@@ -24,8 +24,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textStyle: {
-    fontSize: 70,
-    fontFamily: "Cochin",
+    fontSize: 50,
     fontWeight: "bold",
     backgroundColor: "transparent",
     textAlign: 'center'
