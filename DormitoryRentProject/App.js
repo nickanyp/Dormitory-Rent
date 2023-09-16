@@ -1,10 +1,11 @@
 
 import { StyleSheet, Text, View } from 'react-native';
+import FirstPage from './FirstPage';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={{fontFamily:'SourceSerif4-Regular'}}>Dormitory Rent</Text>
+      <FirstPage text='DÖrmitory Rent'></FirstPage>
     </View>
   );
 }
