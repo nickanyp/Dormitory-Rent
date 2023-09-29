@@ -1,20 +1,24 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
 
-export default function FirstPage(props) {
+const FirstPage = (props) => {
   return (
-    <MaskedView maskElement={<Text style={[styles.textStyle, {backgroundColor:'transparent'}]}>{props.text}</Text>}>
+    <MaskedView
+      maskElement={
+        <Text style={[styles.textStyle, { backgroundColor: "transparent" }]}>
+          {props.text}
+        </Text>
+      }>
       <LinearGradient
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        colors={["#96B3FF", "#FF9699"]}
-      >
-        <Text style={[styles.textStyle, {opacity:0}]}>{props.text}</Text>
+        colors={["#96B3FF", "#FF9699"]}>
+        <Text style={[styles.textStyle, { opacity: 0 }]}>{props.text}</Text>
       </LinearGradient>
     </MaskedView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -24,8 +28,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textStyle: {
+    fontSize: 45,
     fontWeight: "bold",
     backgroundColor: "transparent",
-    textAlign: 'center'
+    textAlign: "center",
   },
 });
+
+export default FirstPage;
