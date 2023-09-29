@@ -4,34 +4,54 @@ import MaskedView from "@react-native-masked-view/masked-view";
 
 const FirstPage = (props) => {
   return (
-    <MaskedView
-      maskElement={
-        <Text style={[styles.textStyle, { backgroundColor: "transparent" }]}>
-          {props.text}
-        </Text>
-      }>
-      <LinearGradient
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        colors={["#96B3FF", "#FF9699"]}>
-        <Text style={[styles.textStyle, { opacity: 0 }]}>{props.text}</Text>
-      </LinearGradient>
-    </MaskedView>
+    <View>
+      <View style={[styles.container, {justifyContent: 'flex-end'}]}>
+        <MaskedView
+          maskElement={
+            <Text style={[styles.textStyle, { backgroundColor: "transparent" }]}>
+              {props.text}
+            </Text>
+          }>
+          <LinearGradient
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            colors={["#96B3FF", "#FF9699"]}>
+            <Text style={[styles.textStyle, { opacity: 0 }]}>{props.text}</Text>
+          </LinearGradient>
+        </MaskedView>
+      </View>
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.btn}>
+          <Text style={styles.textbtn}>แตะเพื่อเปิด</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+  container:{
+    flex:1,
+    flexDirection: 'column'
   },
   textStyle: {
     fontSize: 45,
     fontWeight: "bold",
     backgroundColor: "transparent",
     textAlign: "center",
+  },
+  btn: {
+    flexDirection: 'column',
+    flex: 1,
+    alignSelf: 'center',
+    position: 'absolute',
+    bottom: 35
+  },
+  textbtn: {
+    fontSize: 20,
+    color: "#A8A8A8",
+    textAlign: "center",
+    fontWeight: "bold",
   },
 });
 
