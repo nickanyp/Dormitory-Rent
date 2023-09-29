@@ -3,6 +3,7 @@ import FirstPage from './MainScreen/FirstPage';
 import ChoosePage from './MainScreen/ChoosePage';
 import LoginRenter from './Renter/LoginRenter';
 import MyRoomPage from './Screen/Renter/MyRoomPage';
+import PaymentRenter from './Screen/Renter/PaymentRenter';
 
 export default function App() {
   return (
@@ -10,7 +11,8 @@ export default function App() {
       {/* <FirstPage text='DÖrmitory Rent'></FirstPage> */}
       {/* <ChoosePage></ChoosePage> */}
       {/* <LoginRenter></LoginRenter> */}
-      <MyRoomPage></MyRoomPage>
+      {/* <MyRoomPage></MyRoomPage> */}
+      <PaymentRenter></PaymentRenter>
     </View>
   );
 }

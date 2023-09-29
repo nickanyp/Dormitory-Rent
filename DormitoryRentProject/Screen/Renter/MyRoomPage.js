@@ -26,7 +26,7 @@ const MyRoomPage = () => {
         </View>
       </View>
 
-      <View>
+      <View style={{alignItems: "center"}}>
         <TouchableOpacity style={styles.btn}>
           <Text style={[styles.textBtn, { color: "white", textAlign: "center" }]}>
             ชำระค่าเช่า
@@ -54,9 +54,6 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
     fontSize: 15,
-  },
-  btnContainer: {
-    backgroundColor: "red",
   },
   btn: {
     width: 120,
