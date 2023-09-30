@@ -5,7 +5,7 @@ import MaskedView from "@react-native-masked-view/masked-view";
 const FirstPage = (props) => {
   return (
     <View>
-      <View style={[styles.container, {justifyContent: 'flex-end'}]}>
+      <View style={[styles.container]}>
         <MaskedView
           maskElement={
             <Text style={[styles.textStyle, { backgroundColor: "transparent" }]}>
@@ -32,7 +32,8 @@ const FirstPage = (props) => {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    justifyContent: 'flex-end'
   },
   textStyle: {
     fontSize: 45,

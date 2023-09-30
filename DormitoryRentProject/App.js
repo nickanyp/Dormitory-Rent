@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import FirstPage from "./MainScreen/FirstPage";
 import ChoosePage from "./MainScreen/ChoosePage";
 import LoginRenter from "./Screen/Renter/LoginRenter";
@@ -7,6 +7,7 @@ import PaymentRenter from "./Screen/Renter/PaymentRenter";
 import HistoryRenter from "./Screen/Renter/HistoryRenter";
 import RegisterOwner from "./Screen/Owner/RegisterOwner";
 import LoginOwner from "./Screen/Owner/LoginOwner";
+import AllNavigation from "./Navigation/AllNavigation"
 
 export default function App() {
   return (
@@ -16,8 +17,9 @@ export default function App() {
       {/* <LoginRenter></LoginRenter> */}
       {/* <MyRoomPage></MyRoomPage> */}
       {/* <PaymentRenter></PaymentRenter> */}
-      <RegisterOwner></RegisterOwner>
+      {/* <RegisterOwner></RegisterOwner> */}
       {/* <LoginOwner></LoginOwner> */}
+      <AllNavigation></AllNavigation>
     </View>
   );
 }

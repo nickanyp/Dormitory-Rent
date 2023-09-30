@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   container: {
-    flex: 2,
+    flex: 1,
     flexDirection: "column",
     justifyContent: "center",
   },

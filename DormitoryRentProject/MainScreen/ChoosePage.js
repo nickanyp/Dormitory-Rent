@@ -5,7 +5,8 @@ import {
   View,
   TouchableOpacityBase,
 } from "react-native";
-import FirstPage from "./FirstPage";
+import { LinearGradient } from "expo-linear-gradient";
+import MaskedView from "@react-native-masked-view/masked-view";
 
 export default function ChoosePage() {
   return (
@@ -17,12 +18,27 @@ export default function ChoosePage() {
 
       <TouchableOpacity
         style={[styles.style, { backgroundColor: "#96B3FF", margin: 30 }]}>
-        <Text style={styles.text}>เจ้าของหอพัก</Text>
+        <Text style={styles.text}>เจ้าของ</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={[styles.style, { backgroundColor: "#FF9699" }]}>
-        <Text style={styles.text}>ผู้เช่าหอพัก</Text>
+        <Text style={styles.text}>ผู้เช่า</Text>
       </TouchableOpacity>
+
+      <MaskedView
+        style={styles.footer}
+        maskElement={
+          <Text style={[styles.textStyle, { backgroundColor: "transparent" }]}>
+            DÖrmitory Rent
+          </Text>}>
+        <LinearGradient
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          colors={["#96B3FF", "#FF9699"]}>
+          <Text style={[styles.textStyle, { opacity: 0 }]}>DÖrmitory Rent</Text>
+        </LinearGradient>
+      </MaskedView>
+
     </View>
   );
 }
@@ -42,8 +58,19 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "white",
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: "bold",
     textAlign: 'center',
+  },
+  textStyle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    backgroundColor: "transparent",
+    textAlign: "center",
+  },
+  footer: {
+    alignSelf: "center",
+    position: "absolute",
+    bottom: 35,
   },
 });
