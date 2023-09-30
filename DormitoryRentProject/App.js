@@ -5,18 +5,16 @@ import LoginRenter from "./Screen/Renter/LoginRenter";
 import MyRoomPage from "./Screen/Renter/MyRoomPage";
 import PaymentRenter from "./Screen/Renter/PaymentRenter";
 import HistoryRenter from "./Screen/Renter/HistoryRenter";
-import AppNavigator from "./Navigation/AppNavigator";
 
 export default function App() {
   return (
-    // <View style={styles.container}>
-    //   {/* <FirstPage text='DÖrmitory Rent'></FirstPage> */}
-    //   {/* <ChoosePage></ChoosePage> */}
-    //   {/* <LoginRenter></LoginRenter> */}
-    //   <MyRoomPage></MyRoomPage>
-    //   {/* <PaymentRenter></PaymentRenter> */}
-    // </View>
-    <AppNavigator></AppNavigator>
+    <View style={styles.container}>
+      {/* <FirstPage text='DÖrmitory Rent'></FirstPage> */}
+      {/* <ChoosePage></ChoosePage> */}
+      {/* <LoginRenter></LoginRenter> */}
+      {/* <MyRoomPage></MyRoomPage> */}
+      <PaymentRenter></PaymentRenter>
+    </View>
   );
 }
 

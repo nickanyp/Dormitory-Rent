@@ -3,8 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 const PaymentRenter = () => {
   return (
     <View>
-
-      <View style={{ backgroundColor: "red" }}>
+      <View>
         <View style={styles.box}>
           <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
             กันยายน
@@ -20,14 +19,23 @@ const PaymentRenter = () => {
         </View>
       </View>
 
-      <View style = {{backgroundColor: 'yellow', alignItems: 'center'}}>
-        {/* <Image source={require('/DormitoryRentProject/assets/QR_code.png')}></Image>  */}
-        <Text style={[styles.text, {textAlign: 'center'}]}>แจ้งชำระค่าเช่า</Text>
-        <TouchableOpacity style={styles.btn1}>
-            <Text style={[styles.text, {textAlign: 'center'}]}>อัปโหลดไฟล์รูปภาพ</Text>
+      <View style={{ alignItems: "center", margin: 10}}>
+        <Image
+          style={styles.img}
+          source={require("../../assets/qr-code.png")}
+        ></Image>
+        <Text style={[styles.text, { textAlign: "center", margin:10 }]}>
+          แจ้งชำระค่าเช่า
+        </Text>
+        <TouchableOpacity style={[styles.btn1, styles.shadowProp]}>
+          <Text style={[styles.text, { textAlign: "center" }]}>
+            อัปโหลดไฟล์รูปภาพ
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btn2}>
-            <Text style={[styles.text, {textAlign: 'center'}]}>ยืนยัน</Text>
+          <Text style={[styles.text, { textAlign: "center", color: "white" }]}>
+            ยืนยัน
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -49,21 +57,32 @@ const styles = StyleSheet.create({
   },
   btn1: {
     width: 190,
-    height: 40,
-    borderRadius: 10,
+    height: 50,
+    borderRadius: 15,
     borderWidth: 1.5,
+    borderColor: "#9B9B9B",
     backgroundColor: "white",
     justifyContent: "center",
     margin: 8,
   },
   btn2: {
     width: 120,
-    height: 40,
+    height: 45,
     borderRadius: 40,
     backgroundColor: "#FF9699",
     justifyContent: "center",
     margin: 8,
-  }
+  },
+  img: {
+    width: 200,
+    height: 200,
+  },
+  shadowProp: {
+    shadowColor: '#9B9B9B',
+    shadowOffset: {width: -2, height: 4},
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
+  },
 });
 
 export default PaymentRenter;
