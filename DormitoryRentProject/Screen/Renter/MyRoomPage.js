@@ -1,6 +1,7 @@
+import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
-const MyRoomPage = () => {
+const MyRoomPage = ({navigation}) => {
   return (
     <View>
       <View>
@@ -29,12 +30,12 @@ const MyRoomPage = () => {
       </View>
 
       <View style={{alignItems: "center"}}>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={"S1"}>
           <Text style={[styles.textBtn, { color: "white", textAlign: "center" }]}>
             ชำระค่าเช่า
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} >
           <Text style={[styles.textBtn, { color: "white", textAlign: "center" }]}>
             ประวัติค่าเช่าหอ
           </Text>
@@ -71,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyRoomPage;
+export default MyRoomPage
