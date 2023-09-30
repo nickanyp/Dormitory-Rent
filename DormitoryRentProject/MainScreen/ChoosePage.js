@@ -38,11 +38,12 @@ const styles = StyleSheet.create({
     width: 200,
     padding: 30,
     borderRadius: 40,
+    justifyContent: 'center'
   },
   text: {
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: 'center',
   },
 });

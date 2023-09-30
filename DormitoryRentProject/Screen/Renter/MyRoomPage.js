@@ -5,11 +5,13 @@ const MyRoomPage = () => {
     <View>
       <View>
         <View style={styles.box}>
-          <Text style={styles.text}>ชื่อผู้เช่า 1 : อนัญพร จอมคำ</Text>
-          <Text style={styles.text}>ชื่อผู้เช่า 2 : ตรียา เอื้อเจริญศรี</Text>
-          <Text></Text>
-          <Text style={styles.text}>หอพัก : กัลยรัตน์ 2</Text>
-          <Text style={styles.text}>เลขห้อง : 226</Text>
+          <View>
+            <Text style={styles.text}>ชื่อผู้เช่า 1 : อนัญพร จอมคำ</Text>
+            <Text style={styles.text}>ชื่อผู้เช่า 2 : ตรียา เอื้อเจริญศรี</Text>
+            <Text></Text>
+            <Text style={styles.text}>หอพัก : กัลยรัตน์ 2</Text>
+            <Text style={styles.text}>เลขห้อง : 226</Text>
+          </View>
         </View>
         <View style={styles.box}>
           <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>

@@ -4,11 +4,11 @@ const LoginRenter = () => {
   return (
     <View>
         <Text style={styles.label}>รหัสหอพัก</Text>
-        <TextInput style={styles.input}></TextInput>
+        <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
         <Text style={styles.label}>เลขห้อง</Text>
-        <TextInput style={styles.input}></TextInput>
+        <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
         <Text style={styles.label}>รหัสผ่าน</Text>
-        <TextInput style={styles.input}></TextInput>
+        <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
         <View style={{alignItems: 'center'}}>
           <TouchableOpacity style={styles.btn}>
             <Text style={{textAlign:'center', color: 'white', fontWeight: 'bold', fontSize:20}}>ยืนยัน</Text>
@@ -30,18 +30,22 @@ const styles = StyleSheet.create({
     height: 50,
     borderColor: '#9B9B9B',
     borderWidth: 1.5,
-    borderRadius: 20,
-    marginBottom: 10,
-    paddingHorizontal: 10,
+    borderRadius: 25,
     backgroundColor: 'white',
-    alignSelf: 'center',
-    elevation:5,
+    margin: 5
+  },
+  shadowProp: {
+    shadowColor: '#9B9B9B',
+    shadowOffset: {width: -2, height: 4},
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
   },
   btn: {
     width: 100,
     padding: 10,
-    borderRadius: 15,
+    borderRadius: 20,
     backgroundColor: "#FF9699",
+    margin: 20
   }
   },);
 

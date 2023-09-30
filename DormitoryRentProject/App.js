@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import FirstPage from './MainScreen/FirstPage';
 import ChoosePage from './MainScreen/ChoosePage';
-import LoginRenter from './Renter/LoginRenter';
+import LoginRenter from './Screen/Renter/LoginRenter';
 import MyRoomPage from './Screen/Renter/MyRoomPage';
 import PaymentRenter from './Screen/Renter/PaymentRenter';
 
@@ -11,8 +11,8 @@ export default function App() {
       {/* <FirstPage text='DÖrmitory Rent'></FirstPage> */}
       {/* <ChoosePage></ChoosePage> */}
       {/* <LoginRenter></LoginRenter> */}
-      {/* <MyRoomPage></MyRoomPage> */}
-      <PaymentRenter></PaymentRenter>
+      <MyRoomPage></MyRoomPage>
+      {/* <PaymentRenter></PaymentRenter> */}
     </View>
   );
 }
