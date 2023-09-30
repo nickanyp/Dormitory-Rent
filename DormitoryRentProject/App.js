@@ -5,6 +5,8 @@ import LoginRenter from "./Screen/Renter/LoginRenter";
 import MyRoomPage from "./Screen/Renter/MyRoomPage";
 import PaymentRenter from "./Screen/Renter/PaymentRenter";
 import HistoryRenter from "./Screen/Renter/HistoryRenter";
+import RegisterOwner from "./Screen/Owner/RegisterOwner";
+import LoginOwner from "./Screen/Owner/LoginOwner";
 
 export default function App() {
   return (
@@ -13,7 +15,9 @@ export default function App() {
       {/* <ChoosePage></ChoosePage> */}
       {/* <LoginRenter></LoginRenter> */}
       {/* <MyRoomPage></MyRoomPage> */}
-      <PaymentRenter></PaymentRenter>
+      {/* <PaymentRenter></PaymentRenter> */}
+      {/* <RegisterOwner></RegisterOwner> */}
+      <LoginOwner></LoginOwner>
     </View>
   );
 }
