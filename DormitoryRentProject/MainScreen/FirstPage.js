@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   btn: {
-    flexDirection: 'column',
     flex: 1,
+    flexDirection: 'column',
     alignSelf: 'center',
     position: 'absolute',
     bottom: 35

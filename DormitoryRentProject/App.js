@@ -16,8 +16,8 @@ export default function App() {
       {/* <LoginRenter></LoginRenter> */}
       {/* <MyRoomPage></MyRoomPage> */}
       {/* <PaymentRenter></PaymentRenter> */}
-      {/* <RegisterOwner></RegisterOwner> */}
-      <LoginOwner></LoginOwner>
+      <RegisterOwner></RegisterOwner>
+      {/* <LoginOwner></LoginOwner> */}
     </View>
   );
 }
