@@ -13,7 +13,7 @@ import AllNavigation from "./Navigation/AllNavigation"
 
 export default function App() {
   return (
-      <AllNavigation/>
+    <RegisterOwner></RegisterOwner>
   );
 }
 
@@ -23,4 +23,5 @@ export default function App() {
       {/* <MyRoomPage></MyRoomPage> */}
       {/* <PaymentRenter></PaymentRenter> */}
       {/* <RegisterOwner></RegisterOwner> */}
-      {/* <LoginOwner></LoginOwner> */}
+      // <LoginOwner></LoginOwner>
+     

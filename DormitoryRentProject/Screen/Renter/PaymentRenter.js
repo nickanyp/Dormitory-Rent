@@ -2,8 +2,8 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 
 const PaymentRenter = () => {
   return (
-    <View>
-      <View>
+    <View style={styles.container}>
+      <View style={{alignItems: "center"}}>
         <View style={styles.box}>
           <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
             กันยายน
@@ -43,6 +43,12 @@ const PaymentRenter = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   box: {
     width: 300,
     borderWidth: 1.5,

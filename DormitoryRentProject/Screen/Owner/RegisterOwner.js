@@ -11,20 +11,22 @@ import MaskedView from "@react-native-masked-view/masked-view";
 const RegisterOwner = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>สร้างบัญชีผู้ใช้</Text>
-      <Text></Text>
-      <Text></Text>
-      <Text></Text>
-      <Text style={styles.label}>ชื่อจริง-นามสกุล</Text>
-      <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
-      <Text style={styles.label}>เพศ</Text>
-      <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
-      <Text style={styles.label}>อีเมล</Text>
-      <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
-      <Text style={styles.label}>รหัสผ่าน</Text>
-      <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
-      <Text style={styles.label}>เบอร์โทร</Text>
-      <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
+      <View>
+        <Text style={styles.header}>สร้างบัญชีผู้ใช้</Text>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Text style={styles.label}>ชื่อจริง-นามสกุล</Text>
+        <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
+        <Text style={styles.label}>เพศ</Text>
+        <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
+        <Text style={styles.label}>อีเมล</Text>
+        <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
+        <Text style={styles.label}>รหัสผ่าน</Text>
+        <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
+        <Text style={styles.label}>เบอร์โทร</Text>
+        <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
+      </View>
       <View style={{ alignItems: "center" }}>
         <TouchableOpacity style={styles.btn}>
           <Text
@@ -60,8 +62,9 @@ const RegisterOwner = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   label: {
     color: "#363C56",
