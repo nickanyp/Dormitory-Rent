@@ -18,11 +18,11 @@ const RenterTab = createBottomTabNavigator();
 
 function RenterTabNavigator(){
     return(
-        <RenterTab.Navigator initialRouteName="tab" screenOptions={{tabBarStyle: {height:100}}}>
+        <RenterTab.Navigator initialRouteName="tab" screenOptions={{headerShown:false, tabBarStyle: {height:100, backgroundColor: '#363C56'}}}>
             <RenterTab.Screen name="My room" component={MyRoomPage}
-            options={{tabBarIcon:()=>{return <FontAwesome5 name="door-open" size={26} color="black" />}, tabBarActiveTintColor: "blue"}}/>
+            options={{tabBarIcon:()=>{return <FontAwesome5 name="door-open" size={26} color="#fff" />}, tabBarActiveTintColor: "#fff"}}/>
             <RenterTab.Screen name="Dashboard" component={RenterDashPage}
-            options={{tabBarIcon:()=>{return <MaterialIcons name="dashboard" size={24} color="black" />}, tabBarActiveTintColor: "blue"}}/>
+            options={{tabBarIcon:()=>{return <MaterialIcons name="dashboard" size={24} color="#fff" />}, tabBarActiveTintColor: "#fff"}}/>
         </RenterTab.Navigator>
     )
 }
