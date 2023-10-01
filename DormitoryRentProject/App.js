@@ -18,8 +18,8 @@ export default function App() {
       {/* <MyRoomPage></MyRoomPage> */}
       {/* <PaymentRenter></PaymentRenter> */}
       {/* <RegisterOwner></RegisterOwner> */}
-      {/* <LoginOwner></LoginOwner> */}
-      <AllNavigation></AllNavigation>
+      <LoginOwner></LoginOwner>
+      {/* <AllNavigation></AllNavigation> */}
     </View>
   );
 }

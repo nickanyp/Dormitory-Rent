@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: "white",
     margin: 5,
+    paddingLeft:15
   },
   shadowProp: {
     shadowColor: "#9B9B9B",
