@@ -51,7 +51,7 @@ const MyRoomPage = ({navigation}) => {
 
 const styles = StyleSheet.create({
   box: {
-    width: 300,
+    width: '90%',
     borderWidth: 1.5,
     borderRadius: 10,
     borderColor: "#9B9B9B",
