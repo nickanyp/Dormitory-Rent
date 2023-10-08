@@ -20,3 +20,17 @@ export default function Dormitory() {
       </MaskedView>
     );
   }
+
+const styles = StyleSheet.create({
+  textStyle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    backgroundColor: "transparent",
+    textAlign: "center",
+  },
+  footer: {
+    alignSelf: "center",
+    position: "absolute",
+    bottom: 35,
+  },
+})

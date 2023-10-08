@@ -35,8 +35,7 @@ const RegisterOwner = () => {
               color: "white",
               fontWeight: "bold",
               fontSize: 15,
-            }}
-          >
+            }}>
             ยืนยัน
           </Text>
         </TouchableOpacity>

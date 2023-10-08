@@ -4,10 +4,10 @@ import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
 
 
-const MyRoomPage = ({navigation}) => {
+const MyRoomPage = () => {
   return (
     <View>
-      <View>
+      <View style={styles.container}>
         <View style={styles.box}>
           <View>
             <Text style={styles.text}>ชื่อผู้เช่า 1 : อนัญพร จอมคำ</Text>
@@ -50,6 +50,12 @@ const MyRoomPage = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   box: {
     width: '90%',
     borderWidth: 1.5,

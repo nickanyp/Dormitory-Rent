@@ -5,12 +5,56 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import MaskedView from "@react-native-masked-view/masked-view";
+import Dormitory from "../../component/Dormitory";
+import { Component } from "react";
+import firebase from "../../database/FirebaseDB";
 
-const LoginRenter = () => {
-  return (
-    <View style={styles.container}>
+class LoginRenter extends Component {
+  constructor() {
+    super();
+
+    this.dbRef = firebase.firestore().collection('LoginRenterDB')
+    this.state = {
+      dor_id: "",
+      num_room: "",
+      pass: "",
+      isLoading: false
+    };
+  }
+
+  inputValueUpdate = (val, prop) => {
+    const state = this.state;
+    state[prop] = val;
+    this.setState(state);
+  };
+
+  storeUser() {
+    if (this.state.dor_id == "") {
+      alert("กรุณากรอกข้อมูลให้ครบถ้วน")
+    } else {
+      this.setState({
+        isLoading: true
+      });
+      this.dbRef.add({
+        dor_id: this.state.dor_id,
+        num_room: this.state.num_room,
+        pass: this.setState.pass
+      }).then((res) => {
+        this.setState({
+          dor_id: "",
+          num_room: "",
+          pass: "",
+          isLoading: false
+        });
+        this.props.navigation.navigate('MyRoomPage')
+      })
+    }
+  }
+
+  render() {
+    return(
+      <View style={styles.container}>
+
       <View>
         <Text style={styles.label}>รหัสหอพัก</Text>
         <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
@@ -19,37 +63,21 @@ const LoginRenter = () => {
         <Text style={styles.label}>รหัสผ่าน</Text>
         <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
       </View>
+
       <View style={{ alignItems: "center" }}>
-        <TouchableOpacity style={styles.btn}>
-          <Text
-            style={{
-              textAlign: "center",
-              color: "white",
-              fontWeight: "bold",
-              fontSize: 16,
-            }}
->
+        <TouchableOpacity style={styles.btn} onPress={() => {this.storeUser()}}>
+          <Text style={{ textAlign: "center", color: "white", fontWeight: "bold", fontSize: 16,}}>
             ยืนยัน
           </Text>
         </TouchableOpacity>
       </View>
-      <MaskedView
-        style={styles.footer}
-        maskElement={
-          <Text style={[styles.textStyle, { backgroundColor: "transparent" }]}>
-            DÖrmitory Rent
-          </Text>
-        }>
-        <LinearGradient
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          colors={["#96B3FF", "#FF9699"]}>
-          <Text style={[styles.textStyle, { opacity: 0 }]}>DÖrmitory Rent</Text>
-        </LinearGradient>
-      </MaskedView>
+
+      <Dormitory></Dormitory>
+
     </View>
-  );
-};
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -86,17 +114,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: "#FF9699",
     margin: 20,
-  },
-  textStyle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    backgroundColor: "transparent",
-    textAlign: "center",
-  },
-  footer: {
-    alignSelf: "center",
-    position: "absolute",
-    bottom: 35,
   },
 });
 

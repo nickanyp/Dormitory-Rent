@@ -13,15 +13,8 @@ import AllNavigation from "./Navigation/AllNavigation"
 
 export default function App() {
   return (
-    <RegisterOwner></RegisterOwner>
+    <LoginRenter></LoginRenter>
   );
 }
 
-      {/* <FirstPage text='DÖrmitory Rent'></FirstPage> */}
-      {/* <ChoosePage></ChoosePage> */}
-      {/* <LoginRenter></LoginRenter> */}
-      {/* <MyRoomPage></MyRoomPage> */}
-      {/* <PaymentRenter></PaymentRenter> */}
-      {/* <RegisterOwner></RegisterOwner> */}
-      // <LoginOwner></LoginOwner>
      
