@@ -1,22 +1,23 @@
-import React from "react";
+import React, { Component } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
 
-
-const MyRoomPage = () => {
-  return (
-    <View>
+class MyRoomPage extends Component {
+  constructor() {
+    super();
+  }
+  render() {
+    return (
       <View style={styles.container}>
         <View style={styles.box}>
-          <View>
-            <Text style={styles.text}>ชื่อผู้เช่า 1 : อนัญพร จอมคำ</Text>
-            <Text style={styles.text}>ชื่อผู้เช่า 2 : ตรียา เอื้อเจริญศรี</Text>
-            <Text></Text>
-            <Text style={styles.text}>หอพัก : กัลยรัตน์ 2</Text>
-            <Text style={styles.text}>เลขห้อง : 226</Text>
-          </View>
+          <Text style={styles.text}>ชื่อผู้เช่า 1 : อนัญพร จอมคำ</Text>
+          <Text style={styles.text}>ชื่อผู้เช่า 2 : ตรียา เอื้อเจริญศรี</Text>
+          <Text></Text>
+          <Text style={styles.text}>หอพัก : กัลยรัตน์ 2</Text>
+          <Text style={styles.text}>เลขห้อง : 226</Text>
         </View>
+
         <View style={styles.box}>
           <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
             กันยายน
@@ -30,34 +31,41 @@ const MyRoomPage = () => {
             รวมทั้งสิ้น : 5950 บาท
           </Text>
         </View>
-      </View>
 
-      <View style={{alignItems: "center"}}>
-        <TouchableOpacity style={styles.btn} onPress={"S1"}>
-          <Text style={[styles.textBtn, { color: "white", textAlign: "center" }]}>
-            ชำระค่าเช่า
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn} >
-          <Text style={[styles.textBtn, { color: "white", textAlign: "center" }]}>
-            ประวัติค่าเช่าหอ
-          </Text>
-        </TouchableOpacity>
+        <View style={{ alignItems: "center" }}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => {
+              this.props.navigation.navigate("PaymentRenter");
+            }}>
+            <Text
+              style={[styles.textBtn, { color: "white", textAlign: "center" }]}>
+              ชำระค่าเช่า
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.btn}
+            onPress={() => {this.props.navigation.navigate("HistoryRenter")}}>
+            <Text
+              style={[styles.textBtn, { color: "white", textAlign: "center" }]}>
+              ประวัติค่าเช่าหอ
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      
-    </View>
-  );
-};
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
   },
   box: {
-    width: '90%',
+    width: "90%",
     borderWidth: 1.5,
     borderRadius: 10,
     borderColor: "#9B9B9B",
@@ -82,4 +90,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyRoomPage
+export default MyRoomPage;

@@ -13,7 +13,7 @@ import AllNavigation from "./Navigation/AllNavigation"
 
 export default function App() {
   return (
-    <LoginRenter></LoginRenter>
+    <AllNavigation></AllNavigation>
   );
 }
 

@@ -1,11 +1,13 @@
+import React from "react";
 import {
   Text,
   TextInput,
   View,
   StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
-import Dormitory from "../../component/Dormitory";
+import Dormitory from "../../component/DormitoryFooter";
 import { Component } from "react";
 import firebase from "../../database/FirebaseDB";
 
@@ -13,12 +15,12 @@ class LoginRenter extends Component {
   constructor() {
     super();
 
-    this.dbRef = firebase.firestore().collection('LoginRenterDB')
+    this.dbRef = firebase.firestore().collection("renters");
     this.state = {
       dor_id: "",
       num_room: "",
       pass: "",
-      isLoading: false
+      isLoading: false,
     };
   }
 
@@ -29,52 +31,94 @@ class LoginRenter extends Component {
   };
 
   storeUser() {
-    if (this.state.dor_id == "") {
-      alert("กรุณากรอกข้อมูลให้ครบถ้วน")
+    if (this.state.name == "") {
+      alert("Please provide your information");
     } else {
       this.setState({
-        isLoading: true
+        isLoading: true,
       });
-      this.dbRef.add({
-        dor_id: this.state.dor_id,
-        num_room: this.state.num_room,
-        pass: this.setState.pass
-      }).then((res) => {
-        this.setState({
-          dor_id: "",
-          num_room: "",
-          pass: "",
-          isLoading: false
+      this.dbRef
+        .add({
+          dor_id: this.state.dor_id,
+          num_room: this.state.num_room,
+          pass: this.state.pass,
+        })
+        .then((res) => {
+          this.setState({
+            dor_id: "",
+            num_room: "",
+            pass: "",
+            isLoading: false,
+          });
+          this.props.navigation.navigate("MyRoomPage");
+        })
+        .catch((err) => {
+          console.log("Error found: ", err);
+          this.setState({
+            isLoading: false,
+          });
         });
-        this.props.navigation.navigate('MyRoomPage')
-      })
     }
   }
 
   render() {
-    return(
+    if (this.state.isLoading) {
+      return (
+        <View>
+          <ActivityIndicator size="small" color="#9E9E9E" />
+          <Dormitory></Dormitory>
+        </View>
+      );
+    }
+    return (
       <View style={styles.container}>
+        <View>
+          <Text style={styles.label}>รหัสหอพัก</Text>
+          <TextInput
+            style={[styles.input, styles.shadowProp]}
+            value={this.state.dor_id}
+            onChangeText={(val) => {
+              this.inputValueUpdate(val, "dor_id");
+            }}
+          ></TextInput>
+          <Text style={styles.label}>เลขห้อง</Text>
+          <TextInput
+            style={[styles.input, styles.shadowProp]}
+            value={this.state.num_room}
+            onChangeText={(val) => {
+              this.inputValueUpdate(val, "num_room");
+            }}
+          ></TextInput>
+          <Text style={styles.label}>รหัสผ่าน</Text>
+          <TextInput
+            style={[styles.input, styles.shadowProp]}
+            value={this.state.pass}
+            onChangeText={(val) => {
+              this.inputValueUpdate(val, "pass");
+            }}
+          ></TextInput>
+        </View>
 
-      <View>
-        <Text style={styles.label}>รหัสหอพัก</Text>
-        <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
-        <Text style={styles.label}>เลขห้อง</Text>
-        <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
-        <Text style={styles.label}>รหัสผ่าน</Text>
-        <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
+        <View style={{ alignItems: "center" }}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => {
+              this.storeUser();
+            }}>
+            <Text
+              style={{
+                textAlign: "center",
+                color: "white",
+                fontWeight: "bold",
+                fontSize: 16,
+              }}>
+              ยืนยัน
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <Dormitory></Dormitory>
       </View>
-
-      <View style={{ alignItems: "center" }}>
-        <TouchableOpacity style={styles.btn} onPress={() => {this.storeUser()}}>
-          <Text style={{ textAlign: "center", color: "white", fontWeight: "bold", fontSize: 16,}}>
-            ยืนยัน
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      <Dormitory></Dormitory>
-
-    </View>
     );
   }
 }
@@ -85,6 +129,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white"
   },
   label: {
     color: "#363C56",
@@ -100,7 +145,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: "white",
     margin: 5,
-    padding: 15
+    padding: 15,
   },
   shadowProp: {
     shadowColor: "#9B9B9B",

@@ -2,15 +2,16 @@
 import * as firebase from "firebase/compat";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDP4wf2NY1HUhzPaRRLm1E4sLnDWkFOHpM",
-  authDomain: "dormitoryrent.firebaseapp.com",
-  projectId: "dormitoryrent",
-  storageBucket: "dormitoryrent.appspot.com",
-  messagingSenderId: "440171648400",
-  appId: "1:440171648400:web:72b2de0d92fe35549f4f15",
-  measurementId: "G-GFZG534F8T"
+  apiKey: "AIzaSyCHFf_FcEP9VHYQhtJ6z9nq_Y74d8q4W7s",
+  authDomain: "dormitoryrent-e4b12.firebaseapp.com",
+  projectId: "dormitoryrent-e4b12",
+  storageBucket: "dormitoryrent-e4b12.appspot.com",
+  messagingSenderId: "1009384549650",
+  appId: "1:1009384549650:web:f709d88df75e105ff617cb",
+  measurementId: "G-GCL5NCG1BB"
 };
 
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
 export default firebase;

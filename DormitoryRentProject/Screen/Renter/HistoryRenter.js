@@ -1,8 +1,9 @@
+import { Text } from "react-native";
 
 const HistoryRenter = () => {
 
     return (
-        <Text></Text>
+        <Text>gfsdg</Text>
     )
 }
 
