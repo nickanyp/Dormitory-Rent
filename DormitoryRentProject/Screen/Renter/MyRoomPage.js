@@ -2,35 +2,81 @@ import React, { Component } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
+import firebase from "../../database/FirebaseDB";
+import { ListItem } from "react-native-elements";
 
 class MyRoomPage extends Component {
   constructor() {
     super();
+
+    this.dbRef = firebase.firestore().collection('renters')
+    this.state = {
+      isLoading: true,
+      userArr: []
+    }
   }
+
+  componentDidMount() {
+    this.unsubscribe = this.dbRef.onSnapshot(this.getCollection);
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  getCollection = (querySnapshot) => {
+    const all_data = [];
+    querySnapshot.forEach((res) => {
+      const { name1, name2, dor_name, num_room, dor_price, water_price, elec_price } = res.data();
+      all_data.push({
+        key: res.id,
+        name1, 
+        name2, 
+        dor_name, 
+        num_room, 
+        dor_price, 
+        water_price, 
+        elec_price
+      });
+    });
+    this.setState({
+      userArr: all_data,
+      isLoading: false,
+    });
+    console.log(this.state.userArr)
+  };
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.box}>
-          <Text style={styles.text}>ชื่อผู้เช่า 1 : อนัญพร จอมคำ</Text>
-          <Text style={styles.text}>ชื่อผู้เช่า 2 : ตรียา เอื้อเจริญศรี</Text>
-          <Text></Text>
-          <Text style={styles.text}>หอพัก : กัลยรัตน์ 2</Text>
-          <Text style={styles.text}>เลขห้อง : 226</Text>
-        </View>
+        {this.state.userArr.map((item, i) => {
+          return(
+              <View style={styles.box} key={i}>
+                <Text style={styles.text}>ชื่อผู้เช่า 1 : {item.name1}</Text>
+                <Text style={styles.text}>ชื่อผู้เช่า 2 : {item.name2}</Text>
+                <Text></Text>
+                <Text style={styles.text}>หอพัก : {item.dor_name}</Text>
+                <Text style={styles.text}>เลขห้อง : {item.num_room}</Text>
+              </View>
+          );
+        })}
 
-        <View style={styles.box}>
-          <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
-            กันยายน
-          </Text>
-          <Text></Text>
-          <Text style={styles.text}>ค่าเช่าหอพัก : 4600 บาท</Text>
-          <Text style={styles.text}>ค่าน้ำ : 150 บาท</Text>
-          <Text style={styles.text}>ค่าไฟ : 1200 บาท</Text>
-          <Text></Text>
-          <Text style={[styles.text, { color: "#FF9699" }]}>
-            รวมทั้งสิ้น : 5950 บาท
-          </Text>
-        </View>
+        {this.state.userArr.map((item, i) => {
+          return(
+            <View style={styles.box} key={i}>
+              <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
+                กันยายน
+              </Text>
+              <Text></Text>
+              <Text style={styles.text}>ค่าเช่าหอพัก : {item.dor_price} บาท</Text>
+              <Text style={styles.text}>ค่าน้ำ : {item.water_price} บาท</Text>
+              <Text style={styles.text}>ค่าไฟ : {item.elec_price} บาท</Text>
+              <Text></Text>
+              <Text style={[styles.text, { color: "#FF9699" }]}>
+                รวมทั้งสิ้น : {item.dor_price + item.water_price + item.elec_price} บาท
+              </Text>
+          </View>
+          );
+        })}
 
         <View style={{ alignItems: "center" }}>
           <TouchableOpacity
