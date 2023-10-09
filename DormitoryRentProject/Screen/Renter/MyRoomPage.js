@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
 import firebase from "../../database/FirebaseDB";
@@ -11,7 +11,6 @@ class MyRoomPage extends Component {
 
     this.dbRef = firebase.firestore().collection('renters')
     this.state = {
-      isLoading: true,
       userArr: []
     }
   }
@@ -41,13 +40,13 @@ class MyRoomPage extends Component {
     });
     this.setState({
       userArr: all_data,
-      isLoading: false,
     });
     console.log(this.state.userArr)
   };
   render() {
     return (
       <View style={styles.container}>
+
         {this.state.userArr.map((item, i) => {
           return(
               <View style={styles.box} key={i}>
@@ -57,6 +56,7 @@ class MyRoomPage extends Component {
                 <Text style={styles.text}>หอพัก : {item.dor_name}</Text>
                 <Text style={styles.text}>เลขห้อง : {item.num_room}</Text>
               </View>
+              
           );
         })}
 
@@ -98,6 +98,7 @@ class MyRoomPage extends Component {
             </Text>
           </TouchableOpacity>
         </View>
+        
       </View>
     );
   }
