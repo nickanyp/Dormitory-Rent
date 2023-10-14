@@ -35,6 +35,16 @@ function RenterTabNavigator() {
       }}
     >
       <RenterTab.Screen
+        name="LoginRenter"
+        component={LoginRenter}
+        options={{
+          title: "DÖrmitory Rent",
+          headerStyle: {headerTransparent: true},
+          headerShown: false,
+          tabBarStyle: {display: 'none'}
+        }}
+      />
+      <RenterTab.Screen
         name="MyroomPage"
         component={RenterStackNavigator}
         options={{

@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Dormitory from "../../component/DormitoryFooter";
 import { Component } from "react";
+import { AntDesign } from '@expo/vector-icons'; 
 import firebase from "../../database/FirebaseDB";
 
 class LoginRenter extends Component {
@@ -89,14 +90,19 @@ class LoginRenter extends Component {
               this.inputValueUpdate(val, "num_room");
             }}
           ></TextInput>
+          
           <Text style={styles.label}>รหัสผ่าน</Text>
-          <TextInput
-            style={[styles.input, styles.shadowProp]}
-            value={this.state.pass}
-            onChangeText={(val) => {
-              this.inputValueUpdate(val, "pass");
-            }}
-          ></TextInput>
+          <View style={{justifyContent: 'center'}}>
+            <TextInput
+              style={[styles.input, styles.shadowProp]}
+              value={this.state.pass}
+              onChangeText={(val) => {
+                this.inputValueUpdate(val, "pass");
+              }}
+            ></TextInput>
+            <AntDesign style={styles.icon} name="lock1" size={24} color="#9B9B9B" />
+          </View>
+
         </View>
 
         <View style={{ alignItems: "center" }}>
@@ -160,6 +166,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF9699",
     margin: 20,
   },
+  icon: {
+    position: 'absolute',
+    margin: 20
+  }
 });
 
 export default LoginRenter;

@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
+import LoginRenter from "../Screen/Renter/LoginRenter";
 
 export default function ChoosePage() {
   return (
