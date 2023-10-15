@@ -55,7 +55,7 @@ class PaymentRenter extends Component {
         {this.state.userArr.map((item, i) => {
         return (
           <View style={{ alignItems: "center" }}>
-          <View style={styles.box}>
+          <View style={styles.box} key={i}>
             <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
               กันยายน
             </Text>
@@ -80,15 +80,13 @@ class PaymentRenter extends Component {
           <Text style={[styles.text, { textAlign: "center", margin: 10 }]}>
             แจ้งชำระค่าเช่า
           </Text>
-          <TouchableOpacity style={[styles.btn1, styles.shadowProp]}>
+          <TouchableOpacity style={[styles.btn1, styles.shadowProp]} >
             <Text style={[styles.text, { textAlign: "center" }]}>
               อัปโหลดไฟล์รูปภาพ
             </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn2}>
-            <Text
-              style={[styles.text, { textAlign: "center", color: "white" }]}
-            >
+            <Text style={[styles.text, { textAlign: "center", color: "white" }]}>
               ยืนยัน
             </Text>
           </TouchableOpacity>
