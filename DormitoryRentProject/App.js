@@ -9,11 +9,14 @@ import PaymentRenter from "./Screen/Renter/PaymentRenter";
 import HistoryRenter from "./Screen/Renter/HistoryRenter";
 import RegisterOwner from "./Screen/Owner/RegisterOwner";
 import LoginOwner from "./Screen/Owner/LoginOwner";
+import RenterDashPage from './Screen/Renter/DashboardPage';
 import AllNavigation from "./Navigation/AllNavigation"
+
 
 export default function App() {
   return (
     <AllNavigation></AllNavigation>
+    // <RenterDashPage></RenterDashPage>
   );
 }
 
