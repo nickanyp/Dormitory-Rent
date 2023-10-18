@@ -100,7 +100,6 @@ class LoginRenter extends Component {
                 this.inputValueUpdate(val, "pass");
               }}
             ></TextInput>
-            <AntDesign style={styles.icon} name="lock1" size={24} color="#9B9B9B" />
           </View>
 
         </View>
@@ -135,7 +134,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white"
+    backgroundColor: "white",
+    margin: 10
   },
   label: {
     color: "#363C56",

@@ -55,8 +55,7 @@ class MyRoomPage extends Component {
                 <Text></Text>
                 <Text style={styles.text}>หอพัก : {item.dor_name}</Text>
                 <Text style={styles.text}>เลขห้อง : {item.num_room}</Text>
-              </View>
-              
+              </View> 
           );
         })}
 

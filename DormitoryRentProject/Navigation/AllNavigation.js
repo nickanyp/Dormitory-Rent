@@ -32,8 +32,7 @@ function RenterTabNavigator() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: { height: 100, backgroundColor: "#363C56" },
-      }}
-    >
+      }}>
       <RenterTab.Screen
         name="LoginRenter"
         component={LoginRenter}
@@ -42,8 +41,7 @@ function RenterTabNavigator() {
           headerStyle: {headerTransparent: true},
           headerShown: false,
           tabBarStyle: {display: 'none'}
-        }}
-      />
+        }}/>
       <RenterTab.Screen
         name="MyroomPage"
         component={RenterStackNavigator}
@@ -53,8 +51,7 @@ function RenterTabNavigator() {
             return <FontAwesome5 name="door-open" size={26} color="#fff" />;
           },
           tabBarActiveTintColor: "#fff",
-        }}
-      />
+        }}/>
       <RenterTab.Screen
         name="RenterDashPage"
         component={RenterDashPage}
@@ -64,8 +61,7 @@ function RenterTabNavigator() {
             return <MaterialIcons name="dashboard" size={24} color="#fff" />;
           },
           tabBarActiveTintColor: "#fff",
-        }}
-      />
+        }}/>
     </RenterTab.Navigator>
   );
 }
