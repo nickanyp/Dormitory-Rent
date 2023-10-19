@@ -4,6 +4,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
 import firebase from "../../database/FirebaseDB";
 import { ListItem } from "react-native-elements";
+import DormitoryHeader from "../../component/DormitoryHeader";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 class MyRoomPage extends Component {
   constructor() {
@@ -29,8 +31,8 @@ class MyRoomPage extends Component {
       const { name1, name2, dor_name, num_room, dor_price, water_price, elec_price } = res.data();
       all_data.push({
         key: res.id,
-        name1, 
-        name2, 
+        name1,
+        name2,
         dor_name, 
         num_room, 
         dor_price, 
@@ -45,7 +47,11 @@ class MyRoomPage extends Component {
   };
   render() {
     return (
-      <View style={styles.container}>
+      
+      <SafeAreaView style={styles.container}>
+        <View style={{position: 'absolute', width: 300, top: 55, alignItems: 'center'}}>
+          <DormitoryHeader/>
+        </View>
 
         {this.state.userArr.map((item, i) => {
           return(
@@ -84,7 +90,7 @@ class MyRoomPage extends Component {
               this.props.navigation.navigate("PaymentRenter");
             }}>
             <Text
-              style={[styles.textBtn, { color: "white", textAlign: "center" }]}>
+              style={[styles.textBtn, { color: "white", textAlign: "center", fontWeight: "bold", fontSize: 15 }]}>
               ชำระค่าเช่า
             </Text>
           </TouchableOpacity>
@@ -92,13 +98,13 @@ class MyRoomPage extends Component {
             style={styles.btn}
             onPress={() => {this.props.navigation.navigate("HistoryRenter")}}>
             <Text
-              style={[styles.textBtn, { color: "white", textAlign: "center" }]}>
+              style={[styles.textBtn, { color: "white", textAlign: "center", fontWeight: "bold", fontSize: 15 }]}>
               ประวัติค่าเช่าหอ
             </Text>
           </TouchableOpacity>
         </View>
         
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -108,7 +114,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   box: {
     width: "90%",

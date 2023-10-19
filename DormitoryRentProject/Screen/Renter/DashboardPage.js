@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   button2:{
     width:70,
     height:40,
-    backgroundColor: color2,
+    backgroundColor: {color},
     // borderColor:"#363C56",
     // borderWidth:2,
     borderRadius:20,
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   button3:{
     width:70,
     height:40,
-    backgroundColor:{color3},
+    backgroundColor:{color},
     // borderColor:"#363C56",
     // borderWidth:2,
     borderRadius:20,
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   button4:{
     width:80,
     height:40,
-    backgroundColor:{color4},
+    backgroundColor:{color},
     // borderColor:"#363C56",
     // borderWidth:2,
     borderRadius:20,

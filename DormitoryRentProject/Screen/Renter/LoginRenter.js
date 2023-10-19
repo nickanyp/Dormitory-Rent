@@ -32,8 +32,14 @@ class LoginRenter extends Component {
   };
 
   storeUser() {
-    if (this.state.name == "") {
-      alert("Please provide your information");
+    if (this.state.dor_id === "" && this.state.num_room === "" && this.state.pass === "") {
+      alert("กรุณากรอกข้อมูลทั้งหมด");
+    } else if (this.state.dor_id == "") {
+      alert("กรุณากรอกรหัสหอพัก");
+    } else if(this.state.num_room == ""){
+      alert("กรุณากรอกเลขห้อง");
+    } else if(this.state.pass == "") {
+      alert("กรุณากรอกรหัสผ่าน");
     } else {
       this.setState({
         isLoading: true,
@@ -73,6 +79,7 @@ class LoginRenter extends Component {
     }
     return (
       <View style={styles.container}>
+
         <View>
           <Text style={styles.label}>รหัสหอพัก</Text>
           <TextInput
@@ -90,7 +97,6 @@ class LoginRenter extends Component {
               this.inputValueUpdate(val, "num_room");
             }}
           ></TextInput>
-          
           <Text style={styles.label}>รหัสผ่าน</Text>
           <View style={{justifyContent: 'center'}}>
             <TextInput
@@ -101,7 +107,6 @@ class LoginRenter extends Component {
               }}
             ></TextInput>
           </View>
-
         </View>
 
         <View style={{ alignItems: "center" }}>
@@ -135,7 +140,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
-    margin: 10
+  },
+  labelHead: {
+    color: "#363C56",
+    fontWeight: "bold",
+    paddingBottom: 10,
+    textAlign: 'center'
   },
   label: {
     color: "#363C56",

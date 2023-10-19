@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     height:20,
     width:"100%",
     // backgroundColor:"#000",
-    margin:10
+    margin:10,
+    
   }
 })

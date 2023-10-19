@@ -5,7 +5,8 @@ import MaskedView from "@react-native-masked-view/masked-view";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -19,70 +20,83 @@ import LoginRenter from "../Screen/Renter/LoginRenter";
 import ChoosePage from "../MainScreen/ChoosePage";
 import PaymentRenter from "../Screen/Renter/PaymentRenter";
 import HistoryRenter from "../Screen/Renter/HistoryRenter";
+import DashboardPage from "../Screen/Renter/DashboardPage"
 
 const RenterTab = createBottomTabNavigator();
 const RenterStack = createNativeStackNavigator();
 // const MainRenter = createDrawerNavigator();
 
-
 function RenterTabNavigator() {
   return (
     <RenterTab.Navigator
-      initialRouteName="tab"
-      screenOptions={{
-        headerShown: false,
-        tabBarStyle: { height: 100, backgroundColor: "#363C56" },
-      }}>
+      
+      screenOptions={({route}) => ({
+        tabBarStyle: {
+          height: 90,
+          backgroundColor: '#363C56',
+        }
+      })}
+      >
       <RenterTab.Screen
-        name="LoginRenter"
-        component={LoginRenter}
+        name="MY ROOM"
+        component={MyRoomPage}
         options={{
-          title: "DÖrmitory Rent",
-          headerStyle: {headerTransparent: true},
+          tabBarIcon: ({}) => {
+            return <FontAwesome name="home" size={30} color="white" />
+          },
+          tabBarActiveTintColor: '#FF9699',
+          tabBarInactiveTintColor: 'white',
+          tabBarLabelStyle: {
+            fontSize: 13,
+            fontWeight: 'bold'
+          },
           headerShown: false,
-          tabBarStyle: {display: 'none'}
-        }}/>
+        }}
+      />
       <RenterTab.Screen
-        name="MyroomPage"
-        component={RenterStackNavigator}
+        name="DASHBOARD"
+        component={DashboardPage}
         options={{
-          title: "MY ROOM",
-          tabBarIcon: () => {
-            return <FontAwesome5 name="door-open" size={26} color="#fff" />;
+          tabBarIcon: ({}) => {
+            return <MaterialIcons name="dashboard" size={30} color="white" />
           },
-          tabBarActiveTintColor: "#fff",
-        }}/>
-      <RenterTab.Screen
-        name="RenterDashPage"
-        component={RenterDashPage}
-        options={{
-          title: "DASHBOARD",
-          tabBarIcon: () => {
-            return <MaterialIcons name="dashboard" size={24} color="#fff" />;
+          tabBarActiveTintColor: '#FF9699',
+          tabBarInactiveTintColor: 'white',
+          tabBarLabelStyle: {
+            fontSize: 13,
+            fontWeight: 'bold'
           },
-          tabBarActiveTintColor: "#fff",
-        }}/>
+        }}
+      />
     </RenterTab.Navigator>
-  );
+  )
 }
 
 function RenterStackNavigator() {
   return (
     <RenterStack.Navigator>
       <RenterStack.Screen
+        name="LoginRenter"
+        component={LoginRenter}
+        options={{
+          title: "DÖrmitory Rent",
+          headerShown: false
+        }}
+      />
+
+      <RenterStack.Screen
         name="MyRoomPage"
         component={MyRoomPage}
         options={{
           title: "DÖrmitory Rent",
-          headerStyle: {headerTransparent: true},
         }}
       />
+      
       <RenterStack.Screen
         name="PaymentRenter"
         component={PaymentRenter}
         options={{
           title: "DÖrmitory Rent",
-          headerStyle: {headerTransparent: true},
         }}
       />
       <RenterStack.Screen
@@ -90,7 +104,6 @@ function RenterStackNavigator() {
         component={HistoryRenter}
         options={{
           title: "DÖrmitory Rent",
-          headerStyle: {headerTransparent: true},
         }}
       />
     </RenterStack.Navigator>
