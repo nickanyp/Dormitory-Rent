@@ -66,6 +66,7 @@ function RenterTabNavigator() {
             fontSize: 13,
             fontWeight: 'bold'
           },
+          headerShown: false,
         }}
       />
     </RenterTab.Navigator>
