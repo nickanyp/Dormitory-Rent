@@ -22,14 +22,41 @@ import PaymentRenter from "../Screen/Renter/PaymentRenter";
 import HistoryRenter from "../Screen/Renter/HistoryRenter";
 import DashboardPage from "../Screen/Renter/DashboardPage"
 
+import LoginOwner from "../Screen/Owner/LoginOwner";
+import RegisterOwner from "../Screen/Owner/RegisterOwner";
+
 const RenterTab = createBottomTabNavigator();
 const RenterStack = createNativeStackNavigator();
+const OwnerTab = createBottomTabNavigator();
+const OwnerStack = createNativeStackNavigator();
 // const MainRenter = createDrawerNavigator();
+
+function OwnerStackNavigator() {
+  return (
+    <OwnerStack.Navigator>
+        <OwnerStack.Screen
+        name="LoginOwner"
+        component={LoginOwner}
+        options={{
+          title: "DÖrmitory Rent",
+          headerShown: false
+        }}
+      />
+      <OwnerStack.Screen
+        name="RegisterOwner"
+        component={RegisterOwner}
+        options={{
+          title: "DÖrmitory Rent",
+          headerShown: false
+        }}
+      />
+    </OwnerStack.Navigator>
+  )
+}
 
 function RenterTabNavigator() {
   return (
     <RenterTab.Navigator
-      
       screenOptions={({route}) => ({
         tabBarStyle: {
           height: 90,
@@ -81,7 +108,8 @@ function RenterStackNavigator() {
         component={LoginRenter}
         options={{
           title: "DÖrmitory Rent",
-          headerShown: false
+          headerShown: false,
+          
         }}
       />
 
@@ -90,6 +118,7 @@ function RenterStackNavigator() {
         component={MyRoomPage}
         options={{
           title: "DÖrmitory Rent",
+          headerShown: false
         }}
       />
       
@@ -100,6 +129,7 @@ function RenterStackNavigator() {
           title: "DÖrmitory Rent",
         }}
       />
+
       <RenterStack.Screen
         name="HistoryRenter"
         component={HistoryRenter}
@@ -114,7 +144,7 @@ function RenterStackNavigator() {
 const AllNavigation = () => {
   return (
     <NavigationContainer>
-      <RenterTabNavigator />
+      <OwnerStackNavigator />
     </NavigationContainer>
   );
 };

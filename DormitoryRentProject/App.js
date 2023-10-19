@@ -10,11 +10,17 @@ import HistoryRenter from "./Screen/Renter/HistoryRenter";
 import RegisterOwner from "./Screen/Owner/RegisterOwner";
 import LoginOwner from "./Screen/Owner/LoginOwner";
 import AllNavigation from "./Navigation/AllNavigation"
+import CheckPayment from './Screen/Owner/CheckPayment';
+import PaymentOwner2 from './Screen/Owner/PaymentOwner2';
+import PaymentOwner3 from './Screen/Owner/PaymentOwner3';
+import ProfileOwner from './Screen/Owner/ProfileOwner';
 
 export default function App() {
   return (
     <AllNavigation></AllNavigation>
     // <MyRoomPage></MyRoomPage>
     // <LoginRenter></LoginRenter>
+    // <CheckPayment></CheckPayment>
+    // <ProfileOwner></ProfileOwner>
   );
 }

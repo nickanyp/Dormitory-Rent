@@ -18,11 +18,11 @@ export default function ChoosePage() {
       </Text>
 
       <TouchableOpacity
-        style={[styles.style, { backgroundColor: "#96B3FF", margin: 30 }]}>
+        style={[styles.style, { backgroundColor: "#96B3FF", margin: 30 }]} onPress={() => {this.props.navigation.navigate("LoginOwner")}}>
         <Text style={styles.text}>เจ้าของ</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={[styles.style, { backgroundColor: "#FF9699" }]}>
+      <TouchableOpacity style={[styles.style, { backgroundColor: "#FF9699" }]} onPress={() => {this.props.navigation.navigate("MY ROOM")}}>
         <Text style={styles.text}>ผู้เช่า</Text>
       </TouchableOpacity>
 

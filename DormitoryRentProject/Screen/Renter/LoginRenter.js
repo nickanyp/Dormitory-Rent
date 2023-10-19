@@ -57,7 +57,7 @@ class LoginRenter extends Component {
             pass: "",
             isLoading: false,
           });
-          this.props.navigation.navigate("MyRoomPage");
+          this.props.navigation.navigate("MY ROOM");
         })
         .catch((err) => {
           console.log("Error found: ", err);

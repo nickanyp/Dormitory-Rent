@@ -5,77 +5,77 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import MaskedView from "@react-native-masked-view/masked-view";
+import DormitoryFooter from "../../component/DormitoryFooter";
+import { AntDesign } from '@expo/vector-icons';
+import { Component } from "react";
 
-const LoginOwner = () => {
-  return (
-    <View style={styles.container}>
+class LoginOwner extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        
       <View style={styles.header}>
         <Text style={{ fontSize: 40, fontWeight: "bold", textAlign: "center" }}>
           เข้าสู่ระบบ
         </Text>
       </View>
-      <Text></Text><Text></Text>
-      <View>
-        <Text style={styles.label}>อีเมล</Text>
-        <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
-        <Text style={styles.label}>รหัสผ่าน</Text>
-        <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
+
+      <Text></Text>
+      <Text></Text>
+      
+      <View style={{alignItems: 'center'}}>
+        <View style={[styles.input, styles.shadowProp]}>
+          <AntDesign style={{paddingRight: 10}} name="mail" size={20} color="#363C56" />
+          <TextInput style={{flex: 1}} placeholder="อีเมล"></TextInput>
+        </View>
+        <View style={[styles.input, styles.shadowProp]}>
+          <AntDesign style={{paddingRight: 10}} name="lock1" size={20} color="#363C56" />
+          <TextInput style={{flex: 1}} placeholder="รหัสผ่าน"></TextInput>
+        </View>
       </View>
 
-      <View style={styles.middle}>
+      <View style={{alignItems: "center",}}>
         <TouchableOpacity style={styles.btn}>
-          <Text
-            style={{
-              textAlign: "center",
-              color: "white",
-              fontWeight: "bold",
-              fontSize: 15,
-            }}
-          >
+          <Text style={{textAlign: "center", color: "white", fontWeight: "bold", fontSize: 15,}}>
             ยืนยัน
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {this.props.navigation.navigate("RegisterOwner")}}>
           <Text style={styles.text}>ยังไม่มีบัญชีผู้ใช้?</Text>
         </TouchableOpacity>
       </View>
 
-      <MaskedView
-        style={styles.footer}
-        maskElement={
-          <Text style={[styles.textStyle, { backgroundColor: "transparent" }]}>
-            DÖrmitory Rent
-          </Text>
-        }>
-        <LinearGradient
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          colors={["#96B3FF", "#FF9699"]}>
-          <Text style={[styles.textStyle, { opacity: 0 }]}>DÖrmitory Rent</Text>
-        </LinearGradient>
-      </MaskedView>
+      <DormitoryFooter></DormitoryFooter>
     </View>
-  );
-};
+    );
+  }
+}
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: "white",
+  },
   label: {
     color: "#363C56",
     fontSize: 15,
     fontWeight: "bold",
     padding: 5,
+    left: 75
   },
   input: {
-    width: 240,
-    height: 40,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 300,
+    height: 50,
     borderColor: "#96B3FF",
     borderWidth: 1.5,
     borderRadius: 25,
     backgroundColor: "white",
-    margin: 5,
-    paddingLeft:15
+    margin: 15,
+    paddingLeft: 15,
   },
   shadowProp: {
     shadowColor: "#9B9B9B",
@@ -95,29 +95,22 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textDecorationLine: "underline",
   },
-  textStyle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    backgroundColor: "transparent",
-    textAlign: "center",
-  },
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-  },
   header: {
     fontSize: 40,
     fontWeight: "bold",
     textAlign: "center",
-  },
-  middle: {
     alignItems: "center",
   },
-  footer: {
-    alignSelf: "center",
-    position: "absolute",
-    bottom: 35,
+  SectionStyle: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderWidth: 0.5,
+    borderColor: '#000',
+    height: 40,
+    borderRadius: 5,
+    margin: 10,
   },
 });
 
