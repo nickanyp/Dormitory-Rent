@@ -26,17 +26,17 @@ class LoginOwner extends Component {
       <View style={{alignItems: 'center'}}>
         <View style={[styles.input, styles.shadowProp]}>
           <AntDesign style={{paddingRight: 10}} name="mail" size={20} color="#363C56" />
-          <TextInput style={{flex: 1}} placeholder="อีเมล"></TextInput>
+          <TextInput style={{flex: 1, fontSize: 16}} placeholder="อีเมล"></TextInput>
         </View>
         <View style={[styles.input, styles.shadowProp]}>
           <AntDesign style={{paddingRight: 10}} name="lock1" size={20} color="#363C56" />
-          <TextInput style={{flex: 1}} placeholder="รหัสผ่าน"></TextInput>
+          <TextInput style={{flex: 1, fontSize: 16}} placeholder="รหัสผ่าน"></TextInput>
         </View>
       </View>
 
       <View style={{alignItems: "center",}}>
         <TouchableOpacity style={styles.btn}>
-          <Text style={{textAlign: "center", color: "white", fontWeight: "bold", fontSize: 15,}}>
+          <Text style={{textAlign: "center", color: "white", fontWeight: "bold", fontSize: 16,}}>
             ยืนยัน
           </Text>
         </TouchableOpacity>
@@ -84,9 +84,9 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   btn: {
-    width: 100,
-    padding: 10,
-    borderRadius: 20,
+    width: 110,
+    padding: 15,
+    borderRadius: 30,
     backgroundColor: "#363C56",
     margin: 20,
   },
@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     color: "#FF9699",
     fontWeight: "bold",
     textDecorationLine: "underline",
+    fontSize: 16
   },
   header: {
     fontSize: 40,

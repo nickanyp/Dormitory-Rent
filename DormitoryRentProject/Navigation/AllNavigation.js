@@ -46,8 +46,7 @@ function OwnerStackNavigator() {
         name="RegisterOwner"
         component={RegisterOwner}
         options={{
-          title: "DÖrmitory Rent",
-          headerShown: false
+          title: "",
         }}
       />
     </OwnerStack.Navigator>

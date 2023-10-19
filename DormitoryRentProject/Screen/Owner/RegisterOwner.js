@@ -10,7 +10,6 @@ class RegisterOwner extends Component {
   render() {
     return(
       <View style={styles.container}>
-      <View>
         <Text style={styles.header}>สร้างบัญชีผู้ใช้</Text>
         <Text></Text>
         <Text></Text>
@@ -18,35 +17,29 @@ class RegisterOwner extends Component {
         <View style={{alignItems: 'center'}}>
           <View style={[styles.input, styles.shadowProp]}>
             <Feather style={{paddingRight: 10}} name="user" size={24} color="#363C56" />
-            <TextInput style={{flex: 1}} placeholder="ชื่อจริง-นามสกุล"></TextInput>
+            <TextInput style={{flex: 1, fontSize: 16}} placeholder="ชื่อจริง-นามสกุล"></TextInput>
           </View>
           <View style={[styles.input, styles.shadowProp]}>
             <Fontisto style={{paddingRight: 10}} name="intersex" size={24} color="#363C56" />
-            <TextInput style={{flex: 1}} placeholder="เพศ"></TextInput>
+            <TextInput style={{flex: 1, fontSize: 16}} placeholder="เพศ"></TextInput>
           </View>
           <View style={[styles.input, styles.shadowProp]}>
             <AntDesign style={{paddingRight: 10}} name="mail" size={20} color="#363C56" />
-            <TextInput style={{flex: 1}} placeholder="อีเมล"></TextInput>
+            <TextInput style={{flex: 1, fontSize: 16}} placeholder="อีเมล"></TextInput>
           </View>
           <View style={[styles.input, styles.shadowProp]}>
             <AntDesign style={{paddingRight: 10}} name="lock1" size={20} color="#363C56" />
-            <TextInput style={{flex: 1}} placeholder="รหัสผ่าน"></TextInput>
+            <TextInput style={{flex: 1, fontSize: 16}} placeholder="รหัสผ่าน"></TextInput>
           </View>
           <View style={[styles.input, styles.shadowProp]}>
             <AntDesign style={{paddingRight: 10}} name="phone" size={20} color="#363C56" />
-            <TextInput style={{flex: 1}} placeholder="เบอร์โทร"></TextInput>
+            <TextInput style={{flex: 1, fontSize: 16}} placeholder="เบอร์โทร"></TextInput>
           </View>
         </View>
-      </View>
 
       <View style={{flexDirection: "row", justifyContent: 'center'}}>
         <TouchableOpacity style={styles.btn} onPress={() => {this.props.navigation.navigate("LoginOwner")}}>
-          <Text style={{textAlign: "center", color: "white", fontWeight: "bold",fontSize: 15,}}>
-            ยกเลิก
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={{textAlign: "center", color: "white", fontWeight: "bold",fontSize: 15,}}>
+          <Text style={{textAlign: "center", color: "white", fontWeight: "bold",fontSize: 16,}}>
             ยืนยัน
           </Text>
         </TouchableOpacity>
