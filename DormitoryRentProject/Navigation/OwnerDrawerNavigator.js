@@ -25,7 +25,6 @@ const OwnerDrawerNavigation = () => {
       screenOptions={({route}) => ({
         drawerStyle: {
           backgroundColor: '#EEEEEE',
-          color: 'white'
         },
         headerStyle: {
           height: 120
@@ -53,6 +52,7 @@ const OwnerDrawerNavigation = () => {
           headerTitle: props => <DormitoryHeader {...props}/>,
         }}
       />
+
       <Drawer.Screen
         name="Logout"
         component={OwnerStackNavigation}

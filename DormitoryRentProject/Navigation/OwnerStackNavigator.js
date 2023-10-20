@@ -12,12 +12,20 @@ import OwnerHome from "../Screen/Owner/OwnerHome";
 import EditProfileOwner from "../Screen/Owner/EditProfileOwner";
 import OwnerDormitory from '../Screen/Owner/OwnerDormitory';
 import OwnerTabNavigator from './OwnerTabNavigator';
+import PaymentOwner from '../Screen/Owner/PaymentOwner';
+import InformPaymentOwner from '../Screen/Owner/InformPaymentOwner';
+import StatusPaymentOwner from '../Screen/Owner/StatusPaymentOwner';
 
 const Stack = createNativeStackNavigator();
 
 const OwnerStackNavigation = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+    screenOptions={({route}) => ({
+      headerStyle: {
+        height: 120
+      }
+    })}>
         <Stack.Screen
         name="LoginOwner"
         component={LoginOwner}
@@ -53,7 +61,29 @@ const OwnerStackNavigation = () => {
         name="OwnerDormitory"
         component={OwnerTabNavigator}
         options={{
-          headerTitle: props => <DormitoryHeader {...props}/>
+          headerTitle: props => <DormitoryHeader {...props}/>,
+        }}
+      />
+      <Stack.Screen
+        name="PaymentOwner"
+        component={PaymentOwner}
+        options={{
+          headerTitle: props => <DormitoryHeader {...props}/>,
+          headerShown: false
+        }}
+      />
+      <Stack.Screen
+        name="InformPayment"
+        component={InformPaymentOwner}
+        options={{
+          headerTitle: props => <DormitoryHeader {...props}/>,
+        }}
+      />
+      <Stack.Screen
+        name="StatusPayment"
+        component={StatusPaymentOwner}
+        options={{
+          headerTitle: props => <DormitoryHeader {...props}/>,
         }}
       />
     </Stack.Navigator>

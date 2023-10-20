@@ -1,3 +1,4 @@
+import { Component } from "react";
 import{
     Text,
     View,
@@ -5,9 +6,10 @@ import{
     TouchableOpacity
 }from "react-native";
 
-const PaymentOwner3 = () => {
-return(
-    <View style = {{padding:20, justifyContent: 'center', marginTop: '20%', flex: 1}}>
+class StatusPaymentOwner extends Component {
+    render() {
+        return (
+            <View style = {{padding:20, justifyContent: 'center', marginTop: '20%', flex: 1}}>
         <Text style = {{fontSize: 30, fontWeight: 'bold', color: '#96B3FF', margin: 10}}>
             รายละเอียดค่าเช่าหอพัก
         </Text>
@@ -82,10 +84,9 @@ return(
         </View>
         
     </View>
-);
-};
-
-
+        )
+    }
+}
 
 const styles = StyleSheet.create({
 btn: {
@@ -132,4 +133,4 @@ btn3: {
 
 });
 
-export default PaymentOwner3;
+export default StatusPaymentOwner;
