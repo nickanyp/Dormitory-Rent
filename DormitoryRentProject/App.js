@@ -13,7 +13,7 @@ import AllNavigation from "./Navigation/MainNavigation"
 import CheckPayment from './Screen/Owner/CheckPayment';
 import PaymentOwner2 from './Screen/Owner/PaymentOwner2';
 import PaymentOwner3 from './Screen/Owner/PaymentOwner3';
-import ProfileOwner from './Screen/Owner/ProfileOwner';
+import ProfileOwner from './Screen/Owner/EditProfileOwner';
 
 export default function App() {
   return (

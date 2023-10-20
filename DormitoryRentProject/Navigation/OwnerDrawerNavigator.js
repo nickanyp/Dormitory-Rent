@@ -4,6 +4,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import { Feather } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 //Owner
 import LoginOwner from "../Screen/Owner/LoginOwner";
@@ -12,6 +13,7 @@ import OwnerHome from "../Screen/Owner/OwnerHome";
 import ProfileOwner from '../Screen/Owner/ProfileOwner';
 
 import OwnerStackNavigation from './OwnerStackNavigator';
+import DormitoryHeader from '../component/DormitoryHeader';
 
 const OwnerDrawer = createDrawerNavigator();
 
@@ -23,16 +25,18 @@ const OwnerDrawerNavigation = () => {
         component={OwnerHome}
         options={{
           title: "อนัญพร จอมคำ",
+          headerTitle: props => <DormitoryHeader {...props}/>,
         }}
       />
       <OwnerDrawer.Screen
         name="Profile"
         component={ProfileOwner}
         options={{
-          title: "แก้ไขโปรไฟล์",
+          title: "โปรไฟล์",
           drawerIcon: () => (
-            <Feather name="edit-2" size={24} color="black" />
+            <FontAwesome5 name="user" size={24} color="grey" />
          ),
+         headerTitle: props => <DormitoryHeader {...props}/>,
         }}
       />
       <OwnerDrawer.Screen
