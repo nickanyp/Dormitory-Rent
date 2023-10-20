@@ -35,7 +35,7 @@ class LoginOwner extends Component {
       </View>
 
       <View style={{alignItems: "center",}}>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={() => {this.props.navigation.navigate("OwnerHome")}}>
           <Text style={{textAlign: "center", color: "white", fontWeight: "bold", fontSize: 16,}}>
             ยืนยัน
           </Text>

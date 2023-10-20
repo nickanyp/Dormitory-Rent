@@ -4,12 +4,18 @@ import { Component } from "react";
 import { AntDesign } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 const gender = ["ชาย", "หญิง"]
 class RegisterOwner extends Component {
   render() {
     return(
       <View style={styles.container}>
+        <View style={{justifyContent:'flex-start'}}>
+          <TouchableOpacity>
+            <Ionicons name="caret-back" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
         <Text style={styles.header}>สร้างบัญชีผู้ใช้</Text>
         <Text></Text>
         <Text></Text>
@@ -55,8 +61,8 @@ class RegisterOwner extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     backgroundColor: "white",
+    justifyContent: 'center'
   },
   label: {
     color: "#363C56",

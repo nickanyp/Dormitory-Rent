@@ -13,85 +13,53 @@ import {
     return (
       <View style={styles.container}>
 
-        <View style={{alignItems: "center"}}>
-          <Image style={styles.pic}
-        source={{
-          uri: 'https://cdn.discordapp.com/attachments/860515428253564978/1139454243137400902/Screenshot_2566-08-11_at_14.03.57.png?ex=6528ebf5&is=651676f5&hm=abe387d30938e5afeb23f400c9d644b27c989c3f576d2e0d753a4dd2e1bd83a7&',
-        }}
-        />
+        <View style={{alignItems: "center", margin: 20}}>
+          <TouchableOpacity style={styles.pic}>
+            <Text>อัพโหลดรูปโปรไฟล์</Text>
+          </TouchableOpacity>
         </View>
         
         
-        <Text style={styles.txt}>ชื่อ  อนัญพร จอมคำ</Text>
-        <Text style={styles.txt}>เพศ  หญิง</Text>
-        <Text style={styles.txt}>อีเมล  nicksama@gmail.com</Text>
-        <Text style={styles.txt}>เบอร์โทร  0958575874</Text>
+        <Text style={[styles.txt, {color: "#363C56"}]}>ชื่อ   <Text style={[styles.txt, {color: '#A9A9A9'}]}>อนัญพร จอมคำ</Text></Text>
+        <Text style={[styles.txt, {color: "#363C56"}]}>เพศ   <Text style={[styles.txt, {color: '#A9A9A9'}]}>หญิง</Text></Text>
+        <Text style={[styles.txt, {color: "#363C56"}]}>อีเมล   <Text style={[styles.txt, {color: '#A9A9A9'}]}>nickysama</Text></Text>
+        <Text style={[styles.txt, {color: "#363C56"}]}>เบอร์โทร   <Text style={[styles.txt, {color: '#A9A9A9'}]}>0958575874</Text></Text>
 
-        <View style={{ alignItems: "center"}}>
+        <View style={{ justifyContent: "center", flexDirection: 'row'}}>
           <TouchableOpacity style={styles.btn}>
-            <Text
-              style={{
-                textAlign: "center",
-                color: "white",
-                fontWeight: "bold",
-                fontSize: 15,
-              }}
-            >
-                แก้ไข
-              
+            <Text style={{ textAlign: "center", color: "white", fontWeight: "bold", fontSize: 16,}}>
+              แก้ไข
             </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn}>
-            <Text
-              style={{
-                textAlign: "center",
-                color: "white",
-                fontWeight: "bold",
-                fontSize: 15,
-              }}
-            >
-              ยืนยัน
+            <Text style={{textAlign: "center", color: "white", fontWeight: "bold", fontSize: 16,}}>
+              ยกเลิก
             </Text>
           </TouchableOpacity>
         </View>
        
-        <MaskedView
-          style={styles.footer}
-          maskElement={
-            <Text style={[styles.textStyle, { backgroundColor: "transparent" }]}>
-              DÖrmitory Rent
-            </Text>
-          }>
-        </MaskedView>
       </View>
     );
   };
   
   const styles = StyleSheet.create({
-    pic:{
-      width: 300,
-      height: 300,
-      display:'flex',
-      alignItems: "center",
-      justifyContent: 'center',
-      borderRadius: '100%'
-    },
     container: {
       flex: 1,
       flexDirection: "column",
-      justifyContent: "center",
+      backgroundColor: 'white'
     },
-    label: {
-      color: "#363C56",
-      fontSize: 15,
-      fontWeight: "bold",
-      padding: 5,
+    pic:{
+      width: 180,
+      height: 180,
+      borderRadius: 180/2,
+      display:'flex',
+      alignItems: "center",
+      justifyContent: 'center',
+      backgroundColor: '#D9D9D9',
     },
     txt: {
-      fontSize: 20,
+      fontSize: 16,
       fontWeight: "bold",
-      textAlign: "left",
-      color: "#363C56",
       padding: 10,
       marginLeft: 10,
     },
@@ -110,23 +78,13 @@ import {
       backgroundColor: "transparent",
       textAlign: "center",
     },
-    footer: {
-      alignSelf: "center",
-      position: "absolute",
-      bottom: 35,
-    },
-    shadowProp: {
-      shadowColor: "#9B9B9B",
-      shadowOffset: { width: -2, height: 4 },
-      shadowOpacity: 0.4,
-      shadowRadius: 3,
-    },
     btn: {
       width: 100,
       padding: 10,
       borderRadius: 20,
       backgroundColor: "#363C56",
-      margin: 20,
+      marginTop: 30,
+      margin: 10,
     },
   });
   

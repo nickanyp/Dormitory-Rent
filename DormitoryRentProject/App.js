@@ -9,7 +9,7 @@ import PaymentRenter from "./Screen/Renter/PaymentRenter";
 import HistoryRenter from "./Screen/Renter/HistoryRenter";
 import RegisterOwner from "./Screen/Owner/RegisterOwner";
 import LoginOwner from "./Screen/Owner/LoginOwner";
-import AllNavigation from "./Navigation/AllNavigation"
+import AllNavigation from "./Navigation/MainNavigation"
 import CheckPayment from './Screen/Owner/CheckPayment';
 import PaymentOwner2 from './Screen/Owner/PaymentOwner2';
 import PaymentOwner3 from './Screen/Owner/PaymentOwner3';
