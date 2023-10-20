@@ -2,62 +2,67 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import { Feather } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
 
 //Owner
 import LoginOwner from "../Screen/Owner/LoginOwner";
 import RegisterOwner from "../Screen/Owner/RegisterOwner";
 import OwnerHome from "../Screen/Owner/OwnerHome";
 import ProfileOwner from '../Screen/Owner/ProfileOwner';
+import EditProfileOwner from "../Screen/Owner/EditProfileOwner";
 
 import OwnerStackNavigation from './OwnerStackNavigator';
 import DormitoryHeader from '../component/DormitoryHeader';
+import CustomDrawer from '../component/CustomDrawer';
 
-const OwnerDrawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator();
 
 const OwnerDrawerNavigation = () => {
   return (
-    <OwnerDrawer.Navigator>
-      <OwnerDrawer.Screen
+    <Drawer.Navigator
+      drawerContent={props => <CustomDrawer {...props} />}
+      screenOptions={({route}) => ({
+        drawerStyle: {
+          backgroundColor: '#EEEEEE',
+          color: 'white'
+        },
+        headerStyle: {
+          height: 120
+        }
+      })}>
+      <Drawer.Screen
         name="Home"
         component={OwnerHome}
         options={{
-          title: "อนัญพร จอมคำ",
+          title: "หน้าหลัก",
           drawerIcon: () => (
-            <Ionicons name="ios-home-outline" size={24} color="black" />
+            <FontAwesome5 name="home" size={24} color="#363C56" />
          ),
           headerTitle: props => <DormitoryHeader {...props}/>,
         }}
       />
-      <OwnerDrawer.Screen
+      <Drawer.Screen
         name="Profile"
         component={ProfileOwner}
         options={{
           title: "โปรไฟล์",
           drawerIcon: () => (
-            <FontAwesome5 name="user" size={24} color="grey" />
-         ),
-         headerTitle: props => <DormitoryHeader {...props}/>,
+            <FontAwesome5 name="user" size={24} color="#363C56" />
+          ),
+          headerTitle: props => <DormitoryHeader {...props}/>,
         }}
       />
-      <OwnerDrawer.Screen
+      <Drawer.Screen
         name="Logout"
         component={OwnerStackNavigation}
         options={{
-          title: "ออกจากระบบ",
-          drawerIcon: () => (
-            <MaterialIcons name="logout" size={24} color="red" />
-          ),
-          drawerContentStyle: {
-            flexDirection: "column-reverse",
-          },
+          drawerItemStyle: { height: 0 },
           headerShown: false
         }}
       />
-    </OwnerDrawer.Navigator>
+    </Drawer.Navigator>
+    
   )
 }
 

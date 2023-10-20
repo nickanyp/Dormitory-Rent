@@ -3,18 +3,20 @@ import React from 'react'
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import OwnerDrawerNavigation from './OwnerDrawerNavigator';
+import DormitoryHeader from '../component/DormitoryHeader';
 
 //Owner
 import LoginOwner from "../Screen/Owner/LoginOwner";
 import RegisterOwner from "../Screen/Owner/RegisterOwner";
 import OwnerHome from "../Screen/Owner/OwnerHome";
+import EditProfileOwner from "../Screen/Owner/EditProfileOwner";
 
-const OwnerStack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const OwnerStackNavigation = () => {
   return (
-    <OwnerStack.Navigator>
-        <OwnerStack.Screen
+    <Stack.Navigator>
+        <Stack.Screen
         name="LoginOwner"
         component={LoginOwner}
         options={{
@@ -22,7 +24,7 @@ const OwnerStackNavigation = () => {
           headerShown: false
         }}
       />
-      <OwnerStack.Screen
+      <Stack.Screen
         name="RegisterOwner"
         component={RegisterOwner}
         options={{
@@ -30,7 +32,7 @@ const OwnerStackNavigation = () => {
           headerShown: false
         }}
       />
-      <OwnerStack.Screen
+      <Stack.Screen
         name="OwnerHome"
         component={OwnerDrawerNavigation}
         options={{
@@ -38,7 +40,14 @@ const OwnerStackNavigation = () => {
           headerShown: false
         }}
       />
-    </OwnerStack.Navigator>
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfileOwner}
+        options={{
+          headerTitle: props => <DormitoryHeader {...props}/>
+        }}
+      />
+    </Stack.Navigator>
   )
 }
 

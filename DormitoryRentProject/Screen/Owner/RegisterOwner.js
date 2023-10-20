@@ -6,7 +6,6 @@ import { Fontisto } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
-const gender = ["ชาย", "หญิง"]
 class RegisterOwner extends Component {
   render() {
     return(
@@ -44,7 +43,7 @@ class RegisterOwner extends Component {
         </View>
 
       <View style={{flexDirection: "row", justifyContent: 'center'}}>
-        <TouchableOpacity style={styles.btn} onPress={() => {this.props.navigation.navigate("LoginOwner")}}>
+        <TouchableOpacity style={styles.btn} onPress={() => {this.props.navigation.navigate("Logout")}}>
           <Text style={{textAlign: "center", color: "white", fontWeight: "bold",fontSize: 16,}}>
             ยืนยัน
           </Text>

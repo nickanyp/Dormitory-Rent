@@ -14,7 +14,7 @@ import PaymentRenter from "../Screen/Renter/PaymentRenter";
 import HistoryRenter from "../Screen/Renter/HistoryRenter";
 import DashboardPage from "../Screen/Renter/DashboardPage"
 
-const OwnerTab = createBottomTabNavigator();
+const RenterTab = createBottomTabNavigator();
 
 const RenterTabNavigation = () => {
   return (
