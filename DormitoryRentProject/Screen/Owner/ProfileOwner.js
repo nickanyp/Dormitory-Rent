@@ -45,8 +45,7 @@ class ProfileOwner extends Component {
               backgroundColor: "#EEEEEE",
               borderRadius: 15,
               justifyContent: "center",
-            }}
-          >
+            }}>
             <Text
               style={[
                 styles.txt,

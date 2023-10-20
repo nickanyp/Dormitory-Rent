@@ -10,6 +10,8 @@ import LoginOwner from "../Screen/Owner/LoginOwner";
 import RegisterOwner from "../Screen/Owner/RegisterOwner";
 import OwnerHome from "../Screen/Owner/OwnerHome";
 import EditProfileOwner from "../Screen/Owner/EditProfileOwner";
+import OwnerDormitory from '../Screen/Owner/OwnerDormitory';
+import OwnerTabNavigator from './OwnerTabNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +45,13 @@ const OwnerStackNavigation = () => {
       <Stack.Screen
         name="EditProfile"
         component={EditProfileOwner}
+        options={{
+          headerTitle: props => <DormitoryHeader {...props}/>
+        }}
+      />
+      <Stack.Screen
+        name="OwnerDormitory"
+        component={OwnerTabNavigator}
         options={{
           headerTitle: props => <DormitoryHeader {...props}/>
         }}

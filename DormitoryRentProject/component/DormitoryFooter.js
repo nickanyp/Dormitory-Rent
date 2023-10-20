@@ -23,7 +23,7 @@ export default function Dormitory() {
 
 const styles = StyleSheet.create({
   textStyle: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: "bold",
     backgroundColor: "transparent",
     textAlign: "center",
