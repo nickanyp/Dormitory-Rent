@@ -9,7 +9,7 @@ const FirstPage = ({navigation}) => {
         <Dormitory></Dormitory>
         <TouchableOpacity 
         style={styles.footer} 
-        onPress={() => {navigation.navigate('ChoosePage', {prev: 'FirstPage'})}}>
+        onPress={() => {navigation.navigate('ChoosePage')}}>
           <Text style={{fontSize: 16, fontWeight: 'bold', color: '#A8A8A8',}}>แตะเพื่อเปิด</Text>
         </TouchableOpacity>
     </View>
