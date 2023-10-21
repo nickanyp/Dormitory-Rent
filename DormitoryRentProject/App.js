@@ -17,11 +17,13 @@ import FirstPage from './MainScreen/FirstPage';
 
 export default function App() {
   return (
-    <FirstPage></FirstPage>
-    // <AllNavigation></AllNavigation>
+    // <FirstPage></FirstPage>
+    // <MainScreenNavigation></MainScreenNavigation>
+    <AllNavigation></AllNavigation>
     // <MyRoomPage></MyRoomPage>
     // <LoginRenter></LoginRenter>
     // <CheckPayment></CheckPayment>
     // <ProfileOwner></ProfileOwner>
+    // <ChoosePage></ChoosePage>
   );
 }

@@ -16,7 +16,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import LoginOwner from '../Screen/Owner/LoginOwner';
 
-const CustomDrawer = props => {
+const CustomDrawer = (props, {navigation}) => {
   return (
     <View style={{flex: 1}}>
         <DrawerContentScrollView
@@ -36,7 +36,7 @@ const CustomDrawer = props => {
             </View>
         </DrawerContentScrollView>
         <View style={{marginLeft: 20, borderTopWidth: 1, borderTopColor: '#ccc', marginBottom: 20}}>
-            <TouchableOpacity onPress={() => {(this.navigation.navigate("Logout"))}} style={{paddingVertical: 15}}>
+            <TouchableOpacity onPress={() => {(this.navigation.navigate("LoginOwner"))}} style={{paddingVertical: 15}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <MaterialIcons name="logout" size={24} color="red" />
                     <Text style={{ fontSize: 16, marginLeft: 10, color: 'red'}}>

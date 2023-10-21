@@ -3,13 +3,12 @@ import "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
-import OwnerStackNavigator from "./OwnerStackNavigator";
-import OwnerDrawerNavigator from "./OwnerDrawerNavigator";
+import AllStackNavigator from './AllStackNavigator';
 
 const MainNavigation = () => {
   return (
     <NavigationContainer>
-      <OwnerStackNavigator />
+      <AllStackNavigator />
     </NavigationContainer>
   );
 };

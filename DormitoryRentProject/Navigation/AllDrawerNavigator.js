@@ -5,14 +5,12 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
-//Owner
 import LoginOwner from "../Screen/Owner/LoginOwner";
 import RegisterOwner from "../Screen/Owner/RegisterOwner";
 import OwnerHome from "../Screen/Owner/OwnerHome";
 import ProfileOwner from '../Screen/Owner/ProfileOwner';
 import EditProfileOwner from "../Screen/Owner/EditProfileOwner";
 
-import OwnerStackNavigation from './OwnerStackNavigator';
 import DormitoryHeader from '../component/DormitoryHeader';
 import CustomDrawer from '../component/CustomDrawer';
 
@@ -53,14 +51,6 @@ const OwnerDrawerNavigation = () => {
         }}
       />
 
-      <Drawer.Screen
-        name="Logout"
-        component={OwnerStackNavigation}
-        options={{
-          drawerItemStyle: { height: 0 },
-          headerShown: false
-        }}
-      />
     </Drawer.Navigator>
     
   )

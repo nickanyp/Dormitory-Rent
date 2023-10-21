@@ -1,45 +1,51 @@
-
 import {
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  TouchableOpacityBase,
+  Image
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import MaskedView from "@react-native-masked-view/masked-view";
 import LoginRenter from "../Screen/Renter/LoginRenter";
+import DormitoryFooter from "../component/DormitoryFooter";
 
-export default function ChoosePage() {
+import { MaterialIcons } from '@expo/vector-icons';
+import RenterStackNavigator from "../Navigation/AllStackNavigator";
+
+const ChoosePage = ({navigation}) =>  {
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 20, fontWeight: "bold", color: "#363C56" }}>
-        คุณเป็น<Text style={{ color: "#96B3FF" }}>เจ้าของหอพัก</Text>
-        หรือ<Text style={{color: "#FF9699"}}>ผู้เช่าหอพัก</Text>?
-      </Text>
 
-      <TouchableOpacity
-        style={[styles.style, { backgroundColor: "#96B3FF", margin: 30 }]} onPress={() => {this.props.navigation.navigate("LoginOwner")}}>
-        <Text style={styles.text}>เจ้าของ</Text>
-      </TouchableOpacity>
+      <View style={styles.box1}>
+        <Text style={{fontSize: 35, color: 'white', right: '20%'}}>WELCOME !</Text>
+        <Image style={styles.pic} source={require('../assets/pink.png')}></Image>
+      </View>
 
-      <TouchableOpacity style={[styles.style, { backgroundColor: "#FF9699" }]} onPress={() => {this.props.navigation.navigate("MY ROOM")}}>
-        <Text style={styles.text}>ผู้เช่า</Text>
-      </TouchableOpacity>
+        <View style={styles.box2}>
+          <Text style={{ fontSize: 20, fontWeight: "bold", color: "#363C56", marginTop: '10%' }}>
+            คุณเป็น <Text style={{ color: "#96B3FF" }}>เจ้าของหอพัก </Text>
+            หรือ <Text style={{color: "#FF9699"}}>ผู้เช่าหอพัก</Text> ?
+          </Text>
 
-      <MaskedView
-        style={styles.footer}
-        maskElement={
-          <Text style={[styles.textStyle, { backgroundColor: "transparent" }]}>
-            DÖrmitory Rent
-          </Text>}>
-        <LinearGradient
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          colors={["#96B3FF", "#FF9699"]}>
-          <Text style={[styles.textStyle, { opacity: 0 }]}>DÖrmitory Rent</Text>
-        </LinearGradient>
-      </MaskedView>
+          <View style={{flexDirection: 'column', marginTop: 20}}>
+            <View style={[styles.input, {backgroundColor: '#96B3FF'}]}>
+              <TouchableOpacity 
+              style={{flex: 1}}
+              onPress={() => {navigation.navigate('LoginOwner')}}>
+                <Text style={[styles.text, {color: 'white'}]}>เจ้าของหอพัก</Text>
+              </TouchableOpacity>
+              <MaterialIcons name="navigate-next" size={24} color="white" />
+            </View>
+            <View style={[styles.input, {backgroundColor: '#FF9699'}]}>
+              <TouchableOpacity style={{flex: 1}} 
+              onPress={() => {(navigation.navigate('LoginRenter'))}}>
+                <Text style={styles.text}>ผู้เช่าหอพัก</Text>
+              </TouchableOpacity>
+              <MaterialIcons name="navigate-next" size={24} color="white" />
+            </View>
+          </View>
+        </View>
+
+      <DormitoryFooter></DormitoryFooter>
 
     </View>
   );
@@ -48,31 +54,61 @@ export default function ChoosePage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: '#363C56'
+  },
+  box1: {
+    flex:1,
+    justifyContent: 'center',
+    alignItems: 'flex-start'
+  },
+  box2: {
+    flex:2, 
+    backgroundColor: 'white', 
+    alignItems: 'center',
+    width: '100%', 
+    borderRadius: 40
   },
   style: {
-    flexDirection: 'row',
-    width: 200,
-    padding: 30,
+    width: 100,
+    height: 50,
     borderRadius: 40,
     justifyContent: 'center'
   },
   text: {
     color: "white",
-    fontSize: 30,
+    fontSize: 18,
     fontWeight: "bold",
     textAlign: 'center',
   },
-  textStyle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    backgroundColor: "transparent",
-    textAlign: "center",
+  btn: {
+    width: 120,
+    padding: 15,
+    marginHorizontal: 10,
+    borderRadius: 15,
   },
-  footer: {
-    alignSelf: "center",
-    position: "absolute",
-    bottom: 35,
+  input: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 150,
+    height: 80,
+    backgroundColor: 'red',
+    borderRadius: 25,
+    backgroundColor: "white",
+    margin: 15,
+    paddingLeft: 15,
   },
+  pic: {
+    width: 600,
+    height: 600,
+    resizeMode: 'contain',
+    position: 'absolute',
+    top: -20,
+    left: -40
+  }
 });
+
+export default ChoosePage;

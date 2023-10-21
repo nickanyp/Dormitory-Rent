@@ -49,9 +49,6 @@ class MyRoomPage extends Component {
     return (
       
       <SafeAreaView style={styles.container}>
-        <View style={{position: 'absolute', width: 300, top: 55, alignItems: 'center'}}>
-          <DormitoryHeader/>
-        </View>
 
         {this.state.userArr.map((item, i) => {
           return(

@@ -1,12 +1,16 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import OwnerDormitory from '../Screen/Owner/OwnerDormitory';
-import PaymentOwner from '../Screen/Owner/PaymentOwner';
 
 import { FontAwesome } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+
+import OwnerDormitory from '../Screen/Owner/OwnerDormitory';
+import PaymentOwner from '../Screen/Owner/PaymentOwner';
+import MyRoomPage from "../Screen/Renter/MyRoomPage";
+import DashboardPage from "../Screen/Renter/DashboardPage";
 
 const Tab = createBottomTabNavigator();
 

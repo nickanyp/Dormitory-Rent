@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
 
-export default function DormitoryFooter() {
+export default function Dormitory() {
     return (
         <MaskedView style={styles.footer}
         maskElement={
@@ -23,14 +23,10 @@ export default function DormitoryFooter() {
 
 const styles = StyleSheet.create({
   textStyle: {
-    fontSize: 25,
+    fontSize: 40,
     fontWeight: "bold",
     backgroundColor: "transparent",
     textAlign: "center",
   },
-  footer: {
-    alignSelf: "center",
-    position: "absolute",
-    bottom: 35,
-  },
+  
 })

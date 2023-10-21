@@ -7,9 +7,13 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-import Dormitory from "../../component/DormitoryFooter";
+import DormitoryFooter from "../../component/DormitoryFooter";
+
+import { Octicons } from '@expo/vector-icons';
 import { Component } from "react";
 import { AntDesign } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 import firebase from "../../database/FirebaseDB";
 
 class LoginRenter extends Component {
@@ -69,66 +73,34 @@ class LoginRenter extends Component {
   }
 
   render() {
-    if (this.state.isLoading) {
-      return (
-        <View>
-          <ActivityIndicator size="small" color="#9E9E9E" />
-          <Dormitory></Dormitory>
-        </View>
-      );
-    }
     return (
       <View style={styles.container}>
-
-        <View>
-          <Text style={styles.label}>รหัสหอพัก</Text>
-          <TextInput
-            style={[styles.input, styles.shadowProp]}
-            value={this.state.dor_id}
-            onChangeText={(val) => {
-              this.inputValueUpdate(val, "dor_id");
-            }}
-          ></TextInput>
-          <Text style={styles.label}>เลขห้อง</Text>
-          <TextInput
-            style={[styles.input, styles.shadowProp]}
-            value={this.state.num_room}
-            onChangeText={(val) => {
-              this.inputValueUpdate(val, "num_room");
-            }}
-          ></TextInput>
-          <Text style={styles.label}>รหัสผ่าน</Text>
-          <View style={{justifyContent: 'center'}}>
-            <TextInput
-              style={[styles.input, styles.shadowProp]}
-              value={this.state.pass}
-              onChangeText={(val) => {
-                this.inputValueUpdate(val, "pass");
-              }}
-            ></TextInput>
-          </View>
+      
+      <View style={{alignItems: 'center'}}>
+        <View style={[styles.input, styles.shadowProp]}>
+          <AntDesign style={{paddingRight: 10}} name="mail" size={20} color="#363C56" />
+          <TextInput style={{flex: 1, fontSize: 16}} placeholder="รหัสหอพัก"></TextInput>
         </View>
-
-        <View style={{ alignItems: "center" }}>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => {
-              this.storeUser();
-            }}>
-            <Text
-              style={{
-                textAlign: "center",
-                color: "white",
-                fontWeight: "bold",
-                fontSize: 16,
-              }}>
-              ยืนยัน
-            </Text>
-          </TouchableOpacity>
+        <View style={[styles.input, styles.shadowProp]}>
+          <MaterialCommunityIcons style={{paddingRight: 10}} name="numeric" size={24} color="#363C56" />
+          <TextInput style={{flex: 1, fontSize: 16}} placeholder="เลขห้อง"></TextInput>
         </View>
-
-        <Dormitory></Dormitory>
+        <View style={[styles.input, styles.shadowProp]}>
+          <AntDesign style={{paddingRight: 10}} name="lock1" size={20} color="#363C56" />
+          <TextInput style={{flex: 1, fontSize: 16}} placeholder="รหัสผ่าน"></TextInput>
+        </View>
       </View>
+
+      <View style={{alignItems: "center",}}>
+        <TouchableOpacity style={styles.btn} onPress={() => {this.props.navigation.navigate("MyRoomPage")}}>
+          <Text style={{textAlign: "center", color: "white", fontWeight: "bold", fontSize: 16,}}>
+            ยืนยัน
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      <DormitoryFooter></DormitoryFooter>
+    </View>
     );
   }
 }
@@ -136,32 +108,21 @@ class LoginRenter extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
     backgroundColor: "white",
   },
-  labelHead: {
-    color: "#363C56",
-    fontWeight: "bold",
-    paddingBottom: 10,
-    textAlign: 'center'
-  },
-  label: {
-    color: "#363C56",
-    fontSize: 16,
-    fontWeight: "bold",
-    padding: 5,
-  },
   input: {
-    width: 250,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 300,
     height: 50,
     borderColor: "#9B9B9B",
     borderWidth: 1.5,
     borderRadius: 25,
     backgroundColor: "white",
-    margin: 5,
-    padding: 15,
+    margin: 15,
+    paddingLeft: 15,
   },
   shadowProp: {
     shadowColor: "#9B9B9B",
@@ -170,16 +131,29 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   btn: {
-    width: 100,
-    padding: 10,
-    borderRadius: 20,
+    width: 110,
+    padding: 15,
+    borderRadius: 30,
     backgroundColor: "#FF9699",
     margin: 20,
   },
-  icon: {
-    position: 'absolute',
-    margin: 20
-  }
+  text: {
+    color: "#FF9699",
+    fontWeight: "bold",
+    textDecorationLine: "underline",
+    fontSize: 16
+  },
+  SectionStyle: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderWidth: 0.5,
+    borderColor: '#000',
+    height: 40,
+    borderRadius: 5,
+    margin: 10,
+  },
 });
 
 export default LoginRenter;

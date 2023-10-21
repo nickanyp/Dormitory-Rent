@@ -49,9 +49,6 @@ class HistoryRenter extends Component {
     return (
       
       <SafeAreaView style={styles.container}>
-        <View style={{position: 'absolute', width: 300, top: 55, alignItems: 'center'}}>
-          <DormitoryHeader/>
-        </View>
 
         {this.state.userArr.map((item, i) => {
           return(
@@ -93,7 +90,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     alignItems: "center",
-    justifyContent: "center"
   },
   box: {
     width: "90%",

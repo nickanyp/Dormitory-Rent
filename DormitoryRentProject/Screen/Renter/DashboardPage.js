@@ -20,9 +20,6 @@ const RenterDashPage = () => {
 
   return (
       <SafeAreaView style={styles.container}>
-        <View style={{position: 'absolute', width: 300, top: 55, alignItems: 'center'}}>
-          <DormitoryHeader/>
-        </View>
         <View style={{marginTop:30, marginBottom:10, display:"flex", flexDirection:"row"}}>
           <Pressable style={styles.button}>
             <Text style={{fontWeight:"bold"}}>รวมทั้งหมด</Text>

@@ -1,37 +1,35 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
 import { FontAwesome } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
-// Renter
-import Dormitory from "../component/DormitoryFooter";
+import OwnerDormitory from '../Screen/Owner/OwnerDormitory';
+import PaymentOwner from '../Screen/Owner/PaymentOwner';
 import MyRoomPage from "../Screen/Renter/MyRoomPage";
-import RenterDashPage from "../Screen/Renter/DashboardPage";
-import LoginRenter from "../Screen/Renter/LoginRenter";
-import ChoosePage from "../MainScreen/ChoosePage";
-import PaymentRenter from "../Screen/Renter/PaymentRenter";
-import HistoryRenter from "../Screen/Renter/HistoryRenter";
-import DashboardPage from "../Screen/Renter/DashboardPage"
+import DashboardPage from "../Screen/Renter/DashboardPage";
 
-const RenterTab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
-const RenterTabNavigation = () => {
+const RenterTabNavigator = () => {
   return (
-    <RenterTab.Navigator
+    <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarStyle: {
           height: 90,
           backgroundColor: '#363C56',
-        }
+        },
       })}
       >
-      <RenterTab.Screen
+      <Tab.Screen
         name="MY ROOM"
         component={MyRoomPage}
         options={{
-          tabBarIcon: ({}) => {
-            return <FontAwesome name="home" size={30} color="white" />
+          tabBarIcon: ({ color, size }) => {
+            return <FontAwesome name="home" size={size} color={color} />
           },
           tabBarActiveTintColor: '#FF9699',
           tabBarInactiveTintColor: 'white',
@@ -42,12 +40,12 @@ const RenterTabNavigation = () => {
           headerShown: false,
         }}
       />
-      <RenterTab.Screen
+      <Tab.Screen
         name="DASHBOARD"
         component={DashboardPage}
         options={{
-          tabBarIcon: ({}) => {
-            return <MaterialIcons name="dashboard" size={30} color="white" />
+          tabBarIcon: ({ color, size }) => {
+            return <MaterialIcons name="dashboard" size={size} color={color} />
           },
           tabBarActiveTintColor: '#FF9699',
           tabBarInactiveTintColor: 'white',
@@ -58,8 +56,8 @@ const RenterTabNavigation = () => {
           headerShown: false,
         }}
       />
-    </RenterTab.Navigator>
+    </Tab.Navigator>
   )
 }
 
-export default RenterTabNavigation
+export default RenterTabNavigator

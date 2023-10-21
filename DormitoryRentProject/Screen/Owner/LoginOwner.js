@@ -57,13 +57,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: "white",
   },
-  label: {
-    color: "#363C56",
-    fontSize: 15,
-    fontWeight: "bold",
-    padding: 5,
-    left: 75
-  },
   input: {
     flexDirection: 'row',
     justifyContent: 'center',
