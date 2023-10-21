@@ -5,10 +5,11 @@ import { color } from "react-native-elements/dist/helpers";
 import DormitoryHeader from "../../component/DormitoryHeader";
 import { PieChart, StackedBarChart } from "react-native-chart-kit";
 import RenterDashAll from "./DashboardAll";
+import DashboardLight from "./DashboardLight";
 
 const RenterDashPage = () => {
 
-  let content = <RenterDashAll/>
+  let content = <DashboardLight/>
 
   // let colorselect = "#363C56"
   let color = "#DADADA"
@@ -20,7 +21,7 @@ const RenterDashPage = () => {
 
   return (
       <SafeAreaView style={styles.container}>
-        <View style={{marginTop:30, marginBottom:10, display:"flex", flexDirection:"row"}}>
+        <View style={{marginTop:20, marginBottom:10, display:"flex", flexDirection:"row"}}>
           <Pressable style={styles.button}>
             <Text style={{fontWeight:"bold"}}>รวมทั้งหมด</Text>
           </Pressable>

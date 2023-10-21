@@ -3,77 +3,69 @@ import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } fr
 import { Ionicons, Fontisto, MaterialIcons, Entypo, FontAwesome } from '@expo/vector-icons'; 
 import { color } from "react-native-elements/dist/helpers";
 import DormitoryHeader from "../../component/DormitoryHeader";
-import { PieChart, BarChart } from "react-native-chart-kit";
+import { LineChart } from "react-native-chart-kit";
 
 const DashboardLight = () => {
 
+  const chartConfig = {
+    backgroundGradientFrom: "#fff",
+    backgroundGradientTo: "#fff",
+    backgroundGradientToOpacity: 0,
+    color: (opacity = 1) => `#363C56`,
+    strokeWidth: 2, // optional, default 3
+    barPercentage: 0.5,
+    useShadowColorFromDataset: false // optional
+  };
+
+  const data = {
+    labels: ["5/66", "6/66", "7/66", "8/66", "9/66"],
+    datasets: [
+      {
+        data: [15, 18, 15, 16, 18],
+        color: (opacity = 1) => `#96B3FF`, // optional
+        strokeWidth: 3 // optional
+      }
+    ]
+  };
+
   return (
       <SafeAreaView style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
-          <Text style={{fontSize: 45, fontWeight: 'bold', color:"#363C56"}}>ห้อง A226</Text>
-          <Text style={{margin:10, color:"#7a7a7a", fontWeight:"bold"}}>ประจำงวดเดือน ตุลาคม 2566</Text>
-          <View style={styles.block1}>
-            <Text style={{fontSize:20, fontWeight:"bold"}}>ค่าชำระทั้งหมด 7,390 ฿</Text>
-          </View>
-          <View style={styles.detail1}>
-            <View>
-              <View style={styles.detail2}>
-                <Ionicons name="home-outline" size={30} color="#363C56" />
-                <Text style={{margin:10, fontWeight:"bold"}}>ค่าห้องพัก</Text>
-                <View style={styles.blockprice}>
-                  <Text style={{fontWeight: "bold", fontSize:15}}> 5,500 บาท</Text>
-                </View>
-              </View>
-              <View style={styles.detail2}>
-                <MaterialIcons name="lightbulb-outline" size={30} color="#363C56" />
-                <Text style={{margin:10, fontWeight:"bold"}}>ค่าไฟฟ้า</Text>
-                <View style={styles.blockprice2}>
-                  <Text style={{fontWeight: "bold", fontSize:15}}> 1,440 บาท</Text>
-                </View>
-              </View>
-            </View>
-            <View>
-              <View style={styles.detail2}>
-                <MaterialIcons name="attach-money" size={30} color="#363C56" />
-                <Text style={{margin:10, fontWeight:"bold"}}>ค่าปรับ</Text>
-                <View style={styles.blockprice3}>
-                  <Text style={{fontWeight: "bold", fontSize:15}}> 100 บาท</Text>
-                </View>
-              </View>
-              <View style={styles.detail2}>
-                <Ionicons name="water-outline" size={30} color="#363C56" />
-                <Text style={{margin:10, fontWeight:"bold"}}>ค่าน้ำ</Text>
-                <View style={styles.blockprice4}>
-                  <Text style={{fontWeight: "bold", fontSize:15}}> 200 บาท</Text>
-                </View>
-              </View>
+        <Text style={{marginTop:20, fontSize:19, fontWeight:"bold", color:"#363C56"}}>รายละเอียดน้ำประจำเดือนกันยายน</Text>
+
+        <View style={styles.block1}>
+          <View>
+            <View style={styles.circle}></View>
+            <View style={styles.circle2}>
+              <Text style={{fontSize:30, fontWeight:"bold", color:"#363C56"}}>150฿</Text>
             </View>
           </View>
-          <View style={styles.container}>
-            <PieChart
-              data={data}
-              width={360}
-              height={220}
-              chartConfig={chartConfig}
-              accessor={"population"}
-              backgroundColor={"transparent"}
-              paddingLeft={10}
-            />
-            <View style={styles.cirle}></View>
+          <View style={{justifyContent:"center"}}>
+            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>ค่าน้ำ : 15 บาท/หน่วย</Text>
+            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>ปริมาณน้ำ : 10 หน่วย</Text>
+            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>รวมทั้งหมด : 150 บาท</Text>
           </View>
-          <Text style={{fontWeight:"bold", color:"#363C56", fontSize:16, marginTop:5}}>เปรียบเทียบระหว่าง เดือนปัจุบันและเดือนที่แล้ว</Text>
-          <View style={{marginTop:25, marginBottom:20 }}>
-            <BarChart
-              // style={graphStyle}
-              data={data2}
-              width={360}
-              height={220}
-              yAxisLabel="$"
-              chartConfig={chartConfig}
-              verticalLabelRotation={30}
-            />
+        </View>
+
+        <View style={styles.block2}>
+          <Text style={{fontSize:16, fontWeight:"bold", color:"#fff", marginBottom:10}}>10 หน่วย</Text>
+          <View style={styles.box1}>
+            <Text>กันยายน</Text>
           </View>
-        </ScrollView>
+          <Text style={{fontSize:16, fontWeight:"bold", color:"#fff", marginBottom:10}}>12 หน่วย</Text>
+          <View style={styles.box2}>
+            <Text>สิงหาคม</Text>
+          </View>
+        </View> 
+
+        <View style={styles.block3}>
+          <LineChart
+            data={data}
+            width={320}
+            height={160}
+            chartConfig={chartConfig}
+          />
+        </View>
+        
       </SafeAreaView>
   );
 };
@@ -82,88 +74,65 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    justifyContent: "center",
     alignItems: "center",
     backgroundColor:"#fff"
   },
-  scroll:{
-    textAlign:"center",
-    // backgroundColor:"#f00"
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop:15
-  },
   block1: {
-    width: 250,
-    height:60,
-    borderWidth: 2,
-    borderRadius: 50,
-    borderColor:"#363C56",
-    alignItems:"center",
-    justifyContent: "center",
-    margin:10,
+    display:"flex",
+    flexDirection:"row",
+    // backgroundColor:"#000",
+    marginTop:20,
+    marginLeft:-5
   },
-  detail1:{
-    display: "flex",
-    flex:1,
-    flexDirection: "row",
-    width: 280,
-    height: 270,
-    // backgroundColor:"#f00",
-    marginTop:15
+  circle: {
+    width:150,
+    height:150,
+    borderRadius:360,
+    backgroundColor:"#96B3FF",
+    marginRight:20
   },
-  detail2:{
+  circle2: {
     width:130,
-    height: 135,
-    // backgroundColor: "#0f0",
-    alignItems:"center",
-    marginLeft:5,
-    marginRight:5
-  },
-  blockprice:{
-    width:100,
-    height:40,
-    borderWidth: 1.8,
-    borderRadius: 50,
-    borderColor:"#D2687B",
-    alignItems:"center",
-    justifyContent: "center",
-  },
-  blockprice2:{
-    width:100,
-    height:40,
-    borderWidth: 1.8,
-    borderRadius: 50,
-    borderColor:"#F2AD5C",
-    alignItems:"center",
-    justifyContent: "center",
-  },
-  blockprice3:{
-    width:100,
-    height:40,
-    borderWidth: 1.8,
-    borderRadius: 50,
-    borderColor:"#F64B4B",
-    alignItems:"center",
-    justifyContent: "center",
-  },
-  blockprice4:{
-    width:100,
-    height:40,
-    borderWidth: 1.8,
-    borderRadius: 50,
-    borderColor:"#88A2E4",
-    alignItems:"center",
-    justifyContent: "center",
-  },
-  cirle:{
-    width:100,
-    height:100,
+    height:130,
     borderRadius:360,
     backgroundColor:"#fff",
     position:"absolute",
-    left:50
+    left: 10,
+    top:10,
+    justifyContent:"center",
+    alignItems:"center"
+  },
+  block2:{
+    width:320,
+    height:180,
+    backgroundColor:"#363C56",
+    borderRadius:10,
+    marginTop:20,
+    justifyContent:"center",
+    padding:20  
+  },
+  box1:{
+    width: 220,
+    height:30,
+    backgroundColor:"#96B3FF",
+    borderRadius:10,
+    marginBottom:10,
+    justifyContent:"center",
+    paddingLeft:10
+  },
+  box2:{
+    width: 280,
+    height:30,
+    backgroundColor:"#DADADA",
+    borderRadius:10,
+    marginBottom:10,
+    justifyContent:"center",
+    paddingLeft:10
+  },
+  block3:{
+    marginTop:30
   }
+
 
 });
 export default DashboardLight
