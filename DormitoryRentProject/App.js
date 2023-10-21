@@ -14,16 +14,18 @@ import PaymentOwner2 from './Screen/Owner/InformPaymentOwner';
 import PaymentOwner3 from './Screen/Owner/StatusPaymentOwner';
 import ProfileOwner from './Screen/Owner/EditProfileOwner';
 import FirstPage from './MainScreen/FirstPage';
+import RenterDashPage from './Screen/Renter/DashboardPage';
 
 export default function App() {
   return (
     // <FirstPage></FirstPage>
     // <MainScreenNavigation></MainScreenNavigation>
-    <AllNavigation></AllNavigation>
+    // <AllNavigation></AllNavigation>
     // <MyRoomPage></MyRoomPage>
     // <LoginRenter></LoginRenter>
     // <CheckPayment></CheckPayment>
     // <ProfileOwner></ProfileOwner>
     // <ChoosePage></ChoosePage>
+    <RenterDashPage></RenterDashPage>
   );
 }

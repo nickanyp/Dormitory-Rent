@@ -24,13 +24,13 @@ const RenterDashPage = () => {
           <Pressable style={styles.button}>
             <Text style={{fontWeight:"bold"}}>รวมทั้งหมด</Text>
           </Pressable>
-          <Pressable style={styles.button2}>
+          <Pressable style={styles.button}>
             <Text style={{fontWeight:"bold"}}>ไฟฟ้า</Text>
           </Pressable>
-          <Pressable style={styles.button3}>
+          <Pressable style={styles.button}>
             <Text style={{fontWeight:"bold"}}>น้ำ</Text>
           </Pressable>
-          <Pressable style={styles.button4}>
+          <Pressable style={styles.button}>
             <Text style={{fontWeight:"bold"}}>ค่าปรับ</Text>
           </Pressable>
         </View>
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   button:{
     width:90,
     height:40,
-    backgroundColor:{color},
+    backgroundColor:"#DADADA",
     // borderColor:"#363C56",
     // borderWidth:2,
     borderRadius:20,

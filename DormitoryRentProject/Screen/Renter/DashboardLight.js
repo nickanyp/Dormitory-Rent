@@ -5,59 +5,7 @@ import { color } from "react-native-elements/dist/helpers";
 import DormitoryHeader from "../../component/DormitoryHeader";
 import { PieChart, BarChart } from "react-native-chart-kit";
 
-const RenterDashAll = () => {
-  const data = [
-    {
-      name: "ค่าห้องพัก",
-      population: 5500,
-      color: "#D2687B",
-      legendFontColor: "#D2687B",
-      legendFontSize: 15,
-      legendFontWeight: "bold"
-    },
-    {
-      name: "ค่าไฟฟ้า",
-      population: 1440,
-      color: "#F2AD5C",
-      legendFontColor: "#F2AD5C",
-      legendFontSize: 15
-    },
-    {
-      name: "ค่าน้ำ",
-      population: 200,
-      color: "#88A2E4",
-      legendFontColor: "#88A2E4",
-      legendFontSize: 15
-    },
-    {
-      name: "ค่าปรับ",
-      population: 100,
-      color: "#F64B4B",
-      legendFontColor: "#F64B4B",
-      legendFontSize: 15
-    }
-  ];
-
-  const data2 = {
-    labels: ["ไฟฟ้า", "น้ำ", "ค่าปรับ"],
-    datasets: [
-    {
-      data: [20, 30, 3, 2, 1, 0]
-    }
-  ]
-  };
-
-  const chartConfig = {
-    backgroundGradientFrom: "#1fff",
-    backgroundGradientFromOpacity: 0,
-    backgroundGradientTo: "#fff",
-    backgroundGradientToOpacity: 0,
-    color: (opacity = 1) => `#363C56`,
-    strokeWidth: 2, // optional, default 3
-    barPercentage: 0.5,
-    useShadowColorFromDataset: false, // optional
-    strokeWidth:4
-  };
+const DashboardLight = () => {
 
   return (
       <SafeAreaView style={styles.container}>
@@ -218,4 +166,4 @@ const styles = StyleSheet.create({
   }
 
 });
-export default RenterDashAll
+export default DashboardLight
