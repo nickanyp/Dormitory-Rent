@@ -60,7 +60,7 @@ const RegisterOwner = ({ navigation }) => {
         email,
         password
       );
-      const userDocRef = collection(firestore, "owners");
+      const userDocRef = collection(firestore, "users");
       await addDoc(userDocRef, {
         uid: userCredential.user.uid,
         name,

@@ -16,19 +16,14 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../../database/FirebaseConfig";
 
-const data = [
-  { label: "ชาย", value: "1" },
-  { label: "หญิง", value: "2" },
-];
-
-const LoginRenter = () => {
+const LoginRenter = ({ navigation }) => {
   const [dorpass, setDorpass] = useState("");
   const [numroom, setNumroom] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  
+
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -51,13 +46,15 @@ const LoginRenter = () => {
       .catch((error) => {
         console.log(error);
       });
-      if (dorpass === "" && numroom === "" && password === "") {
-        alert("กรุณากรอกข้อมูลให้ถูกต้อง")
-      } else if (dorpass == "") {
-        alert("กรุณากรอกรหัสหอพัก")
-      } else if (numroom == "") {
-        alert("กรุณากรอกเลขห้อง")
-      } 
+    if (dorpass === "" && numroom === "" && password === "") {
+      alert("กรุณากรอกข้อมูลให้ถูกต้อง");
+    } else if (dorpass == "") {
+      alert("กรุณากรอกรหัสหอพัก");
+    } else if (numroom == "") {
+      alert("กรุณากรอกเลขห้อง");
+    } else if (password == "") {
+      alert("กรุณารหัสผ่าน");
+    }
   };
 
   return (
@@ -131,7 +128,12 @@ const LoginRenter = () => {
       </View>
 
       <View style={{ alignItems: "center" }}>
-        <TouchableOpacity style={styles.btn} onPress={handleSignIn}>
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => {
+            navigation.navigate("MyRoomPage");
+          }}
+        >
           <Text
             style={{
               textAlign: "center",
