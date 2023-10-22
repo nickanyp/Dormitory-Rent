@@ -27,6 +27,11 @@ const LoginOwner = ({ navigation }) => {
     setShowPassword(!showPassword);
   };
 
+  const clearFormFields = () => {
+    setEmail("");
+    setPassword("");
+  };
+
   const handleSignIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -34,6 +39,7 @@ const LoginOwner = ({ navigation }) => {
         const user = userCredential.user;
         console.log(user);
         navigation.navigate("OwnerHome");
+        clearFormFields();
       })
       .catch((error) => {
         console.log(error);

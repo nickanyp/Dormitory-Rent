@@ -25,13 +25,19 @@ const RegisterOwner = ({ navigation }) => {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
+  const clearFormFields = () => {
+    setEmail("");
+    setPassword("");
+  };
+
   const handleCreateAccount = () => {
-    createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password, name, phone)
     .then((userCredential) => {
       console.log("Account created")
       const user = userCredential.user;
       console.log(user)
       navigation.navigate("LoginOwner")
+      clearFormFields();
     })
     .catch(error => {
       console.log(error)
