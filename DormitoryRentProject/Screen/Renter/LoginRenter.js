@@ -16,6 +16,11 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../../database/FirebaseConfig";
 
+const data = [
+  { label: "ชาย", value: "1" },
+  { label: "หญิง", value: "2" },
+];
+
 const LoginRenter = () => {
   const [dorpass, setDorpass] = useState("");
   const [numroom, setNumroom] = useState("");
@@ -23,7 +28,7 @@ const LoginRenter = () => {
   const [showPassword, setShowPassword] = useState(false);
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-
+  
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };

@@ -6,14 +6,14 @@ import {
   TouchableOpacity,
 } from "react-native";
 import DormitoryFooter from "../../component/DormitoryFooter";
-import DropDownPicker from 'react-native-dropdown-picker';
+import { Dropdown } from "react-native-element-dropdown";
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../../database/FirebaseConfig";
 
@@ -23,11 +23,18 @@ const RegisterOwner = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [phone, setPhone] = useState("");
-  
+
+  const data = [
+    { label: "ชาย", value: "1" },
+    { label: "หญิง", value: "2" },
+  ];
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const firestore = getFirestore(app);
+
+  const [value, setValue] = useState(null);
+  const [isFocus, setIsFocus] = useState(false);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -42,13 +49,17 @@ const RegisterOwner = ({ navigation }) => {
 
   const handleCreateAccount = async () => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      // Add user data to Firestore
-      const userDocRef = collection(firestore, 'owners');
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const userDocRef = collection(firestore, "owners");
       await addDoc(userDocRef, {
         uid: userCredential.user.uid,
         name,
         email,
+        password,
         phone,
       });
       console.log("Account created");
@@ -60,7 +71,6 @@ const RegisterOwner = ({ navigation }) => {
       console.log(error);
     }
   };
-  
 
   return (
     <View style={styles.container}>
@@ -83,19 +93,34 @@ const RegisterOwner = ({ navigation }) => {
             onChangeText={(text) => setName(text)}
           ></TextInput>
         </View>
-        {/* <View style={[styles.input, styles.shadowProp]}>
-          <Fontisto
-            style={{ paddingRight: 10 }}
-            name="intersex"
-            size={24}
-            color="#363C56"
-          />
-          <TextInput
-            style={{ flex: 1, fontSize: 16 }}
-            placeholder="เพศ"
-          ></TextInput>
-        </View> */}
         
+        <View style={{flexDirection: 'row'}}>
+          <Dropdown
+            style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
+            placeholderStyle={{ color: '#C7C7CD', fontSize: 16 }}
+            selectedTextStyle={styles.selectedTextStyle}
+            iconStyle={styles.iconStyle}
+            data={data}
+            valueField="value"
+            placeholder={!isFocus ? "เพศ" : "..."}
+            labelField="label"
+            value={value}
+            onFocus={() => setIsFocus(true)}
+            onBlur={() => setIsFocus(false)}
+            onChange={(item) => {
+              setValue(item.value);
+              setIsFocus(false);
+            }}
+            renderLeftIcon={() => (
+              <Fontisto
+                style={{ paddingRight: 10 }}
+                name="intersex"
+                size={24}
+                color="#363C56"
+              />
+            )}
+          />
+        </View>
 
         <View style={[styles.input, styles.shadowProp]}>
           <AntDesign
@@ -218,6 +243,30 @@ const styles = StyleSheet.create({
     backgroundColor: "#363C56",
     marginTop: 30,
     margin: 10,
+  },
+  dropdown: {
+    height: 50,
+    borderColor: "gray",
+    borderWidth: 0.5,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    borderColor: "#96B3FF",
+    borderWidth: 1.5,
+    borderRadius: 25,
+    width: 150,
+    height: 50,
+    margin: 15,
+    paddingLeft: 15,
+  },
+  icon: {
+    marginRight: 5,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
   },
 });
 
