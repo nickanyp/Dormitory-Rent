@@ -1,7 +1,6 @@
+// import * as firebase from "firebase/compat";
 
-import * as firebase from "firebase/compat";
-
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyCHFf_FcEP9VHYQhtJ6z9nq_Y74d8q4W7s",
   authDomain: "dormitoryrent-e4b12.firebaseapp.com",
   projectId: "dormitoryrent-e4b12",
@@ -10,8 +9,3 @@ const firebaseConfig = {
   appId: "1:1009384549650:web:f709d88df75e105ff617cb",
   measurementId: "G-GCL5NCG1BB"
 };
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
-export default firebase;

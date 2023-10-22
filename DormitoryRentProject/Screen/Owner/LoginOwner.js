@@ -6,14 +6,44 @@ import {
   TouchableOpacity,
 } from "react-native";
 import DormitoryFooter from "../../component/DormitoryFooter";
-import { AntDesign } from '@expo/vector-icons';
-import { Component } from "react";
+import { AntDesign } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-class LoginOwner extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        
+import { useState } from "react";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "../../database/FirebaseConfig";
+
+const LoginOwner = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleSignIn = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log("Sign In!");
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  return (
+    <View style={styles.container}>
       <View style={styles.header}>
         <Text style={{ fontSize: 40, fontWeight: "bold", textAlign: "center" }}>
           เข้าสู่ระบบ
@@ -22,45 +52,84 @@ class LoginOwner extends Component {
 
       <Text></Text>
       <Text></Text>
-      
-      <View style={{alignItems: 'center'}}>
+
+      <View style={{ alignItems: "center" }}>
         <View style={[styles.input, styles.shadowProp]}>
-          <AntDesign style={{paddingRight: 10}} name="mail" size={20} color="#363C56" />
-          <TextInput style={{flex: 1, fontSize: 16}} placeholder="อีเมล"></TextInput>
+          <AntDesign
+            style={{ paddingRight: 10 }}
+            name="mail"
+            size={20}
+            color="#363C56"
+          />
+          <TextInput
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            style={{ flex: 1, fontSize: 16 }}
+            placeholder="อีเมล"
+          ></TextInput>
         </View>
         <View style={[styles.input, styles.shadowProp]}>
-          <AntDesign style={{paddingRight: 10}} name="lock1" size={20} color="#363C56" />
-          <TextInput style={{flex: 1, fontSize: 16}} placeholder="รหัสผ่าน"></TextInput>
+          <AntDesign
+            style={{ paddingRight: 10 }}
+            name="lock1"
+            size={20}
+            color="#363C56"
+          />
+          <TextInput
+            secureTextEntry={!showPassword}
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            style={{ flex: 1, fontSize: 16, width: 20 }}
+            placeholder="รหัสผ่าน"
+            placeholderTextColor="#aaa"
+          ></TextInput>
+          <MaterialCommunityIcons
+            style={{ right: 15 }}
+            name={showPassword ? "eye-off" : "eye"}
+            size={24}
+            color="#aaa"
+            onPress={toggleShowPassword}
+          />
         </View>
       </View>
 
-      <View style={{alignItems: "center",}}>
-        <TouchableOpacity style={styles.btn} onPress={() => {this.props.navigation.navigate("OwnerHome")}}>
-          <Text style={{textAlign: "center", color: "white", fontWeight: "bold", fontSize: 16,}}>
+      <View style={{ alignItems: "center" }}>
+        <TouchableOpacity style={styles.btn} onPress={handleSignIn}>
+          <Text
+            style={{
+              textAlign: "center",
+              color: "white",
+              fontWeight: "bold",
+              fontSize: 16,
+            }}
+          >
             ยืนยัน
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {this.props.navigation.navigate("RegisterOwner")}}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("RegisterOwner");
+          }}
+        >
           <Text style={styles.text}>ยังไม่มีบัญชีผู้ใช้?</Text>
         </TouchableOpacity>
       </View>
 
       <DormitoryFooter></DormitoryFooter>
     </View>
-    );
-  }
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     backgroundColor: "white",
   },
   input: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     width: 300,
     height: 50,
     borderColor: "#96B3FF",
@@ -87,7 +156,7 @@ const styles = StyleSheet.create({
     color: "#FF9699",
     fontWeight: "bold",
     textDecorationLine: "underline",
-    fontSize: 16
+    fontSize: 16,
   },
   header: {
     fontSize: 40,
@@ -96,12 +165,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   SectionStyle: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
     borderWidth: 0.5,
-    borderColor: '#000',
+    borderColor: "#000",
     height: 40,
     borderRadius: 5,
     margin: 10,

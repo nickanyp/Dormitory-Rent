@@ -10,11 +10,6 @@ class RegisterOwner extends Component {
   render() {
     return(
       <View style={styles.container}>
-        <View style={{justifyContent:'flex-start'}}>
-          <TouchableOpacity>
-            <Ionicons name="caret-back" size={24} color="black" />
-          </TouchableOpacity>
-        </View>
         <Text style={styles.header}>สร้างบัญชีผู้ใช้</Text>
         <Text></Text>
         <Text></Text>

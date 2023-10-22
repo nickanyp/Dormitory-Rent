@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
-import firebase from "../../database/FirebaseDB";
+import firebase from "../../database/FirebaseConfig";
 import { ListItem } from "react-native-elements";
 import DormitoryHeader from "../../component/DormitoryHeader";
 import { SafeAreaView } from "react-native-safe-area-context";
