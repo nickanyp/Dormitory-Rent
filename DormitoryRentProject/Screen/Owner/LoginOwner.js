@@ -44,6 +44,13 @@ const LoginOwner = ({ navigation }) => {
       .catch((error) => {
         console.log(error);
       });
+    if (email === "" && password === "") {
+      alert("กรุณากรอกอีเมลและรหัสผ่าน")
+    } else if (email == "") {
+      alert("กรุณากรอกอีเมล")
+    } else if (password == "") {
+      alert("กรุณากรอกรหัสผ่าน")
+    } 
   };
 
   return (
@@ -51,6 +58,9 @@ const LoginOwner = ({ navigation }) => {
       <View style={styles.header}>
         <Text style={{ fontSize: 40, fontWeight: "bold", textAlign: "center" }}>
           เข้าสู่ระบบ
+        </Text>
+        <Text style={{ fontSize: 14, fontWeight: "bold", color:"#aaa", marginTop: 20}}>
+            Hello! Welcome back <AntDesign name="heart" size={14} color="#aaa" />
         </Text>
       </View>
 

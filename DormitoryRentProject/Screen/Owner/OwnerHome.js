@@ -2,15 +2,13 @@ import { View, Text, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import { Button } from 'react-native-elements'
 
-class OwnerHome extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>OwnerHome</Text>
-        <Button title="กัลยรัตน์2" onPress={() => {this.props.navigation.navigate("OwnerDormitory")}}></Button>
-      </View>
-    )
-  }
+const OwnerHome = () => {
+  return (
+    <View style={styles.container}>
+      <Text>OwnerHome</Text>
+      <Button title="กัลยรัตน์2" onPress={() => {this.props.navigation.navigate("OwnerDormitory")}}></Button>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
