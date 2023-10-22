@@ -51,6 +51,13 @@ const LoginRenter = () => {
       .catch((error) => {
         console.log(error);
       });
+      if (dorpass === "" && numroom === "" && password === "") {
+        alert("กรุณากรอกข้อมูลให้ถูกต้อง")
+      } else if (dorpass == "") {
+        alert("กรุณากรอกรหัสหอพัก")
+      } else if (numroom == "") {
+        alert("กรุณากรอกเลขห้อง")
+      } 
   };
 
   return (

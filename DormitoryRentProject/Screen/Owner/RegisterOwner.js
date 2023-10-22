@@ -4,13 +4,17 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
+  Button,
+  Pressable,
 } from "react-native";
 import DormitoryFooter from "../../component/DormitoryFooter";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { Dropdown } from "react-native-element-dropdown";
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
@@ -23,8 +27,10 @@ const RegisterOwner = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [phone, setPhone] = useState("");
+  const [date, setDate] = useState(new Date());
+  const [showPicker, setShowPicker] = useState(false);
 
-  const data = [
+  const gender = [
     { label: "ชาย", value: "1" },
     { label: "หญิง", value: "2" },
   ];
@@ -93,14 +99,18 @@ const RegisterOwner = ({ navigation }) => {
             onChangeText={(text) => setName(text)}
           ></TextInput>
         </View>
-        
-        <View style={{flexDirection: 'row'}}>
+
+        <View style={{ flexDirection: "row" }}>
           <Dropdown
-            style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
-            placeholderStyle={{ color: '#C7C7CD', fontSize: 16 }}
+            style={[
+              styles.dropdown,
+              styles.shadowProp,
+              isFocus && { borderColor: "blue" },
+            ]}
+            placeholderStyle={{ color: "#C7C7CD", fontSize: 16 }}
             selectedTextStyle={styles.selectedTextStyle}
             iconStyle={styles.iconStyle}
-            data={data}
+            data={gender}
             valueField="value"
             placeholder={!isFocus ? "เพศ" : "..."}
             labelField="label"
@@ -120,6 +130,20 @@ const RegisterOwner = ({ navigation }) => {
               />
             )}
           />
+          <View style={[styles.input, styles.shadowProp, { width: 150 }]}>
+            <MaterialCommunityIcons
+              style={{ paddingRight: 10 }}
+              name="cake-variant-outline"
+              size={24}
+              color="#363C56"
+            />
+            <TextInput
+              style={{ flex: 1, fontSize: 16 }}
+              placeholder="วันเกิด"
+              value={email}
+              onChangeText={(text) => setEmail(text)}
+            ></TextInput>
+          </View>
         </View>
 
         <View style={[styles.input, styles.shadowProp]}>
@@ -223,6 +247,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     margin: 15,
     paddingLeft: 15,
+    backgroundColor: "white",
   },
   textStyle: {
     fontSize: 20,
@@ -257,6 +282,7 @@ const styles = StyleSheet.create({
     height: 50,
     margin: 15,
     paddingLeft: 15,
+    backgroundColor: "white",
   },
   icon: {
     marginRight: 5,
