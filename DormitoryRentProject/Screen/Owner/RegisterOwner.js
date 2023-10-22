@@ -6,14 +6,14 @@ import {
   TouchableOpacity,
 } from "react-native";
 import DormitoryFooter from "../../component/DormitoryFooter";
+import DropDownPicker from 'react-native-dropdown-picker';
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../../database/FirebaseConfig";
 
@@ -21,28 +21,46 @@ const RegisterOwner = ({ navigation }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [phone, setPhone] = useState("");
+  
+
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  const firestore = getFirestore(app);
 
-  const clearFormFields = () => {
-    setEmail("");
-    setPassword("");
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
-  const handleCreateAccount = () => {
-    createUserWithEmailAndPassword(auth, email, password, name, phone)
-    .then((userCredential) => {
-      console.log("Account created")
+  const clearFormFields = () => {
+    setName("");
+    setEmail("");
+    setPassword("");
+    setPhone("");
+  };
+
+  const handleCreateAccount = async () => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      // Add user data to Firestore
+      const userDocRef = collection(firestore, 'owners');
+      await addDoc(userDocRef, {
+        uid: userCredential.user.uid,
+        name,
+        email,
+        phone,
+      });
+      console.log("Account created");
       const user = userCredential.user;
-      console.log(user)
-      navigation.navigate("LoginOwner")
+      console.log(user);
+      navigation.navigate("LoginOwner");
       clearFormFields();
-    })
-    .catch(error => {
-      console.log(error)
-    })
-  }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
 
   return (
     <View style={styles.container}>
@@ -65,7 +83,7 @@ const RegisterOwner = ({ navigation }) => {
             onChangeText={(text) => setName(text)}
           ></TextInput>
         </View>
-        <View style={[styles.input, styles.shadowProp]}>
+        {/* <View style={[styles.input, styles.shadowProp]}>
           <Fontisto
             style={{ paddingRight: 10 }}
             name="intersex"
@@ -76,7 +94,9 @@ const RegisterOwner = ({ navigation }) => {
             style={{ flex: 1, fontSize: 16 }}
             placeholder="เพศ"
           ></TextInput>
-        </View>
+        </View> */}
+        
+
         <View style={[styles.input, styles.shadowProp]}>
           <AntDesign
             style={{ paddingRight: 10 }}
@@ -101,9 +121,17 @@ const RegisterOwner = ({ navigation }) => {
           <TextInput
             style={{ flex: 1, fontSize: 16 }}
             placeholder="รหัสผ่าน"
+            secureTextEntry={!showPassword}
             value={password}
             onChangeText={(text) => setPassword(text)}
           ></TextInput>
+          <MaterialCommunityIcons
+            style={{ right: 15 }}
+            name={showPassword ? "eye-off" : "eye"}
+            size={24}
+            color="#aaa"
+            onPress={toggleShowPassword}
+          />
         </View>
         <View style={[styles.input, styles.shadowProp]}>
           <AntDesign
@@ -122,10 +150,7 @@ const RegisterOwner = ({ navigation }) => {
       </View>
 
       <View style={{ flexDirection: "row", justifyContent: "center" }}>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={handleCreateAccount}
-        >
+        <TouchableOpacity style={styles.btn} onPress={handleCreateAccount}>
           <Text
             style={{
               textAlign: "center",

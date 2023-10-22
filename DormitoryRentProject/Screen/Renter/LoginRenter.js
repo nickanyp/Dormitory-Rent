@@ -8,23 +8,59 @@ import {
   ActivityIndicator,
 } from "react-native";
 import DormitoryFooter from "../../component/DormitoryFooter";
-
 import { Octicons } from "@expo/vector-icons";
-import { Component } from "react";
+import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
-import firebase from "../../database/FirebaseConfig";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "../../database/FirebaseConfig";
 
 const LoginRenter = () => {
+  const [dorpass, setDorpass] = useState("");
+  const [numroom, setNumroom] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const clearFormFields = () => {
+    setDorpass("");
+    setNumroom("");
+    setPassword("");
+  };
+
+  const handleSignIn = () => {
+    signInWithEmailAndPassword(auth, password)
+      .then((userCredential) => {
+        console.log("Sign In!");
+        const user = userCredential.user;
+        console.log(user);
+        navigation.navigate("OwnerHome");
+        clearFormFields();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={{ fontSize: 40, fontWeight: "bold"}}>
-          เข้าสู่ระบบ
-        </Text>
-        <Text style={{ fontSize: 14, fontWeight: "bold", color:"#aaa", marginTop: 20}}>
-            Hello! Welcome back <AntDesign name="heart" size={14} color="#aaa" />
+        <Text style={{ fontSize: 40, fontWeight: "bold" }}>เข้าสู่ระบบ</Text>
+        <Text
+          style={{
+            fontSize: 14,
+            fontWeight: "bold",
+            color: "#aaa",
+            marginTop: 20,
+          }}
+        >
+          Hello! Welcome back <AntDesign name="heart" size={14} color="#aaa" />
         </Text>
       </View>
       <Text></Text>
@@ -38,6 +74,8 @@ const LoginRenter = () => {
             color="#363C56"
           />
           <TextInput
+            value={dorpass}
+            onChangeText={(numeric) => setDorpass(numeric)}
             style={{ flex: 1, fontSize: 16 }}
             placeholder="รหัสหอพัก"
           ></TextInput>
@@ -50,6 +88,8 @@ const LoginRenter = () => {
             color="#363C56"
           />
           <TextInput
+            value={numroom}
+            onChangeText={(numeric) => setNumroom(numeric)}
             style={{ flex: 1, fontSize: 16 }}
             placeholder="เลขห้อง"
           ></TextInput>
@@ -62,19 +102,24 @@ const LoginRenter = () => {
             color="#363C56"
           />
           <TextInput
+            secureTextEntry={!showPassword}
+            value={password}
+            onChangeText={(text) => setPassword(text)}
             style={{ flex: 1, fontSize: 16 }}
             placeholder="รหัสผ่าน"
           ></TextInput>
+          <MaterialCommunityIcons
+            style={{ right: 15 }}
+            name={showPassword ? "eye-off" : "eye"}
+            size={24}
+            color="#aaa"
+            onPress={toggleShowPassword}
+          />
         </View>
       </View>
 
       <View style={{ alignItems: "center" }}>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => {
-            this.props.navigation.navigate("MyRoomPage");
-          }}
-        >
+        <TouchableOpacity style={styles.btn} onPress={handleSignIn}>
           <Text
             style={{
               textAlign: "center",

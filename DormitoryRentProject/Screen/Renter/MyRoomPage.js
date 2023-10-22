@@ -2,50 +2,11 @@ import React, { Component } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
-import firebase from "../../database/FirebaseDB";
 import { ListItem } from "react-native-elements";
 import DormitoryHeader from "../../component/DormitoryHeader";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-class MyRoomPage extends Component {
-  constructor() {
-    super();
-
-    this.dbRef = firebase.firestore().collection('renters')
-    this.state = {
-      userArr: []
-    }
-  }
-
-  componentDidMount() {
-    this.unsubscribe = this.dbRef.onSnapshot(this.getCollection);
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  getCollection = (querySnapshot) => {
-    const all_data = [];
-    querySnapshot.forEach((res) => {
-      const { name1, name2, dor_name, num_room, dor_price, water_price, elec_price } = res.data();
-      all_data.push({
-        key: res.id,
-        name1,
-        name2,
-        dor_name, 
-        num_room, 
-        dor_price, 
-        water_price, 
-        elec_price
-      });
-    });
-    this.setState({
-      userArr: all_data,
-    });
-    console.log(this.state.userArr)
-  };
-  render() {
+const MyRoomPage = () =>  {
     return (
       
       <SafeAreaView style={styles.container}>
@@ -104,7 +65,7 @@ class MyRoomPage extends Component {
       </SafeAreaView>
     );
   }
-}
+
 
 const styles = StyleSheet.create({
   container: {

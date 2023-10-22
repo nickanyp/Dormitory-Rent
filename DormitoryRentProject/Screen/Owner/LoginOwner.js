@@ -93,9 +93,8 @@ const LoginOwner = ({ navigation }) => {
             secureTextEntry={!showPassword}
             value={password}
             onChangeText={(text) => setPassword(text)}
-            style={{ flex: 1, fontSize: 16, width: 20 }}
+            style={{ flex: 1, fontSize: 16 }}
             placeholder="รหัสผ่าน"
-            placeholderTextColor="#aaa"
           ></TextInput>
           <MaterialCommunityIcons
             style={{ right: 15 }}
@@ -137,8 +136,8 @@ const LoginOwner = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     backgroundColor: "white",
+    justifyContent: 'center'
   },
   input: {
     flexDirection: "row",
