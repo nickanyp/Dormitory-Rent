@@ -36,6 +36,7 @@ const LoginOwner = ({ navigation }) => {
         console.log("Sign In!");
         const user = userCredential.user;
         console.log(user);
+        navigation.navigate('OwnerHome')
       })
       .catch((error) => {
         console.log(error);
