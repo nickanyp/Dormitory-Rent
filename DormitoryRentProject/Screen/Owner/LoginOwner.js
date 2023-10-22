@@ -8,12 +8,9 @@ import {
 import DormitoryFooter from "../../component/DormitoryFooter";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
 import { useState } from "react";
-
 import {
   getAuth,
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { initializeApp } from "firebase/app";
@@ -36,7 +33,7 @@ const LoginOwner = ({ navigation }) => {
         console.log("Sign In!");
         const user = userCredential.user;
         console.log(user);
-        navigation.navigate('OwnerHome')
+        navigation.navigate("OwnerHome");
       })
       .catch((error) => {
         console.log(error);

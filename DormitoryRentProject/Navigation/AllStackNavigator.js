@@ -90,7 +90,6 @@ const RenterStackNavigator = () => {
         component={RegisterOwner}
         options={{
           title: "",
-          headerShown: false
         }}
       />
       <Stack.Screen
