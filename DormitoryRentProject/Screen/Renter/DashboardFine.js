@@ -5,7 +5,7 @@ import { color } from "react-native-elements/dist/helpers";
 import DormitoryHeader from "../../component/DormitoryHeader";
 import { LineChart } from "react-native-chart-kit";
 
-const DashboardLight = () => {
+const DashboardFine = () => {
 
   const chartConfig = {
     backgroundGradientFrom: "#fff",
@@ -21,8 +21,8 @@ const DashboardLight = () => {
     labels: ["5/66", "6/66", "7/66", "8/66", "9/66"],
     datasets: [
       {
-        data: [150, 120, 110, 100, 110],
-        color: (opacity = 1) => `#F2AD5C`, // optional
+        data: [0, 100, 150, 50, 100],
+        color: (opacity = 1) => `#F64B4B`, // optional
         strokeWidth: 3 // optional
       }
     ]
@@ -31,20 +31,20 @@ const DashboardLight = () => {
   return (
       <SafeAreaView style={styles.container}>
         <View style={styles.block4}>
-          <Text style={{fontSize:19, fontWeight:"bold", color:"#363C56"}}>ไฟฟ้าประจำเดือนกันยายน</Text>
+          <Text style={{fontSize:19, fontWeight:"bold", color:"#363C56"}}>ค่าปรับประจำเดือนกันยายน</Text>
         </View>
 
         <View style={styles.block1}>
           <View>
             <View style={styles.circle}></View>
             <View style={styles.circle2}>
-              <Text style={{fontSize:30, fontWeight:"bold", color:"#363C56"}}>880฿</Text>
+              <Text style={{fontSize:30, fontWeight:"bold", color:"#363C56"}}>100฿</Text>
             </View>
           </View>
           <View style={{justifyContent:"center"}}>
-            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>ค่าไฟฟ้า : 8 บาท/หน่วย</Text>
-            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>ปริมาณไฟฟ้า : 110 หน่วย</Text>
-            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>รวมทั้งหมด : 880 บาท</Text>
+            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>ค่าปรับ : 50 บาท/วัน</Text>
+            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>จำนวนวัน : 2 วัน</Text>
+            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>รวมทั้งหมด : 100 บาท</Text>
           </View>
         </View>
 
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     width:150,
     height:150,
     borderRadius:360,
-    backgroundColor:"#F2AD5C",
+    backgroundColor:"#F64B4B",
     marginRight:20
   },
   circle2: {
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   box1:{
     width: 220,
     height:30,
-    backgroundColor:"#F2AD5C",
+    backgroundColor:"#F64B4B",
     borderRadius:10,
     marginBottom:10,
     justifyContent:"center",
@@ -135,10 +135,10 @@ const styles = StyleSheet.create({
     marginTop:30
   }, 
   block4:{
-    width:270,
+    width:280,
     height:50,
     borderRadius:40,
-    borderColor: "#F2AD5C",
+    borderColor: "#F64B4B",
     borderWidth:2,
     justifyContent:"center",
     alignItems: "center",
@@ -147,4 +147,4 @@ const styles = StyleSheet.create({
 
 
 });
-export default DashboardLight
+export default DashboardFine
