@@ -4,6 +4,7 @@ import { Ionicons, Fontisto, MaterialIcons, Entypo, FontAwesome } from '@expo/ve
 import { color } from "react-native-elements/dist/helpers";
 import DormitoryHeader from "../../component/DormitoryHeader";
 import { LineChart } from "react-native-chart-kit";
+import { BarChart } from "react-native-gifted-charts";
 
 const DashboardLight = () => {
 
@@ -28,6 +29,11 @@ const DashboardLight = () => {
     ]
   };
 
+  const barData = [
+    {value: 10, label: 'ตุลาคม', labelTextStyle:{width:50, color:"#363C56", marginLeft:50, fontWeight:"bold"}},
+    {value: 12, label: 'กันยายน', frontColor: 'lightgray', labelMarginTop: 10, labelTextStyle:{width:50, color:"#363C56", marginLeft:50, fontWeight:"bold"}},
+  ];
+
   return (
       <SafeAreaView style={styles.container}>
         <View style={styles.block4}>
@@ -49,15 +55,24 @@ const DashboardLight = () => {
         </View>
 
         <View style={styles.block2}>
-          <Text style={{fontSize:16, fontWeight:"bold", color:"#fff", marginBottom:10}}>10 หน่วย</Text>
-          <View style={styles.box1}>
-            <Text>กันยายน</Text>
-          </View>
-          <Text style={{fontSize:16, fontWeight:"bold", color:"#fff", marginBottom:10}}>12 หน่วย</Text>
-          <View style={styles.box2}>
-            <Text>สิงหาคม</Text>
-          </View>
-        </View> 
+          <Text style={{position:'absolute', top:19, left:26, color:"#fff", fontWeight:"bold", fontSize:15}}>110 หน่วย</Text>
+          <Text style={{position:'absolute', top:78, left:26, color:"#fff", fontWeight:"bold", fontSize:15}}>120 หน่วย</Text>
+          <BarChart
+            horizontal
+            barWidth={30}
+            barHeight={100}
+            barBorderRadius={8}
+            frontColor="#F2AD5C"
+            data={barData}
+            yAxisThickness={0}
+            xAxisThickness={0}
+            noOfSections={2}
+            maxValue={12} //dataเดือนที่มากว่า
+            hideAxesAndRules
+            spacing={30}
+            // backgroundColor='#000'
+          />
+        </View>
 
         <View style={styles.block3}>
           <LineChart
@@ -106,33 +121,18 @@ const styles = StyleSheet.create({
   },
   block2:{
     width:320,
-    height:180,
+    height:160,
     backgroundColor:"#363C56",
     borderRadius:10,
     marginTop:20,
     justifyContent:"center",
-    padding:20  
-  },
-  box1:{
-    width: 220,
-    height:30,
-    backgroundColor:"#F2AD5C",
-    borderRadius:10,
-    marginBottom:10,
-    justifyContent:"center",
-    paddingLeft:10
-  },
-  box2:{
-    width: 280,
-    height:30,
-    backgroundColor:"#DADADA",
-    borderRadius:10,
-    marginBottom:10,
-    justifyContent:"center",
-    paddingLeft:10
+    alignItems:'center',
+    paddingRight:55,
+    paddingTop:100
   },
   block3:{
-    marginTop:30
+    marginTop:30,
+    marginRight:15
   }, 
   block4:{
     width:270,
@@ -148,3 +148,35 @@ const styles = StyleSheet.create({
 
 });
 export default DashboardLight
+
+//bar อันเก่า
+
+{/* <View style={styles.block2}>
+          <Text style={{fontSize:16, fontWeight:"bold", color:"#fff", marginBottom:10}}>10 หน่วย</Text>
+          <View style={styles.box1}>
+            <Text>กันยายน</Text>
+          </View>
+          <Text style={{fontSize:16, fontWeight:"bold", color:"#fff", marginBottom:10}}>12 หน่วย</Text>
+          <View style={styles.box2}>
+            <Text>สิงหาคม</Text>
+          </View>
+        </View>  */}
+
+        // box1:{
+        //   width: 220,
+        //   height:30,
+        //   backgroundColor:"#F2AD5C",
+        //   borderRadius:10,
+        //   marginBottom:10,
+        //   justifyContent:"center",
+        //   paddingLeft:10
+        // },
+        // box2:{
+        //   width: 280,
+        //   height:30,
+        //   backgroundColor:"#DADADA",
+        //   borderRadius:10,
+        //   marginBottom:10,
+        //   justifyContent:"center",
+        //   paddingLeft:10
+        // },

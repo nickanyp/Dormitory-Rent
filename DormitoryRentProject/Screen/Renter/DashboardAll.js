@@ -41,11 +41,11 @@ const RenterDashAll = () => {
 
   const barData = [
     {value: 20, label: <MaterialIcons name="lightbulb-outline" size={20} color="#363C56" />},
-    {value: 30, label: <MaterialIcons name="lightbulb-outline" size={20} color="#363C56" />, frontColor: 'lightgray'},
+    {value: 30, label: <MaterialIcons name="lightbulb-outline" size={20} color="#363C56" />, frontColor: '#C7C7C7'},
     {value: 3, label: <Ionicons name="water-outline" size={20} color="#363C56" />},
-    {value: 2, label: <Ionicons name="water-outline" size={20} color="#363C56" />, frontColor: 'lightgray'},
+    {value: 2, label: <Ionicons name="water-outline" size={20} color="#363C56" />, frontColor: '#C7C7C7'},
     {value: 1, label: <MaterialIcons name="attach-money" size={20} color="#363C56" />},
-    {value: 0, label: <MaterialIcons name="attach-money" size={20} color="#363C56" />, frontColor: 'lightgray'}
+    {value: 0, label: <MaterialIcons name="attach-money" size={20} color="#363C56" />, frontColor: '#C7C7C7'}
   ];
 
   const chartConfig = {
@@ -118,16 +118,19 @@ const RenterDashAll = () => {
               <View style={styles.dot}></View>
               <Text style={{color:"#90DA83", fontWeight:"bold", fontSize:16, marginLeft:5, marginRight:15}}>ตุลาคม</Text>
               <View style={styles.dot2}></View>
-              <Text style={{color:"lightgray", fontWeight:"bold", fontSize:16, marginLeft:5}}>กันยายน</Text>
+              <Text style={{color:"#C7C7C7", fontWeight:"bold", fontSize:16, marginLeft:5}}>กันยายน</Text>
             </View>
             <BarChart
                 barWidth={25}
-                noOfSections={4}
+                noOfSections={5}
                 barBorderRadius={4}
                 frontColor="#90DA83"
                 data={barData}
                 yAxisThickness={0}
                 xAxisThickness={0}
+                maxValue={50}
+                stepHeight={30}
+                hideRules
             />
           </View>
         </ScrollView>
@@ -236,7 +239,7 @@ const styles = StyleSheet.create({
     width:11,
     height:11,
     borderRadius:50,
-    backgroundColor:"lightgray",
+    backgroundColor:"#C7C7C7",
     marginTop:7
   },
 
