@@ -7,12 +7,12 @@ export default function App() {
   return (
     // <FirstPage></FirstPage>
     // <MainScreenNavigation></MainScreenNavigation>
-    // <AllNavigation></AllNavigation>
+    <AllNavigation></AllNavigation>
     // <MyRoomPage></MyRoomPage>
     // <LoginRenter></LoginRenter>
     // <CheckPayment></CheckPayment>
     // <ProfileOwner></ProfileOwner>
     // <ChoosePage></ChoosePage>
-    <RenterDashPage></RenterDashPage>
+    // <RenterDashPage></RenterDashPage>
   );
 }

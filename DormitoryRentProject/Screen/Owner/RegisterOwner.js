@@ -27,6 +27,7 @@ const RegisterOwner = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [phone, setPhone] = useState("");
+  const [birth, setBirth] = useState("");
   const [date, setDate] = useState(new Date());
   const [showPicker, setShowPicker] = useState(false);
 
@@ -140,8 +141,8 @@ const RegisterOwner = ({ navigation }) => {
             <TextInput
               style={{ flex: 1, fontSize: 16 }}
               placeholder="วันเกิด"
-              value={email}
-              onChangeText={(text) => setEmail(text)}
+              value={birth}
+              onChangeText={(text) => setBirth(text)}
             ></TextInput>
           </View>
         </View>
