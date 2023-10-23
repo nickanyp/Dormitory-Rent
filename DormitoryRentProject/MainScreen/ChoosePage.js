@@ -5,18 +5,16 @@ import {
   View,
   Image
 } from "react-native";
-import LoginRenter from "../Screen/Renter/LoginRenter";
 import DormitoryFooter from "../component/DormitoryFooter";
-
 import { MaterialIcons } from '@expo/vector-icons';
-import RenterStackNavigator from "../Navigation/AllStackNavigator";
 
 const ChoosePage = ({navigation}) =>  {
   return (
     <View style={styles.container}>
 
       <View style={styles.box1}>
-        <Text style={{fontSize: 35, color: 'white', right: '20%'}}>WELCOME !</Text>
+        <Text style={{fontSize: 35, color: 'white', right: '20%'}}>WELCOME</Text>
+        <Text style={{fontSize: 16, color: 'white', right: '17%', marginTop: 10}}>TO DÖRMITORY RENT</Text>
         <Image style={styles.pic} source={require('../assets/pink.png')}></Image>
       </View>
 
@@ -62,7 +60,7 @@ const styles = StyleSheet.create({
   box1: {
     flex:1,
     justifyContent: 'center',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   box2: {
     flex:2, 
@@ -107,7 +105,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     position: 'absolute',
     top: -20,
-    left: -40
+    left: -60
   }
 });
 

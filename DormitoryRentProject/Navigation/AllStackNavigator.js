@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import AllDrawerNavigator from './AllDrawerNavigator';
+import AllDrawerNavigator from './OwnerDrawerNavigator';
 import OwnerTabNavigator from './OwnerTabNavigator';
 import RenterTabNavigator from './RenterTabNavigator';
 import DormitoryHeader from '../component/DormitoryHeader';
@@ -29,7 +29,10 @@ const Stack = createNativeStackNavigator();
 
 const AllStackNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+    screenOptions={{
+      headerTransparent:true
+    }}>
 
       {/* MainScreen */}
       <Stack.Screen
@@ -59,7 +62,8 @@ const AllStackNavigator = () => {
         name="MyRoomPage"
         component={RenterTabNavigator}
         options={{
-          headerTitle: props => <DormitoryHeader {...props}/>
+          headerTitle: props => <DormitoryHeader {...props}/>,
+          headerBackVisible:false
         }}
       />
       <Stack.Screen

@@ -15,7 +15,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const MyRoomPage = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.box} >
+      <View style={[styles.box, styles.shadowProp]} >
         <Text style={styles.text}>ชื่อผู้เช่า 1 : </Text>
         <Text style={styles.text}>ชื่อผู้เช่า 2 : </Text>
         <Text></Text>
@@ -23,7 +23,7 @@ const MyRoomPage = ({navigation}) => {
         <Text style={styles.text}>เลขห้อง : </Text>
       </View>
 
-      <View style={styles.box} >
+      <View style={[styles.box, styles.shadowProp]} >
         <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
           กันยายน
         </Text>
@@ -37,7 +37,7 @@ const MyRoomPage = ({navigation}) => {
           บาท
         </Text>
       </View>
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: "center", marginTop: 15 }}>
         <TouchableOpacity
           style={styles.btn}
           onPress={() => {navigation.navigate("PaymentRenter")}}
@@ -93,6 +93,13 @@ const styles = StyleSheet.create({
     borderColor: "#9B9B9B",
     padding: 15,
     margin: 10,
+    backgroundColor: 'white'
+  },
+  shadowProp: {
+    shadowColor: "#9B9B9B",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
   },
   text: {
     fontWeight: "bold",
@@ -100,7 +107,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     width: 120,
-    height: 40,
+    height: 50,
     borderRadius: 40,
     backgroundColor: "#FF9699",
     justifyContent: "center",

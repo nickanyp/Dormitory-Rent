@@ -60,7 +60,7 @@ const LoginRenter = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={{ fontSize: 40, fontWeight: "bold" }}>เข้าสู่ระบบ</Text>
+        <Text style={{ fontSize: 40, fontWeight: "bold", color: "#363C56" }}>เข้าสู่ระบบ</Text>
         <Text
           style={{
             fontSize: 14,

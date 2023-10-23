@@ -11,7 +11,7 @@ import CustomDrawer from '../component/CustomDrawer';
 
 const Drawer = createDrawerNavigator();
 
-const AllDrawerNavigator = () => {
+const RenterDrawerNavigator = () => {
   return (
     <Drawer.Navigator
       drawerContent={props => <CustomDrawer {...props} />}
@@ -51,4 +51,4 @@ const AllDrawerNavigator = () => {
   )
 }
 
-export default AllDrawerNavigator
+export default RenterDrawerNavigator
