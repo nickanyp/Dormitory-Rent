@@ -27,6 +27,11 @@ const LoginOwner = ({ navigation }) => {
     setShowPassword(!showPassword);
   };
 
+  const clearFormFields = () => {
+    setEmail("");
+    setPassword("");
+  };
+
   const handleSignIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -34,10 +39,18 @@ const LoginOwner = ({ navigation }) => {
         const user = userCredential.user;
         console.log(user);
         navigation.navigate("OwnerHome");
+        clearFormFields();
       })
       .catch((error) => {
         console.log(error);
       });
+    if (email === "" && password === "") {
+      alert("กรุณากรอกอีเมลและรหัสผ่าน")
+    } else if (email == "") {
+      alert("กรุณากรอกอีเมล")
+    } else if (password == "") {
+      alert("กรุณากรอกรหัสผ่าน")
+    } 
   };
 
   return (
@@ -45,6 +58,9 @@ const LoginOwner = ({ navigation }) => {
       <View style={styles.header}>
         <Text style={{ fontSize: 40, fontWeight: "bold", textAlign: "center" }}>
           เข้าสู่ระบบ
+        </Text>
+        <Text style={{ fontSize: 14, fontWeight: "bold", color:"#aaa", marginTop: 20}}>
+            Hello! Welcome back <AntDesign name="heart" size={14} color="#aaa" />
         </Text>
       </View>
 
@@ -77,9 +93,8 @@ const LoginOwner = ({ navigation }) => {
             secureTextEntry={!showPassword}
             value={password}
             onChangeText={(text) => setPassword(text)}
-            style={{ flex: 1, fontSize: 16, width: 20 }}
+            style={{ flex: 1, fontSize: 16 }}
             placeholder="รหัสผ่าน"
-            placeholderTextColor="#aaa"
           ></TextInput>
           <MaterialCommunityIcons
             style={{ right: 15 }}
@@ -121,8 +136,8 @@ const LoginOwner = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     backgroundColor: "white",
+    justifyContent: 'center'
   },
   input: {
     flexDirection: "row",

@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import AllDrawerNavigation from './AllDrawerNavigator';
+import AllDrawerNavigator from './AllDrawerNavigator';
 import OwnerTabNavigator from './OwnerTabNavigator';
 import RenterTabNavigator from './RenterTabNavigator';
 import DormitoryHeader from '../component/DormitoryHeader';
@@ -27,7 +27,7 @@ import StatusPaymentOwner from '../Screen/Owner/StatusPaymentOwner';
 
 const Stack = createNativeStackNavigator();
 
-const RenterStackNavigator = () => {
+const AllStackNavigator = () => {
   return (
     <Stack.Navigator>
 
@@ -94,7 +94,7 @@ const RenterStackNavigator = () => {
       />
       <Stack.Screen
         name="OwnerHome"
-        component={AllDrawerNavigation}
+        component={AllDrawerNavigator}
         options={{
           title: "",
           headerShown: false
@@ -140,4 +140,4 @@ const RenterStackNavigator = () => {
   )
 }
 
-export default RenterStackNavigator
+export default AllStackNavigator

@@ -1,100 +1,46 @@
 import { Component } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-import firebase from "../../database/FirebaseDB";
-class PaymentRenter extends Component {
-  constructor() {
-    super();
 
-    this.dbRef = firebase.firestore().collection("renters");
-    this.state = {
-      isLoading: true,
-      userArr: [],
-    };
-  }
-
-  componentDidMount() {
-    this.unsubscribe = this.dbRef.onSnapshot(this.getCollection);
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  getCollection = (querySnapshot) => {
-    const all_data = [];
-    querySnapshot.forEach((res) => {
-      const {
-        name1,
-        name2,
-        dor_name,
-        num_room,
-        dor_price,
-        water_price,
-        elec_price,
-      } = res.data();
-      all_data.push({
-        key: res.id,
-        name1,
-        name2,
-        dor_name,
-        num_room,
-        dor_price,
-        water_price,
-        elec_price,
-      });
-    });
-    this.setState({
-      userArr: all_data,
-      isLoading: false,
-    });
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        {this.state.userArr.map((item, i) => {
-        return (
-          <View style={{ alignItems: "center" }}>
-          <View style={styles.box} key={i}>
-            <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
-              กันยายน
-            </Text>
-            <Text></Text>
-            <Text style={styles.text}>ค่าเช่าหอพัก : {item.dor_price} บาท</Text>
-            <Text style={styles.text}>ค่าน้ำ : {item.water_price} บาท</Text>
-            <Text style={styles.text}>ค่าไฟ : {item.elec_price} บาท</Text>
-            <Text></Text>
-            <Text style={[styles.text, { color: "#FF9699" }]}>
-              รวมทั้งสิ้น : {item.dor_price + item.water_price + item.elec_price} บาท
-            </Text>
-          </View>
-        </View>
-        )
-      })}
-      
-        <View style={{ alignItems: "center", margin: 10 }}>
-          <Image
-            style={styles.img}
-            source={require("../../assets/qr-code.png")}
-          ></Image>
-          <Text style={[styles.text, { textAlign: "center", margin: 10 }]}>
-            แจ้งชำระค่าเช่า
+const PaymentRenter = ({ navigation }) => {
+  return (
+    <View style={styles.container}>
+      <View style={{ alignItems: "center" }}>
+        <View style={styles.box}>
+          <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
+            กันยายน
           </Text>
-          <TouchableOpacity style={[styles.btn1, styles.shadowProp]} >
-            <Text style={[styles.text, { textAlign: "center" }]}>
-              อัปโหลดไฟล์รูปภาพ
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btn2}>
-            <Text style={[styles.text, { textAlign: "center", color: "white" }]}>
-              ยืนยัน
-            </Text>
-          </TouchableOpacity>
+          <Text></Text>
+          <Text style={styles.text}>ค่าเช่าหอพัก : บาท</Text>
+          <Text style={styles.text}>ค่าน้ำ : บาท</Text>
+          <Text style={styles.text}>ค่าไฟ : บาท</Text>
+          <Text></Text>
+          <Text style={[styles.text, { color: "#FF9699" }]}>
+            รวมทั้งสิ้น : บาท
+          </Text>
         </View>
       </View>
-    );
-  }
-}
+      <View style={{ alignItems: "center", margin: 10 }}>
+        <Image
+          style={styles.img}
+          source={require("../../assets/qr-code.png")}
+        ></Image>
+        <Text style={[styles.text, { textAlign: "center", margin: 10 }]}>
+          แจ้งชำระค่าเช่า
+        </Text>
+        <TouchableOpacity style={[styles.btn1, styles.shadowProp]}>
+          <Text style={[styles.text, { textAlign: "center" }]}>
+            อัปโหลดไฟล์รูปภาพ
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btn2}>
+          <Text style={[styles.text, { textAlign: "center", color: "white" }]}>
+            ยืนยัน
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

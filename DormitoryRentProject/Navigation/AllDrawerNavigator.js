@@ -1,26 +1,21 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from 'react';
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
-import LoginOwner from "../Screen/Owner/LoginOwner";
-import RegisterOwner from "../Screen/Owner/RegisterOwner";
 import OwnerHome from "../Screen/Owner/OwnerHome";
 import ProfileOwner from '../Screen/Owner/ProfileOwner';
-import EditProfileOwner from "../Screen/Owner/EditProfileOwner";
 
 import DormitoryHeader from '../component/DormitoryHeader';
 import CustomDrawer from '../component/CustomDrawer';
 
 const Drawer = createDrawerNavigator();
 
-const OwnerDrawerNavigation = () => {
+const AllDrawerNavigator = () => {
   return (
     <Drawer.Navigator
       drawerContent={props => <CustomDrawer {...props} />}
-      screenOptions={({route}) => ({
+      screenOptions={() => ({
         drawerStyle: {
           backgroundColor: '#EEEEEE',
         },
@@ -56,4 +51,4 @@ const OwnerDrawerNavigation = () => {
   )
 }
 
-export default OwnerDrawerNavigation
+export default AllDrawerNavigator

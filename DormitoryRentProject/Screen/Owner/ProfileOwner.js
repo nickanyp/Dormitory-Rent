@@ -1,6 +1,5 @@
 import {
   Text,
-  TextInput,
   View,
   StyleSheet,
   TouchableOpacity,
@@ -8,12 +7,8 @@ import {
 } from "react-native";
 import { Fontisto } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import { Component } from "react";
 
-class ProfileOwner extends Component {
-  render() {
+const ProfileOwner = ({navigation}) => {
     return (
       <View style={styles.container}>
         <View style={styles.box}>
@@ -121,7 +116,7 @@ class ProfileOwner extends Component {
             </View>
           </View>
           <View style={{ alignItems: "center" }}>
-            <TouchableOpacity style={styles.btn} onPress={() => {this.props.navigation.navigate("EditProfile")}}>
+            <TouchableOpacity style={styles.btn} onPress={() => {navigation.navigate("EditProfile")}}>
               <Text
                 style={{
                   textAlign: "center",
@@ -137,7 +132,6 @@ class ProfileOwner extends Component {
         </View>
       </View>
     );
-  }
 }
 
 const styles = StyleSheet.create({

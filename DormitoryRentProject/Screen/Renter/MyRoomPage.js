@@ -1,117 +1,90 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ActivityIndicator,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
-import firebase from "../../database/FirebaseDB";
 import { ListItem } from "react-native-elements";
 import DormitoryHeader from "../../component/DormitoryHeader";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-class MyRoomPage extends Component {
-  constructor() {
-    super();
+const MyRoomPage = ({navigation}) => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.box} >
+        <Text style={styles.text}>ชื่อผู้เช่า 1 : </Text>
+        <Text style={styles.text}>ชื่อผู้เช่า 2 : </Text>
+        <Text></Text>
+        <Text style={styles.text}>หอพัก : </Text>
+        <Text style={styles.text}>เลขห้อง : </Text>
+      </View>
 
-    this.dbRef = firebase.firestore().collection('renters')
-    this.state = {
-      userArr: []
-    }
-  }
-
-  componentDidMount() {
-    this.unsubscribe = this.dbRef.onSnapshot(this.getCollection);
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  getCollection = (querySnapshot) => {
-    const all_data = [];
-    querySnapshot.forEach((res) => {
-      const { name1, name2, dor_name, num_room, dor_price, water_price, elec_price } = res.data();
-      all_data.push({
-        key: res.id,
-        name1,
-        name2,
-        dor_name, 
-        num_room, 
-        dor_price, 
-        water_price, 
-        elec_price
-      });
-    });
-    this.setState({
-      userArr: all_data,
-    });
-    console.log(this.state.userArr)
-  };
-  render() {
-    return (
-      
-      <SafeAreaView style={styles.container}>
-
-        {this.state.userArr.map((item, i) => {
-          return(
-              <View style={styles.box} key={i}>
-                <Text style={styles.text}>ชื่อผู้เช่า 1 : {item.name1}</Text>
-                <Text style={styles.text}>ชื่อผู้เช่า 2 : {item.name2}</Text>
-                <Text></Text>
-                <Text style={styles.text}>หอพัก : {item.dor_name}</Text>
-                <Text style={styles.text}>เลขห้อง : {item.num_room}</Text>
-              </View> 
-          );
-        })}
-
-        {this.state.userArr.map((item, i) => {
-          return(
-            <View style={styles.box} key={i}>
-              <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
-                กันยายน
-              </Text>
-              <Text></Text>
-              <Text style={styles.text}>ค่าเช่าหอพัก : {item.dor_price} บาท</Text>
-              <Text style={styles.text}>ค่าน้ำ : {item.water_price} บาท</Text>
-              <Text style={styles.text}>ค่าไฟ : {item.elec_price} บาท</Text>
-              <Text></Text>
-              <Text style={[styles.text, { color: "#FF9699" }]}>
-                รวมทั้งสิ้น : {item.dor_price + item.water_price + item.elec_price} บาท
-              </Text>
-          </View>
-          );
-        })}
-
-        <View style={{ alignItems: "center" }}>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => {
-              this.props.navigation.navigate("PaymentRenter");
-            }}>
-            <Text
-              style={[styles.textBtn, { color: "white", textAlign: "center", fontWeight: "bold", fontSize: 15 }]}>
-              ชำระค่าเช่า
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={styles.btn}
-            onPress={() => {this.props.navigation.navigate("HistoryRenter")}}>
-            <Text
-              style={[styles.textBtn, { color: "white", textAlign: "center", fontWeight: "bold", fontSize: 15 }]}>
-              ประวัติค่าเช่าหอ
-            </Text>
-          </TouchableOpacity>
-        </View>
-        
-      </SafeAreaView>
-    );
-  }
-}
+      <View style={styles.box} >
+        <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
+          กันยายน
+        </Text>
+        <Text></Text>
+        <Text style={styles.text}>ค่าเช่าหอพัก :  บาท</Text>
+        <Text style={styles.text}>ค่าน้ำ :  บาท</Text>
+        <Text style={styles.text}>ค่าไฟ :  บาท</Text>
+        <Text></Text>
+        <Text style={[styles.text, { color: "#FF9699" }]}>
+          รวมทั้งสิ้น : {" "}
+          บาท
+        </Text>
+      </View>
+      <View style={{ alignItems: "center" }}>
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => {navigation.navigate("PaymentRenter")}}
+        >
+          <Text
+            style={[
+              styles.textBtn,
+              {
+                color: "white",
+                textAlign: "center",
+                fontWeight: "bold",
+                fontSize: 15,
+              },
+            ]}
+          >
+            ชำระค่าเช่า
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => {navigation.navigate("HistoryRenter")}}
+        >
+          <Text
+            style={[
+              styles.textBtn,
+              {
+                color: "white",
+                textAlign: "center",
+                fontWeight: "bold",
+                fontSize: 15,
+              },
+            ]}
+          >
+            ประวัติค่าเช่าหอ
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   box: {
     width: "90%",
