@@ -3,7 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } fr
 import { Ionicons, Fontisto, MaterialIcons, Entypo, FontAwesome } from '@expo/vector-icons'; 
 import { color } from "react-native-elements/dist/helpers";
 import DormitoryHeader from "../../component/DormitoryHeader";
-import { PieChart, BarChart } from "react-native-chart-kit";
+import { PieChart } from "react-native-chart-kit";
+import { BarChart } from "react-native-gifted-charts";
 
 const RenterDashAll = () => {
   const data = [
@@ -38,25 +39,23 @@ const RenterDashAll = () => {
     }
   ];
 
-  const data2 = {
-    labels: ["ไฟฟ้า", "น้ำ", "ค่าปรับ"],
-    datasets: [
-    {
-      data: [20, 30, 3, 2, 1, 0]
-    }
-  ]
-  };
+  const barData = [
+    {value: 20, label: <MaterialIcons name="lightbulb-outline" size={20} color="#363C56" />},
+    {value: 30, label: <MaterialIcons name="lightbulb-outline" size={20} color="#363C56" />, frontColor: 'lightgray'},
+    {value: 3, label: <Ionicons name="water-outline" size={20} color="#363C56" />},
+    {value: 2, label: <Ionicons name="water-outline" size={20} color="#363C56" />, frontColor: 'lightgray'},
+    {value: 1, label: <MaterialIcons name="attach-money" size={20} color="#363C56" />},
+    {value: 0, label: <MaterialIcons name="attach-money" size={20} color="#363C56" />, frontColor: 'lightgray'}
+  ];
 
   const chartConfig = {
-    backgroundGradientFrom: "#1fff",
-    backgroundGradientFromOpacity: 0,
+    backgroundGradientFrom: "#fff",
     backgroundGradientTo: "#fff",
     backgroundGradientToOpacity: 0,
     color: (opacity = 1) => `#363C56`,
     strokeWidth: 2, // optional, default 3
     barPercentage: 0.5,
-    useShadowColorFromDataset: false, // optional
-    strokeWidth:4
+    useShadowColorFromDataset: false // optional
   };
 
   return (
@@ -114,15 +113,21 @@ const RenterDashAll = () => {
             <View style={styles.cirle}></View>
           </View>
           <Text style={{fontWeight:"bold", color:"#363C56", fontSize:16, marginTop:5}}>เปรียบเทียบระหว่าง เดือนปัจุบันและเดือนที่แล้ว</Text>
-          <View style={{marginTop:25, marginBottom:20 }}>
+          <View style={{marginTop:18, marginBottom:25 }}>
+            <View style={styles.blockbar}>
+              <View style={styles.dot}></View>
+              <Text style={{color:"#90DA83", fontWeight:"bold", fontSize:16, marginLeft:5, marginRight:15}}>ตุลาคม</Text>
+              <View style={styles.dot2}></View>
+              <Text style={{color:"lightgray", fontWeight:"bold", fontSize:16, marginLeft:5}}>กันยายน</Text>
+            </View>
             <BarChart
-              // style={graphStyle}
-              data={data2}
-              width={360}
-              height={220}
-              yAxisLabel="$"
-              chartConfig={chartConfig}
-              verticalLabelRotation={30}
+                barWidth={25}
+                noOfSections={4}
+                barBorderRadius={4}
+                frontColor="#90DA83"
+                data={barData}
+                yAxisThickness={0}
+                xAxisThickness={0}
             />
           </View>
         </ScrollView>
@@ -215,7 +220,25 @@ const styles = StyleSheet.create({
     backgroundColor:"#fff",
     position:"absolute",
     left:50
-  }
+  },
+  blockbar:{
+    flexDirection:"row",
+    justifyContent:"center"
+  },
+  dot:{
+    width:11,
+    height:11,
+    borderRadius:50,
+    backgroundColor:"#90DA83",
+    marginTop:7
+  },
+  dot2:{
+    width:11,
+    height:11,
+    borderRadius:50,
+    backgroundColor:"lightgray",
+    marginTop:7
+  },
 
 });
 export default RenterDashAll
