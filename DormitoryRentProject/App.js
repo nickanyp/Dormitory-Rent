@@ -2,6 +2,7 @@
 import React from "react";
 import AllNavigation from "./Navigation/MainNavigation"
 import RenterDashPage from "./Screen/Renter/DashboardPage";
+import OwnerHome from "./Screen/Owner/OwnerHome";
 
 export default function App() {
   return (
@@ -14,5 +15,6 @@ export default function App() {
     // <ProfileOwner></ProfileOwner>
     // <ChoosePage></ChoosePage>
     // <RenterDashPage></RenterDashPage>
+    // <OwnerHome></OwnerHome>
   );
 }
