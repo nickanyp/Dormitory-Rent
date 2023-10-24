@@ -24,7 +24,7 @@ const PaymentRenter = ({ navigation }) => {
           style={styles.img}
           source={require("../../assets/qr-code.png")}
         ></Image>
-        <Text style={[styles.text, { textAlign: "center", margin: 10 }]}>
+        <Text style={[styles.text, { textAlign: "center", marginTop: '5%' }]}>
           แจ้งชำระค่าเช่า
         </Text>
         <TouchableOpacity style={[styles.btn1, styles.shadowProp]}>

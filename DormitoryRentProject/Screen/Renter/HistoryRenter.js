@@ -6,25 +6,12 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import MaskedView from "@react-native-masked-view/masked-view";
-import firebase from "../../database/FirebaseConfig";
-import { ListItem } from "react-native-elements";
-import DormitoryHeader from "../../component/DormitoryHeader";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const HistoryRenter = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.box}>
-        <Text style={styles.text}>ชื่อผู้เช่า 1 : </Text>
-        <Text style={styles.text}>ชื่อผู้เช่า 2 : </Text>
-        <Text></Text>
-        <Text style={styles.text}>หอพัก : </Text>
-        <Text style={styles.text}>เลขห้อง : </Text>
-      </View>
-
-      <View style={styles.box}>
+      <View style={[styles.box, styles.shadowProp]}>
         <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
           กันยายน
         </Text>
@@ -33,9 +20,12 @@ const HistoryRenter = () => {
         <Text style={styles.text}>ค่าน้ำ : บาท</Text>
         <Text style={styles.text}>ค่าไฟ : บาท</Text>
         <Text></Text>
-        <Text style={[styles.text, { color: "#FF9699" }]}>
-          รวมทั้งสิ้น : บาท
-        </Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={[styles.text, { color: "#FF9699", flex: 1 }]}>
+            รวมทั้งสิ้น : บาท
+          </Text>
+          <Text style={[styles.text, { color: "#69CC6D" }]}>ยืนยันแล้ว</Text>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -46,14 +36,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     justifyContent: "center",
+    alignItems: 'center'
   },
   box: {
     width: "90%",
     borderWidth: 1.5,
     borderRadius: 10,
     borderColor: "#9B9B9B",
-    padding: 15,
-    margin: 10,
+    padding: 20,
+    backgroundColor: "white",
   },
   text: {
     fontWeight: "bold",
@@ -70,6 +61,12 @@ const styles = StyleSheet.create({
   textBtn: {
     fontWeight: "bold",
     fontSize: 13,
+  },
+  shadowProp: {
+    shadowColor: "#9B9B9B",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
   },
 });
 

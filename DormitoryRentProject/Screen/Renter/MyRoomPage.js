@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
     fontSize: 15,
+    color: '#363C56'
   },
   btn: {
     width: 120,

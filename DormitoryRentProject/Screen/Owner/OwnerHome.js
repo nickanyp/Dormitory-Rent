@@ -51,7 +51,7 @@ const OwnerHome = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: "center",
+    justifyContent: 'center',
     alignItems: "center",
     backgroundColor: "white",
   },
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     // textAlign:"center",
     // backgroundColor:"#f00",
     // alignItems:"center",
-    marginTop:15
+    marginTop:15,
   },
   box:{
     width:350,

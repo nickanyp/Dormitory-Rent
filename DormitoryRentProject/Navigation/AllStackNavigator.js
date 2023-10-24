@@ -81,7 +81,7 @@ const AllStackNavigator = () => {
         component={HistoryRenter}
         options={{
           headerTitle: props => <DormitoryHeader {...props}/>,
-          headerBackTitle: false
+          headerBackTitleVisible: false
         }}
       />
 
