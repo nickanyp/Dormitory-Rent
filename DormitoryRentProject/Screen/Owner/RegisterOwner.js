@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import Modal from "react-native-modal";
 import DormitoryFooter from "../../component/DormitoryFooter";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DatePicker from "@react-native-community/datetimepicker";
 import { Dropdown } from "react-native-element-dropdown";
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
@@ -48,6 +48,9 @@ const RegisterOwner = ({ navigation }) => {
   };
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
+    let test = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+    setdateOfBirth(test)
+    console.log(dateOfBirth);
   };
 
   // gender
@@ -150,7 +153,7 @@ const RegisterOwner = ({ navigation }) => {
           />
 
           <TouchableOpacity
-            style={[styles.input, styles.shadowProp, { width: 130 }]}
+            style={[styles.input, styles.shadowProp, { marginLeft: 0,width: 145 }]}
             onPress={toggleModal}
           >
             <MaterialCommunityIcons
@@ -164,7 +167,7 @@ const RegisterOwner = ({ navigation }) => {
               style={{ flex: 1, fontSize: 16 }}
               placeholder="วันเกิด"
               value={dateOfBirth}
-              onChangeText={setdateOfBirth}
+              // onChangeText={setdateOfBirth}
               editable={false}
             ></TextInput>
           </TouchableOpacity>
@@ -172,27 +175,27 @@ const RegisterOwner = ({ navigation }) => {
           <Modal isVisible={isModalVisible}>
             <View
               style={{
-                backgroundColor: "white",
+                backgroundColor: "#fff",
                 width: "100%",
                 height: "50%",
                 borderRadius: 40,
                 justifyContent: "center",
               }}
-              value={dateOfBirth}
+              value={date}
               onChangeText={(text) => setdateOfBirth(text)}
             >
-              <DateTimePicker
+              <DatePicker
                 mode="date"
                 display="inline"
                 value={date}
-                obChange={onChange}
+                onChange={onChange}
                 style={{
                   backgroundColor: "white",
                   margin: 10,
                 }}
-              ></DateTimePicker>
+              ></DatePicker>
 
-              <Button title="ยืนยัน" onPress={toggleModal} />
+              <Button title="ยืนยัน" onPress={toggleModal}/>
             </View>
           </Modal>
         </View>
