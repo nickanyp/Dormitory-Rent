@@ -1,144 +1,162 @@
-import { Component } from "react";
-import{
+import {
     Text,
     View,
     StyleSheet,
-    TouchableOpacity
-}from "react-native";
+    TouchableOpacity,
+    TouchableHighlight,
+    renderLabel,
+    SafeAreaView,
+  } from "react-native";
+  import { useState } from "react";
+  import { Dropdown } from "react-native-element-dropdown";
+  import AntDesign from "@expo/vector-icons/AntDesign";
+  import DetailPaymentOwner from "./DetailPaymentOwner";
+  
+  const data = [
+    { label: "มกราคม", value: "1" },
+    { label: "กุมภาพันธ์", value: "2" },
+    { label: "มีนาคม", value: "3" },
+    { label: "เมษายน", value: "4" },
+    { label: "พฤษภาคม", value: "5" },
+    { label: "มิถุนายน", value: "6" },
+    { label: "กรกฎาคม", value: "7" },
+    { label: "สิงหาคม", value: "8" },
+    { label: "กันยายน", value: "9" },
+    { label: "ตุลาคม", value: "10" },
+    { label: "พฤศจิกายน", value: "11" },
+    { label: "ธันวาคม", value: "12" },
+  ];
+  
+  const StatusPaymentOwner = ({navigation}) => {
+    const [value, setValue] = useState(null);
+    const [isFocus, setIsFocus] = useState(false);
+  
+    return (
+      <SafeAreaView style={styles.container}>
+        <View
+          style={{
+            flexDirection: "row",
+            marginTop: "10%",
+            marginHorizontal: "5%",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 25,
+              fontWeight: "bold",
+              color: "#96B3FF",
+              margin: 10,
+            }}
+          >
+            สถานะการชำระค่าเช่า
+          </Text>
+  
+          <Dropdown
+            style={styles.dropdown}
+            placeholderStyle={{
+              fontSize: 14,
+              color: "#363C56",
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+            selectedTextStyle={{
+              fontSize: 14,
+              color: "#363C56",
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+            data={data}
+            labelField="label"
+            valueField="value"
+            placeholder={!isFocus ? "เดือน" : "..."}
+            value={value}
+            onFocus={() => setIsFocus(true)}
+            onChange={(item) => {
+              setValue(item.value);
+              setIsFocus(false);
+            }}
+          />
+        </View>
+  
+        <View style={styles.grid}>
+          <TouchableOpacity
+            style={[styles.btn, styles.shadowProp, {backgroundColor: "#90DA83"}]}
+          >
+            <Text style={styles.txt}>A101</Text>
+          </TouchableOpacity>
 
-class StatusPaymentOwner extends Component {
-    render() {
-        return (
-        <View style = {{padding:20, justifyContent: 'center', flex: 1}}>
-        <Text style = {{fontSize: 30, fontWeight: 'bold', color: '#96B3FF', margin: 10}}>
-            รายละเอียดค่าเช่าหอพัก
-        </Text>
+          <TouchableOpacity
+            style={[styles.btn, styles.shadowProp, {backgroundColor: "#F2AD5C"}]}
+          >
+            <Text style={styles.txt}>A101</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity style = {styles.btn2}>
-            <Text style = {{color: '#fff', fontSize:20, fontWeight: 'bold'}}>
-                A101
-            </Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.btn, styles.shadowProp, {backgroundColor: "#EF6767"}]}
+          >
+            <Text style={styles.txt}>A101</Text>
+          </TouchableOpacity>
 
-        <View style = {{padding: 15}}>
-            <Text style = {styles.txt}>
-                ชื่อผู้เช่า1 : 
-            </Text>
+          <TouchableOpacity
+            style={[styles.btn, styles.shadowProp, {backgroundColor: "white"}]}
+          >
+            <Text style={styles.txt}>A101</Text>
+          </TouchableOpacity>
 
-            <Text style = {styles.txt}>
-                ชื่อผู้เช่า2 : 
-            </Text>
-
-            <Text style = {styles.txt}>
-                ประเภทห้องพัก : 
-        </Text>
         </View>
 
-        <View style = {{flexDirection: 'row', justifyContent: "center"}}>
-            <View>
-                <Text style = {styles.txt2}>
-                    ปริมาณน้ำ : 
-                </Text>
-                <TouchableOpacity style={styles.btn}>
-                </TouchableOpacity>
-            </View>
-            <View>
-                <Text style = {styles.txt2}>
-                    ค่าน้ำ : 
-                </Text>
-                <TouchableOpacity style={styles.btn}>
-                </TouchableOpacity>
-            </View>
-        </View>
-
-        <View style = {{flexDirection: 'row', justifyContent: "center"}}>
-            <View>
-                <Text style = {styles.txt2}>
-                    ปริมาณไฟ : 
-                </Text>
-                <TouchableOpacity style={styles.btn}>
-                </TouchableOpacity>
-            </View>
-            <View>
-                <Text style = {styles.txt2}>
-                    ค่าไฟ : 
-                </Text>
-                <TouchableOpacity style={styles.btn}>
-                </TouchableOpacity>
-            </View>
-        </View>
-
-        <View style = {{justifyContent: "center", alignItems: "center", margin: 15}}>
-            <TouchableOpacity style={styles.btn3}>
-            <Text
-                style={{
-                textAlign: "center",
-                color: "white",
-                fontWeight: "bold",
-                fontSize: 15,
-                }}
-            >
-                ยืนยัน
-            </Text>
-        </TouchableOpacity>
-        </View>
         
-    </View>
-        )
-    }
-}
 
-const styles = StyleSheet.create({
-btn: {
-    width: 140,
-    height: 60,
-    padding: 10,
-    borderRadius: 40,
-    borderWidth: 2.5,
-    margin: 5,
-    alignItems:"center",
-    borderColor: "#96B3FF",
-    shadowOffset: {width: 3, height: 4},
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-},
-
-txt:{
-    fontSize: 20,
-    color: '#363C56',
-    fontWeight: 'bold'
-    
-     
-},
-txt2:{
-    fontSize: 17,
-    color: '#363C56',
-    fontWeight: 'bold',
-    
-     
-},
-btn2: {
-    width: 110,
-    height: 50,
-    padding: 10,
-    borderRadius: 40,
-    borderWidth: 2.5,
-    margin: 5,
-    alignItems:"center",
-    borderColor: "#96B3FF",
-    backgroundColor: '#96B3FF',
-    justifyContent: 'center'
-},
-btn3: {
-    width: 100,
-    height: 45,
-    padding: 10,
-    borderRadius: 20,
-    backgroundColor: "#363C56",
-    justifyContent: "center"
-}
-
-
-});
-
-export default StatusPaymentOwner;
+      </SafeAreaView>
+    );
+  };
+  
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: "white",
+    },
+    grid: {
+      flexDirection: "row",
+      marginHorizontal: "5%",
+      marginTop: '5%'
+    },
+    btn: {
+      width: 75,
+      fontSize: 30,
+      padding: 10,
+      borderRadius: 20,
+      borderWidth: 1,
+      margin: 7,
+      alignItems: "center",
+      shadowColor: "#9B9B9B",
+      shadowOffset: { width: 3, height: 4 },
+      shadowOpacity: 0.5,
+      shadowRadius: 3,
+    },
+    txt: {
+      fontWeight: "bold",
+      color: "#363C56",
+      fontSize: 16,
+    },
+    dropdown: {
+      width: 120,
+      height: 40,
+      borderColor: "gray",
+      borderRadius: 15,
+      paddingHorizontal: 8,
+      backgroundColor: "#D9D9D9",
+      justifyContent: "center",
+    },
+    shadowProp: {
+      shadowColor: "#9B9B9B",
+      shadowOffset: { width: -2, height: 4 },
+      shadowOpacity: 0.4,
+      shadowRadius: 3,
+    },
+  });
+  
+  export default StatusPaymentOwner;
+  

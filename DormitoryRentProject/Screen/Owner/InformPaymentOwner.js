@@ -39,12 +39,11 @@ const InformPaymentOwner = ({navigation}) => {
           marginTop: "10%",
           marginHorizontal: "5%",
           alignItems: "center",
-          justifyContent: "center",
         }}
       >
         <Text
           style={{
-            fontSize: 30,
+            fontSize: 25,
             fontWeight: "bold",
             color: "#96B3FF",
             margin: 10,
@@ -56,13 +55,13 @@ const InformPaymentOwner = ({navigation}) => {
         <Dropdown
           style={styles.dropdown}
           placeholderStyle={{
-            fontSize: 16,
+            fontSize: 14,
             color: "#363C56",
             fontWeight: "bold",
             textAlign: "center",
           }}
           selectedTextStyle={{
-            fontSize: 16,
+            fontSize: 14,
             color: "#363C56",
             fontWeight: "bold",
             textAlign: "center",
@@ -70,7 +69,7 @@ const InformPaymentOwner = ({navigation}) => {
           data={data}
           labelField="label"
           valueField="value"
-          placeholder={!isFocus ? "ดด/ปป" : "..."}
+          placeholder={!isFocus ? "เดือน" : "..."}
           value={value}
           onFocus={() => setIsFocus(true)}
           onChange={(item) => {
@@ -88,6 +87,8 @@ const InformPaymentOwner = ({navigation}) => {
           <Text style={styles.txt}>A101</Text>
         </TouchableOpacity>
       </View>
+
+      
     </SafeAreaView>
   );
 };
@@ -99,8 +100,8 @@ const styles = StyleSheet.create({
   },
   grid: {
     flexDirection: "row",
-    gap: 5,
     marginHorizontal: "5%",
+    marginTop: '5%'
   },
   btn: {
     width: 75,
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 40,
     borderColor: "gray",
-    borderRadius: 15,
+    borderRadius: 16,
     paddingHorizontal: 8,
     backgroundColor: "#D9D9D9",
     justifyContent: "center",

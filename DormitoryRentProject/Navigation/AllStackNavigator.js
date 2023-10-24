@@ -72,14 +72,16 @@ const AllStackNavigator = () => {
         name="PaymentRenter"
         component={PaymentRenter}
         options={{
-          headerTitle: props => <DormitoryHeader {...props}/>
+          headerTitle: props => <DormitoryHeader {...props}/>,
+          headerBackTitleVisible: false
         }}
       />
       <Stack.Screen
         name="HistoryRenter"
         component={HistoryRenter}
         options={{
-          headerTitle: props => <DormitoryHeader {...props}/>
+          headerTitle: props => <DormitoryHeader {...props}/>,
+          headerBackTitle: false
         }}
       />
 

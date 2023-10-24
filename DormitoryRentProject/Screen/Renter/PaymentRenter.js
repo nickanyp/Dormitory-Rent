@@ -5,7 +5,7 @@ const PaymentRenter = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={{ alignItems: "center" }}>
-        <View style={styles.box}>
+        <View style={[styles.box, styles.shadowProp]}>
           <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
             กันยายน
           </Text>
@@ -56,10 +56,12 @@ const styles = StyleSheet.create({
     borderColor: "#9B9B9B",
     padding: 15,
     margin: 10,
+    backgroundColor: 'white'
   },
   text: {
     fontWeight: "bold",
     fontSize: 15,
+    color: '#363C56'
   },
   btn1: {
     width: 190,
@@ -78,6 +80,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF9699",
     justifyContent: "center",
     margin: 8,
+    marginTop: '10%'
   },
   img: {
     width: 200,
