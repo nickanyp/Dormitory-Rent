@@ -63,22 +63,22 @@ const RenterDashAll = () => {
         <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
           <Text style={{fontSize: 45, fontWeight: 'bold', color:"#363C56"}}>ห้อง A226</Text>
           <Text style={{margin:10, color:"#7a7a7a", fontWeight:"bold"}}>ประจำงวดเดือน ตุลาคม 2566</Text>
-          <View style={styles.block1}>
+          <View style={[styles.block1, styles.shadowProp, {backgroundColor: 'white'}]}>
             <Text style={{fontSize:20, fontWeight:"bold"}}>ค่าชำระทั้งหมด 7,390 ฿</Text>
           </View>
           <View style={styles.detail1}>
             <View>
               <View style={styles.detail2}>
                 <Ionicons name="home-outline" size={30} color="#363C56" />
-                <Text style={{margin:10, fontWeight:"bold"}}>ค่าห้องพัก</Text>
-                <View style={styles.blockprice}>
+                <Text style={{margin:10, fontWeight:"bold", color:"#363C56"}}>ค่าห้องพัก</Text>
+                <View style={[styles.blockprice, styles.shadowProp, {backgroundColor: 'white'}]}>
                   <Text style={{fontWeight: "bold", fontSize:15}}> 5,500 บาท</Text>
                 </View>
               </View>
               <View style={styles.detail2}>
                 <MaterialIcons name="lightbulb-outline" size={30} color="#363C56" />
-                <Text style={{margin:10, fontWeight:"bold"}}>ค่าไฟฟ้า</Text>
-                <View style={styles.blockprice2}>
+                <Text style={{margin:10, fontWeight:"bold", color:"#363C56"}}>ค่าไฟฟ้า</Text>
+                <View style={[styles.blockprice2, styles.shadowProp, {backgroundColor: 'white'}]}>
                   <Text style={{fontWeight: "bold", fontSize:15}}> 1,440 บาท</Text>
                 </View>
               </View>
@@ -86,15 +86,15 @@ const RenterDashAll = () => {
             <View>
               <View style={styles.detail2}>
                 <MaterialIcons name="attach-money" size={30} color="#363C56" />
-                <Text style={{margin:10, fontWeight:"bold"}}>ค่าปรับ</Text>
-                <View style={styles.blockprice3}>
+                <Text style={{margin:10, fontWeight:"bold", color:"#363C56"}}>ค่าปรับ</Text>
+                <View style={[styles.blockprice3, styles.shadowProp, {backgroundColor: 'white'}]}>
                   <Text style={{fontWeight: "bold", fontSize:15}}> 100 บาท</Text>
                 </View>
               </View>
               <View style={styles.detail2}>
                 <Ionicons name="water-outline" size={30} color="#363C56" />
-                <Text style={{margin:10, fontWeight:"bold"}}>ค่าน้ำ</Text>
-                <View style={styles.blockprice4}>
+                <Text style={{margin:10, fontWeight:"bold", color:"#363C56"}}>ค่าน้ำ</Text>
+                <View style={[styles.blockprice4, styles.shadowProp, {backgroundColor: 'white'}]}>
                   <Text style={{fontWeight: "bold", fontSize:15}}> 200 บาท</Text>
                 </View>
               </View>
@@ -241,6 +241,12 @@ const styles = StyleSheet.create({
     borderRadius:50,
     backgroundColor:"#C7C7C7",
     marginTop:7
+  },
+  shadowProp: {
+    shadowColor: "#9B9B9B",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
   },
 
 });

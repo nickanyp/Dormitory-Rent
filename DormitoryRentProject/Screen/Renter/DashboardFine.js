@@ -36,7 +36,7 @@ const DashboardFine = () => {
 
   return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.block4}>
+        <View style={[styles.block4, styles.shadowProp, {backgroundColor: 'white'}]}>
           <Text style={{fontSize:19, fontWeight:"bold", color:"#363C56"}}>ค่าปรับประจำเดือนกันยายน</Text>
         </View>
 
@@ -172,7 +172,13 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     alignItems: "center",
     marginTop:15
-  }
+  },
+  shadowProp: {
+    shadowColor: "#9B9B9B",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
+  },
 
 
 });
