@@ -37,7 +37,8 @@ const Payment2Owner = () => {
           flexDirection: "row",
           marginTop: "10%",
           marginHorizontal: "10%",
-          alignItems: 'center'
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <Text
@@ -53,8 +54,18 @@ const Payment2Owner = () => {
 
         <Dropdown
           style={styles.dropdown}
-          placeholderStyle={{fontSize: 16, color: "#363C56", fontWeight: 'bold', textAlign: 'center'}}
-          selectedTextStyle={{fontSize: 16, color: "#363C56", fontWeight: 'bold', textAlign: 'center'}}
+          placeholderStyle={{
+            fontSize: 16,
+            color: "#363C56",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+          selectedTextStyle={{
+            fontSize: 16,
+            color: "#363C56",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
           data={data}
           labelField="label"
           valueField="value"
@@ -114,7 +125,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     paddingHorizontal: 8,
     backgroundColor: "#D9D9D9",
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   shadowProp: {
     shadowColor: "#9B9B9B",
