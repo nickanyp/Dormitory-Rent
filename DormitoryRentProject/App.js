@@ -6,12 +6,13 @@ import OwnerHome from "./Screen/Owner/OwnerHome";
 import RegisterOwner from "./Screen/Owner/RegisterOwner";
 import PaymentOwner from "./Screen/Owner/PaymentOwner";
 import InformPaymentOwner from "./Screen/Owner/InformPaymentOwner";
+import OwnerDormitory from "./Screen/Owner/OwnerDormitory";
 
 export default function App() {
   return (
     // <FirstPage></FirstPage>
     // <MainScreenNavigation></MainScreenNavigation>
-    <AllNavigation></AllNavigation>
+    // <AllNavigation></AllNavigation>
     // <MyRoomPage></MyRoomPage>
     // <LoginRenter></LoginRenter>
     // <CheckPayment></CheckPayment>
@@ -22,5 +23,6 @@ export default function App() {
     // <RegisterOwner></RegisterOwner>
     // <PaymentOwner></PaymentOwner>
     // <InformPaymentOwner></InformPaymentOwner>
+    <OwnerDormitory></OwnerDormitory>
   );
 }
