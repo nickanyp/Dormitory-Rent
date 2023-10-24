@@ -39,18 +39,19 @@ const stackData = [
 const OwnerDormitory = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.block1}>
-        <View style={styles.block2}>
-          <Text style={{fontSize:40, fontWeight:"bold", color:"#96B3FF"}}>กัลยรัตน์ 1</Text>
-          <Text style={{color:"#96B3FF"}}>RNP 655/2 ซ.ฉลองกรุง 1 แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพมหานคร</Text>
-        </View>
-        <View style={styles.block3}>
-          <View style={styles.circle}>
-            <Image style={styles.img} source={require('../../assets/dormitory.png')}/>
+      
+        <View style={styles.block1}>
+          <View style={styles.block2}>
+            <Text style={{fontSize:40, fontWeight:"bold", color:"#96B3FF"}}>กัลยรัตน์ 1</Text>
+            <Text style={{color:"#96B3FF"}}>RNP 655/2 ซ.ฉลองกรุง 1 แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพมหานคร</Text>
+          </View>
+          <View style={styles.block3}>
+            <View style={styles.circle}>
+              <Image style={styles.img} source={require('../../assets/dormitory.png')}/>
+            </View>
           </View>
         </View>
-      </View>
-
+      <ScrollView style={{width:"100%"}}>
         {/* <Text style={{marginLeft:10, fontSize:30, fontWeight:"bold", color:"#363C56"}}>ห้องว่าง</Text> */}
         <View style={{alignItems:"center", marginBottom:15}}>
           <View style={[styles.hori]}>
@@ -77,7 +78,7 @@ const OwnerDormitory = () => {
             </View>
           </View>
 
-          <View style={[styles.hori, {marginTop:20}]}>
+          <View style={[styles.hori, {marginTop:10}]}>
             <View style={{justifyContent:'center', alignItems:"center"}}>
               <Image style={styles.img2} source={require('../../assets/fan.png')}/>
               <Text style={{color:"#363C56"}}>ห้องพัดลม</Text>
@@ -99,29 +100,29 @@ const OwnerDormitory = () => {
           </View>
         </View>
 
-      <View style={styles.month}>
-        <ScrollView contentContainerStyle={styles.scrollmonth} horizontal={true} showsHorizontalScrollIndicator={false}>
-          <Pressable style={[styles.boxmonth, {backgroundColor:"transparent"}]}>
-            <Text style={{fontWeight:"bold", fontSize:17, color:"#363C56"}}>มิ.ย.</Text>
-          </Pressable>
-          <Pressable style={[styles.boxmonth, {backgroundColor:"transparent"}]}>
-            <Text style={{fontWeight:"bold", fontSize:17, color:"#363C56"}}>ก.ค.</Text>
-          </Pressable> 
-          <Pressable style={[styles.boxmonth, {backgroundColor:"transparent"}]}>
-            <Text style={{fontWeight:"bold", fontSize:17, color:"#363C56"}}>ส.ค.</Text>
-          </Pressable>
-          <Pressable style={[styles.boxmonth, {backgroundColor:"transparent"}]}>
-            <Text style={{fontWeight:"bold", fontSize:17, color:"#363C56"}}>ก.ย.</Text>
-          </Pressable> 
-          <Pressable style={styles.boxmonth}>
-            <Text style={{fontWeight:"bold", fontSize:17, color:"#363C56"}}>ต.ค.</Text>
-          </Pressable>
-        </ScrollView>
-      </View>
+        <View style={styles.month}>
+          <ScrollView contentContainerStyle={styles.scrollmonth} horizontal={true} showsHorizontalScrollIndicator={false}>
+            <Pressable style={[styles.boxmonth, {backgroundColor:"transparent"}]}>
+              <Text style={{fontWeight:"bold", fontSize:17, color:"#363C56"}}>มิ.ย.</Text>
+            </Pressable>
+            <Pressable style={[styles.boxmonth, {backgroundColor:"transparent"}]}>
+              <Text style={{fontWeight:"bold", fontSize:17, color:"#363C56"}}>ก.ค.</Text>
+            </Pressable> 
+            <Pressable style={[styles.boxmonth, {backgroundColor:"transparent"}]}>
+              <Text style={{fontWeight:"bold", fontSize:17, color:"#363C56"}}>ส.ค.</Text>
+            </Pressable>
+            <Pressable style={[styles.boxmonth, {backgroundColor:"transparent"}]}>
+              <Text style={{fontWeight:"bold", fontSize:17, color:"#363C56"}}>ก.ย.</Text>
+            </Pressable> 
+            <Pressable style={styles.boxmonth}>
+              <Text style={{fontWeight:"bold", fontSize:17, color:"#363C56"}}>ต.ค.</Text>
+            </Pressable>
+          </ScrollView>
+        </View>
 
-      <ScrollView style={{width:"100%", marginTop:10}}>
+      
         <View style={styles.center}>
-          <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56", marginTop:12, marginBottom:5}}>รวมยอดชำระ 75,000 บาท</Text>
+          <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56", marginTop:20, marginBottom:5}}>รวมยอดชำระ 75,000 บาท</Text>
           <View style={styles.block4}>
             <View style={[styles.box2]}>
               <Text style={{fontSize:13, fontWeight:"bold", color:"#363C56"}}>ชำระแล้ว</Text>
@@ -225,8 +226,7 @@ const OwnerDormitory = () => {
               <Text style={{marginLeft:30, fontSize:17, color:"#363C56", marginBottom: 5}}>2     A202</Text>
               <Text style={{marginLeft:30, fontSize:17, color:"#363C56"}}>3     A203</Text>
             </View>
-          </View>
-          
+          </View> 
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -238,6 +238,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     alignItems: 'center',
+    // backgroundColor:"#f0f"
   },
   center:{
     justifyContent:"center",
@@ -248,7 +249,7 @@ const styles = StyleSheet.create({
     height:130,
     // backgroundColor:"#f0f",
     flexDirection:"row",
-    marginTop: '20%'
+    marginTop: '14%'
   },
   block2:{
     flex:6,
