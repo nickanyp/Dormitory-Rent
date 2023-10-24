@@ -5,11 +5,12 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   renderLabel,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
 import { useState } from "react";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import DetailPaymentOwner from "./DetailPaymentOwner";
 
 const data = [
   { label: "มกราคม", value: "1" },
@@ -26,27 +27,23 @@ const data = [
   { label: "ธันวาคม", value: "12" },
 ];
 
-const Payment2Owner = () => {
+const InformPaymentOwner = ({navigation}) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
-  const renderLabel = () => {
-    if (value || isFocus) {
-      return (
-        <Text style={[styles.label, isFocus && { color: "blue" }]}>
-          Dropdown label
-        </Text>
-      );
-    }
-    return null;
-  };
-
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ flexDirection: "row", marginTop: '10%' }}>
+      <View
+        style={{
+          flexDirection: "row",
+          marginTop: "10%",
+          marginHorizontal: "5%",
+          alignItems: "center",
+        }}
+      >
         <Text
           style={{
-            fontSize: 30,
+            fontSize: 25,
             fontWeight: "bold",
             color: "#96B3FF",
             margin: 10,
@@ -55,77 +52,40 @@ const Payment2Owner = () => {
           แจ้งชำระค่าเช่า
         </Text>
 
-        <View style={styles.grid}>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
+        <Dropdown
+          style={styles.dropdown}
+          placeholderStyle={{
+            fontSize: 14,
+            color: "#363C56",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+          selectedTextStyle={{
+            fontSize: 14,
+            color: "#363C56",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+          data={data}
+          labelField="label"
+          valueField="value"
+          placeholder={!isFocus ? "เดือน" : "..."}
+          value={value}
+          onFocus={() => setIsFocus(true)}
+          onChange={(item) => {
+            setValue(item.value);
+            setIsFocus(false);
+          }}
+        />
       </View>
-
 
       <View style={styles.grid}>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity
+          style={[styles.btn, styles.shadowProp]}
+          onPress={() => {navigation.navigate("DetailPayment")}}
+        >
           <Text style={styles.txt}>A101</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
-      </View>
-
-     
-
-      <View style={styles.grid}>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
-      </View>
-      
-        {/* <View style={styles.condrop}>
-          {renderLabel()}
-          <Dropdown
-            style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
-            placeholderStyle={styles.placeholderStyle}
-            selectedTextStyle={styles.selectedTextStyle}
-            // inputSearchStyle={styles.inputSearchStyle}
-            iconStyle={styles.iconStyle}
-            data={data}
-            search
-            maxHeight={300}
-            labelField="label"
-            valueField="value"
-            placeholder="เดือน"
-            searchPlaceholder="ค้นหา..."
-            value={value}
-            onFocus={() => setIsFocus(true)}
-            onBlur={() => setIsFocus(false)}
-            onChange={(item) => {
-              setValue(item.value);
-              setIsFocus(false);
-            }}
-            renderLeftIcon={() => (
-              <AntDesign
-                style={styles.icon}
-                color={isFocus ? "blue" : "black"}
-                name="Safety"
-                size={20}
-              />
-            )}
-          />
-        </View> */}
       </View>
 
       
@@ -136,11 +96,12 @@ const Payment2Owner = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   grid: {
     flexDirection: "row",
-    gap: 5,
+    marginHorizontal: "5%",
+    marginTop: '5%'
   },
   btn: {
     width: 75,
@@ -149,61 +110,34 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 2.5,
     margin: 7,
-    // marginTop: 15,
     alignItems: "center",
-
     borderColor: "#96B3FF",
     shadowColor: "#9B9B9B",
     shadowOffset: { width: 3, height: 4 },
     shadowOpacity: 0.5,
     shadowRadius: 3,
+    backgroundColor: "white",
   },
   txt: {
     fontWeight: "bold",
     color: "#363C56",
     fontSize: 15,
   },
-
-  condrop: {
-    backgroundColor: "white",
-    padding: 16,
-    flex: 1,
-    justifyContent: "center",
-  },
   dropdown: {
+    width: 120,
     height: 40,
     borderColor: "gray",
-    borderWidth: 0.5,
-    borderRadius: 8,
+    borderRadius: 16,
     paddingHorizontal: 8,
-    width: 120,
+    backgroundColor: "#D9D9D9",
+    justifyContent: "center",
   },
-  //   icon: {
-  //     marginRight: 5,
-  //   },
-  label: {
-    position: "absolute",
-    backgroundColor: "white",
-    left: 22,
-    top: 8,
-    zIndex: 999,
-    paddingHorizontal: 8,
-    fontSize: 14,
-  },
-  placeholderStyle: {
-    fontSize: 16,
-  },
-  selectedTextStyle: {
-    fontSize: 16,
-  },
-  iconStyle: {
-    width: 20,
-    height: 20,
-  },
-  inputSearchStyle: {
-    height: 40,
-    fontSize: 16,
+  shadowProp: {
+    shadowColor: "#9B9B9B",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
   },
 });
 
-export default Payment2Owner;
+export default InformPaymentOwner;

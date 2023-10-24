@@ -236,10 +236,8 @@ const OwnerDormitory = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "white",
-    marginTop:50
+    alignItems: 'center',
   },
   center:{
     justifyContent:"center",
@@ -249,7 +247,8 @@ const styles = StyleSheet.create({
     width: 350,
     height:130,
     // backgroundColor:"#f0f",
-    flexDirection:"row"
+    flexDirection:"row",
+    marginTop: '20%'
   },
   block2:{
     flex:6,

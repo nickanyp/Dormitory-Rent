@@ -20,6 +20,7 @@ const MyRoomPage = ({navigation}) => {
         <Text style={styles.text}>ชื่อผู้เช่า 2 : </Text>
         <Text></Text>
         <Text style={styles.text}>หอพัก : </Text>
+        <Text style={styles.text}>ประเภทห้อง : </Text>
         <Text style={styles.text}>เลขห้อง : </Text>
       </View>
 
@@ -104,6 +105,7 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
     fontSize: 15,
+    color: '#363C56'
   },
   btn: {
     width: 120,

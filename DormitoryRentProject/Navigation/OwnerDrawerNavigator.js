@@ -1,6 +1,6 @@
 import React from 'react';
 import { createDrawerNavigator } from "@react-navigation/drawer";
-
+import 'react-native-gesture-handler';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 import OwnerHome from "../Screen/Owner/OwnerHome";
@@ -17,11 +17,11 @@ const OwnerDrawerNavigator = () => {
       drawerContent={props => <CustomDrawer {...props} />}
       screenOptions={() => ({
         drawerStyle: {
-          backgroundColor: '#EEEEEE',
+          backgroundColor: 'white',
         },
         headerStyle: {
-          height: 120
-        }
+          height: 120,
+        },
       })}>
       <Drawer.Screen
         name="Home"
@@ -42,7 +42,6 @@ const OwnerDrawerNavigator = () => {
           drawerIcon: () => (
             <FontAwesome5 name="user" size={24} color="#363C56" />
           ),
-          headerTitle: props => <DormitoryHeader {...props}/>,
         }}
       />
 

@@ -7,6 +7,8 @@ import {
 } from "react-native";
 import { Fontisto } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const ProfileOwner = ({navigation}) => {
     return (
@@ -40,6 +42,7 @@ const ProfileOwner = ({navigation}) => {
               backgroundColor: "#EEEEEE",
               borderRadius: 15,
               justifyContent: "center",
+              padding: '5%'
             }}>
             <Text
               style={[
@@ -52,7 +55,7 @@ const ProfileOwner = ({navigation}) => {
                 },
               ]}
             >
-              อนัญพร จอมคำ
+              <Ionicons style={{color: "#363C56"}} name="ios-flower-outline" size={20} color="black" /> อนัญพร จอมคำ
             </Text>
             <Text
               style={[
@@ -86,6 +89,19 @@ const ProfileOwner = ({navigation}) => {
                 หญิง
               </Text>
             </View>
+            
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <MaterialCommunityIcons
+              style={styles.icon}
+              name="cake-variant-outline"
+              size={20}
+              color="#363C56"
+            />
+              <Text style={[styles.txt, { color: "#363C56", fontSize: 16 }]}>
+                10/06/2002
+              </Text>
+            </View>
+
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <AntDesign
                 style={styles.icon}
@@ -144,7 +160,7 @@ const styles = StyleSheet.create({
   pic: {
     width: 200,
     height: 200,
-    borderRadius: 200 / 2,
+    borderRadius: "100%",
     marginVertical: 15,
   },
   txt: {

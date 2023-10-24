@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import AllDrawerNavigator from './OwnerDrawerNavigator';
+import OwnerDrawerNavigator from './OwnerDrawerNavigator';
 import OwnerTabNavigator from './OwnerTabNavigator';
 import RenterTabNavigator from './RenterTabNavigator';
 import DormitoryHeader from '../component/DormitoryHeader';
@@ -24,6 +24,7 @@ import EditProfileOwner from '../Screen/Owner/EditProfileOwner';
 import PaymentOwner from '../Screen/Owner/PaymentOwner';
 import InformPaymentOwner from '../Screen/Owner/InformPaymentOwner';
 import StatusPaymentOwner from '../Screen/Owner/StatusPaymentOwner';
+import DetailPaymentOwner from '../Screen/Owner/DetailPaymentOwner';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,7 +32,8 @@ const AllStackNavigator = () => {
   return (
     <Stack.Navigator
     screenOptions={{
-      headerTransparent:true
+      headerTransparent:true,
+      headerStyle: { backgroundColor: 'white' }
     }}>
 
       {/* MainScreen */}
@@ -70,14 +72,16 @@ const AllStackNavigator = () => {
         name="PaymentRenter"
         component={PaymentRenter}
         options={{
-          headerTitle: props => <DormitoryHeader {...props}/>
+          headerTitle: props => <DormitoryHeader {...props}/>,
+          headerBackTitleVisible: false
         }}
       />
       <Stack.Screen
         name="HistoryRenter"
         component={HistoryRenter}
         options={{
-          headerTitle: props => <DormitoryHeader {...props}/>
+          headerTitle: props => <DormitoryHeader {...props}/>,
+          headerBackTitleVisible: false
         }}
       />
 
@@ -98,7 +102,7 @@ const AllStackNavigator = () => {
       />
       <Stack.Screen
         name="OwnerHome"
-        component={AllDrawerNavigator}
+        component={OwnerDrawerNavigator}
         options={{
           title: "",
           headerShown: false
@@ -137,6 +141,14 @@ const AllStackNavigator = () => {
       <Stack.Screen
         name="StatusPayment"
         component={StatusPaymentOwner}
+        options={{
+          headerTitle: props => <DormitoryHeader {...props}/>,
+          headerBackTitleVisible: false
+        }}
+      />
+      <Stack.Screen
+        name="DetailPayment"
+        component={DetailPaymentOwner}
         options={{
           headerTitle: props => <DormitoryHeader {...props}/>,
           headerBackTitleVisible: false

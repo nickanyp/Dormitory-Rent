@@ -98,7 +98,7 @@ const LoginOwner = ({ navigation }) => {
           ></TextInput>
           <MaterialCommunityIcons
             style={{ right: 15 }}
-            name={showPassword ? "eye-off" : "eye"}
+            name={showPassword ? "eye" : "eye-off"}
             size={24}
             color="#aaa"
             onPress={toggleShowPassword}

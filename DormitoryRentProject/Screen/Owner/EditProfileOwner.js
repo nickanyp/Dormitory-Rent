@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-//   import { LinearGradient } from "expo-linear-gradient";
 
 const EditProfileOwner = () => {
   return (
