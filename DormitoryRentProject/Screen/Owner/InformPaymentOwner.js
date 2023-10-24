@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import DetailPaymentOwner from "./DetailPaymentOwner";
 
 const data = [
   { label: "มกราคม", value: "1" },
@@ -26,7 +27,7 @@ const data = [
   { label: "ธันวาคม", value: "12" },
 ];
 
-const Payment2Owner = () => {
+const InformPaymentOwner = ({navigation}) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
@@ -36,7 +37,7 @@ const Payment2Owner = () => {
         style={{
           flexDirection: "row",
           marginTop: "10%",
-          marginHorizontal: "10%",
+          marginHorizontal: "5%",
           alignItems: "center",
           justifyContent: "center",
         }}
@@ -80,7 +81,10 @@ const Payment2Owner = () => {
       </View>
 
       <View style={styles.grid}>
-        <TouchableOpacity style={[styles.btn, styles.shadowProp]}>
+        <TouchableOpacity
+          style={[styles.btn, styles.shadowProp]}
+          onPress={() => {navigation.navigate("DetailPayment")}}
+        >
           <Text style={styles.txt}>A101</Text>
         </TouchableOpacity>
       </View>
@@ -96,7 +100,7 @@ const styles = StyleSheet.create({
   grid: {
     flexDirection: "row",
     gap: 5,
-    marginHorizontal: "10%",
+    marginHorizontal: "5%",
   },
   btn: {
     width: 75,
@@ -135,4 +139,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Payment2Owner;
+export default InformPaymentOwner;

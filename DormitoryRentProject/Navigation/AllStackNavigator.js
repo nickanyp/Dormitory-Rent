@@ -24,6 +24,7 @@ import EditProfileOwner from '../Screen/Owner/EditProfileOwner';
 import PaymentOwner from '../Screen/Owner/PaymentOwner';
 import InformPaymentOwner from '../Screen/Owner/InformPaymentOwner';
 import StatusPaymentOwner from '../Screen/Owner/StatusPaymentOwner';
+import DetailPaymentOwner from '../Screen/Owner/DetailPaymentOwner';
 
 const Stack = createNativeStackNavigator();
 
@@ -138,6 +139,14 @@ const AllStackNavigator = () => {
       <Stack.Screen
         name="StatusPayment"
         component={StatusPaymentOwner}
+        options={{
+          headerTitle: props => <DormitoryHeader {...props}/>,
+          headerBackTitleVisible: false
+        }}
+      />
+      <Stack.Screen
+        name="DetailPayment"
+        component={DetailPaymentOwner}
         options={{
           headerTitle: props => <DormitoryHeader {...props}/>,
           headerBackTitleVisible: false

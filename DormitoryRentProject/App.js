@@ -7,6 +7,7 @@ import RegisterOwner from "./Screen/Owner/RegisterOwner";
 import PaymentOwner from "./Screen/Owner/PaymentOwner";
 import InformPaymentOwner from "./Screen/Owner/InformPaymentOwner";
 import OwnerDormitory from "./Screen/Owner/OwnerDormitory";
+import DetailPaymentOwner from "./Screen/Owner/DetailPaymentOwner";
 
 export default function App() {
   return (
@@ -25,5 +26,6 @@ export default function App() {
     // <InformPaymentOwner></InformPaymentOwner>
     // <InformPaymentOwner></InformPaymentOwner>
     // <OwnerDormitory></OwnerDormitory>
+    // <DetailPaymentOwner></DetailPaymentOwner>
   );
 }
