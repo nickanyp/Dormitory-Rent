@@ -1,35 +1,25 @@
-import {
-  Text,
-  TextInput,
-  View,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { BarChart } from "react-native-gifted-charts";
+
 
 const PaymentOwner = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ flexDirection: "row", margin: 15,  marginTop: '40%'}}>
-        <View style={styles.box}>
-          <Text style={{ fontSize: 35, fontWeight: "bold", color: "#96B3FF" }}>
-            กัลยารัตน์2
-          </Text>
-          <Text style={{ fontWeight: "bold", color: "#96B3FF", fontSize: 14 }}>
-            RNP 655/2 ซ.ฉลองกรุง 1 แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพมหานคร
-          </Text>
+      <View style={styles.block1}>
+        <View style={styles.block2}>
+          <Text style={{fontSize:40, fontWeight:"bold", color:"#96B3FF"}}>กัลยรัตน์ 1</Text>
+          <Text style={{color:"#96B3FF"}}>RNP 655/2 ซ.ฉลองกรุง 1 แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพมหานคร</Text>
         </View>
-
-        <View style={styles.box2}>
-          <Image
-            style={[styles.pic, {top: '25%', left: '25%'}]}
-            source={require("../../assets/dormitory.png")}
-          />
+        <View style={styles.block3}>
+          <View style={styles.circle}>
+            <Image style={styles.img} source={require('../../assets/dormitory.png')}/>
+          </View>
         </View>
       </View>
 
-      <View style={{ alignItems: "center"}}>
+      <View style={{ alignItems: "center", marginTop: '10%'}}>
         <TouchableOpacity
           style={[styles.btn, styles.shadowProp, { borderColor: "#9B9B9B" }]}
           onPress={() => {navigation.navigate("InformPayment")}}
@@ -45,43 +35,54 @@ const PaymentOwner = ({navigation}) => {
 
         <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <Image
-                style={[styles.pic, {width: 350, height: 350, bottom: -370}]}
+                style={styles.pic}
                 source={require("../../assets/blue.png")}
             />
             </View>
       </View>
+
     </SafeAreaView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
+    alignItems: 'center',
   },
-  box: {
-    flex: 2.5,
-    marginLeft: 15,
+  block1:{
+    width: 350,
+    height:130,
+    flexDirection:"row",
+    marginTop: '20%'
   },
-  box2: {
-    // flex:1,
-    width: 120,
-    height: 120,
-    borderRadius: "100%",
-    marginRight: 25,
-    borderWidth: 2,
-    borderColor: "#96B3FF",
+  block2:{
+    flex:6,
+    paddingLeft:10,
   },
-  pic: {
-    width: 60,
-    height: 60,
-    resizeMode: "contain",
-    position: "absolute",
+  block3:{
+    flex:3
   },
-  text: {
-    fontWeight: "bold",
-    textAlign: "center",
-    justifyContent: 'center'
+  circle:{
+    width:100,
+    height:100,
+    borderWidth:1.5,
+    borderColor:"#96B3FF",
+    borderRadius:50,
+    justifyContent:"center",
+    alignItems:"center",
+    marginTop:5
+  },
+  img:{
+    width:50,
+    height:50
+  },
+  scrollmonth:{
+    flexDirection:"row",
+    justifyContent:"center",
+    alignItems:"center",
+    padding:5
   },
   btn: {
     width: 220,
@@ -102,6 +103,18 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 3,
   },
-});
+  text: {
+    fontWeight: "bold",
+    textAlign: "center",
+    justifyContent: 'center'
+  },
+  pic: {
+    width: 300,
+    height: 300,
+    resizeMode: "contain",
+    position: "absolute",
+    bottom: -450,
+  },
+})
 
-export default PaymentOwner;
+export default PaymentOwner
