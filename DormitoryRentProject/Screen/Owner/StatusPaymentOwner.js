@@ -9,7 +9,7 @@ import{
 class StatusPaymentOwner extends Component {
     render() {
         return (
-            <View style = {{padding:20, justifyContent: 'center', marginTop: '20%', flex: 1}}>
+        <View style = {{padding:20, justifyContent: 'center', flex: 1}}>
         <Text style = {{fontSize: 30, fontWeight: 'bold', color: '#96B3FF', margin: 10}}>
             รายละเอียดค่าเช่าหอพัก
         </Text>
@@ -118,8 +118,8 @@ txt2:{
      
 },
 btn2: {
-    width: 130,
-    height: 60,
+    width: 110,
+    height: 50,
     padding: 10,
     borderRadius: 40,
     borderWidth: 2.5,
