@@ -30,25 +30,14 @@ const Payment2Owner = () => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
-  const renderLabel = () => {
-    if (value || isFocus) {
-      return (
-        <Text style={[styles.label, isFocus && { color: "blue" }]}>
-          Dropdown label
-        </Text>
-      );
-    }
-    return null;
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <View
         style={{
           flexDirection: "row",
           marginTop: "10%",
-          backgroundColor: "blue",
           marginHorizontal: "10%",
+          alignItems: 'center'
         }}
       >
         <Text
@@ -64,18 +53,14 @@ const Payment2Owner = () => {
 
         <Dropdown
           style={styles.dropdown}
-          placeholderStyle={styles.placeholderStyle}
-          selectedTextStyle={styles.selectedTextStyle}
-          iconStyle={styles.iconStyle}
+          placeholderStyle={{fontSize: 16, color: "#363C56", fontWeight: 'bold', textAlign: 'center'}}
+          selectedTextStyle={{fontSize: 16, color: "#363C56", fontWeight: 'bold', textAlign: 'center'}}
           data={data}
-          search
-          maxHeight={300}
           labelField="label"
           valueField="value"
-          placeholder="ดด/ปป"
+          placeholder={!isFocus ? "ดด/ปป" : "..."}
           value={value}
           onFocus={() => setIsFocus(true)}
-          onBlur={() => setIsFocus(false)}
           onChange={(item) => {
             setValue(item.value);
             setIsFocus(false);
@@ -100,7 +85,6 @@ const styles = StyleSheet.create({
   grid: {
     flexDirection: "row",
     gap: 5,
-    backgroundColor: "red",
     marginHorizontal: "10%",
   },
   btn: {
@@ -110,9 +94,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 2.5,
     margin: 7,
-    // marginTop: 15,
     alignItems: "center",
-
     borderColor: "#96B3FF",
     shadowColor: "#9B9B9B",
     shadowOffset: { width: 3, height: 4 },
@@ -125,41 +107,14 @@ const styles = StyleSheet.create({
     color: "#363C56",
     fontSize: 15,
   },
-
-  condrop: {
-    backgroundColor: "white",
-    padding: 16,
-    flex: 1,
-    justifyContent: "center",
-  },
   dropdown: {
+    width: 120,
     height: 40,
     borderColor: "gray",
-    borderRadius: 20,
+    borderRadius: 15,
     paddingHorizontal: 8,
-    width: 120,
     backgroundColor: "#D9D9D9",
-  },
-  label: {
-    position: "absolute",
-    backgroundColor: "white",
-    left: 22,
-    top: 8,
-    zIndex: 999,
-    paddingHorizontal: 8,
-    fontSize: 14,
-  },
-  placeholderStyle: {
-    fontSize: 16,
-    color: "#363C56",
-    fontWeight: "bold",
-  },
-  selectedTextStyle: {
-    fontSize: 16,
-  },
-  iconStyle: {
-    width: 20,
-    height: 20,
+    justifyContent: 'center',
   },
   shadowProp: {
     shadowColor: "#9B9B9B",

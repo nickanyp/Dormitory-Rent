@@ -100,7 +100,8 @@ const styles = StyleSheet.create({
     width: 350,
     height:130,
     // backgroundColor:"#f0f",
-    flexDirection:"row"
+    flexDirection:"row",
+    marginTop: '10%'
   },
   block2:{
     flex:6,

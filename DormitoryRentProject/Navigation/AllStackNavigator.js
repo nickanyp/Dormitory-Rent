@@ -31,7 +31,8 @@ const AllStackNavigator = () => {
   return (
     <Stack.Navigator
     screenOptions={{
-      headerTransparent:true
+      headerTransparent:true,
+      headerStyle: { backgroundColor: 'white' }
     }}>
 
       {/* MainScreen */}
