@@ -39,19 +39,21 @@ const stackData = [
 const OwnerDormitory = () => {
   return (
     <SafeAreaView style={styles.container}>
-      
-        <View style={styles.block1}>
-          <View style={styles.block2}>
-            <Text style={{fontSize:40, fontWeight:"bold", color:"#96B3FF"}}>กัลยรัตน์ 1</Text>
-            <Text style={{color:"#96B3FF"}}>RNP 655/2 ซ.ฉลองกรุง 1 แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพมหานคร</Text>
-          </View>
-          <View style={styles.block3}>
-            <View style={styles.circle}>
-              <Image style={styles.img} source={require('../../assets/dormitory.png')}/>
+      <ScrollView style={{width:"100%"}}>
+        <View style={{justifyContent:"center", alignItems:"center", width:"100%", marginTop:"14%",marginBottom:10}}>
+          <View style={styles.block1}>
+            <View style={styles.block2}>
+              <Text style={{fontSize:40, fontWeight:"bold", color:"#96B3FF"}}>กัลยรัตน์ 1</Text>
+              <Text style={{color:"#96B3FF"}}>RNP 655/2 ซ.ฉลองกรุง 1 แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพมหานคร</Text>
+            </View>
+            <View style={styles.block3}>
+              <View style={styles.circle}>
+                <Image style={styles.img} source={require('../../assets/dormitory.png')}/>
+              </View>
             </View>
           </View>
         </View>
-      <ScrollView style={{width:"100%"}}>
+      
         {/* <Text style={{marginLeft:10, fontSize:30, fontWeight:"bold", color:"#363C56"}}>ห้องว่าง</Text> */}
         <View style={{alignItems:"center", marginBottom:15}}>
           <View style={[styles.hori]}>
@@ -249,7 +251,8 @@ const styles = StyleSheet.create({
     height:130,
     // backgroundColor:"#f0f",
     flexDirection:"row",
-    marginTop: '14%'
+    justifyContent:"center",
+    alignItems:"center"
   },
   block2:{
     flex:6,
