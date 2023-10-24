@@ -9,7 +9,7 @@ import{
 class StatusPaymentOwner extends Component {
     render() {
         return (
-            <View style = {{padding:20, justifyContent: 'center', marginTop: '20%', flex: 1}}>
+        <View style = {{padding:20, justifyContent: 'center', flex: 1}}>
         <Text style = {{fontSize: 30, fontWeight: 'bold', color: '#96B3FF', margin: 10}}>
             รายละเอียดค่าเช่าหอพัก
         </Text>
@@ -36,14 +36,14 @@ class StatusPaymentOwner extends Component {
 
         <View style = {{flexDirection: 'row', justifyContent: "center"}}>
             <View>
-                <Text style = {styles.txt}>
+                <Text style = {styles.txt2}>
                     ปริมาณน้ำ : 
                 </Text>
                 <TouchableOpacity style={styles.btn}>
                 </TouchableOpacity>
             </View>
             <View>
-                <Text style = {styles.txt}>
+                <Text style = {styles.txt2}>
                     ค่าน้ำ : 
                 </Text>
                 <TouchableOpacity style={styles.btn}>
@@ -53,14 +53,14 @@ class StatusPaymentOwner extends Component {
 
         <View style = {{flexDirection: 'row', justifyContent: "center"}}>
             <View>
-                <Text style = {styles.txt}>
+                <Text style = {styles.txt2}>
                     ปริมาณไฟ : 
                 </Text>
                 <TouchableOpacity style={styles.btn}>
                 </TouchableOpacity>
             </View>
             <View>
-                <Text style = {styles.txt}>
+                <Text style = {styles.txt2}>
                     ค่าไฟ : 
                 </Text>
                 <TouchableOpacity style={styles.btn}>
@@ -106,12 +106,20 @@ btn: {
 txt:{
     fontSize: 20,
     color: '#363C56',
-    fontWeight: '400'
+    fontWeight: 'bold'
+    
+     
+},
+txt2:{
+    fontSize: 17,
+    color: '#363C56',
+    fontWeight: 'bold',
+    
      
 },
 btn2: {
-    width: 130,
-    height: 60,
+    width: 110,
+    height: 50,
     padding: 10,
     borderRadius: 40,
     borderWidth: 2.5,
