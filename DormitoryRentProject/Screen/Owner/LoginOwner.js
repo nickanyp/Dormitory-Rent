@@ -32,7 +32,7 @@ const LoginOwner = ({ navigation }) => {
     setPassword("");
   };
 
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log("Sign In!");

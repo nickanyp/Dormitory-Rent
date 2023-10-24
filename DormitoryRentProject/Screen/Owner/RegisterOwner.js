@@ -6,7 +6,9 @@ import {
   TouchableOpacity,
   Button,
   Pressable,
+  SafeAreaView,
 } from "react-native";
+import Modal from "react-native-modal";
 import DormitoryFooter from "../../component/DormitoryFooter";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Dropdown } from "react-native-element-dropdown";
@@ -14,7 +16,6 @@ import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
@@ -27,19 +28,33 @@ const RegisterOwner = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [phone, setPhone] = useState("");
-  const [birth, setBirth] = useState("");
-  const [date, setDate] = useState(new Date());
-  const [showPicker, setShowPicker] = useState(false);
-
-  const gender = [
-    { label: "ชาย", value: "1" },
-    { label: "หญิง", value: "2" },
-  ];
+  const [dor_name, setDor_name] = useState("");
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const firestore = getFirestore(app);
 
+  // Birth
+  const [dateOfBirth, setdateOfBirth] = useState("");
+  const [date, setDate] = useState(new Date());
+  const [isModalVisible, setModalVisible] = useState(false);
+  const onChange = ({ type }, selectedDate) => {
+    if (type == "set") {
+      const currentDate = selectedDate;
+      setDate(currentDate);
+    } else {
+      toggleDatePicker();
+    }
+  };
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  // gender
+  const sex = [
+    { label: "ชาย", value: "ชาย" },
+    { label: "หญิง", value: "หญิง" },
+  ];
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
@@ -49,9 +64,11 @@ const RegisterOwner = ({ navigation }) => {
 
   const clearFormFields = () => {
     setName("");
+    setSex("");
     setEmail("");
     setPassword("");
     setPhone("");
+    setDor_name("");
   };
 
   const handleCreateAccount = async () => {
@@ -61,13 +78,15 @@ const RegisterOwner = ({ navigation }) => {
         email,
         password
       );
-      const userDocRef = collection(firestore, "users");
+      const userDocRef = collection(firestore, "owners");
       await addDoc(userDocRef, {
         uid: userCredential.user.uid,
         name,
+        value,
         email,
         password,
         phone,
+        dor_name
       });
       console.log("Account created");
       const user = userCredential.user;
@@ -80,12 +99,14 @@ const RegisterOwner = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>สร้างบัญชีผู้ใช้</Text>
+    <SafeAreaView style={styles.container}>
+      <Text style={[styles.header, { color: "#363C56" }]}>
+        สร้างบัญชีผู้ใช้
+      </Text>
       <Text></Text>
       <Text></Text>
       <Text></Text>
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: "center"}}>
         <View style={[styles.input, styles.shadowProp]}>
           <Feather
             style={{ paddingRight: 10 }}
@@ -102,16 +123,12 @@ const RegisterOwner = ({ navigation }) => {
         </View>
 
         <View style={{ flexDirection: "row" }}>
-          <Dropdown
-            style={[
-              styles.dropdown,
-              styles.shadowProp,
-              isFocus && { borderColor: "blue" },
-            ]}
+        <Dropdown
+            style={[styles.dropdown, styles.shadowProp, { width: 130 }]}
             placeholderStyle={{ color: "#C7C7CD", fontSize: 16 }}
             selectedTextStyle={styles.selectedTextStyle}
             iconStyle={styles.iconStyle}
-            data={gender}
+            data={sex}
             valueField="value"
             placeholder={!isFocus ? "เพศ" : "..."}
             labelField="label"
@@ -131,20 +148,53 @@ const RegisterOwner = ({ navigation }) => {
               />
             )}
           />
-          <View style={[styles.input, styles.shadowProp, { width: 150 }]}>
+
+          <TouchableOpacity
+            style={[styles.input, styles.shadowProp, { width: 130 }]}
+            onPress={toggleModal}
+          >
             <MaterialCommunityIcons
               style={{ paddingRight: 10 }}
               name="cake-variant-outline"
               size={24}
               color="#363C56"
             />
+
             <TextInput
               style={{ flex: 1, fontSize: 16 }}
               placeholder="วันเกิด"
-              value={birth}
-              onChangeText={(text) => setBirth(text)}
+              value={dateOfBirth}
+              onChangeText={setdateOfBirth}
+              editable={false}
             ></TextInput>
-          </View>
+          </TouchableOpacity>
+
+          <Modal isVisible={isModalVisible}>
+            <View
+              style={{
+                backgroundColor: "white",
+                width: "100%",
+                height: "50%",
+                borderRadius: 40,
+                justifyContent: "center",
+              }}
+              value={dateOfBirth}
+              onChangeText={(text) => setdateOfBirth(text)}
+            >
+              <DateTimePicker
+                mode="date"
+                display="inline"
+                value={date}
+                obChange={onChange}
+                style={{
+                  backgroundColor: "white",
+                  margin: 10,
+                }}
+              ></DateTimePicker>
+
+              <Button title="ยืนยัน" onPress={toggleModal} />
+            </View>
+          </Modal>
         </View>
 
         <View style={[styles.input, styles.shadowProp]}>
@@ -177,7 +227,7 @@ const RegisterOwner = ({ navigation }) => {
           ></TextInput>
           <MaterialCommunityIcons
             style={{ right: 15 }}
-            name={showPassword ? "eye-off" : "eye"}
+            name={showPassword ? "eye" : "eye-off"}
             size={24}
             color="#aaa"
             onPress={toggleShowPassword}
@@ -195,6 +245,16 @@ const RegisterOwner = ({ navigation }) => {
             placeholder="เบอร์โทร"
             value={phone}
             onChangeText={(text) => setPhone(text)}
+          ></TextInput>
+        </View>
+
+        <View style={[styles.input, styles.shadowProp]}>
+          <Fontisto style={{ paddingRight: 10 }} name="hotel-alt" size={20} color="#363C56" />
+          <TextInput
+            style={{ flex: 1, fontSize: 16 }}
+            placeholder="หอพัก"
+            value={dor_name}
+            onChangeText={(text) => setDor_name(text)}
           ></TextInput>
         </View>
       </View>
@@ -215,14 +275,13 @@ const RegisterOwner = ({ navigation }) => {
       </View>
 
       <DormitoryFooter></DormitoryFooter>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     backgroundColor: "white",
   },
   label: {
@@ -268,7 +327,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 20,
     backgroundColor: "#363C56",
-    marginTop: 30,
+    marginTop: 10,
     margin: 10,
   },
   dropdown: {
