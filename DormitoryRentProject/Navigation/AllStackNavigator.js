@@ -131,6 +131,7 @@ const AllStackNavigator = () => {
         component={InformPaymentOwner}
         options={{
           headerTitle: props => <DormitoryHeader {...props}/>,
+          headerBackTitleVisible: false
         }}
       />
       <Stack.Screen
@@ -138,6 +139,7 @@ const AllStackNavigator = () => {
         component={StatusPaymentOwner}
         options={{
           headerTitle: props => <DormitoryHeader {...props}/>,
+          headerBackTitleVisible: false
         }}
       />
     </Stack.Navigator>

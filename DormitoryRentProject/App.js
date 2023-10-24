@@ -10,7 +10,7 @@ export default function App() {
   return (
     // <FirstPage></FirstPage>
     // <MainScreenNavigation></MainScreenNavigation>
-    // <AllNavigation></AllNavigation>
+    <AllNavigation></AllNavigation>
     // <MyRoomPage></MyRoomPage>
     // <LoginRenter></LoginRenter>
     // <CheckPayment></CheckPayment>
@@ -19,6 +19,6 @@ export default function App() {
     // <RenterDashPage></RenterDashPage>
     // <OwnerHome></OwnerHome>
     // <RegisterOwner></RegisterOwner>
-    <PaymentOwner></PaymentOwner>
+    // <PaymentOwner></PaymentOwner>
   );
 }
