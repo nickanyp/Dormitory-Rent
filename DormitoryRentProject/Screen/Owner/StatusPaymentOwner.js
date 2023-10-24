@@ -36,14 +36,14 @@ class StatusPaymentOwner extends Component {
 
         <View style = {{flexDirection: 'row', justifyContent: "center"}}>
             <View>
-                <Text style = {styles.txt}>
+                <Text style = {styles.txt2}>
                     ปริมาณน้ำ : 
                 </Text>
                 <TouchableOpacity style={styles.btn}>
                 </TouchableOpacity>
             </View>
             <View>
-                <Text style = {styles.txt}>
+                <Text style = {styles.txt2}>
                     ค่าน้ำ : 
                 </Text>
                 <TouchableOpacity style={styles.btn}>
@@ -53,14 +53,14 @@ class StatusPaymentOwner extends Component {
 
         <View style = {{flexDirection: 'row', justifyContent: "center"}}>
             <View>
-                <Text style = {styles.txt}>
+                <Text style = {styles.txt2}>
                     ปริมาณไฟ : 
                 </Text>
                 <TouchableOpacity style={styles.btn}>
                 </TouchableOpacity>
             </View>
             <View>
-                <Text style = {styles.txt}>
+                <Text style = {styles.txt2}>
                     ค่าไฟ : 
                 </Text>
                 <TouchableOpacity style={styles.btn}>
@@ -106,7 +106,15 @@ btn: {
 txt:{
     fontSize: 20,
     color: '#363C56',
-    fontWeight: '400'
+    fontWeight: 'bold'
+    
+     
+},
+txt2:{
+    fontSize: 17,
+    color: '#363C56',
+    fontWeight: 'bold',
+    
      
 },
 btn2: {
