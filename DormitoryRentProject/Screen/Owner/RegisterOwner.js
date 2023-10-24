@@ -68,6 +68,7 @@ const RegisterOwner = ({ navigation }) => {
   const clearFormFields = () => {
     setName("");
     setSex("");
+    dateOfBirth(""),
     setEmail("");
     setPassword("");
     setPhone("");
@@ -86,6 +87,7 @@ const RegisterOwner = ({ navigation }) => {
         uid: userCredential.user.uid,
         name,
         value,
+        dateOfBirth,
         email,
         password,
         phone,
@@ -162,13 +164,11 @@ const RegisterOwner = ({ navigation }) => {
               size={24}
               color="#363C56"
             />
-
             <TextInput
               style={{ flex: 1, fontSize: 16 }}
               placeholder="วันเกิด"
               value={dateOfBirth}
               // onChangeText={setdateOfBirth}
-              editable={false}
             ></TextInput>
           </TouchableOpacity>
 

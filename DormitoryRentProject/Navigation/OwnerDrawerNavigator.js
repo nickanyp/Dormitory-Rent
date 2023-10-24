@@ -1,6 +1,6 @@
 import React from 'react';
 import { createDrawerNavigator } from "@react-navigation/drawer";
-
+import 'react-native-gesture-handler';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 import OwnerHome from "../Screen/Owner/OwnerHome";
