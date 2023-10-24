@@ -5,6 +5,7 @@ import RenterDashPage from "./Screen/Renter/DashboardPage";
 import OwnerHome from "./Screen/Owner/OwnerHome";
 import RegisterOwner from "./Screen/Owner/RegisterOwner";
 import PaymentOwner from "./Screen/Owner/PaymentOwner";
+import InformPaymentOwner from "./Screen/Owner/InformPaymentOwner";
 
 export default function App() {
   return (
@@ -20,5 +21,6 @@ export default function App() {
     // <OwnerHome></OwnerHome>
     // <RegisterOwner></RegisterOwner>
     // <PaymentOwner></PaymentOwner>
+    // <InformPaymentOwner></InformPaymentOwner>
   );
 }
