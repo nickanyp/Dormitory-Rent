@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   renderLabel,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
 import { useState } from "react";
 import { Dropdown } from "react-native-element-dropdown";
@@ -43,7 +43,14 @@ const Payment2Owner = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ flexDirection: "row", marginTop: '10%' }}>
+      <View
+        style={{
+          flexDirection: "row",
+          marginTop: "10%",
+          backgroundColor: "blue",
+          marginHorizontal: "10%",
+        }}
+      >
         <Text
           style={{
             fontSize: 30,
@@ -55,80 +62,32 @@ const Payment2Owner = () => {
           แจ้งชำระค่าเช่า
         </Text>
 
-        <View style={styles.grid}>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
+        <Dropdown
+          style={styles.dropdown}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          iconStyle={styles.iconStyle}
+          data={data}
+          search
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          placeholder="ดด/ปป"
+          value={value}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+          onChange={(item) => {
+            setValue(item.value);
+            setIsFocus(false);
+          }}
+        />
       </View>
-
 
       <View style={styles.grid}>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={[styles.btn, styles.shadowProp]}>
           <Text style={styles.txt}>A101</Text>
         </TouchableOpacity>
       </View>
-
-     
-
-      <View style={styles.grid}>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
-      </View>
-      
-        {/* <View style={styles.condrop}>
-          {renderLabel()}
-          <Dropdown
-            style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
-            placeholderStyle={styles.placeholderStyle}
-            selectedTextStyle={styles.selectedTextStyle}
-            // inputSearchStyle={styles.inputSearchStyle}
-            iconStyle={styles.iconStyle}
-            data={data}
-            search
-            maxHeight={300}
-            labelField="label"
-            valueField="value"
-            placeholder="เดือน"
-            searchPlaceholder="ค้นหา..."
-            value={value}
-            onFocus={() => setIsFocus(true)}
-            onBlur={() => setIsFocus(false)}
-            onChange={(item) => {
-              setValue(item.value);
-              setIsFocus(false);
-            }}
-            renderLeftIcon={() => (
-              <AntDesign
-                style={styles.icon}
-                color={isFocus ? "blue" : "black"}
-                name="Safety"
-                size={20}
-              />
-            )}
-          />
-        </View> */}
-      </View>
-
-      
     </SafeAreaView>
   );
 };
@@ -136,11 +95,13 @@ const Payment2Owner = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   grid: {
     flexDirection: "row",
     gap: 5,
+    backgroundColor: "red",
+    marginHorizontal: "10%",
   },
   btn: {
     width: 75,
@@ -157,6 +118,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 3, height: 4 },
     shadowOpacity: 0.5,
     shadowRadius: 3,
+    backgroundColor: "white",
   },
   txt: {
     fontWeight: "bold",
@@ -173,14 +135,11 @@ const styles = StyleSheet.create({
   dropdown: {
     height: 40,
     borderColor: "gray",
-    borderWidth: 0.5,
-    borderRadius: 8,
+    borderRadius: 20,
     paddingHorizontal: 8,
     width: 120,
+    backgroundColor: "#D9D9D9",
   },
-  //   icon: {
-  //     marginRight: 5,
-  //   },
   label: {
     position: "absolute",
     backgroundColor: "white",
@@ -192,6 +151,8 @@ const styles = StyleSheet.create({
   },
   placeholderStyle: {
     fontSize: 16,
+    color: "#363C56",
+    fontWeight: "bold",
   },
   selectedTextStyle: {
     fontSize: 16,
@@ -200,9 +161,11 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
   },
-  inputSearchStyle: {
-    height: 40,
-    fontSize: 16,
+  shadowProp: {
+    shadowColor: "#9B9B9B",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
   },
 });
 

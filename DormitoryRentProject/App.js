@@ -11,7 +11,7 @@ export default function App() {
   return (
     // <FirstPage></FirstPage>
     // <MainScreenNavigation></MainScreenNavigation>
-    <AllNavigation></AllNavigation>
+    // <AllNavigation></AllNavigation>
     // <MyRoomPage></MyRoomPage>
     // <LoginRenter></LoginRenter>
     // <CheckPayment></CheckPayment>
@@ -21,6 +21,6 @@ export default function App() {
     // <OwnerHome></OwnerHome>
     // <RegisterOwner></RegisterOwner>
     // <PaymentOwner></PaymentOwner>
-    // <InformPaymentOwner></InformPaymentOwner>
+    <InformPaymentOwner></InformPaymentOwner>
   );
 }
