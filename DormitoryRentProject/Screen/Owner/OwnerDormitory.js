@@ -121,7 +121,6 @@ const OwnerDormitory = () => {
             </Pressable>
           </ScrollView>
         </View>
-
       
         <View style={styles.center}>
           <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56", marginTop:20, marginBottom:5}}>รวมยอดชำระ 75,000 บาท</Text>
@@ -257,10 +256,9 @@ const styles = StyleSheet.create({
   block2:{
     flex:6,
     paddingLeft:10,
-    // backgroundColor:"#ff0"
   },
   block3:{
-    flex:3
+    flex:3,
   },
   circle:{
     width:100,

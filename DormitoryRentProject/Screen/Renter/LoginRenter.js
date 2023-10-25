@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import DormitoryFooter from "../../component/DormitoryFooter";
 import { Octicons } from "@expo/vector-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -22,8 +22,44 @@ const LoginRenter = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [isFormValid, setIsFormValid] = useState(false);
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+
+  useEffect(() => {
+    validateForm();
+  }, [dorpass, email, password]);
+
+  const validateForm = () => {
+    let errors = {};
+    if (!dorpass) {
+      errors.dorpass = "กรุณากรอกรหัสหอพัก";
+    }
+    if (!numroom) {
+      errors.numroom = "กรุณากรอกเลขห้อง";
+    }
+    if (!email) {
+      errors.email = "กรุณากรอกอีเมล";
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      errors.email = "อีเมลไม่ถูกต้อง";
+    }
+    if (!password) {
+      errors.password = "กรุณากรอกรหัสผ่าน";
+    } else if (password.length < 6) {
+      errors.password = "รหัสผ่านควรมีอย่างน้อย 6 ตัวอักษรขึ้นไป";
+    }
+    setErrors(errors);
+    setIsFormValid(Object.keys(errors).length === 0);
+  };
+
+  const handleSubmit = () => {
+    if (isFormValid) {
+      console.log("Form submitted successfully!");
+    } else {
+      console.log("Form has errors. Please correct them.");
+    }
+  };
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -48,21 +84,17 @@ const LoginRenter = ({ navigation }) => {
       .catch((error) => {
         console.log(error);
       });
-    if (dorpass === "" && numroom === "" && password === "") {
+    if (dorpass === "" && numroom === "" && password === "" && email === "") {
       alert("กรุณากรอกข้อมูลให้ถูกต้อง");
-    } else if (dorpass == "") {
-      alert("กรุณากรอกรหัสหอพัก");
-    } else if (numroom == "") {
-      alert("กรุณากรอกเลขห้อง");
-    } else if (password == "") {
-      alert("กรุณารหัสผ่าน");
-    }
+    } 
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={{ fontSize: 40, fontWeight: "bold", color: "#363C56" }}>เข้าสู่ระบบ</Text>
+        <Text style={{ fontSize: 40, fontWeight: "bold", color: "#363C56" }}>
+          เข้าสู่ระบบ
+        </Text>
         <Text
           style={{
             fontSize: 14,
@@ -106,7 +138,7 @@ const LoginRenter = ({ navigation }) => {
           ></TextInput>
         </View>
         <View style={[styles.input, styles.shadowProp]}>
-        <AntDesign
+          <AntDesign
             style={{ paddingRight: 10 }}
             name="mail"
             size={20}
@@ -144,10 +176,7 @@ const LoginRenter = ({ navigation }) => {
       </View>
 
       <View style={{ alignItems: "center" }}>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={handleSignIn}
-        >
+        <TouchableOpacity style={styles.btn} onPress={handleSignIn}>
           <Text
             style={{
               textAlign: "center",
