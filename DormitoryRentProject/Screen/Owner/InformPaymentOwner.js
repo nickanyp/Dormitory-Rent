@@ -7,29 +7,59 @@ import {
   renderLabel,
   SafeAreaView,
 } from "react-native";
-import { useState } from "react";
+import { useEffect,  useState } from "react";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import DetailPaymentOwner from "./DetailPaymentOwner";
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 
 const data = [
-  { label: "มกราคม", value: "1" },
-  { label: "กุมภาพันธ์", value: "2" },
-  { label: "มีนาคม", value: "3" },
-  { label: "เมษายน", value: "4" },
-  { label: "พฤษภาคม", value: "5" },
-  { label: "มิถุนายน", value: "6" },
-  { label: "กรกฎาคม", value: "7" },
-  { label: "สิงหาคม", value: "8" },
-  { label: "กันยายน", value: "9" },
-  { label: "ตุลาคม", value: "10" },
-  { label: "พฤศจิกายน", value: "11" },
-  { label: "ธันวาคม", value: "12" },
+  { label: "มกราคม 66", value: "1" },
+  { label: "กุมภาพันธ์ 66", value: "2" },
+  { label: "มีนาคม 66", value: "3" },
+  { label: "เมษายน 66", value: "4" },
+  { label: "พฤษภาคม 66", value: "5" },
+  { label: "มิถุนายน 66", value: "6" },
+  { label: "กรกฎาคม 66", value: "7" },
+  { label: "สิงหาคม 66", value: "8" },
+  { label: "กันยายน 66", value: "9" },
+  { label: "ตุลาคม 66", value: "10" },
+  { label: "พฤศจิกายน 66", value: "11" },
+  { label: "ธันวาคม 66", value: "12" },
 ];
 
-const InformPaymentOwner = ({navigation}) => {
+const InformPaymentOwner = ({navigation, route}) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
+
+  const code = route.params.code
+  const [roomArr, setRoom] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const db = getFirestore();
+      const roomQuery = query(collection(db, 'room'), where('code', '==', code));
+
+      try {
+        const querySnapshot = await getDocs(roomQuery);
+
+        if (querySnapshot.empty) {
+          console.log('No rooms found');
+        } else {
+          const rooms = [];
+          querySnapshot.forEach((doc) => {
+            rooms.push({ id: doc.id, data: doc.data() });
+          });
+          setRoom(rooms);
+          console.log(roomArr)
+        }
+      } catch (error) {
+        console.error('Error fetching rooms:', error);
+      }
+    };
+
+    fetchData();
+  }, [code]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -80,12 +110,17 @@ const InformPaymentOwner = ({navigation}) => {
       </View>
 
       <View style={styles.grid}>
-        <TouchableOpacity
-          style={[styles.btn, styles.shadowProp]}
-          onPress={() => {navigation.navigate("DetailPayment")}}
-        >
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
+        {roomArr.map((item) => {
+          return(
+            <TouchableOpacity
+              style={[styles.btn, styles.shadowProp]}
+              onPress={() => {navigation.navigate("DetailPayment")}}
+            >
+              <Text style={styles.txt}>{item.data.room}</Text>
+            </TouchableOpacity>
+          )
+        })}
+        
       </View>
 
       
@@ -124,7 +159,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   dropdown: {
-    width: 120,
+    width: 140,
     height: 40,
     borderColor: "gray",
     borderRadius: 16,

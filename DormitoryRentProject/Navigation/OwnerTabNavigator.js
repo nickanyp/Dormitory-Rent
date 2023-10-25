@@ -45,6 +45,7 @@ const OwnerTabNavigator = ({route}) => {
       <Tab.Screen
         name="PAYMENT"
         component={PaymentOwner}
+        initialParams={{data: item}}
         options={{
           tabBarIcon: ({ color, size }) => {
             return <MaterialCommunityIcons name="bank" size={size} color={color} />

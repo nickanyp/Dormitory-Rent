@@ -8,48 +8,16 @@ import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { firebaseConfig } from '../../database/FirebaseConfig';
 
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const PaymentOwner = ({route, navigation}) => {
+  const item = route.params.data
 
-class PaymentOwner extends Component {
-  constructor() {
-    super()
-    this.firestoreRef = firebase.firestore().collection("owners");
-    this.state = {
-      userArr: [],
-    };
-  }
-
-  componentDidMount() {
-    this.unsubscribe = this.firestoreRef.onSnapshot(this.getCollection);
-  }
-
-  getCollection = (querySnapshot) => {
-    const all_data = [];
-    querySnapshot.forEach((res) => {
-      const {
-        address,
-      } = res.data();
-      all_data.push({
-        key: res.id,
-        address,
-      });
-    });
-    this.setState({
-      userArr: all_data,
-      isLoading: false,
-    });
-  };
-
-  render() {
     return (
       <SafeAreaView style={styles.container}>
-        {this.state.userArr.map((item, i)=> {
-          return(
-            <View style={styles.block1}>
-            <View style={styles.block2} key={i}>
-              <Text style={{ fontSize: 40, fontWeight: "bold", color: "#96B3FF" }}>กัลยรัตน์ 1</Text>
-              <Text style={{ color: "#96B3FF" }}>{item.address}</Text>
+          <View style={styles.block1}>
+            <View style={styles.block2} >
+              <Text style={{ fontSize: 40, fontWeight: "bold", color: "#96B3FF" }}>{item.data.name}</Text>
+              <Text style={{ color: "#96B3FF" }}>{item.data.address}</Text>
+              <Text style={{color:"#9e9e9e", marginTop:5}}>code : {item.data.code}</Text>
             </View>
             <View style={styles.block3}>
               <View style={styles.circle}>
@@ -57,14 +25,12 @@ class PaymentOwner extends Component {
               </View>
             </View>
           </View>
-          )
-        })}
 
 
       <View style={{ alignItems: "center", marginTop: '10%'}}>
         <TouchableOpacity
           style={[styles.btn, styles.shadowProp, { borderColor: "#9B9B9B" }]}
-          onPress={() => {navigation.navigate("InformPayment")}}
+          onPress={() => {navigation.navigate("InformPayment", {code: item.data.code})}}
         >
           <Text style={[styles.text, {color: "#363C56", fontSize: 16}]}>แจ้งชำระค่าเช่า</Text>
         </TouchableOpacity>
@@ -86,7 +52,6 @@ class PaymentOwner extends Component {
     </SafeAreaView>
     )
   }
-}
 
 const styles = StyleSheet.create({
   container: {

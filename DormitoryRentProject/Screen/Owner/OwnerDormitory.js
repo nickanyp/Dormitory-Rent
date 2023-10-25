@@ -48,7 +48,7 @@ const OwnerDormitory = ({navigation, route}) => {
             <View style={styles.block2}>
               <Text style={{fontSize:40, fontWeight:"bold", color:"#96B3FF"}}>{item.data.name}</Text>
               <Text style={{color:"#96B3FF"}}>{item.data.address}</Text>
-              <Text style={{color:"#9e9e9e"}}>code : {item.data.code}</Text>
+              <Text style={{color:"#9e9e9e", marginTop:5}}>code : {item.data.code}</Text>
             </View>
             <View style={styles.block3}>
               <View style={styles.circle}>
@@ -241,9 +241,10 @@ const OwnerDormitory = ({navigation, route}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
-    alignItems: 'center',
-    // backgroundColor:"#f0f"
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor:"#fff"
   },
   center:{
     justifyContent:"center",
