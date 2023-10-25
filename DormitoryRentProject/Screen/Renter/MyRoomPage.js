@@ -29,11 +29,11 @@ const MyRoomPage = ({ route, navigation }) => {
         collection(db, "renters"),
         where("uid", "==", uid)
       );
-      console.log(renterQuery)
+      console.log(renterQuery);
 
       try {
         const querySnapshot = await getDocs(renterQuery);
-        console.log(querySnapshot)
+        console.log(querySnapshot);
 
         if (querySnapshot.empty) {
           console.log("No dormitories found");
@@ -41,7 +41,8 @@ const MyRoomPage = ({ route, navigation }) => {
           const renters_data = [];
           querySnapshot.forEach((doc) => {
             renters_data.push({
-              id: doc.id, data: doc.data()
+              id: doc.id,
+              data: doc.data(),
             });
           });
           setRenter(renters_data);
@@ -57,126 +58,115 @@ const MyRoomPage = ({ route, navigation }) => {
 
   console.log(renterArr);
 
-  // const uid = route.params.uid
-  // const [rentersArr, setRenters] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const db = getFirestore();
-  //     const dormitoryQuery = query(collection(db, 'renters'));
-
-  //     try {
-  //       const querySnapshot = await getDocs(dormitoryQuery);
-
-  //       if (querySnapshot.empty) {
-  //         console.log('No dormitories found');
-  //       } else {
-  //         const dormitories = [];
-  //         querySnapshot.forEach((doc) => {
-  //           dormitories.push({ id: doc.id, data: doc.data() });
-  //         });
-  //         setDormitory(dormitories);
-  //         console.log(dormitoryArr)
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching dormitories:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [uid]);
-
   return (
     <SafeAreaView style={styles.container}>
-      <View style={[styles.box, styles.shadowProp]}>
-        <Text style={styles.text}>
-          ชื่อผู้เช่า 1 : <Text></Text>
-        </Text>
-        <Text style={styles.text}>
-          ชื่อผู้เช่า 2 : <Text></Text>
-        </Text>
-        <Text style={styles.text}>
-          ชื่อผู้เช่า 3 : <Text></Text>
-        </Text>
-        <Text style={styles.text}>
-          ชื่อผู้เช่า 4 : <Text></Text>
-        </Text>
-        <Text></Text>
-        <Text style={styles.text}>
-          หอพัก : <Text></Text>
-        </Text>
-        <Text style={styles.text}>
-          ประเภทห้อง : <Text></Text>
-        </Text>
-        <Text style={styles.text}>
-          เลขห้อง : <Text></Text>
-        </Text>
-      </View>
+      {renterArr.map((item) => {
+        return (
+          <View style={[styles.box, styles.shadowProp]}>
+            <Text style={styles.text}>
+              ชื่อผู้เช่า 1 : <Text>{item.data.name1}</Text>
+            </Text>
+            <Text style={styles.text}>
+              ชื่อผู้เช่า 2 : <Text>{item.data.name2}</Text>
+            </Text>
+            <Text style={styles.text}>
+              ชื่อผู้เช่า 3 : <Text>{item.data.name3}</Text>
+            </Text>
+            <Text style={styles.text}>
+              ชื่อผู้เช่า 4 : <Text>{item.data.name4}</Text>
+            </Text>
+            <Text></Text>
+            <Text style={styles.text}>
+              หอพัก : <Text>{item.data.dor_name}</Text>
+            </Text>
+            <Text style={styles.text}>
+              ประเภทห้อง : <Text>{item.data.dor_type}</Text>
+            </Text>
+            <Text style={styles.text}>
+              เลขห้อง : <Text>{item.data.num_room}</Text>
+            </Text>
+          </View>
+        );
+      })}
 
-      <View style={[styles.box, styles.shadowProp]}>
-        <Text
-          style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}
-        ></Text>
-        <Text></Text>
-        <Text style={styles.text}>
-          ค่าเช่าหอพัก : <Text> </Text>บาท
-        </Text>
-        <Text style={styles.text}>
-          ค่าน้ำ : <Text> </Text>บาท <Text> </Text>
-        </Text>
-        <Text style={styles.text}>
-          ค่าไฟ : <Text> </Text>บาท <Text> </Text>
-        </Text>
-        <Text></Text>
-        <Text style={[styles.text, { color: "#FF9699" }]}>
-          รวมทั้งสิ้น : <Text> </Text>บาท
-        </Text>
-      </View>
+      {renterArr.map((item) => {
+        return (
+          <View style={[styles.box, styles.shadowProp]}>
+            <Text
+              style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}
+            ></Text>
+            <Text></Text>
+            <Text style={styles.text}>
+              ค่าเช่าหอพัก : <Text> </Text>บาท
+            </Text>
+            <Text style={styles.text}>
+              ค่าน้ำ : <Text> </Text>บาท <Text> </Text>
+            </Text>
+            <Text style={styles.text}>
+              ค่าไฟ : <Text> </Text>บาท <Text> </Text>
+            </Text>
+            <Text></Text>
+            <Text style={[styles.text, { color: "#FF9699" }]}>
+              รวมทั้งสิ้น : <Text> </Text>บาท
+            </Text>
+          </View>
+        );
+      })}
 
-      <View
-        style={{ alignItems: "center", marginTop: 15, flexDirection: "row" }}
-      >
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => {
-            navigation.navigate("PaymentRenter");
-          }}
-        >
-          <Text
-            style={[
-              styles.textBtn,
-              {
-                color: "white",
-                textAlign: "center",
-                fontWeight: "bold",
-                fontSize: 15,
-              },
-            ]}
-          >
-            ชำระค่าเช่า
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => {
-            navigation.navigate("HistoryRneter");
-          }}
-        >
-          <Text
-            style={[
-              styles.textBtn,
-              {
-                color: "white",
-                textAlign: "center",
-                fontWeight: "bold",
-                fontSize: 15,
-              },
-            ]}
-          >
-            ประวัติค่าเช่าหอ
-          </Text>
-        </TouchableOpacity>
-      </View>
+      {renterArr.map((item) => {
+        return (
+          <View>
+            <View
+              style={{
+                alignItems: "center",
+                marginTop: 15,
+                flexDirection: "row",
+              }}
+            >
+              <TouchableOpacity
+                style={styles.btn}
+                onPress={() => {
+                  navigation.navigate("PaymentRenter", { data: item });
+                }}
+              >
+                <Text
+                  style={[
+                    styles.textBtn,
+                    {
+                      color: "white",
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      fontSize: 15,
+                    },
+                  ]}
+                >
+                  ชำระค่าเช่า
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.btn}
+                onPress={() => {
+                  navigation.navigate("HistoryRenter", { data: item });
+                }}
+              >
+                <Text
+                  style={[
+                    styles.textBtn,
+                    {
+                      color: "white",
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      fontSize: 15,
+                    },
+                  ]}
+                >
+                  ประวัติค่าเช่าหอ
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        );
+      })}
 
       <View style={{ top: 35 }}>
         <TouchableOpacity

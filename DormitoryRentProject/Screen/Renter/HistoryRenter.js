@@ -8,7 +8,10 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const HistoryRenter = () => {
+const HistoryRenter = ({ route, navigation }) => {
+  const item = route.params.data
+  console.log(item)
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={[styles.box, styles.shadowProp]}>

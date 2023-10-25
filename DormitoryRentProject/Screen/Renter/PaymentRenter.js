@@ -1,44 +1,56 @@
 import { Component } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const PaymentRenter = ({ navigation }) => {
+const PaymentRenter = ({ route, navigation }) => {
+  const item = route.params.data
+  console.log(item)
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ alignItems: "center" }}>
-        <View style={[styles.box, styles.shadowProp]}>
-          <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
-            กันยายน
-          </Text>
-          <Text></Text>
-          <Text style={styles.text}>ค่าเช่าหอพัก : บาท</Text>
-          <Text style={styles.text}>ค่าน้ำ : บาท</Text>
-          <Text style={styles.text}>ค่าไฟ : บาท</Text>
-          <Text></Text>
-          <Text style={[styles.text, { color: "#FF9699" }]}>
-            รวมทั้งสิ้น : บาท
-          </Text>
-        </View>
-      </View>
-      <View style={{ alignItems: "center", margin: 10 }}>
-        <Image
-          style={styles.img}
-          source={require("../../assets/qr-code.png")}
-        ></Image>
-        <Text style={[styles.text, { textAlign: "center", marginTop: '5%' }]}>
-          แจ้งชำระค่าเช่า
-        </Text>
-        <TouchableOpacity style={[styles.btn1, styles.shadowProp]}>
-          <Text style={[styles.text, { textAlign: "center" }]}>
-            อัปโหลดไฟล์รูปภาพ
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn2}>
-          <Text style={[styles.text, { textAlign: "center", color: "white" }]}>
-            ยืนยัน
-          </Text>
-        </TouchableOpacity>
-      </View>
+          <View>
+            <View style={{ alignItems: "center" }}>
+              <View style={[styles.box, styles.shadowProp]}>
+                <Text
+                  style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}
+                >
+                  กันยายน
+                </Text>
+                <Text></Text>
+                <Text style={styles.text}>ค่าเช่าหอพัก : บาท</Text>
+                <Text style={styles.text}>ค่าน้ำ : บาท</Text>
+                <Text style={styles.text}>ค่าไฟ : บาท</Text>
+                <Text></Text>
+                <Text style={[styles.text, { color: "#FF9699" }]}>
+                  รวมทั้งสิ้น : บาท
+                </Text>
+              </View>
+            </View>
+            <View style={{ alignItems: "center", margin: 10 }}>
+              <Image
+                style={styles.img}
+                source={require("../../assets/qr-code.png")}
+              ></Image>
+              <Text
+                style={[styles.text, { textAlign: "center", marginTop: "5%" }]}
+              >
+                แจ้งชำระค่าเช่า
+              </Text>
+              <TouchableOpacity style={[styles.btn1, styles.shadowProp]}>
+                <Text style={[styles.text, { textAlign: "center" }]}>
+                  อัปโหลดไฟล์รูปภาพ
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.btn2}>
+                <Text
+                  style={[styles.text, { textAlign: "center", color: "white" }]}
+                >
+                  ยืนยัน
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
     </SafeAreaView>
   );
 };
@@ -57,12 +69,12 @@ const styles = StyleSheet.create({
     borderColor: "#9B9B9B",
     padding: 15,
     margin: 10,
-    backgroundColor: 'white'
+    backgroundColor: "white",
   },
   text: {
     fontWeight: "bold",
     fontSize: 15,
-    color: '#363C56'
+    color: "#363C56",
   },
   btn1: {
     width: 190,
@@ -81,7 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF9699",
     justifyContent: "center",
     margin: 8,
-    marginTop: '10%'
+    marginTop: "10%",
   },
   img: {
     width: 200,
