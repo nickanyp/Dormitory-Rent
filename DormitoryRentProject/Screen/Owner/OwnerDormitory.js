@@ -38,7 +38,6 @@ const stackData = [
 
 const OwnerDormitory = ({navigation, route}) => {
   const item = route.params.data
-  console.log(2)
   console.log(item)
 
   return (
@@ -47,8 +46,9 @@ const OwnerDormitory = ({navigation, route}) => {
         <View style={{justifyContent:"center", alignItems:"center", width:"100%", marginTop:"14%",marginBottom:10}}>
           <View style={styles.block1}>
             <View style={styles.block2}>
-              <Text style={{fontSize:40, fontWeight:"bold", color:"#96B3FF"}}>กัลยรัตน์ 1</Text>
-              <Text style={{color:"#96B3FF"}}>RNP 655/2 ซ.ฉลองกรุง 1 แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพมหานคร</Text>
+              <Text style={{fontSize:40, fontWeight:"bold", color:"#96B3FF"}}>{item.data.name}</Text>
+              <Text style={{color:"#96B3FF"}}>{item.data.address}</Text>
+              <Text style={{color:"#9e9e9e"}}>code : {item.data.code}</Text>
             </View>
             <View style={styles.block3}>
               <View style={styles.circle}>
@@ -72,9 +72,9 @@ const OwnerDormitory = ({navigation, route}) => {
                 <Text style={{color:'#363C56', fontWeight:"bold"}}>ห้องเดี่ยว</Text>
               </View>
               <View style={{marginLeft:20}}>
-                <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>1/{item.data.emp_suite+item.data.suite}</Text>
-                <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>5/25</Text>
-                <Text style={{color:'#363C56', fontWeight:"bold"}}>1/6</Text>
+                <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>{item.data.emp_suite}/{parseInt(item.data.suite)+parseInt(item.data.emp_suite)}</Text>
+                <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>{item.data.emp_genair}/{parseInt(item.data.genair)+parseInt(item.data.emp_genair)}</Text>
+                <Text style={{color:'#363C56', fontWeight:"bold"}}>{item.data.emp_oneair}/{parseInt(item.data.oneair)+parseInt(item.data.emp_oneair)}</Text>
               </View>
               <View style={{marginLeft:10}}>
                 <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>ห้อง</Text>
@@ -95,8 +95,8 @@ const OwnerDormitory = ({navigation, route}) => {
                 <Text style={{color:'#363C56', fontWeight:"bold"}}>ห้องเดี่ยว</Text>
               </View>
               <View style={{marginLeft:20, justifyContent:"center"}}>
-                <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>1/2</Text>
-                <Text style={{color:'#363C56', fontWeight:"bold"}}>5/25</Text>
+                <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>{item.data.emp_genfan}/{parseInt(item.data.genfan)+parseInt(item.data.emp_genfan)}</Text>
+                <Text style={{color:'#363C56', fontWeight:"bold"}}>{item.data.emp_onefan}/{parseInt(item.data.onefan)+parseInt(item.data.emp_onefan)}</Text>
               </View>
               <View style={{marginLeft:10, justifyContent:"center"}}>
                 <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>ห้อง</Text>
