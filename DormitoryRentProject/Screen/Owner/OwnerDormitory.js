@@ -36,7 +36,7 @@ const stackData = [
   }
 ];
 
-const OwnerDormitory = () => {
+const OwnerDormitory = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={{width:"100%"}}>
@@ -155,7 +155,7 @@ const OwnerDormitory = () => {
           </View>
 
           <View style={[styles.block4, {marginTop:10}]}>
-            <Pressable style={styles.room}>
+            <Pressable style={styles.room} onPressIn={() => {navigation.navigate("DetailRoomSuite")}}>
               <Text style={{fontWeight:"bold", color:"#363C56"}}>ห้องสูท</Text>
               <Image style={styles.img} source={require('../../assets/air-conditioner.png')}/>
               <View style={[styles.block4, {marginTop:0}]}>
@@ -165,7 +165,7 @@ const OwnerDormitory = () => {
                 <Text style={{marginLeft:5, color:"#363C56"}}>1</Text>
               </View>
             </Pressable>
-            <Pressable style={styles.room}>
+            <Pressable style={styles.room} onPressIn={() => {navigation.navigate("DetailRoomGenAir")}}>
               <Text style={{fontWeight:"bold", color:"#363C56"}}>ห้องธรรมดา</Text>
               <Image style={styles.img} source={require('../../assets/air-conditioner.png')}/>
               <View style={[styles.block4, {marginTop:0}]}>
@@ -175,7 +175,7 @@ const OwnerDormitory = () => {
                 <Text style={{marginLeft:5, color:"#363C56"}}>1</Text>
               </View>
             </Pressable>
-            <Pressable style={styles.room}>
+            <Pressable style={styles.room} onPressIn={() => {navigation.navigate("DetailRoomGenFan")}}>
               <Text style={{fontWeight:"bold", color:"#363C56"}}>ห้องธรรมดา</Text>
               <Image style={[styles.img, {width:35, height:35, marginTop:7.5, marginBottom:7.5}]} source={require('../../assets/fan.png')}/>
               <View style={[styles.block4, {marginTop:0}]}>
@@ -187,7 +187,7 @@ const OwnerDormitory = () => {
             </Pressable>
           </View>
           <View style={[styles.block4, {marginTop:0}]}>
-            <Pressable style={styles.room}>
+            <Pressable style={styles.room} onPressIn={() => {navigation.navigate("DetailRoomOneAir")}}>
               <Text style={{fontWeight:"bold", color:"#363C56"}}>ห้องเดี่ยว</Text>
               <Image style={styles.img} source={require('../../assets/air-conditioner.png')}/>
               <View style={[styles.block4, {marginTop:0}]}>
@@ -197,7 +197,7 @@ const OwnerDormitory = () => {
                 <Text style={{marginLeft:5, color:"#363C56"}}>1</Text>
               </View>
             </Pressable>
-            <Pressable style={styles.room}>
+            <Pressable style={styles.room} onPressIn={() => {navigation.navigate("DetailRoomOneFan")}}>
               <Text style={{fontWeight:"bold", color:"#363C56"}}>ห้องเดี่ยว</Text>
               <Image style={[styles.img, {width:35, height:35, marginTop:7.5, marginBottom:7.5}]} source={require('../../assets/fan.png')}/>
               <View style={[styles.block4, {marginTop:0}]}>
@@ -367,7 +367,8 @@ const styles = StyleSheet.create({
     borderWidth:1.5,
     margin:8,
     justifyContent:"center",
-    alignItems:"center"
+    alignItems:"center",
+    backgroundColor:"white"
   }
 });
 
