@@ -14,7 +14,8 @@ import DashboardPage from "../Screen/Renter/DashboardPage";
 
 const Tab = createBottomTabNavigator();
 
-const OwnerTabNavigator = () => {
+const OwnerTabNavigator = ({route}) => {
+  const item = route.params.data
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -27,6 +28,7 @@ const OwnerTabNavigator = () => {
       <Tab.Screen
         name="DORMITORY"
         component={OwnerDormitory}
+        initialParams={{data: item}}
         options={{
           tabBarIcon: ({ color, size }) => {
             return <AntDesign name="heart" size={size} color={color} />
