@@ -157,7 +157,6 @@ const LoginOwner = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
-
       <DormitoryFooter></DormitoryFooter>
     </View>
   );
