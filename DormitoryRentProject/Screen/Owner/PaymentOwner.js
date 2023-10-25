@@ -1,58 +1,65 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList} from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Component } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 // import { BarChart } from "react-native-gifted-charts";
 
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { firebaseConfig } from '../../database/FirebaseConfig';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCHFf_FcEP9VHYQhtJ6z9nq_Y74d8q4W7s",
-  authDomain: "dormitoryrent-e4b12.firebaseapp.com",
-  projectId: "dormitoryrent-e4b12",
-  storageBucket: "dormitoryrent-e4b12.appspot.com",
-  messagingSenderId: "1009384549650",
-  appId: "1:1009384549650:web:f709d88df75e105ff617cb",
-  measurementId: "G-GCL5NCG1BB"
-};
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const PaymentOwner = ({navigation}) => {
-  const [owners, setOwners] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const ownersCollection = collection(db, 'owners');
-        const querySnapshot = await getDocs(ownersCollection);
-        const ownerData = [];
-        querySnapshot.forEach((doc) => {
-          ownerData.push(doc.data());
-        });
-        setOwners(ownerData); // Use setOwners to update the state
-      } catch (error) {
-        console.error("Error getting documents: ", error);
-      }
+class PaymentOwner extends Component {
+  constructor() {
+    super()
+    this.firestoreRef = firebase.firestore().collection("owners");
+    this.state = {
+      userArr: [],
     };
+  }
 
-    fetchData();
-  }, []);
+  componentDidMount() {
+    this.unsubscribe = this.firestoreRef.onSnapshot(this.getCollection);
+  }
 
-  return (
+  getCollection = (querySnapshot) => {
+    const all_data = [];
+    querySnapshot.forEach((res) => {
+      const {
+        address,
+      } = res.data();
+      all_data.push({
+        key: res.id,
+        address,
+      });
+    });
+    this.setState({
+      userArr: all_data,
+      isLoading: false,
+    });
+  };
+
+  render() {
+    return (
       <SafeAreaView style={styles.container}>
-      <View style={styles.block1}>
-        <View style={styles.block2}>
-          <Text style={{ fontSize: 40, fontWeight: "bold", color: "#96B3FF" }}>กัลยรัตน์ 1</Text>
-          <Text style={{ color: "#96B3FF" }}>{owners[0] ? owners[0].address : ''}</Text>
-        </View>
-        <View style={styles.block3}>
-          <View style={styles.circle}>
-            <Image style={styles.img} source={require('../../assets/dormitory.png')} />
+        {this.state.userArr.map((item, i)=> {
+          return(
+            <View style={styles.block1}>
+            <View style={styles.block2} key={i}>
+              <Text style={{ fontSize: 40, fontWeight: "bold", color: "#96B3FF" }}>กัลยรัตน์ 1</Text>
+              <Text style={{ color: "#96B3FF" }}>{item.address}</Text>
+            </View>
+            <View style={styles.block3}>
+              <View style={styles.circle}>
+                <Image style={styles.img} source={require('../../assets/dormitory.png')} />
+              </View>
+            </View>
           </View>
-        </View>
-      </View>
+          )
+        })}
+
 
       <View style={{ alignItems: "center", marginTop: '10%'}}>
         <TouchableOpacity
@@ -77,7 +84,8 @@ const PaymentOwner = ({navigation}) => {
       </View>
 
     </SafeAreaView>
-  )
+    )
+  }
 }
 
 const styles = StyleSheet.create({
