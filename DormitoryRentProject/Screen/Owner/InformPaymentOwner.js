@@ -31,6 +31,7 @@ const data = [
 const InformPaymentOwner = ({navigation, route}) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
+  const [month, setMonth] = useState();
 
   const code = route.params.code
   const [roomArr, setRoom] = useState([]);
@@ -104,6 +105,7 @@ const InformPaymentOwner = ({navigation, route}) => {
           onFocus={() => setIsFocus(true)}
           onChange={(item) => {
             setValue(item.value);
+            setMonth(item.value)
             setIsFocus(false);
           }}
         />
@@ -114,7 +116,7 @@ const InformPaymentOwner = ({navigation, route}) => {
           return(
             <TouchableOpacity
               style={[styles.btn, styles.shadowProp]}
-              onPress={() => {navigation.navigate("DetailPayment", {room: item.room, code: item.code})}}
+              onPress={() => {navigation.navigate("DetailPayment", {room: item.data.room, code: item.data.code, type: item.data.type, month: month})}}
             >
               <Text style={styles.txt}>{item.data.room}</Text>
             </TouchableOpacity>

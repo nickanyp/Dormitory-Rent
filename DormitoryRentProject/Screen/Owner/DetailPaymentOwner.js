@@ -9,8 +9,64 @@ import {
   TextInput,
 } from "react-native";
 import React from "react";
+import { useState, useEffect } from "react";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "../../database/FirebaseConfig";
 
-const DetailPaymentOwner = ({ navigation }) => {
+const DetailPaymentOwner = ({ navigation, route }) => {
+  const code = route.params.code;
+  const room = route.params.room;
+  const month = route.params.month;
+  let type = route.params.type;
+  console.log(room)
+
+  const app = initializeApp(firebaseConfig);
+  const firestore = getFirestore(app);
+
+  // const [pwater, setPriceWater] = useState();
+  // const [plight, setPriceLight] = useState();
+  const [water, setWater] = useState();
+  const [light, setLight] = useState();
+
+  const clearFormFields = () => {
+    setPriceWater("")
+    setPriceLight("")
+    setWater("")
+    setLight("")
+  }
+
+  const handleSendDetail = async () => {
+    try {
+      const detailDocRef = collection(firestore, "payment");
+      console.log(water, light, month, room, code)
+      await addDoc(detailDocRef, {
+          water,
+          light,
+          month,
+          room,
+          code
+      });
+      console.log("success")
+      navigation.navigate("InformPayment", {code: code})
+      clearFormFields()
+    }catch (error){
+      console.log(error)
+    }
+  }
+  
+  if (type == "genair"){
+    type = "ห้องธรรมดาปรับอากาศ"
+  }else if (type == "genfan"){
+    type = "ห้องธรรมดาพัดลม"
+  }else if (type == "suite"){
+    type = "ห้องสูท"
+  }else if (type == "oneair"){
+    type = "ห้องเดี่ยวปรับอากาศ"
+  }else if (type == "onefan"){
+    type = "ห้องเดี่ยวพัดลม"
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -52,44 +108,42 @@ const DetailPaymentOwner = ({ navigation }) => {
               fontSize: 20,
             }}
           >
-            A101
+            {room}
           </Text>
         </View>
 
         <View style={{marginTop: '5%'}}>
           <Text style={styles.text}>ชื่อผู้เช่า1: </Text>
           <Text style={styles.text}>ชื่อผู้เช่า2: </Text>
-          <Text style={styles.text}>ประเภทห้องพัก: </Text>
+          <Text style={styles.text}>ประเภทห้องพัก: {type}</Text>
 
           <View style={{ flexDirection: "row", justifyContent: 'center', marginTop: '5%' }}>
             <View style={{ marginRight: "10%" }}>
               <Text style={styles.text}>ปริมาณน้ำ</Text>
-              <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
+              <TextInput style={[styles.input, styles.shadowProp]} onChangeText={(text)=>{setWater(text)}}></TextInput>
             </View>
             <View>
-              <Text style={styles.text}>ค่าน้ำ</Text>
-              <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
+              <Text style={styles.text}>ปริมาณไฟฟ้า</Text>
+              <TextInput style={[styles.input, styles.shadowProp]} onChangeText={(text)=>{setLight(text)}}></TextInput>
             </View>
           </View>
 
-          <View style={{ flexDirection: "row", justifyContent: 'center', marginTop: '5%' }}>
+          {/* <View style={{ flexDirection: "row", justifyContent: 'center', marginTop: '5%' }}>
             <View style={{ marginRight: "10%" }}>
               <Text style={styles.text}>ปริมาณไฟ</Text>
-              <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
+              <TextInput style={[styles.input, styles.shadowProp]} onChangeText={(text)=>{setLight(text)}}></TextInput>
             </View>
             <View>
               <Text style={styles.text}>ค่าไฟ</Text>
-              <TextInput style={[styles.input, styles.shadowProp]}></TextInput>
+              <TextInput style={[styles.input, styles.shadowProp]} onChangeText={(text)=>{setPr(text)}}></TextInput>
             </View>
-          </View>
+          </View> */}
         </View>
 
         <View style={{ alignItems: "center", marginTop: '10%' }}>
         <TouchableOpacity
           style={styles.btn}
-          onPress={() => {
-            navigation.navigate("InformPayment");
-          }}
+          onPress={handleSendDetail}
         >
           <Text
             style={{
