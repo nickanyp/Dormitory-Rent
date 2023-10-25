@@ -4,27 +4,48 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
+  Keyboard,
+  Alert,
 } from "react-native";
 import DormitoryFooter from "../../component/DormitoryFooter";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useState } from "react";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { useState, useEffect } from "react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../../database/FirebaseConfig";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React from "react";
 
 const LoginOwner = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState({});
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
+  useEffect(() => {
+    validateForm();
+  }, [email, password]);
+
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const validateForm = () => {
+    let errors = {};
+    if (!email) {
+      errors.email = "กรุณากรอกอีเมล";
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      errors.email = "อีเมลไม่ถูกต้อง";
+    }
+    if (!password) {
+      errors.password = "กรุณากรอกรหัสผ่าน";
+    } else if (password.length < 6) {
+      errors.password = "รหัสผ่านควรมีอย่างน้อย 6 ตัวอักษร";
+    }
+    setErrors(errors);
   };
 
   const clearFormFields = () => {
@@ -44,15 +65,9 @@ const LoginOwner = ({ navigation }) => {
         clearFormFields();
       })
       .catch((error) => {
-        console.log(error);
+        console.log('Form has errors. Please correct them.');
+        // Alert("กรุณากรอกอีเมลและรหัสผ่าน")
       });
-    if (email === "" && password === "") {
-      alert("กรุณากรอกอีเมลและรหัสผ่าน")
-    } else if (email == "") {
-      alert("กรุณากรอกอีเมล")
-    } else if (password == "") {
-      alert("กรุณากรอกรหัสผ่าน")
-    } 
   };
 
   return (
@@ -61,8 +76,15 @@ const LoginOwner = ({ navigation }) => {
         <Text style={{ fontSize: 40, fontWeight: "bold", textAlign: "center" }}>
           เข้าสู่ระบบ
         </Text>
-        <Text style={{ fontSize: 14, fontWeight: "bold", color:"#aaa", marginTop: 20}}>
-            Hello! Welcome back <AntDesign name="heart" size={14} color="#aaa" />
+        <Text
+          style={{
+            fontSize: 14,
+            fontWeight: "bold",
+            color: "#aaa",
+            marginTop: 20,
+          }}
+        >
+          Hello! Welcome back <AntDesign name="heart" size={14} color="#aaa" />
         </Text>
       </View>
 
@@ -84,6 +106,10 @@ const LoginOwner = ({ navigation }) => {
             placeholder="อีเมล"
           ></TextInput>
         </View>
+      </View>
+      <Text style={styles.errorText}>{errors.email}</Text>
+
+      <View style={{ alignItems: "center" }}>
         <View style={[styles.input, styles.shadowProp]}>
           <AntDesign
             style={{ paddingRight: 10 }}
@@ -107,6 +133,7 @@ const LoginOwner = ({ navigation }) => {
           />
         </View>
       </View>
+      <Text style={styles.errorText}>{errors.password}</Text>
 
       <View style={{ alignItems: "center" }}>
         <TouchableOpacity style={styles.btn} onPress={handleSignIn}>
@@ -130,6 +157,7 @@ const LoginOwner = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
+
       <DormitoryFooter></DormitoryFooter>
     </View>
   );
@@ -139,7 +167,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    justifyContent: 'center'
+    justifyContent: "center",
   },
   input: {
     flexDirection: "row",
@@ -151,7 +179,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderRadius: 25,
     backgroundColor: "white",
-    margin: 15,
+    margin: "2%",
     paddingLeft: 15,
   },
   shadowProp: {
@@ -189,6 +217,11 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 5,
     margin: 10,
+  },
+  errorText: {
+    color: "red",
+    fontSize: 14,
+    marginLeft: "15%",
   },
 });
 

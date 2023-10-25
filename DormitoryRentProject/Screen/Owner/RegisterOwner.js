@@ -12,7 +12,7 @@ import Modal from "react-native-modal";
 import DormitoryFooter from "../../component/DormitoryFooter";
 import DatePicker from "@react-native-community/datetimepicker";
 import { Dropdown } from "react-native-element-dropdown";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
@@ -29,10 +29,38 @@ const RegisterOwner = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [phone, setPhone] = useState("");
   const [dor_name, setDor_name] = useState("");
-
+  const [errors, setErrors] = useState({});
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const firestore = getFirestore(app);
+
+  useEffect(() => {
+    validateForm();
+  }, [name, value, email, password, dateOfBirth, phone]);
+
+  const validateForm = () => {
+    let errors = {};
+    if (!name) {
+      errors.name = "กรุณากรอกชื่อ-นามสกุล";
+    } if (!value) {
+      errors.value = "กรุณากรอกเพศ";
+    } if (!dateOfBirth) {
+      errors.dateOfBirth = "กรุณากรอกวันเกิด";
+    }
+    if (!email) {
+      errors.email = "กรุณากรอกอีเมล";
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      errors.email = "อีเมลไม่ถูกต้อง";
+    }
+    if (!password) {
+      errors.password = "กรุณากรอกรหัสผ่าน";
+    } else if (password.length < 6) {
+      errors.password = "รหัสผ่านควรมีอย่างน้อย 6 ตัวอักษร";
+    } if (!phone) {
+      errors.phone = "กรุณากรอกเบอร์โทรศัพท์"
+    }
+    setErrors(errors);
+  };
 
   // Birth
   const [dateOfBirth, setdateOfBirth] = useState("");
@@ -111,7 +139,8 @@ const RegisterOwner = ({ navigation }) => {
       <Text></Text>
       <Text></Text>
       <Text></Text>
-      <View style={{ alignItems: "center"}}>
+
+        <View style={{alignItems: 'center'}}>
         <View style={[styles.input, styles.shadowProp]}>
           <Feather
             style={{ paddingRight: 10 }}
@@ -126,51 +155,52 @@ const RegisterOwner = ({ navigation }) => {
             onChangeText={(text) => setName(text)}
           ></TextInput>
         </View>
+        </View>
+        <Text style={styles.errorText}>{errors.name}</Text>
 
-        <View style={{ flexDirection: "row" }}>
-        <Dropdown
-            style={[styles.dropdown, styles.shadowProp, { width: 130 }]}
-            placeholderStyle={{ color: "#C7C7CD", fontSize: 16 }}
-            selectedTextStyle={styles.selectedTextStyle}
-            iconStyle={styles.iconStyle}
-            data={sex}
-            valueField="value"
-            placeholder={!isFocus ? "เพศ" : "..."}
-            labelField="label"
-            value={value}
-            onFocus={() => setIsFocus(true)}
-            onBlur={() => setIsFocus(false)}
-            onChange={(item) => {
-              setValue(item.value);
-              setIsFocus(false);
-            }}
-            renderLeftIcon={() => (
-              <Fontisto
+        <View style={{ flexDirection: "row", justifyContent: 'center' }}>
+            <Dropdown
+              style={[styles.dropdown, styles.shadowProp, { width: 130 }]}
+              placeholderStyle={{ color: "#C7C7CD", fontSize: 16 }}
+              selectedTextStyle={styles.selectedTextStyle}
+              iconStyle={styles.iconStyle}
+              data={sex}
+              valueField="value"
+              placeholder={!isFocus ? "เพศ" : "..."}
+              labelField="label"
+              value={value}
+              onFocus={() => setIsFocus(true)}
+              onBlur={() => setIsFocus(false)}
+              onChange={(item) => {
+                setValue(item.value);
+                setIsFocus(false);
+              }}
+              renderLeftIcon={() => (
+                <Fontisto
+                  style={{ paddingRight: 10 }}
+                  name="intersex"
+                  size={24}
+                  color="#363C56"
+                />
+              )}
+            />
+            <TouchableOpacity
+              style={[styles.input, styles.shadowProp, { marginLeft: 0,width: 145 }]}
+              onPress={toggleModal}
+            >
+              <MaterialCommunityIcons
                 style={{ paddingRight: 10 }}
-                name="intersex"
+                name="cake-variant-outline"
                 size={24}
                 color="#363C56"
               />
-            )}
-          />
-
-          <TouchableOpacity
-            style={[styles.input, styles.shadowProp, { marginLeft: 0,width: 145 }]}
-            onPress={toggleModal}
-          >
-            <MaterialCommunityIcons
-              style={{ paddingRight: 10 }}
-              name="cake-variant-outline"
-              size={24}
-              color="#363C56"
-            />
-            <TextInput
-              style={{ flex: 1, fontSize: 16 }}
-              placeholder="วันเกิด"
-              value={dateOfBirth}
-              // onChangeText={setdateOfBirth}
-            ></TextInput>
-          </TouchableOpacity>
+              <TextInput
+                style={{ flex: 1, fontSize: 16 }}
+                placeholder="วันเกิด"
+                value={dateOfBirth}
+                // onChangeText={setdateOfBirth}
+              ></TextInput>
+            </TouchableOpacity>
 
           <Modal isVisible={isModalVisible}>
             <View
@@ -200,42 +230,51 @@ const RegisterOwner = ({ navigation }) => {
           </Modal>
         </View>
 
-        <View style={[styles.input, styles.shadowProp]}>
-          <AntDesign
-            style={{ paddingRight: 10 }}
-            name="mail"
-            size={20}
-            color="#363C56"
-          />
-          <TextInput
-            style={{ flex: 1, fontSize: 16 }}
-            placeholder="อีเมล"
-            value={email}
-            onChangeText={(text) => setEmail(text)}
-          ></TextInput>
+        <View style={{alignItems: 'center'}}>
+          <View style={[styles.input, styles.shadowProp,]}>
+            <AntDesign
+              style={{ paddingRight: 10 }}
+              name="mail"
+              size={20}
+              color="#363C56"
+            />
+            <TextInput
+              style={{ flex: 1, fontSize: 16 }}
+              placeholder="อีเมล"
+              value={email}
+              onChangeText={(text) => setEmail(text)}
+            ></TextInput>
+          </View>
         </View>
-        <View style={[styles.input, styles.shadowProp]}>
-          <AntDesign
-            style={{ paddingRight: 10 }}
-            name="lock1"
-            size={20}
-            color="#363C56"
-          />
-          <TextInput
-            style={{ flex: 1, fontSize: 16 }}
-            placeholder="รหัสผ่าน"
-            secureTextEntry={!showPassword}
-            value={password}
-            onChangeText={(text) => setPassword(text)}
-          ></TextInput>
-          <MaterialCommunityIcons
-            style={{ right: 15 }}
-            name={showPassword ? "eye" : "eye-off"}
-            size={24}
-            color="#aaa"
-            onPress={toggleShowPassword}
-          />
+        <Text style={styles.errorText}>{errors.email}</Text>
+
+        <View style={{alignItems: 'center'}}>
+          <View style={[styles.input, styles.shadowProp]}>
+            <AntDesign
+              style={{ paddingRight: 10 }}
+              name="lock1"
+              size={20}
+              color="#363C56"
+            />
+            <TextInput
+              style={{ flex: 1, fontSize: 16 }}
+              placeholder="รหัสผ่าน"
+              secureTextEntry={!showPassword}
+              value={password}
+              onChangeText={(text) => setPassword(text)}
+            ></TextInput>
+            <MaterialCommunityIcons
+              style={{ right: 15 }}
+              name={showPassword ? "eye" : "eye-off"}
+              size={24}
+              color="#aaa"
+              onPress={toggleShowPassword}
+            />
+          </View>
         </View>
+        <Text style={styles.errorText}>{errors.password}</Text>
+
+        <View style={{alignItems: 'center'}}>
         <View style={[styles.input, styles.shadowProp]}>
           <AntDesign
             style={{ paddingRight: 10 }}
@@ -250,17 +289,9 @@ const RegisterOwner = ({ navigation }) => {
             onChangeText={(text) => setPhone(text)}
           ></TextInput>
         </View>
-
-        <View style={[styles.input, styles.shadowProp]}>
-          <Fontisto style={{ paddingRight: 10 }} name="hotel-alt" size={20} color="#363C56" />
-          <TextInput
-            style={{ flex: 1, fontSize: 16 }}
-            placeholder="หอพัก"
-            value={dor_name}
-            onChangeText={(text) => setDor_name(text)}
-          ></TextInput>
         </View>
-      </View>
+        <Text style={styles.errorText}>{errors.phone}</Text>
+
 
       <View style={{ flexDirection: "row", justifyContent: "center" }}>
         <TouchableOpacity style={styles.btn} onPress={handleCreateAccount}>
@@ -309,7 +340,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderRadius: 25,
     backgroundColor: "white",
-    margin: 15,
+    margin: '2%',
     paddingLeft: 15,
     backgroundColor: "white",
   },
@@ -344,7 +375,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     width: 150,
     height: 50,
-    margin: 15,
+    margin: '2%',
     paddingLeft: 15,
     backgroundColor: "white",
   },
@@ -357,6 +388,11 @@ const styles = StyleSheet.create({
   iconStyle: {
     width: 20,
     height: 20,
+  },
+  errorText: {
+    color: "red",
+    fontSize: 14,
+    marginLeft: "15%",
   },
 });
 
