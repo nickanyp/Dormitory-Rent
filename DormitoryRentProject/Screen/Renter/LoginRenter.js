@@ -19,6 +19,7 @@ import { firebaseConfig } from "../../database/FirebaseConfig";
 const LoginRenter = ({ navigation }) => {
   const [dorpass, setDorpass] = useState("");
   const [numroom, setNumroom] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const app = initializeApp(firebaseConfig);
@@ -31,16 +32,17 @@ const LoginRenter = ({ navigation }) => {
   const clearFormFields = () => {
     setDorpass("");
     setNumroom("");
+    setEmail("");
     setPassword("");
   };
 
   const handleSignIn = () => {
-    signInWithEmailAndPassword(auth, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log("Sign In!");
         const user = userCredential.user;
         console.log(user);
-        navigation.navigate("OwnerHome");
+        navigation.navigate("MyRoomPage");
         clearFormFields();
       })
       .catch((error) => {
@@ -104,6 +106,20 @@ const LoginRenter = ({ navigation }) => {
           ></TextInput>
         </View>
         <View style={[styles.input, styles.shadowProp]}>
+        <AntDesign
+            style={{ paddingRight: 10 }}
+            name="mail"
+            size={20}
+            color="#363C56"
+          />
+          <TextInput
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            style={{ flex: 1, fontSize: 16 }}
+            placeholder="อีเมล"
+          ></TextInput>
+        </View>
+        <View style={[styles.input, styles.shadowProp]}>
           <AntDesign
             style={{ paddingRight: 10 }}
             name="lock1"
@@ -130,9 +146,7 @@ const LoginRenter = ({ navigation }) => {
       <View style={{ alignItems: "center" }}>
         <TouchableOpacity
           style={styles.btn}
-          onPress={() => {
-            navigation.navigate("MyRoomPage");
-          }}
+          onPress={handleSignIn}
         >
           <Text
             style={{

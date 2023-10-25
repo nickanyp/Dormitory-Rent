@@ -6,79 +6,136 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import MaskedView from "@react-native-masked-view/masked-view";
-import { ListItem } from "react-native-elements";
-import DormitoryHeader from "../../component/DormitoryHeader";
 import { SafeAreaView } from "react-native-safe-area-context";
+import firebase from "../../database/FirebaseConfig";
 
-const MyRoomPage = ({navigation}) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={[styles.box, styles.shadowProp]} >
-        <Text style={styles.text}>ชื่อผู้เช่า 1 : </Text>
-        <Text style={styles.text}>ชื่อผู้เช่า 2 : </Text>
-        <Text></Text>
-        <Text style={styles.text}>หอพัก : </Text>
-        <Text style={styles.text}>ประเภทห้อง : </Text>
-        <Text style={styles.text}>เลขห้อง : </Text>
-      </View>
+class MyRoomPage extends Component {
+  constructor() {
+    super();
 
-      <View style={[styles.box, styles.shadowProp]} >
-        <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
-          กันยายน
-        </Text>
-        <Text></Text>
-        <Text style={styles.text}>ค่าเช่าหอพัก :  บาท</Text>
-        <Text style={styles.text}>ค่าน้ำ :  บาท</Text>
-        <Text style={styles.text}>ค่าไฟ :  บาท</Text>
-        <Text></Text>
-        <Text style={[styles.text, { color: "#FF9699" }]}>
-          รวมทั้งสิ้น : {" "}
-          บาท
-        </Text>
-      </View>
-      <View style={{ alignItems: "center", marginTop: 15 }}>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => {navigation.navigate("PaymentRenter")}}
-        >
-          <Text
-            style={[
-              styles.textBtn,
-              {
-                color: "white",
-                textAlign: "center",
-                fontWeight: "bold",
-                fontSize: 15,
-              },
-            ]}
+    this.firestoreRef = firebase.firestore().collection("renters");
+    this.state = {
+      userArr: [],
+    };
+  }
+
+  componentDidMount() {
+    this.unsubscribe = this.firestoreRef.onSnapshot(this.getCollection);
+  }
+
+  getCollection = (querySnapshot) => {
+    const all_data = [];
+    querySnapshot.forEach((res) => {
+      const {
+        name1,
+        name2,
+        name3,
+        name4,
+        dor_name,
+        dor_price,
+        dor_type,
+        num_room,
+      } = res.data();
+      all_data.push({
+        key: res.id,
+        name1,
+        name2,
+        name3,
+        name4,
+        dor_name,
+        dor_price,
+        dor_type,
+        num_room,
+      });
+    });
+    this.setState({
+      userArr: all_data,
+      isLoading: false,
+    });
+  };
+
+  render() {
+    return (
+      <SafeAreaView style={styles.container}>
+        {this.state.userArr.map((item, i) => {
+          return(
+            <View style={[styles.box, styles.shadowProp]} key={i}>
+          <Text style={styles.text}>ชื่อผู้เช่า 1 : <Text style={{fontWeight: 'normal'}}>{item.name1}</Text></Text>
+          <Text style={styles.text}>ชื่อผู้เช่า 2 : <Text style={{fontWeight: 'normal'}}>{item.name2}</Text></Text>
+          <Text style={styles.text}>ชื่อผู้เช่า 3 : <Text style={{fontWeight: 'normal'}}>{item.name3}</Text></Text>
+          <Text style={styles.text}>ชื่อผู้เช่า 4 : <Text style={{fontWeight: 'normal'}}>{item.name4}</Text></Text>
+          <Text></Text>
+          <Text style={styles.text}>หอพัก : <Text style={{fontWeight: 'normal'}}>{item.dor_name}</Text></Text>
+          <Text style={styles.text}>ประเภทห้อง : <Text style={{fontWeight: 'normal'}}>{item.dor_type}</Text></Text>
+          <Text style={styles.text}>เลขห้อง : <Text style={{fontWeight: 'normal'}}>{item.num_room}</Text></Text>
+        </View>
+          )
+        })}
+
+        {this.state.userArr.map((item, i) => {
+          return(
+            <View style={[styles.box, styles.shadowProp]}>
+            <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
+              กันยายน
+            </Text>
+            <Text></Text>
+            <Text style={styles.text}>ค่าเช่าหอพัก : <Text style={{fontWeight: 'normal'}}>{item.dor_price} </Text>บาท</Text>
+            <Text style={styles.text}>ค่าน้ำ : บาท</Text>
+            <Text style={styles.text}>ค่าไฟ : บาท</Text>
+            <Text></Text>
+            <Text style={[styles.text, { color: "#FF9699" }]}>
+              รวมทั้งสิ้น : บาท
+            </Text>
+          </View>
+          )
+        })}
+      
+        <View style={{ alignItems: "center", marginTop: 15 }}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => {
+              navigation.navigate("PaymentRenter");
+            }}
           >
-            ชำระค่าเช่า
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => {navigation.navigate("HistoryRenter")}}
-        >
-          <Text
-            style={[
-              styles.textBtn,
-              {
-                color: "white",
-                textAlign: "center",
-                fontWeight: "bold",
-                fontSize: 15,
-              },
-            ]}
+            <Text
+              style={[
+                styles.textBtn,
+                {
+                  color: "white",
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  fontSize: 15,
+                },
+              ]}
+            >
+              ชำระค่าเช่า
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => {
+              navigation.navigate("HistoryRenter");
+            }}
           >
-            ประวัติค่าเช่าหอ
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
-  );
-};
+            <Text
+              style={[
+                styles.textBtn,
+                {
+                  color: "white",
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  fontSize: 15,
+                },
+              ]}
+            >
+              ประวัติค่าเช่าหอ
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -94,7 +151,7 @@ const styles = StyleSheet.create({
     borderColor: "#9B9B9B",
     padding: 15,
     margin: 10,
-    backgroundColor: 'white'
+    backgroundColor: "white",
   },
   shadowProp: {
     shadowColor: "#9B9B9B",
@@ -105,7 +162,7 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
     fontSize: 15,
-    color: '#363C56'
+    color: "#363C56",
   },
   btn: {
     width: 120,
