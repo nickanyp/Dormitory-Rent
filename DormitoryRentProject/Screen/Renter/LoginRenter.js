@@ -67,7 +67,9 @@ const LoginRenter = ({ navigation }) => {
         console.log("Sign In!");
         const user = userCredential.user;
         console.log(user);
-        navigation.navigate("MyRoomPage");
+        const user_uid = user.uid;
+        console.log(user_uid);
+        navigation.navigate("MyRoomPage", { uid: user_uid });
         clearFormFields();
       })
       .catch((error) => {

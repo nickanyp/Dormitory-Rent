@@ -7,7 +7,6 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { firebaseConfig } from '../../database/FirebaseConfig';
 
-
 const PaymentOwner = ({route, navigation}) => {
   const item = route.params.data
 

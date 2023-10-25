@@ -14,7 +14,9 @@ import DashboardPage from "../Screen/Renter/DashboardPage";
 
 const Tab = createBottomTabNavigator();
 
-const RenterTabNavigator = () => {
+const RenterTabNavigator = ({route}) => {
+  const uid = route.params.uid
+  console.log(route.params.uid)
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -27,6 +29,7 @@ const RenterTabNavigator = () => {
       <Tab.Screen
         name="MY ROOM"
         component={MyRoomPage}
+        initialParams={{uid: uid}}
         options={{
           tabBarIcon: ({ color, size }) => {
             return <FontAwesome name="home" size={size} color={color} />
