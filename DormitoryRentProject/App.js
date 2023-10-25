@@ -10,12 +10,16 @@ import OwnerDormitory from "./Screen/Owner/OwnerDormitory";
 import DetailPaymentOwner from "./Screen/Owner/DetailPaymentOwner";
 import HistoryRenter from "./Screen/Renter/HistoryRenter";
 import ProfileOwner from "./Screen/Owner/ProfileOwner";
+import DetailRoomSuite from "./Screen/Owner/DetailRoomSuite";
+import DetailRoomGenAir from "./Screen/Owner/DetailRoomGenAir";
 
 export default function App() {
   return (
     // <FirstPage></FirstPage>
     // <MainScreenNavigation></MainScreenNavigation>
-    <AllNavigation></AllNavigation>
+    // <AllNavigation></AllNavigation>
+    // <DetailRoomSuite></DetailRoomSuite>
+    <DetailRoomGenAir></DetailRoomGenAir>
     // <MyRoomPage></MyRoomPage>
     // <LoginRenter></LoginRenter>
     // <CheckPayment></CheckPayment>
