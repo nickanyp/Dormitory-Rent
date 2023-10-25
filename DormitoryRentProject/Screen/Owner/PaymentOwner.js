@@ -1,20 +1,55 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList} from 'react-native'
+import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { BarChart } from "react-native-gifted-charts";
+// import { BarChart } from "react-native-gifted-charts";
 
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCHFf_FcEP9VHYQhtJ6z9nq_Y74d8q4W7s",
+  authDomain: "dormitoryrent-e4b12.firebaseapp.com",
+  projectId: "dormitoryrent-e4b12",
+  storageBucket: "dormitoryrent-e4b12.appspot.com",
+  messagingSenderId: "1009384549650",
+  appId: "1:1009384549650:web:f709d88df75e105ff617cb",
+  measurementId: "G-GCL5NCG1BB"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 const PaymentOwner = ({navigation}) => {
+  const [owners, setOwners] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const ownersCollection = collection(db, 'owners');
+        const querySnapshot = await getDocs(ownersCollection);
+        const ownerData = [];
+        querySnapshot.forEach((doc) => {
+          ownerData.push(doc.data());
+        });
+        setOwners(ownerData); // Use setOwners to update the state
+      } catch (error) {
+        console.error("Error getting documents: ", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
-    <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container}>
       <View style={styles.block1}>
         <View style={styles.block2}>
-          <Text style={{fontSize:40, fontWeight:"bold", color:"#96B3FF"}}>กัลยรัตน์ 1</Text>
-          <Text style={{color:"#96B3FF"}}>RNP 655/2 ซ.ฉลองกรุง 1 แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพมหานคร</Text>
+          <Text style={{ fontSize: 40, fontWeight: "bold", color: "#96B3FF" }}>กัลยรัตน์ 1</Text>
+          <Text style={{ color: "#96B3FF" }}>{owners[0] ? owners[0].address : ''}</Text>
         </View>
         <View style={styles.block3}>
           <View style={styles.circle}>
-            <Image style={styles.img} source={require('../../assets/dormitory.png')}/>
+            <Image style={styles.img} source={require('../../assets/dormitory.png')} />
           </View>
         </View>
       </View>
@@ -117,4 +152,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default PaymentOwner
+export default PaymentOwner;
