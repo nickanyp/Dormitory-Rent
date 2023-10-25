@@ -25,6 +25,11 @@ import PaymentOwner from '../Screen/Owner/PaymentOwner';
 import InformPaymentOwner from '../Screen/Owner/InformPaymentOwner';
 import StatusPaymentOwner from '../Screen/Owner/StatusPaymentOwner';
 import DetailPaymentOwner from '../Screen/Owner/DetailPaymentOwner';
+import DetailRoomSuite from '../Screen/Owner/DetailRoomSuite';
+import DetailRoomGenAir from '../Screen/Owner/DetailRoomGenAir';
+import DetailRoomGenFan from '../Screen/Owner/DetailRoomGenFan';
+import DetailRoomOneAir from '../Screen/Owner/DetailRoomOneAir';
+import DetailRoomOneFan from '../Screen/Owner/DetailRoomOneFan';
 
 const Stack = createNativeStackNavigator();
 
@@ -149,6 +154,46 @@ const AllStackNavigator = () => {
       <Stack.Screen
         name="DetailPayment"
         component={DetailPaymentOwner}
+        options={{
+          headerTitle: props => <DormitoryHeader {...props}/>,
+          headerBackTitleVisible: false
+        }}
+      />
+      <Stack.Screen
+        name='DetailRoomSuite'
+        component={DetailRoomSuite}
+        options={{
+          headerTitle: props => <DormitoryHeader {...props}/>,
+          headerBackTitleVisible: false
+        }}
+      />
+      <Stack.Screen
+        name='DetailRoomGenAir'
+        component={DetailRoomGenAir}
+        options={{
+          headerTitle: props => <DormitoryHeader {...props}/>,
+          headerBackTitleVisible: false
+        }}
+      />
+      <Stack.Screen
+        name='DetailRoomGenFan'
+        component={DetailRoomGenFan}
+        options={{
+          headerTitle: props => <DormitoryHeader {...props}/>,
+          headerBackTitleVisible: false
+        }}
+      />
+      <Stack.Screen
+        name='DetailRoomOneAir'
+        component={DetailRoomOneAir}
+        options={{
+          headerTitle: props => <DormitoryHeader {...props}/>,
+          headerBackTitleVisible: false
+        }}
+      />
+      <Stack.Screen
+        name='DetailRoomOneFan'
+        component={DetailRoomOneFan}
         options={{
           headerTitle: props => <DormitoryHeader {...props}/>,
           headerBackTitleVisible: false

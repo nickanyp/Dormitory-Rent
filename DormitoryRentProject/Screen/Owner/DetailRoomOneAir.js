@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     // backgroundColor:"#f00"
     justifyContent: "center",
     alignItems: "center",
-    marginTop:15,
+    marginTop:8,
   },
   center:{
     justifyContent:"center",
