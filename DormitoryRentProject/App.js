@@ -37,7 +37,6 @@ export default function App() {
     // <OwnerDormitory></OwnerDormitory>
     // <DetailPaymentOwner></DetailPaymentOwner>
     // <HistoryRenter></HistoryRenter>
-    // <MyRoomPage></MyRoomPage>
     // <LoginOwner></LoginOwner>
   );
 }

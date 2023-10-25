@@ -1,9 +1,10 @@
 import { Component } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const PaymentRenter = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={{ alignItems: "center" }}>
         <View style={[styles.box, styles.shadowProp]}>
           <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
@@ -38,7 +39,7 @@ const PaymentRenter = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

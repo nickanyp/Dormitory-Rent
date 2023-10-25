@@ -171,7 +171,7 @@ class MyRoomPage extends Component {
           );
         })}
 
-        <View style={{ alignItems: "center", marginTop: 15 }}>
+        <View style={{ alignItems: "center", marginTop: 15, flexDirection: 'row' }}>
           <TouchableOpacity
             style={styles.btn}
             onPress={() => {
@@ -210,6 +210,30 @@ class MyRoomPage extends Component {
               ]}
             >
               ประวัติค่าเช่าหอ
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={{top: 35}}>
+        <TouchableOpacity
+            style={{borderColor: '#F64B4B', width: 120,
+            height: 50, borderWidth: 2, borderRadius: 40, justifyContent: "center"}}
+            onPress={() => {
+              this.props.navigation.navigate("LoginRenter");
+            }}
+          >
+            <Text
+              style={[
+                styles.textBtn,
+                {
+                  color: "#F64B4B",
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  fontSize: 15,
+                },
+              ]}
+            >
+              ออกจากระบบ
             </Text>
           </TouchableOpacity>
         </View>
