@@ -23,43 +23,12 @@ const LoginRenter = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
-  const [isFormValid, setIsFormValid] = useState(false);
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
   useEffect(() => {
     validateForm();
-  }, [dorpass, email, password]);
-
-  const validateForm = () => {
-    let errors = {};
-    if (!dorpass) {
-      errors.dorpass = "กรุณากรอกรหัสหอพัก";
-    }
-    if (!numroom) {
-      errors.numroom = "กรุณากรอกเลขห้อง";
-    }
-    if (!email) {
-      errors.email = "กรุณากรอกอีเมล";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      errors.email = "อีเมลไม่ถูกต้อง";
-    }
-    if (!password) {
-      errors.password = "กรุณากรอกรหัสผ่าน";
-    } else if (password.length < 6) {
-      errors.password = "รหัสผ่านควรมีอย่างน้อย 6 ตัวอักษรขึ้นไป";
-    }
-    setErrors(errors);
-    setIsFormValid(Object.keys(errors).length === 0);
-  };
-
-  const handleSubmit = () => {
-    if (isFormValid) {
-      console.log("Form submitted successfully!");
-    } else {
-      console.log("Form has errors. Please correct them.");
-    }
-  };
+  }, [dorpass, numroom, email, password,]);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -71,6 +40,26 @@ const LoginRenter = ({ navigation }) => {
     setEmail("");
     setPassword("");
   };
+
+  const validateForm = () => {
+    let errors = {};
+    if (!dorpass) {
+      errors.dorpass = "กรุณากรอกรหัสหอพัก";}
+    if (!numroom) {
+      errors.numroom = "กรุณากรอกเลขห้อง";}
+    if (!email) {
+      errors.email = "กรุณากรอกอีเมล";
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      errors.email = "อีเมลไม่ถูกต้อง";
+    }
+    if (!password) {
+      errors.password = "กรุณากรอกรหัสผ่าน";
+    } else if (password.length < 6) {
+      errors.password = "รหัสผ่านควรมีอย่างน้อย 6 ตัวอักษร";
+    }
+    setErrors(errors);
+  };
+
 
   const handleSignIn = () => {
     signInWithEmailAndPassword(auth, email, password)
@@ -84,9 +73,6 @@ const LoginRenter = ({ navigation }) => {
       .catch((error) => {
         console.log(error);
       });
-    if (dorpass === "" && numroom === "" && password === "" && email === "") {
-      alert("กรุณากรอกข้อมูลให้ถูกต้อง");
-    } 
   };
 
   return (
@@ -108,49 +94,62 @@ const LoginRenter = ({ navigation }) => {
       </View>
       <Text></Text>
       <Text></Text>
-      <View style={{ alignItems: "center" }}>
-        <View style={[styles.input, styles.shadowProp]}>
-          <AntDesign
-            style={{ paddingRight: 10 }}
-            name="mail"
-            size={20}
-            color="#363C56"
-          />
-          <TextInput
-            value={dorpass}
-            onChangeText={(numeric) => setDorpass(numeric)}
-            style={{ flex: 1, fontSize: 16 }}
-            placeholder="รหัสหอพัก"
-          ></TextInput>
+
+        <View style={{alignItems: "center"}}>
+          <View style={[styles.input, styles.shadowProp]}>
+            <AntDesign
+              style={{ paddingRight: 10 }}
+              name="mail"
+              size={20}
+              color="#363C56"
+            />
+            <TextInput
+              value={dorpass}
+              onChangeText={(numeric) => setDorpass(numeric)}
+              style={{ flex: 1, fontSize: 16 }}
+              placeholder="รหัสหอพัก"
+            ></TextInput>
+          </View>
         </View>
-        <View style={[styles.input, styles.shadowProp]}>
-          <MaterialCommunityIcons
-            style={{ paddingRight: 10 }}
-            name="numeric"
-            size={24}
-            color="#363C56"
-          />
-          <TextInput
-            value={numroom}
-            onChangeText={(numeric) => setNumroom(numeric)}
-            style={{ flex: 1, fontSize: 16 }}
-            placeholder="เลขห้อง"
-          ></TextInput>
+        <Text style={styles.errorText}>{errors.dorpass}</Text>
+
+        <View style={{alignItems: "center"}}>
+          <View style={[styles.input, styles.shadowProp]}>
+            <MaterialCommunityIcons
+              style={{ paddingRight: 10 }}
+              name="numeric"
+              size={24}
+              color="#363C56"
+            />
+            <TextInput
+              value={numroom}
+              onChangeText={(numeric) => setNumroom(numeric)}
+              style={{ flex: 1, fontSize: 16 }}
+              placeholder="เลขห้อง"
+            ></TextInput>
+          </View>
         </View>
-        <View style={[styles.input, styles.shadowProp]}>
-          <AntDesign
-            style={{ paddingRight: 10 }}
-            name="mail"
-            size={20}
-            color="#363C56"
-          />
-          <TextInput
-            value={email}
-            onChangeText={(text) => setEmail(text)}
-            style={{ flex: 1, fontSize: 16 }}
-            placeholder="อีเมล"
-          ></TextInput>
+        <Text style={styles.errorText}>{errors.numroom}</Text>
+
+        <View style={{alignItems: 'center'}}>
+          <View style={[styles.input, styles.shadowProp]}>
+            <AntDesign
+              style={{ paddingRight: 10 }}
+              name="mail"
+              size={20}
+              color="#363C56"
+            />
+            <TextInput
+              value={email}
+              onChangeText={(text) => setEmail(text)}
+              style={{ flex: 1, fontSize: 16 }}
+              placeholder="อีเมล"
+            ></TextInput>
+          </View>
         </View>
+        <Text style={styles.errorText}>{errors.email}</Text>
+
+        <View style={{alignItems: 'center'}}>
         <View style={[styles.input, styles.shadowProp]}>
           <AntDesign
             style={{ paddingRight: 10 }}
@@ -173,7 +172,8 @@ const LoginRenter = ({ navigation }) => {
             onPress={toggleShowPassword}
           />
         </View>
-      </View>
+        </View>
+      <Text style={styles.errorText}>{errors.password}</Text>
 
       <View style={{ alignItems: "center" }}>
         <TouchableOpacity style={styles.btn} onPress={handleSignIn}>
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderRadius: 25,
     backgroundColor: "white",
-    margin: 15,
+    margin: '2%',
     paddingLeft: 15,
   },
   shadowProp: {
@@ -247,6 +247,11 @@ const styles = StyleSheet.create({
   header: {
     textAlign: "center",
     alignItems: "center",
+  },
+  errorText: {
+    color: "red",
+    fontSize: 14,
+    marginLeft: "15%",
   },
 });
 

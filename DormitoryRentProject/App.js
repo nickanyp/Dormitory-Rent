@@ -13,6 +13,8 @@ import ProfileOwner from "./Screen/Owner/ProfileOwner";
 import DetailRoomSuite from "./Screen/Owner/DetailRoomSuite";
 import DetailRoomGenAir from "./Screen/Owner/DetailRoomGenAir";
 import MyRoomPage from "./Screen/Renter/MyRoomPage";
+import LoginRenter from "./Screen/Renter/LoginRenter";
+import LoginOwner from "./Screen/Owner/LoginOwner";
 
 export default function App() {
   return (
@@ -36,5 +38,6 @@ export default function App() {
     // <DetailPaymentOwner></DetailPaymentOwner>
     // <HistoryRenter></HistoryRenter>
     // <MyRoomPage></MyRoomPage>
+    // <LoginOwner></LoginOwner>
   );
 }
