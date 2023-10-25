@@ -1,48 +1,88 @@
 import { View, Text, StyleSheet, SafeAreaView, ScrollView, Pressable } from 'react-native'
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from 'react-native-elements'
 import { AntDesign } from '@expo/vector-icons'; 
+// import * as firebase from "firebase/compat";
+import {firebase, initializeApp} from 'firebase/app'; 
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { firebaseConfig } from "../../database/FirebaseConfig";
 
-const OwnerHome = ({navigation}) => {
+const OwnerHome = ({route, navigation}) => {
+  const uid = route.params.uid
+  const [dormitoryArr, setDormitory] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const db = getFirestore();
+      const dormitoryQuery = query(collection(db, 'dormitory'), where('owner_uid', '==', uid));
+
+      try {
+        const querySnapshot = await getDocs(dormitoryQuery);
+
+        if (querySnapshot.empty) {
+          console.log('No dormitories found');
+        } else {
+          const dormitories = [];
+          querySnapshot.forEach((doc) => {
+            dormitories.push({ id: doc.id, data: doc.data() });
+          });
+          setDormitory(dormitories);
+          console.log(dormitoryArr)
+        }
+      } catch (error) {
+        console.error('Error fetching dormitories:', error);
+      }
+    };
+
+    fetchData();
+  }, [uid]);
+
+  console.log(dormitoryArr)
+  
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scroll}>
-        <View style={styles.box} >
-          <Pressable style={styles.block} onPress={() => {navigation.navigate("OwnerDormitory")}}>
-            <Text style={{fontSize:35, fontWeight:"bold", color:"#fff"}}>กัลยรัตน์ 1</Text>
-            <AntDesign name="rightcircleo" size={24} color="#fff" style={styles.button}/>
-          </Pressable>
-          <View style={styles.box2}>
-            <View style={styles.box3}>
-              <View style={styles.circle}>
-                <View style={styles.circle4}>
-                  <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>40</Text>
+        {dormitoryArr.map((item)=>{
+          return(
+            <View style={styles.box} >
+              <Pressable style={styles.block} onPress={() => {navigation.navigate("OwnerDormitory", {data: item})}}>
+                <Text style={{fontSize:35, fontWeight:"bold", color:"#fff"}}>{item.data.name}</Text>
+                <AntDesign name="rightcircleo" size={24} color="#fff" style={styles.button}/>
+              </Pressable>
+              <View style={styles.box2}>
+                <View style={styles.box3}>
+                  <View style={styles.circle}>
+                    <View style={styles.circle4}>
+                      <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{item.data.room}</Text>
+                    </View>
+                  </View>
+                  <Text>ห้องทั้งหมด</Text>
+                </View>
+                <View style={styles.box3}>
+                  <View style={styles.circle2}>
+                    <View style={styles.circle4}>
+                    <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{item.data.empty}</Text>
+                    </View>
+                  </View>
+                  <Text>ห้องว่าง</Text>
+                </View>
+                <View style={styles.box3}>
+                  <View style={styles.circle3}>
+                    <View style={styles.circle4}>
+                      <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{item.data.full}</Text>
+                    </View>
+                  </View>
+                  <Text>มีผู้เช่า</Text>
                 </View>
               </View>
-              <Text>ห้องทั้งหมด</Text>
-            </View>
-            <View style={styles.box3}>
-              <View style={styles.circle2}>
-                <View style={styles.circle4}>
-                <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>2</Text>
-                </View>
+              <View style={styles.block}>
+                <Text style={{marginRight:10, fontSize:18, color:"#fff", fontWeight:"bold"}}>ชำระแล้ว: {item.data.pay}</Text>
+                <Text style={{fontSize:18, color:"#fff", fontWeight:"bold"}}>ยังไม่ชำระ: {item.data.notpay}</Text>
               </View>
-              <Text>ห้องว่าง</Text>
             </View>
-            <View style={styles.box3}>
-              <View style={styles.circle3}>
-                <View style={styles.circle4}>
-                <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>38</Text>
-                </View>
-              </View>
-              <Text>มีผู้เช่า</Text>
-            </View>
-          </View>
-          <View style={styles.block}>
-            <Text style={{marginRight:10, fontSize:18, color:"#fff", fontWeight:"bold"}}>ชำระแล้ว: 35</Text>
-            <Text style={{fontSize:18, color:"#fff", fontWeight:"bold"}}>ยังไม่ชำระ: 35</Text>
-          </View>
-        </View>
+          );
+        })}
+
       </ScrollView>
     </SafeAreaView>
   )

@@ -36,7 +36,11 @@ const stackData = [
   }
 ];
 
-const OwnerDormitory = ({navigation}) => {
+const OwnerDormitory = ({navigation, route}) => {
+  const item = route.params.data
+  console.log(2)
+  console.log(item)
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={{width:"100%"}}>
@@ -68,7 +72,7 @@ const OwnerDormitory = ({navigation}) => {
                 <Text style={{color:'#363C56', fontWeight:"bold"}}>ห้องเดี่ยว</Text>
               </View>
               <View style={{marginLeft:20}}>
-                <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>1/2</Text>
+                <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>1/{item.data.emp_suite+item.data.suite}</Text>
                 <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>5/25</Text>
                 <Text style={{color:'#363C56', fontWeight:"bold"}}>1/6</Text>
               </View>

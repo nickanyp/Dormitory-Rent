@@ -11,7 +11,9 @@ import CustomDrawer from '../component/CustomDrawer';
 
 const Drawer = createDrawerNavigator();
 
-const OwnerDrawerNavigator = () => {
+const OwnerDrawerNavigator = ({route}) => {
+  const uid = route.params.uid
+  console.log(route.params.uid)
   return (
     <Drawer.Navigator
       drawerContent={props => <CustomDrawer {...props} />}
@@ -26,13 +28,14 @@ const OwnerDrawerNavigator = () => {
       <Drawer.Screen
         name="Home"
         component={OwnerHome}
-        options={{
+        initialParams={{uid: uid}}
+        options={() => ({
           title: "หน้าหลัก",
           drawerIcon: () => (
             <FontAwesome5 name="home" size={24} color="#363C56" />
          ),
           headerTitle: props => <DormitoryHeader {...props}/>,
-        }}
+        })}
       />
       <Drawer.Screen
         name="Profile"

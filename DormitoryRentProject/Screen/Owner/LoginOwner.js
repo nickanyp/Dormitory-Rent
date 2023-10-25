@@ -59,8 +59,9 @@ const LoginOwner = ({ navigation }) => {
         console.log("Sign In!");
         const user = userCredential.user;
         console.log(user);
-        console.log('Form submitted successfully!'); 
-        navigation.navigate("OwnerHome");
+        const user_uid = user.uid;
+        console.log(user_uid);
+        navigation.navigate("OwnerHome", { uid: user_uid });
         clearFormFields();
       })
       .catch((error) => {
@@ -149,9 +150,9 @@ const LoginOwner = ({ navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("RegisterOwner");
-          }}
-        >
+              navigation.navigate("RegisterOwner");
+            }}
+          >
           <Text style={styles.text}>ยังไม่มีบัญชีผู้ใช้?</Text>
         </TouchableOpacity>
       </View>
