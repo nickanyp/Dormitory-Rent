@@ -114,7 +114,7 @@ const InformPaymentOwner = ({navigation, route}) => {
           return(
             <TouchableOpacity
               style={[styles.btn, styles.shadowProp]}
-              onPress={() => {navigation.navigate("DetailPayment")}}
+              onPress={() => {navigation.navigate("DetailPayment", {room: item.room, code: item.code})}}
             >
               <Text style={styles.txt}>{item.data.room}</Text>
             </TouchableOpacity>
