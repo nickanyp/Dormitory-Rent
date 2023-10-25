@@ -13,88 +13,169 @@ class MyRoomPage extends Component {
   constructor() {
     super();
 
-    this.firestoreRef = firebase.firestore().collection("renters");
+    // this.firestoreRef = firebase.firestore().collection("renters");
     this.state = {
       userArr: [],
+      monthsArr: []
     };
   }
 
   componentDidMount() {
-    this.unsubscribe = this.firestoreRef.onSnapshot(this.getCollection);
-  }
+    const dbRef = firebase.firestore().collection("renters").doc("user3");
+    const dbMonths = dbRef.collection("months");
 
-  getCollection = (querySnapshot) => {
-    const all_data = [];
-    querySnapshot.forEach((res) => {
-      const {
-        name1,
-        name2,
-        name3,
-        name4,
-        dor_name,
-        dor_price,
-        dor_type,
-        num_room,
-      } = res.data();
-      all_data.push({
-        key: res.id,
-        name1,
-        name2,
-        name3,
-        name4,
-        dor_name,
-        dor_price,
-        dor_type,
-        num_room,
+    dbRef
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          const userData = doc.data();
+          this.setState({ userArr: [userData], isLoading: false });
+          console.log(userData);
+        } else {
+          this.setState({ isLoading: false });
+        }
+      })
+      .catch((error) => {
+        console.error("Error getting user data:", error);
       });
-    });
-    this.setState({
-      userArr: all_data,
-      isLoading: false,
-    });
-  };
+
+    // dbMonths
+    // .get()
+    // .then((doc) => {
+    //   if (doc.exists) {
+    //     const monthsData = doc.data();
+    //     this.setState({ userArr: [monthsData], isLoading: false });
+    //     console.log(monthsData)
+    //   } else {
+    //     this.setState({ isLoading: false });
+    //   }
+    // })
+    // .catch((error) => {
+    //   console.error("Error getting user data:", error);
+    // });
+
+    // dbRef.onSnapshot(
+    //   (querySnapshot) => {
+    //     const all_data = [];
+    //     querySnapshot.forEach((res) => {
+    //       const { name1, name2, name3, name4,  } =
+    //         res.data();
+    //       all_data.push({
+    //         key: res.id,
+    //         jan,
+    //         feb,
+    //         mar,
+    //         apr,
+    //         may,
+    //         jun,
+    //         jul,
+    //         aug,
+    //         sep,
+    //         oct,
+    //         nov,
+    //         dec,
+    //       });
+    //     });
+    //     this.setState({ userArr: all_data, isLoading: false });
+    //     console.log(all_data);
+    //   },
+    //   (error) => {
+    //     console.error("Error getting subcollection data:", error);
+    //   }
+    // );
+
+    dbMonths.onSnapshot(
+      (querySnapshot) => {
+        const all_months = [];
+        querySnapshot.forEach((res) => {
+          const { jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec } =
+            res.data();
+          all_months.push({
+            key: res.id,
+            jan,
+            feb,
+            mar,
+            apr,
+            may,
+            jun,
+            jul,
+            aug,
+            sep,
+            oct,
+            nov,
+            dec,
+          });
+        });
+        this.setState({ monthsArr: all_months, isLoading: false });
+        console.log(all_months);
+      },
+      (error) => {
+        console.error("Error getting subcollection data:", error);
+      }
+    );
+  }
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
         {this.state.userArr.map((item, i) => {
-          return(
+          return (
             <View style={[styles.box, styles.shadowProp]} key={i}>
-          <Text style={styles.text}>ชื่อผู้เช่า 1 : <Text style={{fontWeight: 'normal'}}>{item.name1}</Text></Text>
-          <Text style={styles.text}>ชื่อผู้เช่า 2 : <Text style={{fontWeight: 'normal'}}>{item.name2}</Text></Text>
-          <Text style={styles.text}>ชื่อผู้เช่า 3 : <Text style={{fontWeight: 'normal'}}>{item.name3}</Text></Text>
-          <Text style={styles.text}>ชื่อผู้เช่า 4 : <Text style={{fontWeight: 'normal'}}>{item.name4}</Text></Text>
-          <Text></Text>
-          <Text style={styles.text}>หอพัก : <Text style={{fontWeight: 'normal'}}>{item.dor_name}</Text></Text>
-          <Text style={styles.text}>ประเภทห้อง : <Text style={{fontWeight: 'normal'}}>{item.dor_type}</Text></Text>
-          <Text style={styles.text}>เลขห้อง : <Text style={{fontWeight: 'normal'}}>{item.num_room}</Text></Text>
-        </View>
-          )
+              <Text style={styles.text}>
+                ชื่อผู้เช่า 1 : <Text>{item.name1}</Text>
+              </Text>
+              <Text style={styles.text}>
+                ชื่อผู้เช่า 2 : <Text>{item.name2}</Text>
+              </Text>
+              <Text style={styles.text}>
+                ชื่อผู้เช่า 3 : <Text>{item.name3}</Text>
+              </Text>
+              <Text style={styles.text}>
+                ชื่อผู้เช่า 4 : <Text>{item.name4}</Text>
+              </Text>
+              <Text></Text>
+              <Text style={styles.text}>
+                หอพัก : <Text>{item.dor_name}</Text>
+              </Text>
+              <Text style={styles.text}>
+                ประเภทห้อง : <Text>{item.dor_type}</Text>
+              </Text>
+              <Text style={styles.text}>
+                เลขห้อง : <Text>{item.num_room}</Text>
+              </Text>
+            </View>
+          );
         })}
 
-        {this.state.userArr.map((item, i) => {
-          return(
+        {this.state.monthsArr.map((item, i) => {
+          return (
             <View style={[styles.box, styles.shadowProp]}>
-            <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
-              กันยายน
-            </Text>
-            <Text></Text>
-            <Text style={styles.text}>ค่าเช่าหอพัก : <Text style={{fontWeight: 'normal'}}>{item.dor_price} </Text>บาท</Text>
-            <Text style={styles.text}>ค่าน้ำ : บาท</Text>
-            <Text style={styles.text}>ค่าไฟ : บาท</Text>
-            <Text></Text>
-            <Text style={[styles.text, { color: "#FF9699" }]}>
-              รวมทั้งสิ้น : บาท
-            </Text>
-          </View>
-          )
+              <Text
+                style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}
+              >{item.oct[0]}</Text>
+              <Text></Text>
+              <Text style={styles.text}>
+                ค่าเช่าหอพัก : <Text>{item.oct[3]} </Text>บาท
+              </Text>
+              <Text style={styles.text}>
+                ค่าน้ำ : <Text> {item.oct[1]} </Text>บาท <Text> ( {item.oct[1]/10} หน่วย)</Text>
+              </Text>
+              <Text style={styles.text}>
+                ค่าไฟ : <Text> {item.oct[2]} </Text>บาท <Text> ( {item.oct[2]/8} หน่วย)</Text>
+              </Text>
+              <Text></Text>
+              <Text style={[styles.text, { color: "#FF9699" }]}>
+                รวมทั้งสิ้น : <Text> {item.oct[1]+item.oct[2]+item.oct[3]} </Text>บาท
+              </Text>
+            </View>
+          );
         })}
-      
+
         <View style={{ alignItems: "center", marginTop: 15 }}>
           <TouchableOpacity
             style={styles.btn}
             onPress={() => {
-              navigation.navigate("PaymentRenter");
+              this.props.navigation.navigate("PaymentRenter");
             }}
           >
             <Text
@@ -114,7 +195,7 @@ class MyRoomPage extends Component {
           <TouchableOpacity
             style={styles.btn}
             onPress={() => {
-              navigation.navigate("HistoryRenter");
+              this.props.navigation.navigate("HistoryRenter");
             }}
           >
             <Text
