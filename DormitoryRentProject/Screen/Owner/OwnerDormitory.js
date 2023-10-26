@@ -107,7 +107,8 @@ const OwnerDormitory = ({navigation, route}) => {
         </View>
 
         <View style={styles.month}>
-          <ScrollView contentContainerStyle={styles.scrollmonth} horizontal={true} showsHorizontalScrollIndicator={false}>
+          <Text style={{color:"#fff", fontSize:22, fontWeight:"bold"}}>ตุลาคม 2566</Text>
+          {/* <ScrollView contentContainerStyle={styles.scrollmonth} horizontal={true} showsHorizontalScrollIndicator={false}>
             <Pressable style={[styles.boxmonth, {backgroundColor:"transparent"}]}>
               <Text style={{fontWeight:"bold", fontSize:17, color:"#363C56"}}>มิ.ย.</Text>
             </Pressable>
@@ -123,19 +124,19 @@ const OwnerDormitory = ({navigation, route}) => {
             <Pressable style={styles.boxmonth}>
               <Text style={{fontWeight:"bold", fontSize:17, color:"#363C56"}}>ต.ค.</Text>
             </Pressable>
-          </ScrollView>
+          </ScrollView> */}
         </View>
       
         <View style={styles.center}>
-          <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56", marginTop:20, marginBottom:5}}>รวมยอดชำระ 75,000 บาท</Text>
+          <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56", marginTop:20, marginBottom:5}}>รวมยอดชำระ 14,550 บาท</Text>
           <View style={styles.block4}>
             <View style={[styles.box2]}>
               <Text style={{fontSize:13, fontWeight:"bold", color:"#363C56"}}>ชำระแล้ว</Text>
-              <Text style={{fontSize:18, fontWeight:"bold", color:"#90DA83"}}>53,500 บาท</Text>
+              <Text style={{fontSize:18, fontWeight:"bold", color:"#90DA83"}}>9,700 บาท</Text>
             </View>
             <View style={[styles.box2]}>
               <Text style={{fontSize:13, fontWeight:"bold", color:"#363C56"}}>ยังไม่ชำระ</Text>
-              <Text style={{fontSize:18, fontWeight:"bold", color:"#FF9699"}}>22,500 บาท</Text>
+              <Text style={{fontSize:18, fontWeight:"bold", color:"#FF9699"}}>4,850 บาท</Text>
             </View>
           </View>
 
@@ -143,18 +144,18 @@ const OwnerDormitory = ({navigation, route}) => {
             <View style={[styles.block4]}>
               <View style={[styles.dot, {backgroundColor:"#90DA83"}]}></View>
               <Text style={{color:"#363C56", fontWeight:"bold"}}>ชำระแล้ว</Text>
-              <Text style={{color:"#363C56", fontWeight:"bold", marginTop:4, marginLeft:5}}>30</Text>
+              <Text style={{color:"#363C56", fontWeight:"bold", marginTop:4, marginLeft:5}}>2</Text>
               
             </View>
             <View style={[styles.block4]}>
               <View style={[styles.dot, {backgroundColor:"#F2AD5C"}]}></View>
               <Text style={{color:"#363C56", fontWeight:"bold"}}>รอการยืนยัน</Text>
-              <Text style={{color:"#363C56", fontWeight:"bold", marginTop:4, marginLeft:5}}>3</Text>
+              <Text style={{color:"#363C56", fontWeight:"bold", marginTop:4, marginLeft:5}}>0</Text>
             </View>
             <View style={[styles.block4]}>
               <View style={[styles.dot, {backgroundColor:"#F64B4B"}]}></View>
               <Text style={{color:"#363C56", fontWeight:"bold"}}>ยังไม่ชำระ</Text>
-              <Text style={{color:"#363C56", fontWeight:"bold", marginTop:4, marginLeft:5}}>7</Text>
+              <Text style={{color:"#363C56", fontWeight:"bold", marginTop:4, marginLeft:5}}>1</Text>
             </View>
           </View>
 
@@ -164,9 +165,9 @@ const OwnerDormitory = ({navigation, route}) => {
               <Image style={styles.img} source={require('../../assets/air-conditioner.png')}/>
               <View style={[styles.block4, {marginTop:0}]}>
                 <View style={[styles.dot2, {backgroundColor:"#90DA83"}]}></View>
-                <Text style={{marginLeft:5, color:"#363C56"}}>1</Text>
+                <Text style={{marginLeft:5, color:"#363C56"}}>0</Text>
                 <View style={[styles.dot2, {backgroundColor:"#F64B4B", marginLeft:10}]}></View>
-                <Text style={{marginLeft:5, color:"#363C56"}}>1</Text>
+                <Text style={{marginLeft:5, color:"#363C56"}}>0</Text>
               </View>
             </Pressable>
             <Pressable style={styles.room} onPressIn={() => {navigation.navigate("DetailRoomGenAir")}}>
@@ -174,7 +175,7 @@ const OwnerDormitory = ({navigation, route}) => {
               <Image style={styles.img} source={require('../../assets/air-conditioner.png')}/>
               <View style={[styles.block4, {marginTop:0}]}>
                 <View style={[styles.dot2, {backgroundColor:"#90DA83"}]}></View>
-                <Text style={{marginLeft:5, color:"#363C56"}}>1</Text>
+                <Text style={{marginLeft:5, color:"#363C56"}}>2</Text>
                 <View style={[styles.dot2, {backgroundColor:"#F64B4B", marginLeft:10}]}></View>
                 <Text style={{marginLeft:5, color:"#363C56"}}>1</Text>
               </View>
@@ -184,9 +185,9 @@ const OwnerDormitory = ({navigation, route}) => {
               <Image style={[styles.img, {width:35, height:35, marginTop:7.5, marginBottom:7.5}]} source={require('../../assets/fan.png')}/>
               <View style={[styles.block4, {marginTop:0}]}>
                 <View style={[styles.dot2, {backgroundColor:"#90DA83"}]}></View>
-                <Text style={{marginLeft:5, color:"#363C56"}}>1</Text>
+                <Text style={{marginLeft:5, color:"#363C56"}}>0</Text>
                 <View style={[styles.dot2, {backgroundColor:"#F64B4B", marginLeft:10}]}></View>
-                <Text style={{marginLeft:5, color:"#363C56"}}>1</Text>
+                <Text style={{marginLeft:5, color:"#363C56"}}>0</Text>
               </View>
             </Pressable>
           </View>
@@ -196,9 +197,9 @@ const OwnerDormitory = ({navigation, route}) => {
               <Image style={styles.img} source={require('../../assets/air-conditioner.png')}/>
               <View style={[styles.block4, {marginTop:0}]}>
                 <View style={[styles.dot2, {backgroundColor:"#90DA83"}]}></View>
-                <Text style={{marginLeft:5, color:"#363C56"}}>1</Text>
+                <Text style={{marginLeft:5, color:"#363C56"}}>0</Text>
                 <View style={[styles.dot2, {backgroundColor:"#F64B4B", marginLeft:10}]}></View>
-                <Text style={{marginLeft:5, color:"#363C56"}}>1</Text>
+                <Text style={{marginLeft:5, color:"#363C56"}}>0</Text>
               </View>
             </Pressable>
             <Pressable style={styles.room} onPressIn={() => {navigation.navigate("DetailRoomOneFan")}}>
@@ -206,9 +207,9 @@ const OwnerDormitory = ({navigation, route}) => {
               <Image style={[styles.img, {width:35, height:35, marginTop:7.5, marginBottom:7.5}]} source={require('../../assets/fan.png')}/>
               <View style={[styles.block4, {marginTop:0}]}>
                 <View style={[styles.dot2, {backgroundColor:"#90DA83"}]}></View>
-                <Text style={{marginLeft:5, color:"#363C56"}}>1</Text>
+                <Text style={{marginLeft:5, color:"#363C56"}}>0</Text>
                 <View style={[styles.dot2, {backgroundColor:"#F64B4B", marginLeft:10}]}></View>
-                <Text style={{marginLeft:5, color:"#363C56"}}>1</Text>
+                <Text style={{marginLeft:5, color:"#363C56"}}>0</Text>
               </View>
             </Pressable>
           </View>
@@ -217,7 +218,7 @@ const OwnerDormitory = ({navigation, route}) => {
             <View>
               <View style={styles.circle2}>
                 <View style={styles.circle3}>
-                  <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56"}}>1500 ฿</Text>
+                  <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56"}}>0 ฿</Text>
                 </View>
               </View>
               <View style={[styles.block4, {justifyContent:"center", marginTop:0}]}>
@@ -227,9 +228,9 @@ const OwnerDormitory = ({navigation, route}) => {
             </View>
             <View style={{marginLeft:10}}>
               <Text style={{marginLeft:30, fontSize:20, fontWeight:"bold", color:"#363C56", marginBottom:12, marginTop:-15}}>ชำระเงินล่าช้า</Text>
-              <Text style={{marginLeft:30, fontSize:17, color:"#363C56", marginBottom: 5}}>1     A201</Text>
-              <Text style={{marginLeft:30, fontSize:17, color:"#363C56", marginBottom: 5}}>2     A202</Text>
-              <Text style={{marginLeft:30, fontSize:17, color:"#363C56"}}>3     A203</Text>
+              <Text style={{marginLeft:30, fontSize:17, color:"#363C56", marginBottom: 5}}>1     -</Text>
+              <Text style={{marginLeft:30, fontSize:17, color:"#363C56", marginBottom: 5}}>2     -</Text>
+              <Text style={{marginLeft:30, fontSize:17, color:"#363C56"}}>3     -</Text>
             </View>
           </View> 
         </View>
@@ -305,7 +306,8 @@ const styles = StyleSheet.create({
     width: "100%",
     height:50,
     backgroundColor: "#96B3FF",
-    alignItems:"center"
+    alignItems:"center",
+    justifyContent:"center"
   },
   scrollmonth:{
     flexDirection:"row",

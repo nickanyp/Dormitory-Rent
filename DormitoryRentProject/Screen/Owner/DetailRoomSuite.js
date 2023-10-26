@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView, Ima
 import { LineChart } from "react-native-gifted-charts";
 
 const DetailRoomSuite = () => {
-    const data = [{value: 0, label:"พ.ค."}, {value: 1, label:"มิ.ย."}, {value: 2, label:"ก.ค."}, {value: 1, label:"ส.ค."}, {value: 1, label:"ก.ย."}, {value: 0, label:"ต.ค."}];
+    const data = [{value: 0, label:"พ.ค."}, {value: 0, label:"มิ.ย."}, {value: 0, label:"ก.ค."}, {value: 0, label:"ส.ค."}, {value: 0, label:"ก.ย."}, {value: 0, label:"ต.ค."}];
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
@@ -11,8 +11,8 @@ const DetailRoomSuite = () => {
                     <View style={styles.block1}>
                         <View style={styles.block2}>
                         <Text style={{fontSize:40, fontWeight:"bold", color:"#96B3FF"}}>ห้องสูท</Text>
-                        <Text style={{color:"#96B3FF"}}>จำนวนห้อง 2 ห้อง</Text>
-                        <Text style={{color:"#96B3FF"}}>ห้องว่าง 1 ห้อง ห้องมีผู้เช่าแล้ว 1 ห้อง</Text>
+                        <Text style={{color:"#96B3FF"}}>จำนวนห้อง 1 ห้อง</Text>
+                        <Text style={{color:"#96B3FF"}}>ห้องว่าง 1 ห้อง ห้องมีผู้เช่าแล้ว 0 ห้อง</Text>
                         </View>
                         <View style={styles.block3}>
                         <View style={styles.circle}>
@@ -26,7 +26,7 @@ const DetailRoomSuite = () => {
                     <View style={styles.box3}>
                         <View style={styles.circle1}>
                             <View style={styles.circle4}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>40</Text>
+                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>1</Text>
                             </View>
                         </View>
                         <Text>ห้องทั้งหมด</Text>
@@ -34,7 +34,7 @@ const DetailRoomSuite = () => {
                     <View style={styles.box3}>
                         <View style={styles.circle2}>
                             <View style={styles.circle4}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>2</Text>
+                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>1</Text>
                             </View>
                         </View>
                         <Text>ห้องว่าง</Text>
@@ -42,22 +42,22 @@ const DetailRoomSuite = () => {
                     <View style={styles.box3}>
                         <View style={styles.circle3}>
                             <View style={styles.circle4}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>38</Text>
+                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>0</Text>
                             </View>
                         </View>
                     <Text>มีผู้เช่า</Text>
                     </View>
                 </View>
 
-                <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56", marginTop:15}}>ยอดชำระ 11,000 บาท</Text>
+                <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56", marginTop:15}}>ยอดชำระ 0 บาท</Text>
                 <View style={styles.block4}>
                     <View style={[styles.box4, {borderColor:"#90DA83"}]}>
                         <Text style={{fontSize:13, fontWeight:"bold", color:"#363C56"}}>ชำระแล้ว</Text>
-                        <Text style={{fontSize:18, fontWeight:"bold", color:"#90DA83"}}>5,500 บาท</Text>
+                        <Text style={{fontSize:18, fontWeight:"bold", color:"#90DA83"}}>0 บาท</Text>
                     </View>
                         <View style={[styles.box4, {borderColor:"#FF9699"}]}>
                         <Text style={{fontSize:13, fontWeight:"bold", color:"#363C56"}}>ยังไม่ชำระ</Text>
-                        <Text style={{fontSize:18, fontWeight:"bold", color:"#FF9699"}}>5,500 บาท</Text>
+                        <Text style={{fontSize:18, fontWeight:"bold", color:"#FF9699"}}>0 บาท</Text>
                     </View>
                 </View>
 
@@ -65,7 +65,7 @@ const DetailRoomSuite = () => {
                     <View style={styles.box3}>
                         <View style={[styles.circle1, {backgroundColor:"#90DA83"}]}>
                             <View style={styles.circle4}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>40</Text>
+                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>0</Text>
                             </View>
                         </View>
                         <Text>ชำระแล้ว</Text>
@@ -73,7 +73,7 @@ const DetailRoomSuite = () => {
                     <View style={styles.box3}>
                         <View style={[styles.circle2, {backgroundColor:'#F2AD5C'}]}>
                             <View style={styles.circle4}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>2</Text>
+                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>0</Text>
                             </View>
                         </View>
                         <Text>รอการยืนยัน</Text>
@@ -81,7 +81,7 @@ const DetailRoomSuite = () => {
                     <View style={styles.box3}>
                         <View style={[styles.circle3, {backgroundColor:"#F64B4B"}]}>
                             <View style={[styles.circle4]}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>38</Text>
+                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>0</Text>
                             </View>
                         </View>
                     <Text>ยังไม่ชำระ</Text>
@@ -110,12 +110,12 @@ const DetailRoomSuite = () => {
                         <Text style={{fontSize:18, fontWeight:"bold", color:"#96B3FF"}}>2</Text>
                     </View>
                     <View style={{marginLeft:15, justifyContent:"center", alignItems:"center"}}>
-                        <Text style={{fontSize:18, fontWeight:"bold", color:"#363C56"}}>A201</Text>
-                        <Text style={{fontSize:18, fontWeight:"bold", color:"#363C56"}}>A202</Text>
+                        <Text style={{fontSize:18, fontWeight:"bold", color:"#363C56"}}>-</Text>
+                        <Text style={{fontSize:18, fontWeight:"bold", color:"#363C56"}}>-</Text>
                     </View>
                     <View style={{marginTop:-1, marginLeft:15,justifyContent:"center", alignItems:"center"}}>
-                        <Text style={{fontSize:17, fontWeight:"bold", color:"#363C56"}}>1 ครั้ง</Text>
-                        <Text style={{fontSize:17, fontWeight:"bold", color:"#363C56"}}>2 ครั้ง</Text>
+                        <Text style={{fontSize:17, fontWeight:"bold", color:"#363C56"}}>ครั้ง</Text>
+                        <Text style={{fontSize:17, fontWeight:"bold", color:"#363C56"}}>ครั้ง</Text>
                     </View>
                 </View>
             </ScrollView>
