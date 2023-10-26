@@ -116,7 +116,7 @@ const InformPaymentOwner = ({navigation, route}) => {
           return(
             <TouchableOpacity
               style={[styles.btn, styles.shadowProp]}
-              onPress={() => {navigation.navigate("DetailPayment", {room: item.data.room, code: item.data.code, type: item.data.type, month: month})}}
+              onPress={() => {navigation.navigate("DetailPayment", {room: item.data.room, code: item.data.code, type: item.data.type, month: month, price: item.data.price})}}
             >
               <Text style={styles.txt}>{item.data.room}</Text>
             </TouchableOpacity>
@@ -136,12 +136,11 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   grid: {
-    flexDirection: "row",
-    marginHorizontal: "5%",
-    marginTop: '5%'
+    justifyContent:"center",
+    alignItems:"center"
   },
   btn: {
-    width: 75,
+    width: 200,
     fontSize: 30,
     padding: 10,
     borderRadius: 20,

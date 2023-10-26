@@ -104,10 +104,11 @@ const StatusPaymentOwner = ({ navigation }) => {
           style={[
             styles.btn,
             styles.shadowProp,
-            { backgroundColor: "#F2AD5C" },
+            { backgroundColor: "#90DA83" },
           ]}
+          onPress={toggleModal}
         >
-          <Text style={styles.txt}>A101</Text>
+          <Text style={styles.txt}>A102</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -117,13 +118,49 @@ const StatusPaymentOwner = ({ navigation }) => {
             { backgroundColor: "#EF6767" },
           ]}
         >
-          <Text style={styles.txt}>A101</Text>
+          <Text style={styles.txt}>A103</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[styles.btn, styles.shadowProp, { backgroundColor: "white" }]}
         >
-          <Text style={styles.txt}>A101</Text>
+          <Text style={styles.txt}>A104</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.btn, styles.shadowProp, { backgroundColor: "white" }]}
+        >
+          <Text style={styles.txt}>A105</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.btn, styles.shadowProp, { backgroundColor: "white" }]}
+        >
+          <Text style={styles.txt}>A106</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.btn, styles.shadowProp, { backgroundColor: "white" }]}
+        >
+          <Text style={styles.txt}>A107</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.btn, styles.shadowProp, { backgroundColor: "white" }]}
+        >
+          <Text style={styles.txt}>A108</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.btn, styles.shadowProp, { backgroundColor: "white" }]}
+        >
+          <Text style={styles.txt}>A109</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.btn, styles.shadowProp, { backgroundColor: "white" }]}
+        >
+          <Text style={styles.txt}>A110</Text>
         </TouchableOpacity>
       </View>
 
@@ -141,7 +178,7 @@ const StatusPaymentOwner = ({ navigation }) => {
           >
             <Image style={styles.img} source={require('../../assets/slip.jpeg')} />
 
-            <Button title="ยืนยัน" onPress={toggleModal} />
+            <Button title="ปิด" onPress={toggleModal} />
           </View>
         </Modal>
       </View>
@@ -155,12 +192,11 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   grid: {
-    flexDirection: "row",
-    marginHorizontal: "5%",
-    marginTop: "5%",
+    justifyContent:"center",
+    alignItems:"center"
   },
   btn: {
-    width: 75,
+    width: 200,
     fontSize: 30,
     padding: 10,
     borderRadius: 20,
