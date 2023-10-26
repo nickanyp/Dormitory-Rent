@@ -1,162 +1,203 @@
 import {
-    Text,
-    View,
-    StyleSheet,
-    TouchableOpacity,
-    TouchableHighlight,
-    renderLabel,
-    SafeAreaView,
-  } from "react-native";
-  import { useState } from "react";
-  import { Dropdown } from "react-native-element-dropdown";
-  import AntDesign from "@expo/vector-icons/AntDesign";
-  import DetailPaymentOwner from "./DetailPaymentOwner";
-  
-  const data = [
-    { label: "มกราคม", value: "1" },
-    { label: "กุมภาพันธ์", value: "2" },
-    { label: "มีนาคม", value: "3" },
-    { label: "เมษายน", value: "4" },
-    { label: "พฤษภาคม", value: "5" },
-    { label: "มิถุนายน", value: "6" },
-    { label: "กรกฎาคม", value: "7" },
-    { label: "สิงหาคม", value: "8" },
-    { label: "กันยายน", value: "9" },
-    { label: "ตุลาคม", value: "10" },
-    { label: "พฤศจิกายน", value: "11" },
-    { label: "ธันวาคม", value: "12" },
-  ];
-  
-  const StatusPaymentOwner = ({navigation}) => {
-    const [value, setValue] = useState(null);
-    const [isFocus, setIsFocus] = useState(false);
-  
-    return (
-      <SafeAreaView style={styles.container}>
-        <View
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  TouchableHighlight,
+  renderLabel,
+  SafeAreaView,
+  Image,
+  Button
+} from "react-native";
+import { useState } from "react";
+import { Dropdown } from "react-native-element-dropdown";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import DetailPaymentOwner from "./DetailPaymentOwner";
+import Modal from "react-native-modal";
+
+const data = [
+  { label: "มกราคม", value: "1" },
+  { label: "กุมภาพันธ์", value: "2" },
+  { label: "มีนาคม", value: "3" },
+  { label: "เมษายน", value: "4" },
+  { label: "พฤษภาคม", value: "5" },
+  { label: "มิถุนายน", value: "6" },
+  { label: "กรกฎาคม", value: "7" },
+  { label: "สิงหาคม", value: "8" },
+  { label: "กันยายน", value: "9" },
+  { label: "ตุลาคม", value: "10" },
+  { label: "พฤศจิกายน", value: "11" },
+  { label: "ธันวาคม", value: "12" },
+];
+
+const StatusPaymentOwner = ({ navigation }) => {
+  const [value, setValue] = useState(null);
+  const [isFocus, setIsFocus] = useState(false);
+
+  const [isModalVisible, setModalVisible] = useState(false);
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View
+        style={{
+          flexDirection: "row",
+          marginTop: "10%",
+          marginHorizontal: "5%",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Text
           style={{
-            flexDirection: "row",
-            marginTop: "10%",
-            marginHorizontal: "5%",
-            alignItems: "center",
-            justifyContent: "center",
+            fontSize: 25,
+            fontWeight: "bold",
+            color: "#96B3FF",
+            margin: 10,
           }}
         >
-          <Text
+          สถานะการชำระค่าเช่า
+        </Text>
+
+        <Dropdown
+          style={styles.dropdown}
+          placeholderStyle={{
+            fontSize: 14,
+            color: "#363C56",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+          selectedTextStyle={{
+            fontSize: 14,
+            color: "#363C56",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+          data={data}
+          labelField="label"
+          valueField="value"
+          placeholder={!isFocus ? "เดือน" : "..."}
+          value={value}
+          onFocus={() => setIsFocus(true)}
+          onChange={(item) => {
+            setValue(item.value);
+            setIsFocus(false);
+          }}
+        />
+      </View>
+
+      <View style={styles.grid}>
+        <TouchableOpacity
+          style={[
+            styles.btn,
+            styles.shadowProp,
+            { backgroundColor: "#90DA83" },
+          ]}
+          onPress={toggleModal}
+        >
+          <Text style={styles.txt}>A101</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[
+            styles.btn,
+            styles.shadowProp,
+            { backgroundColor: "#F2AD5C" },
+          ]}
+        >
+          <Text style={styles.txt}>A101</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[
+            styles.btn,
+            styles.shadowProp,
+            { backgroundColor: "#EF6767" },
+          ]}
+        >
+          <Text style={styles.txt}>A101</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.btn, styles.shadowProp, { backgroundColor: "white" }]}
+        >
+          <Text style={styles.txt}>A101</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View>
+        <Modal isVisible={isModalVisible}>
+          <View
             style={{
-              fontSize: 25,
-              fontWeight: "bold",
-              color: "#96B3FF",
-              margin: 10,
+              backgroundColor: "#fff",
+              width: "100%",
+              height: "50%",
+              borderRadius: 40,
+              justifyContent: "center",
+              alignItems: 'center'
             }}
           >
-            สถานะการชำระค่าเช่า
-          </Text>
-  
-          <Dropdown
-            style={styles.dropdown}
-            placeholderStyle={{
-              fontSize: 14,
-              color: "#363C56",
-              fontWeight: "bold",
-              textAlign: "center",
-            }}
-            selectedTextStyle={{
-              fontSize: 14,
-              color: "#363C56",
-              fontWeight: "bold",
-              textAlign: "center",
-            }}
-            data={data}
-            labelField="label"
-            valueField="value"
-            placeholder={!isFocus ? "เดือน" : "..."}
-            value={value}
-            onFocus={() => setIsFocus(true)}
-            onChange={(item) => {
-              setValue(item.value);
-              setIsFocus(false);
-            }}
-          />
-        </View>
-  
-        <View style={styles.grid}>
-          <TouchableOpacity
-            style={[styles.btn, styles.shadowProp, {backgroundColor: "#90DA83"}]}
-          >
-            <Text style={styles.txt}>A101</Text>
-          </TouchableOpacity>
+            <Image style={styles.img} source={require('../../assets/slip.jpeg')} />
 
-          <TouchableOpacity
-            style={[styles.btn, styles.shadowProp, {backgroundColor: "#F2AD5C"}]}
-          >
-            <Text style={styles.txt}>A101</Text>
-          </TouchableOpacity>
+            <Button title="ยืนยัน" onPress={toggleModal} />
+          </View>
+        </Modal>
+      </View>
+    </SafeAreaView>
+  );
+};
 
-          <TouchableOpacity
-            style={[styles.btn, styles.shadowProp, {backgroundColor: "#EF6767"}]}
-          >
-            <Text style={styles.txt}>A101</Text>
-          </TouchableOpacity>
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+  },
+  grid: {
+    flexDirection: "row",
+    marginHorizontal: "5%",
+    marginTop: "5%",
+  },
+  btn: {
+    width: 75,
+    fontSize: 30,
+    padding: 10,
+    borderRadius: 20,
+    borderWidth: 1,
+    margin: 7,
+    alignItems: "center",
+    shadowColor: "#9B9B9B",
+    shadowOffset: { width: 3, height: 4 },
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+  },
+  txt: {
+    fontWeight: "bold",
+    color: "#363C56",
+    fontSize: 16,
+  },
+  dropdown: {
+    width: 120,
+    height: 40,
+    borderColor: "gray",
+    borderRadius: 15,
+    paddingHorizontal: 8,
+    backgroundColor: "#D9D9D9",
+    justifyContent: "center",
+  },
+  shadowProp: {
+    shadowColor: "#9B9B9B",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
+  },
+  img: {
+    width: 300,
+    height: 300,
+    marginBottom: '5%',
+    resizeMode: 'contain',
+  },
+});
 
-          <TouchableOpacity
-            style={[styles.btn, styles.shadowProp, {backgroundColor: "white"}]}
-          >
-            <Text style={styles.txt}>A101</Text>
-          </TouchableOpacity>
-
-        </View>
-
-        
-
-      </SafeAreaView>
-    );
-  };
-  
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "white",
-    },
-    grid: {
-      flexDirection: "row",
-      marginHorizontal: "5%",
-      marginTop: '5%'
-    },
-    btn: {
-      width: 75,
-      fontSize: 30,
-      padding: 10,
-      borderRadius: 20,
-      borderWidth: 1,
-      margin: 7,
-      alignItems: "center",
-      shadowColor: "#9B9B9B",
-      shadowOffset: { width: 3, height: 4 },
-      shadowOpacity: 0.5,
-      shadowRadius: 3,
-    },
-    txt: {
-      fontWeight: "bold",
-      color: "#363C56",
-      fontSize: 16,
-    },
-    dropdown: {
-      width: 120,
-      height: 40,
-      borderColor: "gray",
-      borderRadius: 15,
-      paddingHorizontal: 8,
-      backgroundColor: "#D9D9D9",
-      justifyContent: "center",
-    },
-    shadowProp: {
-      shadowColor: "#9B9B9B",
-      shadowOffset: { width: -2, height: 4 },
-      shadowOpacity: 0.4,
-      shadowRadius: 3,
-    },
-  });
-  
-  export default StatusPaymentOwner;
-  
+export default StatusPaymentOwner;
