@@ -29,76 +29,118 @@ const MyRoomPage = ({ route, navigation }) => {
     currentmonth+=1
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const db = getFirestore();
-      const renterQuery = query(collection(db, "renters"), where("uid", "==", uid));
-      console.log(renterQuery);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const db = getFirestore();
+  //     const renterQuery = query(collection(db, "renters"), where("uid", "==", uid));
+  //     console.log(renterQuery);
 
-      try {
-        const querySnapshot = await getDocs(renterQuery);
-        console.log(querySnapshot);
+  //     try {
+  //       const querySnapshot = await getDocs(renterQuery);
+  //       console.log(querySnapshot);
 
-        if (querySnapshot.empty) {
-          console.log("No dormitories found");
-        } else {
-          const renters_data = [];
-          querySnapshot.forEach((doc) => {
-            renters_data.push({
-              id: doc.id,
-              data: doc.data(),
-            });
-          });
-          setRenter(renters_data);
-          console.log(renterArr);
-        }
+  //       if (querySnapshot.empty) {
+  //         console.log("No dormitories found");
+  //       } else {
+  //         const renters_data = [];
+  //         querySnapshot.forEach((doc) => {
+  //           renters_data.push({
+  //             id: doc.id,
+  //             data: doc.data(),
+  //           });
+  //         });
+  //         setRenter(renters_data);
+  //         console.log(renterArr);
+  //       }
         
-      } catch (error) {
-        console.error("Error fetching renters:", error);
-      }
+  //     } catch (error) {
+  //       console.error("Error fetching renters:", error);
+  //     }
 
-      console.log(renterArr);
-      const dataRenter = renterArr[0].data
-      // console.log(dataRenter)
-      console.log(toString(currentmonth))
-      const paymentQuery = query(collection(db, "payment"), where("month", "==", currentmonth.toString()), where("code", "==", dataRenter.code), where("room", "==", dataRenter.num_room));
+  //     console.log(renterArr);
+  //     const dataRenter = renterArr[0].data
+  //     // console.log(dataRenter)
+  //     console.log(toString(currentmonth))
+  //     const paymentQuery = query(collection(db, "payment"), where("month", "==", currentmonth.toString()), where("code", "==", dataRenter.code), where("room", "==", dataRenter.num_room));
 
-      try {
-        const querySnapshot = await getDocs(paymentQuery);
-        // console.log(querySnapshot);
+  //     try {
+  //       const querySnapshot = await getDocs(paymentQuery);
+  //       // console.log(querySnapshot);
 
-        if (querySnapshot.empty) {
-          console.log("No data found");
-        } else {
-          const payment_data = [];
-          querySnapshot.forEach((doc) => {
-            payment_data.push({
-              id: doc.id,
-              data: doc.data(),
-            });
-          });
-          setPayment(payment_data);
+  //       if (querySnapshot.empty) {
+  //         console.log("No data found");
+  //       } else {
+  //         const payment_data = [];
+  //         querySnapshot.forEach((doc) => {
+  //           payment_data.push({
+  //             id: doc.id,
+  //             data: doc.data(),
+  //           });
+  //         });
+  //         setPayment(payment_data);
           
-        }
-      } catch (error) {
-        console.error("Error fetching payment renters:", error);
-      }
-    };
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching payment renters:", error);
+  //     }
+  //   };
 
-    fetchData();
-    console.log(2)
+  //   fetchData();
+  //   console.log(2)
     
 
-  }, [uid]);
+  // }, [uid]);
 
+  useEffect(() => {
+    // Initialize Firebase (if not already initialized)
+    const app = initializeApp(firebaseConfig);
+
+    // Reference to Firestore
+    const db = getFirestore(app);
+
+    // Fetch data from collection1
+    const fetchDataFromCollection1 = async () => {
+      const querySnapshot = await getDocs(query(collection(db, "renters"), where("uid", "==", uid)));
+
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push({ id: doc.id, ...doc.data() });
+      });
+
+      setRenter(data);
+      console.log(data)
+
+      // Use the data from collection1 to query collection2
+      data.forEach(async (item) => {
+        const querySnapshot = await getDocs(
+          query(collection(db, "payment"), where("month", "==", currentmonth.toString()), where("code", "==", item.code), where("room", "==", item.num_room))
+        );
+
+        const relatedData = [];
+        querySnapshot.forEach((doc) => {
+          relatedData.push({ id: doc.id, ...doc.data() });
+        });
+
+        setPayment(relatedData)
+
+
+        // Update the state with related data from collection2
+        // setPayment((prevData) => [...prevData, { renterArr: item, paymentArr: relatedData }]);
+      });
+    };
+
+    fetchDataFromCollection1();
+  }, []); 
+
+  console.log(renterArr)
+  console.log(2)
+  console.log(paymentArr)
   
 
   let namemoth = ''
   if (currentmonth == 10){
     namemoth = "ตุลาคม"
   }
-  console.log(namemoth)
-  console.log(paymentArr);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -106,26 +148,26 @@ const MyRoomPage = ({ route, navigation }) => {
         return (
           <View style={[styles.box, styles.shadowProp]}>
             <Text style={[styles.text, {fontSize:19, color:"#FF9699"}]}>
-              หอพัก : <Text>{item.data.dor_name}</Text>
+              หอพัก : <Text>{item.dor_name}</Text>
             </Text>
             <Text style={[styles.text, {fontSize:19, color:"#FF9699"}]}>
-              ประเภทห้อง : <Text>{item.data.dor_type}</Text>
+              ประเภทห้อง : <Text>{item.dor_type}</Text>
             </Text>
             <Text style={[styles.text, {fontSize:19, color:"#FF9699"}]}>
-              เลขห้อง : <Text>{item.data.num_room}</Text>
+              เลขห้อง : <Text>{item.num_room}</Text>
             </Text>
             <Text></Text>
             <Text style={styles.text}>
-              ชื่อผู้เช่า 1 : <Text>{item.data.name1}</Text>
+              ชื่อผู้เช่า 1 : <Text>{item.name1}</Text>
             </Text>
             <Text style={styles.text}>
-              ชื่อผู้เช่า 2 : <Text>{item.data.name2}</Text>
+              ชื่อผู้เช่า 2 : <Text>{item.name2}</Text>
             </Text>
             <Text style={styles.text}>
-              ชื่อผู้เช่า 3 : <Text>{item.data.name3}</Text>
+              ชื่อผู้เช่า 3 : <Text>{item.name3}</Text>
             </Text>
             <Text style={styles.text}>
-              ชื่อผู้เช่า 4 : <Text>{item.data.name4}</Text>
+              ชื่อผู้เช่า 4 : <Text>{item.name4}</Text>
             </Text>
           </View>
         );
@@ -139,17 +181,17 @@ const MyRoomPage = ({ route, navigation }) => {
             >{namemoth}</Text>
             <Text></Text>
             <Text style={styles.text}>
-              ค่าเช่าหอพัก : <Text>{item.data.rent}</Text>บาท
+              ค่าเช่าหอพัก : <Text>{item.rent}</Text>บาท
             </Text>
             <Text style={styles.text}>
-              ค่าน้ำ : <Text>{parseInt(item.data.water)*18}</Text> บาท ( {item.data.water} หน่วย ) <Text> </Text>
+              ค่าน้ำ : <Text>{parseInt(item.water)*18}</Text> บาท ( {item.water} หน่วย ) <Text> </Text>
             </Text>
             <Text style={styles.text}>
-              ค่าไฟ : <Text>{parseInt(item.data.light)*8}</Text>บาท ( {item.data.light} หน่วย )<Text> </Text>
+              ค่าไฟ : <Text>{parseInt(item.light)*8}</Text>บาท ( {item.light} หน่วย )<Text> </Text>
             </Text>
             <Text></Text>
             <Text style={[styles.text, { color: "#FF9699", fontSize:20 }]}>
-              รวมทั้งสิ้น : <Text>{parseInt(item.data.rent)+(parseInt(item.data.water)*18)+(parseInt(item.data.light)*8)}</Text>บาท
+              รวมทั้งสิ้น : <Text>{parseInt(item.rent)+(parseInt(item.water)*18)+(parseInt(item.light)*8)}</Text>บาท
             </Text>
           </View>
         );

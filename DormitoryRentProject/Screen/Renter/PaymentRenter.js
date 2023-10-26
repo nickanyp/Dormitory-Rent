@@ -30,17 +30,17 @@ const PaymentRenter = ({ route, navigation }) => {
                   >{month}</Text>
                   <Text></Text>
                   <Text style={styles.text}>
-                    ค่าเช่าหอพัก : <Text>{item.data.rent}</Text>บาท
+                    ค่าเช่าหอพัก : <Text>{item.rent}</Text>บาท
                   </Text>
                   <Text style={styles.text}>
-                    ค่าน้ำ : <Text>{parseInt(item.data.water)*18}</Text>บาท ( {item.data.water} หน่วย ) <Text> </Text>
+                    ค่าน้ำ : <Text>{parseInt(item.water)*18}</Text>บาท ( {item.water} หน่วย ) <Text> </Text>
                   </Text>
                   <Text style={styles.text}>
-                    ค่าไฟ : <Text>{parseInt(item.data.light)*8}</Text>บาท ( {item.data.light} หน่วย )<Text> </Text>
+                    ค่าไฟ : <Text>{parseInt(item.light)*8}</Text>บาท ( {item.light} หน่วย )<Text> </Text>
                   </Text>
                   <Text></Text>
                   <Text style={[styles.text, { color: "#FF9699", fontSize:20 }]}>
-                    รวมทั้งสิ้น : <Text>{parseInt(item.data.rent)+(parseInt(item.data.water)*18)+(parseInt(item.data.light)*8)}</Text>บาท
+                    รวมทั้งสิ้น : <Text>{parseInt(item.rent)+(parseInt(item.water)*18)+(parseInt(item.light)*8)}</Text>บาท
                   </Text>
                 </View>
               );
@@ -56,12 +56,12 @@ const PaymentRenter = ({ route, navigation }) => {
               >
                 แจ้งชำระค่าเช่า
               </Text>
-              <TouchableOpacity style={[styles.btn1, styles.shadowProp]} onPressIn={handleChoosePhoto}>
+              <TouchableOpacity style={[styles.btn1, styles.shadowProp]}>
                 <Text style={[styles.text, { textAlign: "center" }]}>
                   อัปโหลดไฟล์รูปภาพ
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.btn2}>
+              <TouchableOpacity style={styles.btn2} onPressIn={}>
                 <Text
                   style={[styles.text, { textAlign: "center", color: "white" }]}
                 >
