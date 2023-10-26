@@ -36,27 +36,28 @@ const DashboardLight = () => {
 
   return (
       <SafeAreaView style={styles.container}>
+        <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <View style={[styles.block4, styles.shadowProp, {backgroundColor: 'white'}]}>
-          <Text style={{fontSize:19, fontWeight:"bold", color:"#363C56"}}>ไฟฟ้าประจำเดือนกันยายน</Text>
+          <Text style={{fontSize:19, fontWeight:"bold", color:"#363C56"}}>ไฟฟ้าประจำเดือนตุลาคม</Text>
         </View>
 
         <View style={styles.block1}>
           <View>
             <View style={styles.circle}></View>
             <View style={styles.circle2}>
-              <Text style={{fontSize:30, fontWeight:"bold", color:"#363C56"}}>880฿</Text>
+              <Text style={{fontSize:30, fontWeight:"bold", color:"#363C56"}}>4,567฿</Text>
             </View>
           </View>
           <View style={{justifyContent:"center"}}>
             <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>ค่าไฟฟ้า : 8 บาท/หน่วย</Text>
-            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>ปริมาณไฟฟ้า : 110 หน่วย</Text>
-            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>รวมทั้งหมด : 880 บาท</Text>
+            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>ปริมาณไฟฟ้า : 570 หน่วย</Text>
+            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>รวมทั้งหมด : 4,567 บาท</Text>
           </View>
         </View>
 
         <View style={styles.block2}>
-          <Text style={{position:'absolute', top:19, left:26, color:"#fff", fontWeight:"bold", fontSize:15}}>110 หน่วย</Text>
-          <Text style={{position:'absolute', top:78, left:26, color:"#fff", fontWeight:"bold", fontSize:15}}>120 หน่วย</Text>
+          <Text style={{position:'absolute', top:19, left:26, color:"#fff", fontWeight:"bold", fontSize:15}}>570.875 หน่วย</Text>
+          <Text style={{position:'absolute', top:78, left:26, color:"#fff", fontWeight:"bold", fontSize:15}}>321.54 หน่วย</Text>
           <BarChart
             horizontal
             barWidth={30}
@@ -82,6 +83,7 @@ const DashboardLight = () => {
             chartConfig={chartConfig}
           />
         </View>
+        </ScrollView>
         
       </SafeAreaView>
   );
@@ -149,6 +151,13 @@ const styles = StyleSheet.create({
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.4,
     shadowRadius: 3,
+  },
+  scroll:{
+    textAlign:"center",
+    // backgroundColor:"#f00"
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop:15
   },
 
 });

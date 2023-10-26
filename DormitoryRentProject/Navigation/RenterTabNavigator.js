@@ -46,6 +46,7 @@ const RenterTabNavigator = ({route}) => {
       <Tab.Screen
         name="DASHBOARD"
         component={DashboardPage}
+        initialParams={{uid: uid}}
         options={{
           tabBarIcon: ({ color, size }) => {
             return <MaterialIcons name="dashboard" size={size} color={color} />

@@ -184,6 +184,7 @@ const RegisterOwner = ({ navigation }) => {
                 />
               )}
             />
+            
             <TouchableOpacity
               style={[styles.input, styles.shadowProp, { marginLeft: 0,width: 145 }]}
               onPress={toggleModal}
@@ -390,7 +391,7 @@ const styles = StyleSheet.create({
     height: 20,
   },
   errorText: {
-    color: "red",
+    color: "#96B3FF",
     fontSize: 14,
     marginLeft: "15%",
   },
