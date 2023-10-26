@@ -61,7 +61,7 @@ const PaymentRenter = ({ route, navigation }) => {
                   อัปโหลดไฟล์รูปภาพ
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.btn2} >
+              <TouchableOpacity style={styles.btn2} onPressIn={() => {navigation.navigate("MY ROOM")}}>
                 <Text
                   style={[styles.text, { textAlign: "center", color: "white" }]}
                 >
