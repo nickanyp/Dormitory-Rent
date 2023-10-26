@@ -5,31 +5,34 @@ import {
   TouchableOpacity,
   StyleSheet,
   ActivityIndicator,
+  ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const HistoryRenter = ({ route, navigation }) => {
-  const item = route.params.data
-  console.log(item)
+  const item = route.params.data;
+  console.log(item);
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={[styles.box, styles.shadowProp]}>
-        <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
-          กันยายน
-        </Text>
-        <Text></Text>
-        <Text style={styles.text}>ค่าเช่าหอพัก : บาท</Text>
-        <Text style={styles.text}>ค่าน้ำ : บาท</Text>
-        <Text style={styles.text}>ค่าไฟ : บาท</Text>
-        <Text></Text>
-        <View style={{ flexDirection: "row" }}>
-          <Text style={[styles.text, { color: "#FF9699", flex: 1 }]}>
-            รวมทั้งสิ้น : บาท
+      <ScrollView>
+        <View style={[styles.box, styles.shadowProp]}>
+          <Text style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}>
+            กันยายน
           </Text>
-          <Text style={[styles.text, { color: "#69CC6D" }]}>ยืนยันแล้ว</Text>
+          <Text></Text>
+          <Text style={[styles.text, {marginHorizontal: 0}]}>ค่าเช่าหอพัก : บาท</Text>
+          <Text style={[styles.text, {marginHorizontal: 0}]}>ค่าน้ำ : บาท</Text>
+          <Text style={[styles.text, {marginHorizontal: 0}]}>ค่าไฟ : บาท</Text>
+          <Text></Text>
+          <View style={{ flexDirection: "row" , backgroundColor: 'yellow'}}>
+            <Text style={[styles.text, { color: "#FF9699", flex: 2 }]}>
+              รวมทั้งสิ้น : บาท
+            </Text>
+            <Text style={[styles.text, { color: "#69CC6D", flex: 1}]}>ยืนยันแล้ว</Text>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -37,12 +40,13 @@ const HistoryRenter = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "red",
     justifyContent: "center",
-    alignItems: 'center'
+    alignItems: "center",
+    marginTop: '15%'
   },
   box: {
-    width: "90%",
+    width: "100%",
     borderWidth: 1.5,
     borderRadius: 10,
     borderColor: "#9B9B9B",
@@ -52,18 +56,7 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
     fontSize: 15,
-  },
-  btn: {
-    width: 120,
-    height: 40,
-    borderRadius: 40,
-    backgroundColor: "#FF9699",
-    justifyContent: "center",
-    margin: 8,
-  },
-  textBtn: {
-    fontWeight: "bold",
-    fontSize: 13,
+    marginHorizontal: '15%'
   },
   shadowProp: {
     shadowColor: "#9B9B9B",

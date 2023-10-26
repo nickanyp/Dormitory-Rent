@@ -23,16 +23,19 @@ const MyRoomPage = ({ route, navigation }) => {
   const [renterArr, setRenter] = useState([]);
   const [paymentArr, setPayment] = useState([]);
   const today = new Date();
-  const day = today.getDate()
-  let currentmonth = today.getMonth()
-  if (day >= 26){
-    currentmonth+=1
+  const day = today.getDate();
+  let currentmonth = today.getMonth();
+  if (day >= 26) {
+    currentmonth += 1;
   }
 
   useEffect(() => {
     const fetchData = async () => {
       const db = getFirestore();
-      const renterQuery = query(collection(db, "renters"), where("uid", "==", uid));
+      const renterQuery = query(
+        collection(db, "renters"),
+        where("uid", "==", uid)
+      );
       console.log(renterQuery);
 
       try {
@@ -52,16 +55,20 @@ const MyRoomPage = ({ route, navigation }) => {
           setRenter(renters_data);
           console.log(renterArr);
         }
-        
       } catch (error) {
         console.error("Error fetching renters:", error);
       }
 
       console.log(renterArr);
-      const dataRenter = renterArr[0].data
+      const dataRenter = renterArr[0].data;
       // console.log(dataRenter)
-      console.log(toString(currentmonth))
-      const paymentQuery = query(collection(db, "payment"), where("month", "==", currentmonth.toString()), where("code", "==", dataRenter.code), where("room", "==", dataRenter.num_room));
+      console.log(toString(currentmonth));
+      const paymentQuery = query(
+        collection(db, "payment"),
+        where("month", "==", currentmonth.toString()),
+        where("code", "==", dataRenter.code),
+        where("room", "==", dataRenter.num_room)
+      );
 
       try {
         const querySnapshot = await getDocs(paymentQuery);
@@ -78,7 +85,6 @@ const MyRoomPage = ({ route, navigation }) => {
             });
           });
           setPayment(payment_data);
-          
         }
       } catch (error) {
         console.error("Error fetching payment renters:", error);
@@ -86,18 +92,14 @@ const MyRoomPage = ({ route, navigation }) => {
     };
 
     fetchData();
-    console.log(2)
-    
-
+    console.log(2);
   }, [uid]);
 
-  
-
-  let namemoth = ''
-  if (currentmonth == 10){
-    namemoth = "ตุลาคม"
+  let namemoth = "";
+  if (currentmonth == 10) {
+    namemoth = "ตุลาคม";
   }
-  console.log(namemoth)
+  console.log(namemoth);
   console.log(paymentArr);
 
   return (
@@ -105,13 +107,13 @@ const MyRoomPage = ({ route, navigation }) => {
       {renterArr.map((item) => {
         return (
           <View style={[styles.box, styles.shadowProp]}>
-            <Text style={[styles.text, {fontSize:19, color:"#FF9699"}]}>
+            <Text style={[styles.text, { fontSize: 19, color: "#FF9699" }]}>
               หอพัก : <Text>{item.data.dor_name}</Text>
             </Text>
-            <Text style={[styles.text, {fontSize:19, color:"#FF9699"}]}>
+            <Text style={[styles.text, { fontSize: 19, color: "#FF9699" }]}>
               ประเภทห้อง : <Text>{item.data.dor_type}</Text>
             </Text>
-            <Text style={[styles.text, {fontSize:19, color:"#FF9699"}]}>
+            <Text style={[styles.text, { fontSize: 19, color: "#FF9699" }]}>
               เลขห้อง : <Text>{item.data.num_room}</Text>
             </Text>
             <Text></Text>
@@ -136,77 +138,88 @@ const MyRoomPage = ({ route, navigation }) => {
           <View style={[styles.box, styles.shadowProp]}>
             <Text
               style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}
-            >{namemoth}</Text>
+            >
+              {namemoth}
+            </Text>
             <Text></Text>
             <Text style={styles.text}>
               ค่าเช่าหอพัก : <Text>{item.data.rent}</Text>บาท
             </Text>
             <Text style={styles.text}>
-              ค่าน้ำ : <Text>{parseInt(item.data.water)*18}</Text> บาท ( {item.data.water} หน่วย ) <Text> </Text>
+              ค่าน้ำ : <Text>{parseInt(item.data.water) * 18}</Text> บาท ({" "}
+              {item.data.water} หน่วย ) <Text> </Text>
             </Text>
             <Text style={styles.text}>
-              ค่าไฟ : <Text>{parseInt(item.data.light)*8}</Text>บาท ( {item.data.light} หน่วย )<Text> </Text>
+              ค่าไฟ : <Text>{parseInt(item.data.light) * 8}</Text>บาท ({" "}
+              {item.data.light} หน่วย )<Text> </Text>
             </Text>
             <Text></Text>
-            <Text style={[styles.text, { color: "#FF9699", fontSize:20 }]}>
-              รวมทั้งสิ้น : <Text>{parseInt(item.data.rent)+(parseInt(item.data.water)*18)+(parseInt(item.data.light)*8)}</Text>บาท
+            <Text style={[styles.text, { color: "#FF9699", fontSize: 20 }]}>
+              รวมทั้งสิ้น :{" "}
+              <Text>
+                {parseInt(item.data.rent) +
+                  parseInt(item.data.water) * 18 +
+                  parseInt(item.data.light) * 8}
+              </Text>
+              บาท
             </Text>
           </View>
         );
       })}
 
-      
-          <View>
-            <View
-              style={{
-                alignItems: "center",
-                marginTop: 15,
-                flexDirection: "row",
-              }}
+      <View>
+        <View
+          style={{
+            alignItems: "center",
+            marginTop: 15,
+            flexDirection: "row",
+          }}
+        >
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => {
+              navigation.navigate("PaymentRenter", {
+                data: paymentArr,
+                month: namemoth,
+              });
+            }}
+          >
+            <Text
+              style={[
+                styles.textBtn,
+                {
+                  color: "white",
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  fontSize: 15,
+                },
+              ]}
             >
-              <TouchableOpacity
-                style={styles.btn}
-                onPress={() => {
-                  navigation.navigate("PaymentRenter", { data: paymentArr, month: namemoth });
-                }}
-              >
-                <Text
-                  style={[
-                    styles.textBtn,
-                    {
-                      color: "white",
-                      textAlign: "center",
-                      fontWeight: "bold",
-                      fontSize: 15,
-                    },
-                  ]}
-                >
-                  ชำระค่าเช่า
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.btn}
-                onPress={() => {
-                  navigation.navigate("HistoryRenter", { data: renterArr });
-                }}
-              >
-                <Text
-                  style={[
-                    styles.textBtn,
-                    {
-                      color: "white",
-                      textAlign: "center",
-                      fontWeight: "bold",
-                      fontSize: 15,
-                    },
-                  ]}
-                >
-                  ประวัติค่าเช่าหอ
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        
+              ชำระค่าเช่า
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => {
+              navigation.navigate("HistoryRenter", { data: renterArr });
+            }}
+          >
+            <Text
+              style={[
+                styles.textBtn,
+                {
+                  color: "white",
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  fontSize: 15,
+                },
+              ]}
+            >
+              ประวัติค่าเช่าหอ
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
 
       <View style={{ top: 35 }}>
         <TouchableOpacity
