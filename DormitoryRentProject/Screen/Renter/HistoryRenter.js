@@ -91,7 +91,7 @@ const HistoryRenter = ({ route, navigation }) => {
                 รวมทั้งสิ้น : <Text>{parseInt(item.data.rent)+(parseInt(item.data.water)*18)+(parseInt(item.data.light)*8)}</Text>บาท
               </Text>
               <Text></Text>
-              <Text>{item.data.status? "ชำระแล้ว": "ยังไม่ชำระ"}</Text>
+              {item.data.status? <Text style={{color:"#69CC6D"}}>ชำระแล้ว</Text>: <Text style={{color:"#FF0000"}}>ยังไม่ชำระ</Text>}
             </View>
           )
           
