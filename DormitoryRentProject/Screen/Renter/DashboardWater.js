@@ -1,13 +1,25 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from "react-native";
-import { Ionicons, Fontisto, MaterialIcons, Entypo, FontAwesome } from '@expo/vector-icons'; 
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+} from "react-native";
+import {
+  Ionicons,
+  Fontisto,
+  MaterialIcons,
+  Entypo,
+  FontAwesome,
+} from "@expo/vector-icons";
 import { color } from "react-native-elements/dist/helpers";
 import DormitoryHeader from "../../component/DormitoryHeader";
 import { LineChart } from "react-native-chart-kit";
 import { BarChart } from "react-native-gifted-charts";
 
 const DashboardWater = () => {
-
   const chartConfig = {
     backgroundGradientFrom: "#fff",
     backgroundGradientTo: "#fff",
@@ -15,7 +27,7 @@ const DashboardWater = () => {
     color: (opacity = 1) => `#363C56`,
     strokeWidth: 2, // optional, default 3
     barPercentage: 0.5,
-    useShadowColorFromDataset: false // optional
+    useShadowColorFromDataset: false, // optional
   };
 
   const data = {
@@ -24,33 +36,93 @@ const DashboardWater = () => {
       {
         data: [15, 18, 15, 16, 18],
         color: (opacity = 1) => `#96B3FF`, // optional
-        strokeWidth: 3 // optional
-      }
-    ]
+        strokeWidth: 3, // optional
+      },
+    ],
   };
 
   const barData = [
-    {value: 10, label: 'ตุลาคม', labelTextStyle:{width:50, color:"#363C56", marginLeft:50, fontWeight:"bold"}},
-    {value: 12, label: 'กันยายน', frontColor: 'lightgray', labelMarginTop: 10, labelTextStyle:{width:50, color:"#363C56", marginLeft:50, fontWeight:"bold"}},
+    {
+      value: 10,
+      label: "ตุลาคม",
+      labelTextStyle: {
+        width: 50,
+        color: "#363C56",
+        marginLeft: 50,
+        fontWeight: "bold",
+      },
+    },
+    {
+      value: 12,
+      label: "กันยายน",
+      frontColor: "lightgray",
+      labelMarginTop: 10,
+      labelTextStyle: {
+        width: 50,
+        color: "#363C56",
+        marginLeft: 50,
+        fontWeight: "bold",
+      },
+    },
   ];
 
   return (
-      <SafeAreaView style={styles.container}>
-        <View style={[styles.block4, styles.shadowProp, {backgroundColor: 'white'}]}>
-          <Text style={{fontSize:19, fontWeight:"bold", color:"#363C56"}}>น้ำประจำเดือนกันยายน</Text>
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
+        <View
+          style={[
+            styles.block4,
+            styles.shadowProp,
+            { backgroundColor: "white" },
+          ]}
+        >
+          <Text style={{ fontSize: 19, fontWeight: "bold", color: "#363C56" }}>
+            น้ำประจำเดือนกันยายน
+          </Text>
         </View>
 
         <View style={styles.block1}>
           <View>
             <View style={styles.circle}></View>
             <View style={styles.circle2}>
-              <Text style={{fontSize:30, fontWeight:"bold", color:"#363C56"}}>150฿</Text>
+              <Text
+                style={{ fontSize: 30, fontWeight: "bold", color: "#363C56" }}
+              >
+                432฿
+              </Text>
             </View>
           </View>
-          <View style={{justifyContent:"center"}}>
-            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>ค่าน้ำ : 15 บาท/หน่วย</Text>
-            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>ปริมาณน้ำ : 10 หน่วย</Text>
-            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>รวมทั้งหมด : 150 บาท</Text>
+          <View style={{ justifyContent: "center" }}>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+                color: "#363C56",
+                marginBottom: 5,
+              }}
+            >
+              ค่าน้ำ : 18 บาท/หน่วย
+            </Text>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+                color: "#363C56",
+                marginBottom: 5,
+              }}
+            >
+              ปริมาณน้ำ : 24 หน่วย
+            </Text>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+                color: "#363C56",
+                marginBottom: 5,
+              }}
+            >
+              รวมทั้งหมด : 432 บาท
+            </Text>
           </View>
         </View>
 
@@ -66,8 +138,30 @@ const DashboardWater = () => {
         </View>  */}
 
         <View style={styles.block2}>
-          <Text style={{position:'absolute', top:19, left:26, color:"#fff", fontWeight:"bold", fontSize:15}}>110 หน่วย</Text>
-          <Text style={{position:'absolute', top:78, left:26, color:"#fff", fontWeight:"bold", fontSize:15}}>120 หน่วย</Text>
+          <Text
+            style={{
+              position: "absolute",
+              top: 19,
+              left: 26,
+              color: "#fff",
+              fontWeight: "bold",
+              fontSize: 15,
+            }}
+          >
+            432 หน่วย
+          </Text>
+          <Text
+            style={{
+              position: "absolute",
+              top: 78,
+              left: 26,
+              color: "#fff",
+              fontWeight: "bold",
+              fontSize: 15,
+            }}
+          >
+            120 หน่วย
+          </Text>
           <BarChart
             horizontal
             barWidth={30}
@@ -93,8 +187,8 @@ const DashboardWater = () => {
             chartConfig={chartConfig}
           />
         </View>
-        
-      </SafeAreaView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -103,43 +197,43 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor:"#fff"
+    backgroundColor: "#fff",
   },
   block1: {
-    display:"flex",
-    flexDirection:"row",
+    display: "flex",
+    flexDirection: "row",
     // backgroundColor:"#000",
-    marginTop:16,
-    marginLeft:-5
+    marginTop: 16,
+    marginLeft: -5,
   },
   circle: {
-    width:150,
-    height:150,
-    borderRadius:360,
-    backgroundColor:"#96B3FF",
-    marginRight:20
+    width: 150,
+    height: 150,
+    borderRadius: 360,
+    backgroundColor: "#96B3FF",
+    marginRight: 20,
   },
   circle2: {
-    width:130,
-    height:130,
-    borderRadius:360,
-    backgroundColor:"#fff",
-    position:"absolute",
+    width: 130,
+    height: 130,
+    borderRadius: 360,
+    backgroundColor: "#fff",
+    position: "absolute",
     left: 10,
-    top:10,
-    justifyContent:"center",
-    alignItems:"center"
+    top: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  block2:{
-    width:320,
-    height:160,
-    backgroundColor:"#363C56",
-    borderRadius:10,
-    marginTop:20,
-    justifyContent:"center",
-    alignItems:'center',
-    paddingRight:55,
-    paddingTop:100
+  block2: {
+    width: 320,
+    height: 160,
+    backgroundColor: "#363C56",
+    borderRadius: 10,
+    marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingRight: 55,
+    paddingTop: 100,
   },
   // box1:{
   //   width: 220,
@@ -159,19 +253,19 @@ const styles = StyleSheet.create({
   //   justifyContent:"center",
   //   paddingLeft:10
   // },
-  block3:{
-    marginTop:30,
-    marginRight:15
-  }, 
-  block4:{
-    width:250,
-    height:50,
-    borderRadius:40,
+  block3: {
+    marginTop: 30,
+    marginRight: 15,
+  },
+  block4: {
+    width: 250,
+    height: 50,
+    borderRadius: 40,
     borderColor: "#96B3FF",
-    borderWidth:2,
-    justifyContent:"center",
+    borderWidth: 2,
+    justifyContent: "center",
     alignItems: "center",
-    marginTop:15
+    marginTop: 15,
   },
   shadowProp: {
     shadowColor: "#9B9B9B",
@@ -179,7 +273,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 3,
   },
-
-
+  scroll:{
+    textAlign:"center",
+    // backgroundColor:"#f00"
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop:15
+  },
 });
-export default DashboardWater
+export default DashboardWater;
