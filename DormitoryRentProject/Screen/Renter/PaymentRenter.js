@@ -2,11 +2,21 @@ import { Component } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { launchImageLibrary } from 'react-native-image-picker';
 
 const PaymentRenter = ({ route, navigation }) => {
   const paymentArr = route.params.data
   const month = route.params.month
   console.log(paymentArr)
+
+  const handleChoosePhoto = () => {
+    launchImageLibrary({ noData: true }, (response) => {
+      // console.log(response);
+      if (response) {
+        setPhoto(response);
+      }
+    });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -46,7 +56,7 @@ const PaymentRenter = ({ route, navigation }) => {
               >
                 แจ้งชำระค่าเช่า
               </Text>
-              <TouchableOpacity style={[styles.btn1, styles.shadowProp]}>
+              <TouchableOpacity style={[styles.btn1, styles.shadowProp]} onPressIn={handleChoosePhoto}>
                 <Text style={[styles.text, { textAlign: "center" }]}>
                   อัปโหลดไฟล์รูปภาพ
                 </Text>

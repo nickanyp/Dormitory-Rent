@@ -52,10 +52,12 @@ const MyRoomPage = ({ route, navigation }) => {
           setRenter(renters_data);
           console.log(renterArr);
         }
+        
       } catch (error) {
         console.error("Error fetching renters:", error);
       }
 
+      console.log(renterArr);
       const dataRenter = renterArr[0].data
       // console.log(dataRenter)
       console.log(toString(currentmonth))
@@ -76,7 +78,7 @@ const MyRoomPage = ({ route, navigation }) => {
             });
           });
           setPayment(payment_data);
-          console.log(paymentArr);
+          
         }
       } catch (error) {
         console.error("Error fetching payment renters:", error);
@@ -84,14 +86,19 @@ const MyRoomPage = ({ route, navigation }) => {
     };
 
     fetchData();
+    console.log(2)
+    
+
   }, [uid]);
+
+  
 
   let namemoth = ''
   if (currentmonth == 10){
     namemoth = "ตุลาคม"
   }
   console.log(namemoth)
-
+  console.log(paymentArr);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -148,8 +155,7 @@ const MyRoomPage = ({ route, navigation }) => {
         );
       })}
 
-      {paymentArr.map((item) => {
-        return (
+      
           <View>
             <View
               style={{
@@ -181,7 +187,7 @@ const MyRoomPage = ({ route, navigation }) => {
               <TouchableOpacity
                 style={styles.btn}
                 onPress={() => {
-                  navigation.navigate("HistoryRenter", { data: item });
+                  navigation.navigate("HistoryRenter", { data: renterArr });
                 }}
               >
                 <Text
@@ -200,8 +206,7 @@ const MyRoomPage = ({ route, navigation }) => {
               </TouchableOpacity>
             </View>
           </View>
-        );
-      })}
+        
 
       <View style={{ top: 35 }}>
         <TouchableOpacity
