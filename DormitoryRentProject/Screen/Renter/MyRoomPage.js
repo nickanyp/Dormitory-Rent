@@ -21,14 +21,18 @@ import { firebaseConfig } from "../../database/FirebaseConfig";
 const MyRoomPage = ({ route, navigation }) => {
   const uid = route.params.uid;
   const [renterArr, setRenter] = useState([]);
+  const [paymentArr, setPayment] = useState([]);
+  const today = new Date();
+  const day = today.getDate()
+  let currentmonth = today.getMonth()
+  if (day >= 26){
+    currentmonth+=1
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       const db = getFirestore();
-      const renterQuery = query(
-        collection(db, "renters"),
-        where("uid", "==", uid)
-      );
+      const renterQuery = query(collection(db, "renters"), where("uid", "==", uid));
       console.log(renterQuery);
 
       try {
@@ -51,18 +55,59 @@ const MyRoomPage = ({ route, navigation }) => {
       } catch (error) {
         console.error("Error fetching renters:", error);
       }
+
+      const dataRenter = renterArr[0].data
+      // console.log(dataRenter)
+      console.log(toString(currentmonth))
+      const paymentQuery = query(collection(db, "payment"), where("month", "==", currentmonth.toString()), where("code", "==", dataRenter.code), where("room", "==", dataRenter.num_room));
+
+      try {
+        const querySnapshot = await getDocs(paymentQuery);
+        // console.log(querySnapshot);
+
+        if (querySnapshot.empty) {
+          console.log("No data found");
+        } else {
+          const payment_data = [];
+          querySnapshot.forEach((doc) => {
+            payment_data.push({
+              id: doc.id,
+              data: doc.data(),
+            });
+          });
+          setPayment(payment_data);
+          console.log(paymentArr);
+        }
+      } catch (error) {
+        console.error("Error fetching payment renters:", error);
+      }
     };
 
     fetchData();
   }, [uid]);
 
-  console.log(renterArr);
+  let namemoth = ''
+  if (currentmonth == 10){
+    namemoth = "ตุลาคม"
+  }
+  console.log(namemoth)
+
 
   return (
     <SafeAreaView style={styles.container}>
       {renterArr.map((item) => {
         return (
           <View style={[styles.box, styles.shadowProp]}>
+            <Text style={[styles.text, {fontSize:19, color:"#FF9699"}]}>
+              หอพัก : <Text>{item.data.dor_name}</Text>
+            </Text>
+            <Text style={[styles.text, {fontSize:19, color:"#FF9699"}]}>
+              ประเภทห้อง : <Text>{item.data.dor_type}</Text>
+            </Text>
+            <Text style={[styles.text, {fontSize:19, color:"#FF9699"}]}>
+              เลขห้อง : <Text>{item.data.num_room}</Text>
+            </Text>
+            <Text></Text>
             <Text style={styles.text}>
               ชื่อผู้เช่า 1 : <Text>{item.data.name1}</Text>
             </Text>
@@ -75,45 +120,35 @@ const MyRoomPage = ({ route, navigation }) => {
             <Text style={styles.text}>
               ชื่อผู้เช่า 4 : <Text>{item.data.name4}</Text>
             </Text>
-            <Text></Text>
-            <Text style={styles.text}>
-              หอพัก : <Text>{item.data.dor_name}</Text>
-            </Text>
-            <Text style={styles.text}>
-              ประเภทห้อง : <Text>{item.data.dor_type}</Text>
-            </Text>
-            <Text style={styles.text}>
-              เลขห้อง : <Text>{item.data.num_room}</Text>
-            </Text>
           </View>
         );
       })}
 
-      {renterArr.map((item) => {
+      {paymentArr.map((item) => {
         return (
           <View style={[styles.box, styles.shadowProp]}>
             <Text
               style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}
-            ></Text>
+            >{namemoth}</Text>
             <Text></Text>
             <Text style={styles.text}>
-              ค่าเช่าหอพัก : <Text> </Text>บาท
+              ค่าเช่าหอพัก : <Text>{item.data.rent}</Text>บาท
             </Text>
             <Text style={styles.text}>
-              ค่าน้ำ : <Text> </Text>บาท <Text> </Text>
+              ค่าน้ำ : <Text>{parseInt(item.data.water)*18}</Text> บาท ( {item.data.water} หน่วย ) <Text> </Text>
             </Text>
             <Text style={styles.text}>
-              ค่าไฟ : <Text> </Text>บาท <Text> </Text>
+              ค่าไฟ : <Text>{parseInt(item.data.light)*8}</Text>บาท ( {item.data.light} หน่วย )<Text> </Text>
             </Text>
             <Text></Text>
-            <Text style={[styles.text, { color: "#FF9699" }]}>
-              รวมทั้งสิ้น : <Text> </Text>บาท
+            <Text style={[styles.text, { color: "#FF9699", fontSize:20 }]}>
+              รวมทั้งสิ้น : <Text>{parseInt(item.data.rent)+(parseInt(item.data.water)*18)+(parseInt(item.data.light)*8)}</Text>บาท
             </Text>
           </View>
         );
       })}
 
-      {renterArr.map((item) => {
+      {paymentArr.map((item) => {
         return (
           <View>
             <View
@@ -126,7 +161,7 @@ const MyRoomPage = ({ route, navigation }) => {
               <TouchableOpacity
                 style={styles.btn}
                 onPress={() => {
-                  navigation.navigate("PaymentRenter", { data: item });
+                  navigation.navigate("PaymentRenter", { data: paymentArr, month: namemoth });
                 }}
               >
                 <Text

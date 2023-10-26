@@ -4,28 +4,37 @@ import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const PaymentRenter = ({ route, navigation }) => {
-  const item = route.params.data
-  console.log(item)
+  const paymentArr = route.params.data
+  const month = route.params.month
+  console.log(paymentArr)
 
   return (
     <SafeAreaView style={styles.container}>
           <View>
             <View style={{ alignItems: "center" }}>
-              <View style={[styles.box, styles.shadowProp]}>
-                <Text
-                  style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}
-                >
-                  กันยายน
-                </Text>
-                <Text></Text>
-                <Text style={styles.text}>ค่าเช่าหอพัก : บาท</Text>
-                <Text style={styles.text}>ค่าน้ำ : บาท</Text>
-                <Text style={styles.text}>ค่าไฟ : บาท</Text>
-                <Text></Text>
-                <Text style={[styles.text, { color: "#FF9699" }]}>
-                  รวมทั้งสิ้น : บาท
-                </Text>
-              </View>
+            {paymentArr.map((item) => {
+              return (
+                <View style={[styles.box, styles.shadowProp]}>
+                  <Text
+                    style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}
+                  >{month}</Text>
+                  <Text></Text>
+                  <Text style={styles.text}>
+                    ค่าเช่าหอพัก : <Text>{item.data.rent}</Text>บาท
+                  </Text>
+                  <Text style={styles.text}>
+                    ค่าน้ำ : <Text>{parseInt(item.data.water)*18}</Text>บาท ( {item.data.water} หน่วย ) <Text> </Text>
+                  </Text>
+                  <Text style={styles.text}>
+                    ค่าไฟ : <Text>{parseInt(item.data.light)*8}</Text>บาท ( {item.data.light} หน่วย )<Text> </Text>
+                  </Text>
+                  <Text></Text>
+                  <Text style={[styles.text, { color: "#FF9699", fontSize:20 }]}>
+                    รวมทั้งสิ้น : <Text>{parseInt(item.data.rent)+(parseInt(item.data.water)*18)+(parseInt(item.data.light)*8)}</Text>บาท
+                  </Text>
+                </View>
+              );
+            })}
             </View>
             <View style={{ alignItems: "center", margin: 10 }}>
               <Image
