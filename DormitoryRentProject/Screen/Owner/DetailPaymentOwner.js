@@ -48,7 +48,7 @@ const DetailPaymentOwner = ({ navigation, route }) => {
           code
       });
       console.log("success")
-      navigation.navigate("InformPayment", {code: code})
+      navigation.navigate("InformPayment", {code: code})  
       clearFormFields()
     }catch (error){
       console.log(error)
