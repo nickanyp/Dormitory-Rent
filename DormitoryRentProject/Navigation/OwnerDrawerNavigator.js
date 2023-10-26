@@ -37,7 +37,7 @@ const OwnerDrawerNavigator = ({route}) => {
           headerTitle: props => <DormitoryHeader {...props}/>,
         })}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="Profile"
         component={ProfileOwner}
         options={{
@@ -46,7 +46,7 @@ const OwnerDrawerNavigator = ({route}) => {
             <FontAwesome5 name="user" size={24} color="#363C56" />
           ),
         }}
-      />
+      /> */}
 
     </Drawer.Navigator>
     
