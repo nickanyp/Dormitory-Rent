@@ -10,50 +10,90 @@ import { firebaseConfig } from "../../database/FirebaseConfig";
 const OwnerHome = ({route, navigation}) => {
   const uid = route.params.uid
   const [dormitoryArr, setDormitory] = useState([]);
+  const [codeArr, setCode] = useState([]);
+  const [roomArr, setRoom] = useState([]);
+  // const [all, setAll] = useState([]);
+  // const [full, setFull] = useState([]);
+  // const [emp,  setEmp] = useState([]);
+  // const [num_all, setNumall] = useState(0);
+  // const [num_full, setNumfull] = useState(0);
+  // const [num_emp, setNumemp] = useState(0)
 
   useEffect(() => {
-    const fetchData = async () => {
-      const db = getFirestore();
-      const dormitoryQuery = query(collection(db, 'dormitory'), where('owner_uid', '==', uid));
-
-      try {
-        const querySnapshot = await getDocs(dormitoryQuery);
-
-        if (querySnapshot.empty) {
-          console.log('No dormitories found');
-        } else {
-          const dormitories = [];
-          querySnapshot.forEach((doc) => {
-            dormitories.push({ id: doc.id, data: doc.data() });
-          });
-          setDormitory(dormitories);
-          console.log(dormitoryArr)
-        }
-      } catch (error) {
-        console.error('Error fetching dormitories:', error);
-      }
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const fetchData = async () => { 
+      const dormitoryQuery = await getDocs(query(collection(db, 'dormitory'), where('owner_uid', '==', uid)));
+      const dormitories = [];
+      const code =[];
+      dormitoryQuery.forEach((doc) => {
+        dormitories.push({ id: doc.id, ...doc.data() });
+        code.push(doc.data().code);
+      });
+      setDormitory(dormitories);
+      setCode(code)
+      var room = [];
+      dormitories.forEach(async (item) => {
+        const roomQuery = await getDocs(
+          query(collection(db, "room"), where("code", "==", item.code))
+        ); 
+        roomQuery.forEach((doc) => {
+            room.push({id: doc.id, ...doc.data()});
+        });
+        setRoom(room);
+      })
+      
     };
 
     fetchData();
   }, [uid]);
 
+  console.log("---------------------")
   console.log(dormitoryArr)
+  console.log(roomArr)
+  console.log(codeArr)
+  console.log("-----")
+
+  const allArr = [];
+  const fullArr = [];
+  const empArr = [];
+  for(let i=0; i<codeArr.length; i++){
+    let all = 0
+    let full = 0
+    let emp = 0
+    for(let j=0; j<roomArr.length; j++){
+      if(roomArr[j].code == codeArr[i]){
+        all += 1
+        if(roomArr[j].status == true){
+          emp += 1
+        }else if(roomArr[j].status == false){
+          full += 1
+        }
+      }
+    }
+    allArr.push(all.toString())
+    fullArr.push(full.toString())
+    empArr.push(emp.toString())
+  }
   
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scroll}>
-        {dormitoryArr.map((item)=>{
+        {dormitoryArr.map((item, i)=>{
+          console.log(allArr)
+          console.log(fullArr)
+          console.log(empArr)
           return(
-            <View style={styles.box} >
+            <View key={i} style={styles.box} >
               <Pressable style={styles.block} onPress={() => {navigation.navigate("OwnerDormitory", {data: item})}}>
-                <Text style={{fontSize:35, fontWeight:"bold", color:"#fff"}}>{item.data.name}</Text>
+                <Text style={{fontSize:35, fontWeight:"bold", color:"#fff"}}>{item.name}</Text>
                 <AntDesign name="rightcircleo" size={24} color="#fff" style={styles.button}/>
               </Pressable>
               <View style={styles.box2}>
                 <View style={styles.box3}>
                   <View style={styles.circle}>
                     <View style={styles.circle4}>
-                      <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{item.data.room}</Text>
+                      <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{allArr[i]}</Text>
                     </View>
                   </View>
                   <Text>ห้องทั้งหมด</Text>
@@ -61,7 +101,7 @@ const OwnerHome = ({route, navigation}) => {
                 <View style={styles.box3}>
                   <View style={styles.circle2}>
                     <View style={styles.circle4}>
-                    <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{item.data.empty}</Text>
+                    <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{empArr[i]}</Text>
                     </View>
                   </View>
                   <Text>ห้องว่าง</Text>
@@ -69,16 +109,13 @@ const OwnerHome = ({route, navigation}) => {
                 <View style={styles.box3}>
                   <View style={styles.circle3}>
                     <View style={styles.circle4}>
-                      <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{item.data.full}</Text>
+                      <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{fullArr[i]}</Text>
                     </View>
                   </View>
                   <Text>มีผู้เช่า</Text>
                 </View>
               </View>
-              <View style={styles.block}>
-                <Text style={{marginRight:10, fontSize:18, color:"#fff", fontWeight:"bold"}}>ชำระแล้ว: {item.data.pay}</Text>
-                <Text style={{fontSize:18, color:"#fff", fontWeight:"bold"}}>ยังไม่ชำระ: {item.data.notpay}</Text>
-              </View>
+              
             </View>
           );
         })}
@@ -86,6 +123,7 @@ const OwnerHome = ({route, navigation}) => {
       </ScrollView>
     </SafeAreaView>
   )
+  
 }
 
 const styles = StyleSheet.create({
@@ -174,3 +212,7 @@ const styles = StyleSheet.create({
 
 export default OwnerHome
 {/* <Button title="กัลยรัตน์2" onPress={() => {navigation.navigate("OwnerDormitory")}}></Button> */}
+{/* <View style={styles.block}>
+                <Text style={{marginRight:10, fontSize:18, color:"#fff", fontWeight:"bold"}}>ชำระแล้ว: {item.data.pay}</Text>
+                <Text style={{fontSize:18, color:"#fff", fontWeight:"bold"}}>ยังไม่ชำระ: {item.data.notpay}</Text>
+              </View> */}

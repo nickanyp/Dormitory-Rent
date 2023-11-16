@@ -3,7 +3,19 @@ import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView, Ima
 import { LineChart } from "react-native-gifted-charts";
 
 const DetailRoomGenAir = () => {
-    const data = [{value: 0, label:"พ.ค."}, {value: 0, label:"มิ.ย."}, {value: 0, label:"ก.ค."}, {value: 0, label:"ส.ค."}, {value: 0, label:"ก.ย."}, {value: 0, label:"ต.ค."}];
+    const room = route.params.room
+    const emp = route.params.emp
+    const full = route.params.full
+    const pay = route.params.pay
+    const notpay = route.params.notpay
+    const data = [
+      {value: 0, label:"พ.ค."}, 
+      {value: 0, label:"มิ.ย."}, 
+      {value: 0, label:"ก.ค."}, 
+      {value: 0, label:"ส.ค."}, 
+      {value: 0, label:"ก.ย."}, 
+      {value: 0, label:"ต.ค."}
+    ];
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>

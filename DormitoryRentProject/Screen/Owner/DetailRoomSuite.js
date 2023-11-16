@@ -2,8 +2,20 @@ import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView, Image } from "react-native";
 import { LineChart } from "react-native-gifted-charts";
 
-const DetailRoomSuite = () => {
-    const data = [{value: 0, label:"พ.ค."}, {value: 0, label:"มิ.ย."}, {value: 0, label:"ก.ค."}, {value: 0, label:"ส.ค."}, {value: 0, label:"ก.ย."}, {value: 0, label:"ต.ค."}];
+const DetailRoomSuite = ({route}) => {
+    const room = route.params.room
+    const emp = route.params.emp
+    const full = route.params.full
+    const pay = route.params.pay
+    const notpay = route.params.notpay
+    const data = [
+        {value: 0, label:"พ.ค."}, 
+        {value: 0, label:"มิ.ย."}, 
+        {value: 0, label:"ก.ค."}, 
+        {value: 0, label:"ส.ค."}, 
+        {value: 0, label:"ก.ย."}, 
+        {value: 0, label:"ต.ค."}
+    ];
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
@@ -11,8 +23,8 @@ const DetailRoomSuite = () => {
                     <View style={styles.block1}>
                         <View style={styles.block2}>
                         <Text style={{fontSize:40, fontWeight:"bold", color:"#96B3FF"}}>ห้องสูท</Text>
-                        <Text style={{color:"#96B3FF"}}>จำนวนห้อง 1 ห้อง</Text>
-                        <Text style={{color:"#96B3FF"}}>ห้องว่าง 1 ห้อง ห้องมีผู้เช่าแล้ว 0 ห้อง</Text>
+                        <Text style={{color:"#96B3FF"}}>จำนวนห้อง {room.length} ห้อง</Text>
+                        <Text style={{color:"#96B3FF"}}>ห้องว่าง {emp.length} ห้อง ห้องมีผู้เช่าแล้ว {full.length} ห้อง</Text>
                         </View>
                         <View style={styles.block3}>
                         <View style={styles.circle}>
@@ -26,7 +38,7 @@ const DetailRoomSuite = () => {
                     <View style={styles.box3}>
                         <View style={styles.circle1}>
                             <View style={styles.circle4}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>1</Text>
+                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{room.length}</Text>
                             </View>
                         </View>
                         <Text>ห้องทั้งหมด</Text>
@@ -34,7 +46,7 @@ const DetailRoomSuite = () => {
                     <View style={styles.box3}>
                         <View style={styles.circle2}>
                             <View style={styles.circle4}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>1</Text>
+                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{emp.length}</Text>
                             </View>
                         </View>
                         <Text>ห้องว่าง</Text>
@@ -42,7 +54,7 @@ const DetailRoomSuite = () => {
                     <View style={styles.box3}>
                         <View style={styles.circle3}>
                             <View style={styles.circle4}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>0</Text>
+                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{full.length}</Text>
                             </View>
                         </View>
                     <Text>มีผู้เช่า</Text>
@@ -65,7 +77,7 @@ const DetailRoomSuite = () => {
                     <View style={styles.box3}>
                         <View style={[styles.circle1, {backgroundColor:"#90DA83"}]}>
                             <View style={styles.circle4}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>0</Text>
+                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{pay.length}</Text>
                             </View>
                         </View>
                         <Text>ชำระแล้ว</Text>
@@ -73,7 +85,7 @@ const DetailRoomSuite = () => {
                     <View style={styles.box3}>
                         <View style={[styles.circle2, {backgroundColor:'#F2AD5C'}]}>
                             <View style={styles.circle4}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>0</Text>
+                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{notpay.length}</Text>
                             </View>
                         </View>
                         <Text>รอการยืนยัน</Text>
