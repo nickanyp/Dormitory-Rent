@@ -78,17 +78,17 @@ const HistoryRenter = ({ route, navigation }) => {
               >{item.data.month}</Text>
               <Text></Text>
               <Text style={styles.text}>
-                ค่าเช่าหอพัก : <Text>{item.data.rent}</Text>บาท
+                ค่าเช่าหอพัก : <Text>{item.data.rent}</Text> บาท
               </Text>
               <Text style={styles.text}>
                 ค่าน้ำ : <Text>{parseInt(item.data.water)*18}</Text> บาท ( {item.data.water} หน่วย ) <Text> </Text>
               </Text>
               <Text style={styles.text}>
-                ค่าไฟ : <Text>{parseInt(item.data.light)*8}</Text>บาท ( {item.data.light} หน่วย )<Text> </Text>
+                ค่าไฟ : <Text>{parseInt(item.data.light)*8}</Text> บาท ( {item.data.light} หน่วย )<Text> </Text>
               </Text>
               <Text></Text>
               <Text style={[styles.text, { color: "#FF9699", fontSize:20 }]}>
-                รวมทั้งสิ้น : <Text>{parseInt(item.data.rent)+(parseInt(item.data.water)*18)+(parseInt(item.data.light)*8)}</Text>บาท
+                รวมทั้งสิ้น : <Text>{parseInt(item.data.rent)+(parseInt(item.data.water)*18)+(parseInt(item.data.light)*8)}</Text> บาท
               </Text>
               <Text></Text>
               {item.data.status? <Text style={{color:"#69CC6D"}}>ชำระแล้ว</Text>: <Text style={{color:"#FF0000"}}>ยังไม่ชำระ</Text>}
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop:5,
+    padding: 10
     // width: "100%"
   },
   box: {

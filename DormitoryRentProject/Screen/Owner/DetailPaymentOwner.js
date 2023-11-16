@@ -18,7 +18,7 @@ const DetailPaymentOwner = ({ navigation, route }) => {
   const code = route.params.code;
   const room = route.params.room;
   const month = route.params.month;
-  const price = route.params.price;
+  const rent = route.params.price;
   let type = route.params.type;
   console.log(room)
 
@@ -46,7 +46,9 @@ const DetailPaymentOwner = ({ navigation, route }) => {
           light,
           month,
           room,
-          code
+          code,
+          rent,
+          status:false
       });
       console.log("success")
       navigation.navigate("InformPayment", {code: code})  
@@ -118,7 +120,7 @@ const DetailPaymentOwner = ({ navigation, route }) => {
           <Text style={styles.text}>ชื่อผู้เช่า2: นางสาววรรณิศา พงศ์พัฒนา</Text>
           <Text></Text>
           <Text style={styles.text}>ประเภทห้องพัก: {type}</Text>
-          <Text style={styles.text}>ราคา: {price}</Text>
+          <Text style={styles.text}>ราคา: {rent}</Text>
 
           <View style={{ flexDirection: "row", justifyContent: 'center', marginTop: '5%' }}>
             <View style={{ marginRight: "10%" }}>
