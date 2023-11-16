@@ -11,52 +11,39 @@ import { useEffect,  useState } from "react";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import DetailPaymentOwner from "./DetailPaymentOwner";
+import {firebase, initializeApp} from 'firebase/app'; 
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
-
-const data = [
-  { label: "มกราคม 66", value: "1" },
-  { label: "กุมภาพันธ์ 66", value: "2" },
-  { label: "มีนาคม 66", value: "3" },
-  { label: "เมษายน 66", value: "4" },
-  { label: "พฤษภาคม 66", value: "5" },
-  { label: "มิถุนายน 66", value: "6" },
-  { label: "กรกฎาคม 66", value: "7" },
-  { label: "สิงหาคม 66", value: "8" },
-  { label: "กันยายน 66", value: "9" },
-  { label: "ตุลาคม 66", value: "10" },
-  { label: "พฤศจิกายน 66", value: "11" },
-  { label: "ธันวาคม 66", value: "12" },
-];
+import { firebaseConfig } from "../../database/FirebaseConfig";
 
 const InformPaymentOwner = ({navigation, route}) => {
-  const [value, setValue] = useState(null);
-  const [isFocus, setIsFocus] = useState(false);
-  const [month, setMonth] = useState();
+  const today = new Date();
+  const day = today.getDate();
+  const year = today.getFullYear();
+  let month = today.getMonth();
+  if (day >= 26) {
+    month += 1;
+  }
 
   const code = route.params.code
-  const [roomArr, setRoom] = useState([]);
+  const [empArr, setEmpRoom] = useState([]);
+  const [fullArr, setFullRoom] = useState([]);
 
   useEffect(() => {
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
     const fetchData = async () => {
-      const db = getFirestore();
-      const roomQuery = query(collection(db, 'room'), where('code', '==', code));
-
-      try {
-        const querySnapshot = await getDocs(roomQuery);
-
-        if (querySnapshot.empty) {
-          console.log('No rooms found');
-        } else {
-          const rooms = [];
-          querySnapshot.forEach((doc) => {
-            rooms.push({ id: doc.id, data: doc.data() });
-          });
-          setRoom(rooms);
-          console.log(roomArr)
+      const empQuery = await getDocs(query(collection(db, 'room'), where('code', '==', code)));
+      const empRoom = [];
+      const fullRoom = [];
+      empQuery.forEach((doc) => {
+        if (doc.data().status == true){
+          fullRoom.push({ id: doc.id, ...doc.data() })
+        }else if(doc.data().status == false) {
+          empRoom.push({ id: doc.id, ...doc.data() })
         }
-      } catch (error) {
-        console.error('Error fetching rooms:', error);
-      }
+      })
+      setEmpRoom(empRoom)
+      setFullRoom(fullRoom)
     };
 
     fetchData();
@@ -64,68 +51,33 @@ const InformPaymentOwner = ({navigation, route}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View
-        style={{
-          flexDirection: "row",
-          marginTop: "10%",
-          marginHorizontal: "5%",
-          alignItems: "center",
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 25,
-            fontWeight: "bold",
-            color: "#96B3FF",
-            margin: 10,
-          }}
-        >
+      <View style={{flexDirection: "row", marginTop: "9%", marginHorizontal: "5%", alignItems: "center", marginBottom:15}}>
+        <Text style={{ fontSize: 30, fontWeight: "bold", color: "#96B3FF", margin: 10, marginBottom:15}}>
           แจ้งชำระค่าเช่า
         </Text>
-
-        <Dropdown
-          style={styles.dropdown}
-          placeholderStyle={{
-            fontSize: 14,
-            color: "#363C56",
-            fontWeight: "bold",
-            textAlign: "center",
-          }}
-          selectedTextStyle={{
-            fontSize: 14,
-            color: "#363C56",
-            fontWeight: "bold",
-            textAlign: "center",
-          }}
-          data={data}
-          labelField="label"
-          valueField="value"
-          placeholder={!isFocus ? "เดือน" : "..."}
-          value={value}
-          onFocus={() => setIsFocus(true)}
-          onChange={(item) => {
-            setValue(item.value);
-            setMonth(item.value)
-            setIsFocus(false);
-          }}
-        />
+        <View style={styles.dropdown}>
+          <Text style={[styles.txt, {color: "#fff", fontSize: 18}]}>{month} / {year}</Text>
+        </View>
       </View>
 
       <View style={styles.grid}>
-        {roomArr.map((item) => {
+        {fullArr.map((item, i) => {
           return(
-            <TouchableOpacity
-              style={[styles.btn, styles.shadowProp]}
-              onPress={() => {navigation.navigate("DetailPayment", {room: item.data.room, code: item.data.code, type: item.data.type, month: month, price: item.data.price})}}
+            <TouchableOpacity key={i} style={[styles.btn, styles.shadowProp, {backgroundColor: item.inform? '#96B3FF' : '#fff', }]}
+              onPress={() => {navigation.navigate("DetailPayment", {room: item, month: month})}}
             >
-              <Text style={styles.txt}>{item.data.room}</Text>
+              <Text style={[styles.txt,{ color: item.inform? '#fff' : '#363C56'}]}>{item.room}</Text>
             </TouchableOpacity>
           )
         })}
-        
+        {empArr.map((item, i) => {
+          return(
+            <TouchableOpacity key={i} style={[styles.btn, styles.shadowProp, {borderColor:"#cfcfcf"}]}>
+              <Text style={styles.txt}>{item.room}</Text>
+            </TouchableOpacity>
+          )
+        })}
       </View>
-
-      
     </SafeAreaView>
   );
 };
@@ -163,10 +115,10 @@ const styles = StyleSheet.create({
     width: 140,
     height: 40,
     borderColor: "gray",
-    borderRadius: 16,
-    paddingHorizontal: 8,
-    backgroundColor: "#D9D9D9",
-    justifyContent: "center",
+    borderRadius: 20,
+    backgroundColor: "#96B3FF",
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   shadowProp: {
     shadowColor: "#9B9B9B",

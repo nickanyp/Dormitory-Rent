@@ -111,57 +111,6 @@ const StatusPaymentOwner = ({ navigation }) => {
           <Text style={styles.txt}>A102</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={[
-            styles.btn,
-            styles.shadowProp,
-            { backgroundColor: "#EF6767" },
-          ]}
-        >
-          <Text style={styles.txt}>A103</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.btn, styles.shadowProp, { backgroundColor: "white" }]}
-        >
-          <Text style={styles.txt}>A104</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.btn, styles.shadowProp, { backgroundColor: "white" }]}
-        >
-          <Text style={styles.txt}>A105</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.btn, styles.shadowProp, { backgroundColor: "white" }]}
-        >
-          <Text style={styles.txt}>A106</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.btn, styles.shadowProp, { backgroundColor: "white" }]}
-        >
-          <Text style={styles.txt}>A107</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.btn, styles.shadowProp, { backgroundColor: "white" }]}
-        >
-          <Text style={styles.txt}>A108</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.btn, styles.shadowProp, { backgroundColor: "white" }]}
-        >
-          <Text style={styles.txt}>A109</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.btn, styles.shadowProp, { backgroundColor: "white" }]}
-        >
-          <Text style={styles.txt}>A110</Text>
-        </TouchableOpacity>
       </View>
 
       <View>

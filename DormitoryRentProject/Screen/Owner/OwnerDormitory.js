@@ -171,6 +171,20 @@ const OwnerDormitory = ({navigation, route}) => {
     fetchData();
   }, [dormitory]);
 
+  let payincome = 0;
+  let notpayincome = 0;
+  for (let i = 0; i < ic.length; i++){
+    payincome += (parseInt(ic[i].light)*parseInt(dormitory.light));
+    payincome += (parseInt(ic[i].water)*parseInt(dormitory.water));
+    payincome += parseInt(ic[i].price);
+    console.log(dormitory)
+  }
+  for (let i = 0; i < np.length; i++){
+    notpayincome += (parseInt(np[i].light)*parseInt(dormitory.light));
+    notpayincome += (parseInt(np[i].water)*parseInt(dormitory.water));
+    notpayincome += parseInt(np[i].price);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={{width:"100%"}}>
@@ -237,19 +251,19 @@ const OwnerDormitory = ({navigation, route}) => {
         </View>
 
         <View style={styles.month}>
-          <Text style={{color:"#fff", fontSize:22, fontWeight:"bold"}}>{month} {year}</Text>
+          <Text style={{color:"#fff", fontSize:22, fontWeight:"bold"}}>{month} / {year}</Text>
         </View>
       
         <View style={styles.center}>
-          <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56", marginTop:20, marginBottom:5}}>รวมยอดชำระ 14,550 บาท</Text>
+          <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56", marginTop:20, marginBottom:5}}>รวมยอดชำระ {payincome.toString()} บาท</Text>
           <View style={styles.block4}>
             <View style={[styles.box2]}>
               <Text style={{fontSize:13, fontWeight:"bold", color:"#363C56"}}>ชำระแล้ว</Text>
-              <Text style={{fontSize:18, fontWeight:"bold", color:"#90DA83"}}>9,700 บาท</Text>
+              <Text style={{fontSize:18, fontWeight:"bold", color:"#90DA83"}}>{(payincome-notpayincome).toString()} บาท</Text>
             </View>
             <View style={[styles.box2]}>
               <Text style={{fontSize:13, fontWeight:"bold", color:"#363C56"}}>ยังไม่ชำระ</Text>
-              <Text style={{fontSize:18, fontWeight:"bold", color:"#FF9699"}}>4,850 บาท</Text>
+              <Text style={{fontSize:18, fontWeight:"bold", color:"#FF9699"}}>{notpayincome.toString()} บาท</Text>
             </View>
           </View>
 

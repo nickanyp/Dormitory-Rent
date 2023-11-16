@@ -14,9 +14,9 @@ const PaymentOwner = ({route, navigation}) => {
       <SafeAreaView style={styles.container}>
           <View style={styles.block1}>
             <View style={styles.block2} >
-              <Text style={{ fontSize: 40, fontWeight: "bold", color: "#96B3FF" }}>{item.data.name}</Text>
-              <Text style={{ color: "#96B3FF" }}>{item.data.address}</Text>
-              <Text style={{color:"#9e9e9e", marginTop:5}}>code : {item.data.code}</Text>
+              <Text style={{ fontSize: 40, fontWeight: "bold", color: "#96B3FF" }}>{item.name}</Text>
+              <Text style={{ color: "#96B3FF" }}>{item.address}</Text>
+              <Text style={{color:"#9e9e9e", marginTop:5}}>code : {item.code}</Text>
             </View>
             <View style={styles.block3}>
               <View style={styles.circle}>
@@ -29,13 +29,13 @@ const PaymentOwner = ({route, navigation}) => {
       <View style={{ alignItems: "center", marginTop: '10%'}}>
         <TouchableOpacity
           style={[styles.btn, styles.shadowProp, { borderColor: "#9B9B9B" }]}
-          onPress={() => {navigation.navigate("InformPayment", {code: item.data.code})}}
+          onPress={() => {navigation.navigate("InformPayment", {code: item.code})}}
         >
           <Text style={[styles.text, {color: "#363C56", fontSize: 16}]}>แจ้งชำระค่าเช่า</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.btn, styles.shadowProp, { borderColor: "#9B9B9B" }]}
-          onPress={() => {navigation.navigate("StatusPayment")}}
+          onPress={() => {navigation.navigate("StatusPayment", {code: item.code})}}
         >
           <Text style={[styles.text, {color: "#363C56", fontSize: 16}]}>สถานะการชำระค่าเช่า</Text>
         </TouchableOpacity>

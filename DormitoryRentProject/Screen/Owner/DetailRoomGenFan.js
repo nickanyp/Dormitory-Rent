@@ -2,7 +2,12 @@ import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView, Image } from "react-native";
 import { LineChart } from "react-native-gifted-charts";
 
-const DetailRoomGenFan = () => {
+const DetailRoomGenFan = ({route}) => {
+    const room = route.params.room
+    const emp = route.params.emp
+    const full = route.params.full
+    const pay = route.params.pay
+    const notpay = route.params.notpay
     const data = [{value: 0, label:"พ.ค."}, {value: 0, label:"มิ.ย."}, {value: 0, label:"ก.ค."}, {value: 0, label:"ส.ค."}, {value: 0, label:"ก.ย."}, {value: 0, label:"ต.ค."}];
     return (
         <SafeAreaView style={styles.container}>
@@ -11,8 +16,8 @@ const DetailRoomGenFan = () => {
                     <View style={styles.block1}>
                         <View style={styles.block2}>
                         <Text style={{fontSize:23, fontWeight:"bold", color:"#96B3FF"}}>ห้องธรรมดาพัดลม</Text>
-                        <Text style={{color:"#96B3FF"}}>จำนวนห้อง 2 ห้อง</Text>
-                        <Text style={{color:"#96B3FF"}}>ห้องว่าง 2 ห้อง ห้องมีผู้เช่าแล้ว 0 ห้อง</Text>
+                        <Text style={{color:"#96B3FF"}}>จำนวนห้อง {room.length} ห้อง</Text>
+                        <Text style={{color:"#96B3FF"}}>ห้องว่าง {emp.length} ห้อง ห้องมีผู้เช่าแล้ว {full.length} ห้อง</Text>
                         </View>
                         <View style={styles.block3}>
                         <View style={styles.circle}>
@@ -26,7 +31,7 @@ const DetailRoomGenFan = () => {
                     <View style={styles.box3}>
                         <View style={styles.circle1}>
                             <View style={styles.circle4}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>2</Text>
+                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{room.length}</Text>
                             </View>
                         </View>
                         <Text>ห้องทั้งหมด</Text>
@@ -34,7 +39,7 @@ const DetailRoomGenFan = () => {
                     <View style={styles.box3}>
                         <View style={styles.circle2}>
                             <View style={styles.circle4}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>2</Text>
+                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{emp.length}</Text>
                             </View>
                         </View>
                         <Text>ห้องว่าง</Text>
@@ -42,7 +47,7 @@ const DetailRoomGenFan = () => {
                     <View style={styles.box3}>
                         <View style={styles.circle3}>
                             <View style={styles.circle4}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>0</Text>
+                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{full.length}</Text>
                             </View>
                         </View>
                     <Text>มีผู้เช่า</Text>
@@ -65,23 +70,23 @@ const DetailRoomGenFan = () => {
                     <View style={styles.box3}>
                         <View style={[styles.circle1, {backgroundColor:"#90DA83"}]}>
                             <View style={styles.circle4}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>0</Text>
+                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{pay.length}</Text>
                             </View>
                         </View>
                         <Text>ชำระแล้ว</Text>
                     </View>
-                    <View style={styles.box3}>
+                    {/* <View style={styles.box3}>
                         <View style={[styles.circle2, {backgroundColor:'#F2AD5C'}]}>
                             <View style={styles.circle4}>
                             <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>0</Text>
                             </View>
                         </View>
                         <Text>รอการยืนยัน</Text>
-                    </View>
+                    </View> */}
                     <View style={styles.box3}>
                         <View style={[styles.circle3, {backgroundColor:"#F64B4B"}]}>
                             <View style={[styles.circle4]}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>0</Text>
+                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{notpay.length}</Text>
                             </View>
                         </View>
                     <Text>ยังไม่ชำระ</Text>

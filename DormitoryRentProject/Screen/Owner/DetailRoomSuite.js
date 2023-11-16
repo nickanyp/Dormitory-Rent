@@ -82,18 +82,11 @@ const DetailRoomSuite = ({route}) => {
                         </View>
                         <Text>ชำระแล้ว</Text>
                     </View>
-                    <View style={styles.box3}>
-                        <View style={[styles.circle2, {backgroundColor:'#F2AD5C'}]}>
-                            <View style={styles.circle4}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{notpay.length}</Text>
-                            </View>
-                        </View>
-                        <Text>รอการยืนยัน</Text>
-                    </View>
+                    
                     <View style={styles.box3}>
                         <View style={[styles.circle3, {backgroundColor:"#F64B4B"}]}>
                             <View style={[styles.circle4]}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>0</Text>
+                            <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{notpay.length}</Text>
                             </View>
                         </View>
                     <Text>ยังไม่ชำระ</Text>
