@@ -190,25 +190,23 @@ const MyRoomPage = ({ route, navigation }) => {
             </Text>
             <Text></Text>
             <Text style={styles.text}>
-              ค่าเช่าหอพัก : <Text>{item.rent}</Text>บาท
+              ค่าเช่าหอพัก : <Text>{item.rent}</Text> บาท
             </Text>
             <Text style={styles.text}>
               ค่าน้ำ : <Text>{parseInt(item.water) * 18}</Text> บาท ({" "}
               {item.water} หน่วย ) <Text> </Text>
             </Text>
             <Text style={styles.text}>
-              ค่าไฟ : <Text>{parseInt(item.light) * 8}</Text>บาท ({" "}
+              ค่าไฟ : <Text>{parseInt(item.light) * 8}</Text> บาท ({" "}
               {item.light} หน่วย )<Text> </Text>
             </Text>
             <Text></Text>
             <Text style={[styles.text, { color: "#FF9699", fontSize: 20 }]}>
-              รวมทั้งสิ้น :{" "}
-              <Text>
+              รวมทั้งสิ้น :{" "} 
+
                 {parseInt(item.rent) +
                   parseInt(item.water) * 18 +
-                  parseInt(item.light) * 8}
-              </Text>
-              บาท
+                  parseInt(item.light) * 8} บาท
             </Text>
           </View>
         );
