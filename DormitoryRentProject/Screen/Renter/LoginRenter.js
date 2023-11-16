@@ -19,7 +19,6 @@ import { firebaseConfig } from "../../database/FirebaseConfig";
 const LoginRenter = ({ navigation }) => {
   const [dorpass, setDorpass] = useState("");
   const [numroom, setNumroom] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
@@ -28,7 +27,7 @@ const LoginRenter = ({ navigation }) => {
 
   useEffect(() => {
     validateForm();
-  }, [dorpass, numroom, email, password,]);
+  }, [dorpass, numroom, password,]);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -37,7 +36,6 @@ const LoginRenter = ({ navigation }) => {
   const clearFormFields = () => {
     setDorpass("");
     setNumroom("");
-    setEmail("");
     setPassword("");
   };
 
@@ -47,11 +45,6 @@ const LoginRenter = ({ navigation }) => {
       errors.dorpass = "กรุณากรอกรหัสหอพัก";}
     if (!numroom) {
       errors.numroom = "กรุณากรอกเลขห้อง";}
-    if (!email) {
-      errors.email = "กรุณากรอกอีเมล";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      errors.email = "อีเมลไม่ถูกต้อง";
-    }
     if (!password) {
       errors.password = "กรุณากรอกรหัสผ่าน";
     } else if (password.length < 6) {
@@ -60,21 +53,22 @@ const LoginRenter = ({ navigation }) => {
     setErrors(errors);
   };
 
-
   const handleSignIn = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log("Sign In!");
-        const user = userCredential.user;
-        console.log(user);
-        const user_uid = user.uid;
-        console.log(user_uid);
-        navigation.navigate("MyRoomPage", { uid: user_uid });
-        clearFormFields();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // signInWithEmailAndPassword(auth)
+    //   .then((userCredential) => {
+    //     console.log("Sign In!");
+    //     const user = userCredential.user;
+    //     console.log(user);
+    //     const user_uid = user.uid;
+    //     console.log(user_uid);
+    //     navigation.navigate("MyRoomPage", { uid: user_uid });
+    //     clearFormFields();
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    navigation.navigate("MyRoomPage");
+    clearFormFields();
   };
 
   return (
@@ -132,24 +126,6 @@ const LoginRenter = ({ navigation }) => {
           </View>
         </View>
         <Text style={styles.errorText}>{errors.numroom}</Text>
-
-        <View style={{alignItems: 'center'}}>
-          <View style={[styles.input, styles.shadowProp]}>
-            <AntDesign
-              style={{ paddingRight: 10 }}
-              name="mail"
-              size={20}
-              color="#363C56"
-            />
-            <TextInput
-              value={email}
-              onChangeText={(text) => setEmail(text)}
-              style={{ flex: 1, fontSize: 16 }}
-              placeholder="อีเมล"
-            ></TextInput>
-          </View>
-        </View>
-        <Text style={styles.errorText}>{errors.email}</Text>
 
         <View style={{alignItems: 'center'}}>
         <View style={[styles.input, styles.shadowProp]}>

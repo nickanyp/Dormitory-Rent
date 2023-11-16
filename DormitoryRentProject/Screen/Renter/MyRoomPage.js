@@ -19,7 +19,7 @@ import {
 import { firebaseConfig } from "../../database/FirebaseConfig";
 
 const MyRoomPage = ({ route, navigation }) => {
-  const uid = route.params.uid;
+  // const uid = route.params.uid;
   const [renterArr, setRenter] = useState([]);
   const [paymentArr, setPayment] = useState([]);
   const today = new Date();

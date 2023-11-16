@@ -15,8 +15,8 @@ import DashboardPage from "../Screen/Renter/DashboardPage";
 const Tab = createBottomTabNavigator();
 
 const RenterTabNavigator = ({route}) => {
-  const uid = route.params.uid
-  console.log(route.params.uid)
+  // const uid = route.params.uid
+  // console.log(route.params.uid)
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -29,7 +29,7 @@ const RenterTabNavigator = ({route}) => {
       <Tab.Screen
         name="MY ROOM"
         component={MyRoomPage}
-        initialParams={{uid: uid}}
+        // initialParams={{uid: uid}}
         options={{
           tabBarIcon: ({ color, size }) => {
             return <FontAwesome name="home" size={size} color={color} />
@@ -46,7 +46,7 @@ const RenterTabNavigator = ({route}) => {
       <Tab.Screen
         name="DASHBOARD"
         component={DashboardPage}
-        initialParams={{uid: uid}}
+        // initialParams={{uid: uid}}
         options={{
           tabBarIcon: ({ color, size }) => {
             return <MaterialIcons name="dashboard" size={size} color={color} />
