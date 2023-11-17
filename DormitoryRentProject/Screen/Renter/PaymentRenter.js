@@ -3,20 +3,28 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { launchImageLibrary } from 'react-native-image-picker';
+import {firebase, initializeApp} from 'firebase/app'; 
+import { getFirestore, collection, query, where, getDocs, updateDoc, doc, addDoc } from "firebase/firestore";
+import { firebaseConfig } from "../../database/FirebaseConfig";
 
 const PaymentRenter = ({ route, navigation }) => {
+  const renter = route.params.renter
   const paymentArr = route.params.data
   const month = route.params.month
   console.log(paymentArr)
 
-  const handleChoosePhoto = () => {
-    launchImageLibrary({ noData: true }, (response) => {
-      // console.log(response);
-      if (response) {
-        setPhoto(response);
-      }
-    });
-  };
+  const handlePayment = async () => {
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const upDocRef = collection(db, 'payment');
+    await updateDoc(doc(db, 'payment', paymentArr[0].id), {
+      status: true
+    })
+    console.log("success")
+    navigation.navigate("MY ROOM", {renter: renter})
+
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -30,7 +38,7 @@ const PaymentRenter = ({ route, navigation }) => {
                   >{month}</Text>
                   <Text></Text>
                   <Text style={styles.text}>
-                    ค่าเช่าหอพัก : <Text>{item.rent}</Text>บาท
+                    ค่าเช่าหอพัก : <Text>{item.price}</Text>บาท
                   </Text>
                   <Text style={styles.text}>
                     ค่าน้ำ : <Text>{parseInt(item.water)*18}</Text>บาท ( {item.water} หน่วย ) <Text> </Text>
@@ -40,7 +48,7 @@ const PaymentRenter = ({ route, navigation }) => {
                   </Text>
                   <Text></Text>
                   <Text style={[styles.text, { color: "#FF9699", fontSize:20 }]}>
-                    รวมทั้งสิ้น : <Text>{parseInt(item.rent)+(parseInt(item.water)*18)+(parseInt(item.light)*8)}</Text>บาท
+                    รวมทั้งสิ้น : <Text>{parseInt(item.price)+(parseInt(item.water)*18)+(parseInt(item.light)*8)}</Text>บาท
                   </Text>
                 </View>
               );
@@ -61,11 +69,9 @@ const PaymentRenter = ({ route, navigation }) => {
                   อัปโหลดไฟล์รูปภาพ
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.btn2} onPressIn={() => {navigation.navigate("MY ROOM")}}>
-                <Text
-                  style={[styles.text, { textAlign: "center", color: "white" }]}
-                >
-                  ยืนยัน
+              <TouchableOpacity style={styles.btn2} onPress={paymentArr.status? null: handlePayment}>
+                <Text style={[styles.text, { textAlign: "center", color: "white" }]}>
+                  {handlePayment? 'ชำระเสร็จสิ้น' : 'ยืนยัน' }
                 </Text>
               </TouchableOpacity>
             </View>

@@ -8,90 +8,68 @@ import {
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  getFirestore,
-  collection,
-  query,
-  where,
-  getDocs,
-} from "firebase/firestore";
+import {firebase, initializeApp} from 'firebase/app'; 
+import { getFirestore, collection, query, where, getDocs, updateDoc, doc, addDoc } from "firebase/firestore";
+import { firebaseConfig } from "../../database/FirebaseConfig";
 
 const HistoryRenter = ({ route, navigation }) => {
-  const item = route.params.data
+  const renter = route.params.renter
   const [paymentArr, setPayment] = useState([]);
-  // console.log(item[0])
 
   useEffect(() => {
-    const fetchData = async () => {
-      const db = getFirestore();
-      const dataRenter = item[0]
-      console.log(dataRenter)
-      const paymentQuery = query(collection(db, "payment"), where("code", "==", dataRenter.code), where("room", "==", dataRenter.num_room));
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-      try {
-        const querySnapshot = await getDocs(paymentQuery);
-        // console.log(querySnapshot);
-
-        if (querySnapshot.empty) {
-          console.log("No data found");
-        } else {
-          console.log("have")
-          const payment_data = [];
-          querySnapshot.forEach((doc) => {
-            payment_data.push({
-              id: doc.id,
-              data: doc.data(),
-            });
-          });
-          setPayment(payment_data);
-          console.log(paymentArr)
-          console.log(1)
-        }
-      } catch (error) {
-        console.error("Error fetching payment renters:", error);
-      }
-    };
+    const fetchData = async() => {
+      const hisQuery = await getDocs(query(collection(db, 'payment'),
+      where('code', '==', renter.code), where('room', '==', renter.num_room)))
+      const pay = [];
+      hisQuery.forEach((doc) => {
+        pay.push({id:doc.id, ...doc.data()})
+      })
+      setPayment(pay)
+    }
 
     fetchData();
-  }, [item]);
+  }, [renter]);
 
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         {paymentArr.map((item) => {
-          if (item.data.month == "6"){
-            item.data.month = "มิถุนายน 66"
-          } else if (item.data.month == "10"){
-            item.data.month = "ตุลาคม 66"
-          } else if (item.data.month == "7"){
-            item.data.month = "กรกฎาคม 66"
-          } else if (item.data.month == "8"){
-            item.data.month = "สิงหาคม 66"
-          } else if (item.data.month == "9"){
-            item.data.month = "กันยายน 66"
+          if (item.month == "6"){
+            item.month = "มิถุนายน 66"
+          } else if (item.month == "10"){
+            item.month = "ตุลาคม 66"
+          } else if (item.month == "7"){
+            item.month = "กรกฎาคม 66"
+          } else if (item.month == "8"){
+            item.month = "สิงหาคม 66"
+          } else if (item.month == "9"){
+            item.month = "กันยายน 66"
           }
           return(
             <View style={[styles.box, styles.shadowProp]}>
             <Text
               style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}
-              >{item.data.month}</Text>
+              >{item.month}</Text>
               <Text></Text>
               <Text style={styles.text}>
-                ค่าเช่าหอพัก : <Text>{item.data.rent}</Text> บาท
+                ค่าเช่าหอพัก : <Text>{item.price}</Text> บาท
               </Text>
               <Text style={styles.text}>
-                ค่าน้ำ : <Text>{parseInt(item.data.water)*18}</Text> บาท ( {item.data.water} หน่วย ) <Text> </Text>
+                ค่าน้ำ : <Text>{parseInt(item.water)*18}</Text> บาท ( {item.water} หน่วย ) <Text> </Text>
               </Text>
               <Text style={styles.text}>
-                ค่าไฟ : <Text>{parseInt(item.data.light)*8}</Text> บาท ( {item.data.light} หน่วย )<Text> </Text>
+                ค่าไฟ : <Text>{parseInt(item.light)*8}</Text> บาท ( {item.light} หน่วย )<Text> </Text>
               </Text>
               <Text></Text>
               <Text style={[styles.text, { color: "#FF9699", fontSize:20 }]}>
-                รวมทั้งสิ้น : <Text>{parseInt(item.data.rent)+(parseInt(item.data.water)*18)+(parseInt(item.data.light)*8)}</Text> บาท
+                รวมทั้งสิ้น : <Text>{parseInt(item.price)+(parseInt(item.water)*18)+(parseInt(item.light)*8)}</Text> บาท
               </Text>
               <Text></Text>
-              {item.data.status? <Text style={{color:"#69CC6D"}}>ชำระแล้ว</Text>: <Text style={{color:"#FF0000"}}>ยังไม่ชำระ</Text>}
+              {item.status? <Text style={{color:"#69CC6D"}}>ชำระแล้ว</Text>: <Text style={{color:"#FF0000"}}>ยังไม่ชำระ</Text>}
             </View>
           )
           

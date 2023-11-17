@@ -13,10 +13,12 @@ import { useState, useEffect } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { initializeApp } from "firebase/app";
+import {firebase, initializeApp} from 'firebase/app'; 
+import { getFirestore, collection, query, where, getDocs, updateDoc, doc, addDoc } from "firebase/firestore";
 import { firebaseConfig } from "../../database/FirebaseConfig";
 
 const LoginRenter = ({ navigation }) => {
+  const [renter, setRenter] = useState()
   const [dorpass, setDorpass] = useState("");
   const [numroom, setNumroom] = useState("");
   const [password, setPassword] = useState("");
@@ -27,6 +29,17 @@ const LoginRenter = ({ navigation }) => {
 
   useEffect(() => {
     validateForm();
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const fetchData = async () => {
+      const renterQuery = await getDocs(query(collection(db, 'renters'), 
+      where('code', '==', dorpass), where('num_room', '==', numroom)))
+      renterQuery.forEach((doc) => {
+        setRenter({id:doc.id, ...doc.data()})
+      })
+    };
+    fetchData()
   }, [dorpass, numroom, password,]);
 
   const toggleShowPassword = () => {
@@ -54,21 +67,13 @@ const LoginRenter = ({ navigation }) => {
   };
 
   const handleSignIn = () => {
-    // signInWithEmailAndPassword(auth)
-    //   .then((userCredential) => {
-    //     console.log("Sign In!");
-    //     const user = userCredential.user;
-    //     console.log(user);
-    //     const user_uid = user.uid;
-    //     console.log(user_uid);
-    //     navigation.navigate("MyRoomPage", { uid: user_uid });
-    //     clearFormFields();
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    navigation.navigate("MyRoomPage");
-    clearFormFields();
+    if(renter.password == password){
+      navigation.navigate("MyRoomPage", {renter: renter});
+      clearFormFields();
+    }else{
+      console.log(error)
+    }
+    
   };
 
   return (
@@ -77,14 +82,7 @@ const LoginRenter = ({ navigation }) => {
         <Text style={{ fontSize: 40, fontWeight: "bold", color: "#363C56" }}>
           เข้าสู่ระบบ
         </Text>
-        <Text
-          style={{
-            fontSize: 14,
-            fontWeight: "bold",
-            color: "#aaa",
-            marginTop: 20,
-          }}
-        >
+        <Text style={{fontSize: 14,fontWeight: "bold",color: "#aaa",marginTop: 20,}}>
           Hello! Welcome back <AntDesign name="heart" size={14} color="#aaa" />
         </Text>
       </View>
@@ -93,12 +91,7 @@ const LoginRenter = ({ navigation }) => {
 
         <View style={{alignItems: "center"}}>
           <View style={[styles.input, styles.shadowProp]}>
-            <AntDesign
-              style={{ paddingRight: 10 }}
-              name="mail"
-              size={20}
-              color="#363C56"
-            />
+            <AntDesign style={{ paddingRight: 10 }} name="mail" size={20} color="#363C56"/>
             <TextInput
               value={dorpass}
               onChangeText={(numeric) => setDorpass(numeric)}
@@ -111,12 +104,7 @@ const LoginRenter = ({ navigation }) => {
 
         <View style={{alignItems: "center"}}>
           <View style={[styles.input, styles.shadowProp]}>
-            <MaterialCommunityIcons
-              style={{ paddingRight: 10 }}
-              name="numeric"
-              size={24}
-              color="#363C56"
-            />
+            <MaterialCommunityIcons style={{ paddingRight: 10 }} name="numeric" size={24} color="#363C56"/>
             <TextInput
               value={numroom}
               onChangeText={(numeric) => setNumroom(numeric)}
@@ -129,12 +117,7 @@ const LoginRenter = ({ navigation }) => {
 
         <View style={{alignItems: 'center'}}>
         <View style={[styles.input, styles.shadowProp]}>
-          <AntDesign
-            style={{ paddingRight: 10 }}
-            name="lock1"
-            size={20}
-            color="#363C56"
-          />
+          <AntDesign style={{ paddingRight: 10 }} name="lock1" size={20} color="#363C56"/>
           <TextInput
             secureTextEntry={!showPassword}
             value={password}
@@ -142,27 +125,14 @@ const LoginRenter = ({ navigation }) => {
             style={{ flex: 1, fontSize: 16 }}
             placeholder="รหัสผ่าน"
           ></TextInput>
-          <MaterialCommunityIcons
-            style={{ right: 15 }}
-            name={showPassword ? "eye" : "eye-off"}
-            size={24}
-            color="#aaa"
-            onPress={toggleShowPassword}
-          />
+          <MaterialCommunityIcons style={{ right: 15 }} name={showPassword ? "eye" : "eye-off"} size={24} color="#aaa" onPress={toggleShowPassword}/>
         </View>
         </View>
       <Text style={styles.errorText}>{errors.password}</Text>
 
       <View style={{ alignItems: "center" }}>
         <TouchableOpacity style={styles.btn} onPress={handleSignIn}>
-          <Text
-            style={{
-              textAlign: "center",
-              color: "white",
-              fontWeight: "bold",
-              fontSize: 16,
-            }}
-          >
+          <Text style={{ textAlign: "center", color: "white", fontWeight: "bold", fontSize: 16}}>
             ยืนยัน
           </Text>
         </TouchableOpacity>

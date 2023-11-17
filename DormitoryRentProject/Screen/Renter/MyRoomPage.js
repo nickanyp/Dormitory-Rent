@@ -8,19 +8,13 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useEffect, useState } from "react";
-import { firebase, initializeApp } from "firebase/app";
-import {
-  getFirestore,
-  collection,
-  query,
-  where,
-  getDocs,
-} from "firebase/firestore";
+import {firebase, initializeApp} from 'firebase/app';
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 import { firebaseConfig } from "../../database/FirebaseConfig";
 
 const MyRoomPage = ({ route, navigation }) => {
-  // const uid = route.params.uid;
-  const [renterArr, setRenter] = useState([]);
+  const renter = route.params.renter;
+  const [dormitoryName, setDormitory] = useState('');
   const [paymentArr, setPayment] = useState([]);
   const today = new Date();
   const day = today.getDate();
@@ -30,91 +24,69 @@ const MyRoomPage = ({ route, navigation }) => {
   }
 
     useEffect(() => {
-      // Initialize Firebase (if not already initialized)
       const app = initializeApp(firebaseConfig);
-  
-      // Reference to Firestore
       const db = getFirestore(app);
-  
-      // Fetch data from collection1
-      const fetchDataFromCollection1 = async () => {
-        const querySnapshot = await getDocs(query(collection(db, "renters"), where("uid", "==", uid)));
-  
+
+      const fetchData = async () => {
+        const dorQuery = await getDocs(query(collection(db, 'dormitory'), where('code', '==', renter.code)))
+        dorQuery.forEach((doc) => {
+          setDormitory(doc.data().name)
+        })
+
+        const querySnapshot = await getDocs(query(collection(db, "payment"), 
+        where("code", "==", renter.code), where('room', '==', renter.num_room),
+        where('month', '==', currentmonth)));
         const data = [];
         querySnapshot.forEach((doc) => {
           data.push({ id: doc.id, ...doc.data() });
         });
-  
-        setRenter(data);
-        console.log(data)
-  
-        // Use the data from collection1 to query collection2
-        data.forEach(async (item) => {
-          const querySnapshot = await getDocs(
-            query(collection(db, "payment"), where("month", "==", currentmonth.toString()), where("code", "==", item.code), where("room", "==", item.num_room))
-          );
-  
-          const relatedData = [];
-          querySnapshot.forEach((doc) => {
-            relatedData.push({ id: doc.id, ...doc.data() });
-          });
-  
-          setPayment(relatedData)
-  
-  
-          // Update the state with related data from collection2
-          // setPayment((prevData) => [...prevData, { renterArr: item, paymentArr: relatedData }]);
-        });
+        setPayment(data);
       };
   
-      fetchDataFromCollection1();
-    }, []); 
+      fetchData();
+    }, [renter]); 
   
-    console.log(renterArr)
-    console.log(2)
     console.log(paymentArr)
+    console.log(2)
+    console.log(currentmonth)
+    console.log("---")
 
   let namemoth = "";
   if (currentmonth == 10) {
     namemoth = "ตุลาคม";
   }
-  console.log(namemoth);
-  console.log(paymentArr);
 
   return (
     <SafeAreaView style={styles.container}>
-      {renterArr.map((item) => {
-        return (
+
           <View style={[styles.box, styles.shadowProp]}>
             <Text style={[styles.text, { fontSize: 19, color: "#FF9699" }]}>
-              หอพัก : <Text>{item.dor_name}</Text>
+              หอพัก : <Text>{dormitoryName}</Text>
             </Text>
             <Text style={[styles.text, { fontSize: 19, color: "#FF9699" }]}>
-              ประเภทห้อง : <Text>{item.dor_type}</Text>
+              ประเภทห้อง : <Text>{renter.type}</Text>
             </Text>
             <Text style={[styles.text, { fontSize: 19, color: "#FF9699" }]}>
-              เลขห้อง : <Text>{item.num_room}</Text>
+              เลขห้อง : <Text>{renter.num_room}</Text>
             </Text>
             <Text></Text>
             <Text style={styles.text}>
-              ชื่อผู้เช่า 1 : <Text>{item.name1}</Text>
+              ชื่อผู้เช่า 1 : <Text>{renter.name1}</Text>
             </Text>
             <Text style={styles.text}>
-              ชื่อผู้เช่า 2 : <Text>{item.name2}</Text>
+              ชื่อผู้เช่า 2 : <Text>{renter.name2}</Text>
             </Text>
             <Text style={styles.text}>
-              ชื่อผู้เช่า 3 : <Text>{item.name3}</Text>
+              ชื่อผู้เช่า 3 : <Text>{renter.name3}</Text>
             </Text>
             <Text style={styles.text}>
-              ชื่อผู้เช่า 4 : <Text>{item.name4}</Text>
+              ชื่อผู้เช่า 4 : <Text>{renter.name4}</Text>
             </Text>
           </View>
-        );
-      })}
 
-      {paymentArr.map((item) => {
+      {paymentArr.map((item, i) => {
         return (
-          <View style={[styles.box, styles.shadowProp]}>
+          <View key={i} style={[styles.box, styles.shadowProp]}>
             <Text
               style={{ fontWeight: "bold", fontSize: 25, color: "#FF9699" }}
             >
@@ -122,7 +94,7 @@ const MyRoomPage = ({ route, navigation }) => {
             </Text>
             <Text></Text>
             <Text style={styles.text}>
-              ค่าเช่าหอพัก : <Text>{item.rent}</Text> บาท
+              ค่าเช่าหอพัก : <Text>{item.price}</Text> บาท
             </Text>
             <Text style={styles.text}>
               ค่าน้ำ : <Text>{parseInt(item.water) * 18}</Text> บาท ({" "}
@@ -135,8 +107,7 @@ const MyRoomPage = ({ route, navigation }) => {
             <Text></Text>
             <Text style={[styles.text, { color: "#FF9699", fontSize: 20 }]}>
               รวมทั้งสิ้น :{" "} 
-
-                {parseInt(item.rent) +
+                {parseInt(item.price) +
                   parseInt(item.water) * 18 +
                   parseInt(item.light) * 8} บาท
             </Text>
@@ -158,27 +129,18 @@ const MyRoomPage = ({ route, navigation }) => {
               navigation.navigate("PaymentRenter", {
                 data: paymentArr,
                 month: namemoth,
+                renter: renter
               });
             }}
           >
-            <Text
-              style={[
-                styles.textBtn,
-                {
-                  color: "white",
-                  textAlign: "center",
-                  fontWeight: "bold",
-                  fontSize: 15,
-                },
-              ]}
-            >
+            <Text style={[styles.textBtn,{color: "white",textAlign: "center",fontWeight: "bold",fontSize: 15,},]}>
               ชำระค่าเช่า
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btn}
             onPress={() => {
-              navigation.navigate("HistoryRenter", { data: renterArr });
+              navigation.navigate("HistoryRenter", { renter: renter });
             }}
           >
             <Text
