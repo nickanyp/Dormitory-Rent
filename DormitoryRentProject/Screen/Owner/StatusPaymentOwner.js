@@ -9,11 +9,14 @@ import {
   Image,
   Button
 } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import DetailPaymentOwner from "./DetailPaymentOwner";
 import Modal from "react-native-modal";
+import {firebase, initializeApp} from 'firebase/app'; 
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { firebaseConfig } from "../../database/FirebaseConfig";
 
 const data = [
   { label: "มกราคม", value: "1" },
@@ -30,9 +33,30 @@ const data = [
   { label: "ธันวาคม", value: "12" },
 ];
 
-const StatusPaymentOwner = ({ navigation }) => {
+const StatusPaymentOwner = ({ navigation, route }) => {
+  const code = route.params.code
+  const [empArr, setEmpRoom] = useState([]);
+  const [fullArr, setFullRoom] = useState([]);
+  const [paymentArr, setPaymentRoom] = useState([]);
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
+
+  useEffect(() => {
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const fetchData = async () => {
+      console.log(value)
+      const payQuery = await getDocs(query(collection(db, 'payment'), where('code', '==', code),
+      where('month', '==', parseInt(value))));
+      const pay = [];
+      payQuery.forEach((doc) => {
+        pay.push({id:doc.id, ...doc.data()})
+      })
+      setPaymentRoom(pay)
+    };
+
+    fetchData();
+  }, [code, value]);
 
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModal = () => {
@@ -89,44 +113,29 @@ const StatusPaymentOwner = ({ navigation }) => {
       </View>
 
       <View style={styles.grid}>
-        <TouchableOpacity
-          style={[
-            styles.btn,
-            styles.shadowProp,
-            { backgroundColor: "#90DA83" },
-          ]}
-          onPress={toggleModal}
-        >
-          <Text style={styles.txt}>A101</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[
-            styles.btn,
-            styles.shadowProp,
-            { backgroundColor: "#90DA83" },
-          ]}
-          onPress={toggleModal}
-        >
-          <Text style={styles.txt}>A102</Text>
-        </TouchableOpacity>
-
+        {paymentArr.map((item, i) => {
+          return(
+            <TouchableOpacity key={i} style={[ styles.btn, styles.shadowProp, 
+            { backgroundColor:  item.status? "#90DA83":"#EF6767"},]}
+              onPress={toggleModal}>
+              <Text style={styles.txt}>{item.room}</Text>
+              <View>
+                <Modal isVisible={isModalVisible}>
+                  <View style={{ backgroundColor: "#fff", width: "100%", height: "50%", borderRadius: 40, justifyContent: "center", alignItems: 'center'}}>
+                    <Image style={styles.img} source={require('../../assets/slip2.jpeg')} />
+                    <Button title="ปิด" onPress={toggleModal} />
+                  </View>
+                </Modal>
+              </View>
+            </TouchableOpacity>
+          )
+        })}
       </View>
 
       <View>
         <Modal isVisible={isModalVisible}>
-          <View
-            style={{
-              backgroundColor: "#fff",
-              width: "100%",
-              height: "50%",
-              borderRadius: 40,
-              justifyContent: "center",
-              alignItems: 'center'
-            }}
-          >
+          <View style={{ backgroundColor: "#fff", width: "100%", height: "50%", borderRadius: 40, justifyContent: "center", alignItems: 'center'}}>
             <Image style={styles.img} source={require('../../assets/slip.jpeg')} />
-
             <Button title="ปิด" onPress={toggleModal} />
           </View>
         </Modal>

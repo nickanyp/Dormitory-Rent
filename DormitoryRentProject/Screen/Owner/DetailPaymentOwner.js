@@ -84,6 +84,17 @@ const DetailPaymentOwner = ({ navigation, route }) => {
       navigation.navigate("InformPayment", {code: room.code}) 
     }else{
       try {
+        if (room.type == "ห้องธรรมดาปรับอากาศ"){
+          room.type = "genair"
+        }else if (room.type == "ห้องธรรมดาพัดลม"){
+          room.type = "genfan"
+        }else if (room.type == "ห้องสูท"){
+          room.type = "suite"
+        }else if (room.type == "ห้องเดี่ยวปรับอากาศ"){
+          room.type = "oneair"
+        }else if (room.type == "ห้องเดี่ยวพัดลม"){
+          room.type = "onefan"
+        }
         const detailDocRef = collection(db, "payment");
         await addDoc(detailDocRef, {
             water: water,

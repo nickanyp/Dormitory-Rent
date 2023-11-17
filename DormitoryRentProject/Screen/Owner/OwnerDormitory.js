@@ -6,40 +6,6 @@ import {firebase, initializeApp} from 'firebase/app';
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 import { firebaseConfig } from "../../database/FirebaseConfig";
 
-
-const stackData = [
-  {
-    stacks: [
-      {value: 1, color: '#96B3FF'},
-      {value: 1, color: '#D9D9D9'},
-    ]
-  },
-  {
-    stacks: [
-      {value: 20, color: '#FF9699'},
-      {value: 5, color: '#D9D9D9'},
-    ]
-  },
-  {
-    stacks: [
-      {value: 2, color: '#90DA84'},
-      {value: 1, color: '#D9D9D9'},
-    ]
-  },
-  {
-    stacks: [
-      {value: 6, color: '#F2AD5C'},
-      {value: 1, color: '#D9D9D9'},
-    ]
-  },
-  {
-    stacks: [
-      {value: 3, color: '#E6C0FF'},
-      {value: 0, color: '#D9D9D9'},
-    ]
-  }
-];
-
 const OwnerDormitory = ({navigation, route}) => {
   const dormitory = route.params.data
   const today = new Date();
