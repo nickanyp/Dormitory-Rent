@@ -17,7 +17,7 @@ const CustomDrawer = ({ navigation, ...props }) => {
     <View style={{flex: 1}}>
         <DrawerContentScrollView
             {...props}>
-            <ImageBackground
+            {/* <ImageBackground
             source={{uri: 'https://media.discordapp.net/attachments/1094988129192128632/1164849072616767568/IMG_2281.jpeg?ex=6544b53c&is=6532403c&hm=a9a7fed40a23b4fbc51fec091f701225272e19d61d8e81015c5692e099c0ee8b&=&width=526&height=702'}}
             style={{padding: 20}}>
             <Image
@@ -26,7 +26,7 @@ const CustomDrawer = ({ navigation, ...props }) => {
             <Text style={{ color: '#fff', fontSize: 20, marginBottom: 5,}}>
                 อนัญพร จอมคำ
             </Text>
-            </ImageBackground>
+            </ImageBackground> */}
             <View style={{flex: 1, paddingTop: 10}}>
             <DrawerItemList {...props} />
             </View>
