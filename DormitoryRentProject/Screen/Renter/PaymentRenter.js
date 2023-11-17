@@ -72,7 +72,7 @@ const PaymentRenter = ({ route, navigation }) => {
               </TouchableOpacity>
               <TouchableOpacity style={styles.btn2} onPress={paymentArr.status? null: handlePayment}>
                 <Text style={[styles.text, { textAlign: "center", color: "white" }]}>
-                  {handlePayment? 'ชำระเสร็จสิ้น' : 'ยืนยัน' }
+                  {paymentArr.status? 'ชำระเสร็จสิ้น' : 'ยืนยัน' }
                 </Text>
               </TouchableOpacity>
             </View>
