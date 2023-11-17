@@ -403,7 +403,7 @@ const OwnerDormitory = ({navigation, route}) => {
               </View> */}
             </View>
             
-          </View>a
+          </View>
 
           <View style={[styles.block4, {marginTop:0}]}>
             <View style={[styles.block4]}>
