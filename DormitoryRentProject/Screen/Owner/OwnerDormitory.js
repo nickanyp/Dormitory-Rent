@@ -59,6 +59,7 @@ const OwnerDormitory = ({navigation, route}) => {
   const [ganp, setGenairNotPay] = useState([]);
   const [gfp, setGenfanPay] = useState([]);
   const [gfnp, setGenfanNotPay] = useState([]);
+  const fineRoom = [];
 
   useEffect(() => {
     if(month == 'ตุลาคม'){
@@ -200,6 +201,14 @@ const OwnerDormitory = ({navigation, route}) => {
     notpayincome += (parseInt(np[i].light)*parseInt(dormitory.light));
     notpayincome += (parseInt(np[i].water)*parseInt(dormitory.water));
     notpayincome += parseInt(np[i].price);
+  }
+  let fine = 0;
+  for (let i=0; i<ic.length;i++){
+    console.log(fineRoom)
+    fine += parseInt(ic[i].fine)
+    if(parseInt(ic[i].fine) > 0){
+      fineRoom.push(ic[i].room)
+    }
   }
 
   const [isModalVisible, setModalVisible] = useState(false);
@@ -454,7 +463,7 @@ const OwnerDormitory = ({navigation, route}) => {
             <View>
               <View style={styles.circle2}>
                 <View style={styles.circle3}>
-                  <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56"}}>0 ฿</Text>
+                  <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56"}}>{fine} ฿</Text>
                 </View>
               </View>
               <View style={[styles.block4, {justifyContent:"center", marginTop:0}]}>
@@ -464,9 +473,10 @@ const OwnerDormitory = ({navigation, route}) => {
             </View>
             <View style={{marginLeft:10}}>
               <Text style={{marginLeft:30, fontSize:20, fontWeight:"bold", color:"#363C56", marginBottom:12, marginTop:-15}}>ชำระเงินล่าช้า</Text>
-              <Text style={{marginLeft:30, fontSize:17, color:"#363C56", marginBottom: 5}}>1     -</Text>
-              <Text style={{marginLeft:30, fontSize:17, color:"#363C56", marginBottom: 5}}>2     -</Text>
-              <Text style={{marginLeft:30, fontSize:17, color:"#363C56"}}>3     -</Text>
+              {fineRoom.map((item, i) => {
+                return(<Text key={i} style={{marginLeft:30, fontSize:17, color:"#363C56", marginBottom: 5}}> {item}</Text>)
+              })}
+              {/* <Text  style={{marginLeft:30, fontSize:17, color:"#363C56", marginBottom: 5}}> {fineRoom}</Text> */}
             </View>
           </View> 
         </View>

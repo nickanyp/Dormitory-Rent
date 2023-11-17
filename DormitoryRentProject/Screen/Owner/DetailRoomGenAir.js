@@ -77,6 +77,28 @@ const DetailRoomGenAir = ({route}) => {
                     </View>
                 </View>
 
+                <Text style={{color:'#96B3FF',fontWeight:'bold', fontSize:18, margin:15}}>ห้องว่าง</Text>
+                <View style={{flexDirection:'row', flexWrap: 'wrap', width:340}}>
+                    {emp.map((item, i) => {
+                      return(
+                        <View key={i} style={{width:60, height:30, marginLeft:15, borderWidth:1.5, borderColor:"#96B3FF", borderRadius:50, justifyContent:"center", alignItems:"center",}}>
+                          <Text style={{color:'#363C56',fontWeight:'bold', fontSize:15}} key={i}>{item.room}</Text>
+                        </View>
+                      )
+                    })}
+                </View>
+
+                <Text style={{color:'#96B3FF',fontWeight:'bold', fontSize:18, margin:15}}>ห้องมีผู้เช่า</Text>
+                <View style={{flexDirection:'row', flexWrap: 'wrap', width:340}}>
+                    {full.map((item, i) => {
+                      return(
+                        <View key={i} style={{width:60, height:30, marginLeft:15, borderWidth:1.5, borderColor:"#96B3FF", borderRadius:50, justifyContent:"center", alignItems:"center",}}>
+                          <Text style={{color:'#363C56',fontWeight:'bold', fontSize:15}} key={i}>{item.room}</Text>
+                        </View>
+                      )
+                    })}
+                </View>
+
                 <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56", marginTop:15}}>ยอดชำระ {parseInt(payincome)+parseInt(notpayincome)} บาท</Text>
                 <View style={styles.block4}>
                     <View style={[styles.box4, {borderColor:"#90DA83"}]}>
@@ -89,7 +111,7 @@ const DetailRoomGenAir = ({route}) => {
                     </View>
                 </View>
 
-                <View style={[styles.box2, {marginTop:20}]}>
+                <View style={[styles.box2, {height: 127,marginTop:20, alignItems:"start", paddingTop:10}]}>
                     <View style={styles.box3}>
                         <View style={[styles.circle1, {backgroundColor:"#90DA83"}]}>
                             <View style={styles.circle4}>
@@ -105,39 +127,28 @@ const DetailRoomGenAir = ({route}) => {
                             <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>{notpay.length}</Text>
                             </View>
                         </View>
-                    <Text>ยังไม่ชำระ</Text>
+                      <Text>ยังไม่ชำระ</Text>
                     </View>
                 </View>
-
-                <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56", marginTop:15, marginBottom:10}}>ชำระเงินล่าช้า</Text>
-                <LineChart
-                    data={data}
-                    color={'#F64B4B'}
-                    thickness={3}
-                    dataPointsColor={'red'}
-                    width={280}
-                    height={100}
-                    rulesType="solid"
-                    maxValue={5}
-                    noOfSections={5}
-                />
-                <View style={[styles.block4, {marginTop:20, justifyContent:"center", marginBottom:30}]}>
-                    <View style={{alignItems:"center", marginRight:30, borderWidth:1, padding:10, borderRadius:20, borderColor:"#F64B4B"}}>
-                        <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>ลำดับ</Text>
-                        <Text style={{fontSize:20, fontWeight:"bold", color:"#363C56"}}>การชำระล่าช้า</Text>
-                    </View>
-                    <View style={{justifyContent:"center", alignItems:"center"}}>
-                        <Text style={{fontSize:18, fontWeight:"bold", color:"#96B3FF"}}>1</Text>
-                        <Text style={{fontSize:18, fontWeight:"bold", color:"#96B3FF"}}>2</Text>
-                    </View>
-                    <View style={{marginLeft:15, justifyContent:"center", alignItems:"center"}}>
-                        <Text style={{fontSize:18, fontWeight:"bold", color:"#363C56"}}>-</Text>
-                        <Text style={{fontSize:18, fontWeight:"bold", color:"#363C56"}}>-</Text>
-                    </View>
-                    <View style={{marginTop:-1, marginLeft:15,justifyContent:"center", alignItems:"center"}}>
-                        <Text style={{fontSize:17, fontWeight:"bold", color:"#363C56"}}>ครั้ง</Text>
-                        <Text style={{fontSize:17, fontWeight:"bold", color:"#363C56"}}>ครั้ง</Text>
-                    </View>
+                <View style={{flexDirection:'row', marginTop:10}}>
+                  <View style={{margin:10}}>
+                    <Text style={{fontWeight:'bold', fontSize:18, color:'#363C56'}}>ห้องที่ชำระแล้ว</Text>
+                    <View style={{ height: 1, backgroundColor: 'black', marginBottom:10}} />
+                    {pay.map((item, i) => {
+                      return(
+                        <Text style={{color:'#363C56',fontWeight:'bold', fontSize:15, margin:3}} key={i}>{item.room}</Text>
+                      )
+                    })}
+                  </View>
+                  <View style={{margin:10}}>
+                    <Text style={{fontWeight:'bold', fontSize:18, color:'#363C56'}}>ห้องที่ยังไม่ชำระ</Text>
+                    <View style={{ height: 1, backgroundColor: 'black'}} />
+                    {notpay.map((item, i) => {
+                      return(
+                        <Text style={{color:'#363C56',fontWeight:'bold', fontSize:15}} key={i}>{item.room}</Text>
+                      )
+                    })}
+                  </View>
                 </View>
             </ScrollView>
         </SafeAreaView>
