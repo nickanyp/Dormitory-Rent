@@ -5,8 +5,65 @@ import { color } from "react-native-elements/dist/helpers";
 import DormitoryHeader from "../../component/DormitoryHeader";
 import { LineChart } from "react-native-chart-kit";
 import { BarChart } from "react-native-gifted-charts";
+import { useEffect, useState } from "react";
+import {firebase, initializeApp} from 'firebase/app';
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { firebaseConfig } from "../../database/FirebaseConfig";
 
-const DashboardLight = () => {
+
+const DashboardLight = (props) => {
+  const renter = props.renter
+  const [paymentArr, setPayment] = useState([]);
+  const [pastArr, setPPast] = useState([]);
+  const [price, setPrice] = useState(0);
+  const [water, setWater] = useState(0);
+  const [light, setLight] = useState(0);
+  const [fine, setFine] = useState(0);
+  const [p_price, setPastPrice] = useState(0);
+  const [p_water, setPastWater] = useState(0);
+  const [p_light, setPastLight] = useState(0);
+  const [p_fine, setPastFine] = useState(0);
+  const today = new Date();
+  const day = today.getDate();
+  const year = today.getFullYear();
+  let currentmonth = today.getMonth();
+  if (day >= 26) {
+    currentmonth += 1;
+  }
+
+  useEffect(() => {
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(query(collection(db, "payment"), 
+      where("code", "==", renter.code), where('room', '==', renter.num_room),
+      where('month', '==', currentmonth)));
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push({ id: doc.id, ...doc.data() });
+        setPrice(parseInt(doc.data().price))
+        setLight(parseInt(doc.data().light))
+        setWater(parseInt(doc.data().water))
+        setFine(parseInt(doc.data().fine))
+      });
+      setPayment(data);
+
+      const PastSnapshot = await getDocs(query(collection(db, "payment"), 
+      where("code", "==", renter.code), where('room', '==', renter.num_room),
+      where('month', '==', currentmonth-1)));
+      const data2 = [];
+      PastSnapshot.forEach((doc) => {
+        data2.push({ id: doc.id, ...doc.data() });
+        setPastPrice(parseInt(doc.data().price))
+        setPastLight(parseInt(doc.data().light))
+        setPastWater(parseInt(doc.data().water))
+        setPastFine(parseInt(doc.data().fine))
+      });
+      setPPast(data2);
+    }
+    fetchData();
+  }, [renter])
 
   const chartConfig = {
     backgroundGradientFrom: "#fff",
@@ -19,10 +76,10 @@ const DashboardLight = () => {
   };
 
   const data = {
-    labels: ["5/66", "6/66", "7/66", "8/66", "9/66"],
+    labels: [((currentmonth-1).toString()+ '/' + (year).toString()), (currentmonth.toString()+ '/' + year.toString())],
     datasets: [
       {
-        data: [150, 120, 110, 100, 110],
+        data: [p_light, light],
         color: (opacity = 1) => `#F2AD5C`, // optional
         strokeWidth: 3 // optional
       }
@@ -30,34 +87,34 @@ const DashboardLight = () => {
   };
 
   const barData = [
-    {value: 10, label: 'ตุลาคม', labelTextStyle:{width:50, color:"#363C56", marginLeft:50, fontWeight:"bold"}},
-    {value: 12, label: 'กันยายน', frontColor: 'lightgray', labelMarginTop: 10, labelTextStyle:{width:50, color:"#363C56", marginLeft:50, fontWeight:"bold"}},
+    {value: light, label: (currentmonth.toString()+ '/' + year.toString()), labelTextStyle:{width:70, color:"#fff", marginLeft:50, fontWeight:"bold"}},
+    {value: p_light, label: ((currentmonth-1).toString()+ '/' + (year).toString()), frontColor: 'lightgray', labelMarginTop: 10, labelTextStyle:{width:70, color:"#fff", marginLeft:50, fontWeight:"bold"}},
   ];
 
   return (
       <SafeAreaView style={styles.container}>
         <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <View style={[styles.block4, styles.shadowProp, {backgroundColor: 'white'}]}>
-          <Text style={{fontSize:19, fontWeight:"bold", color:"#363C56"}}>ไฟฟ้าประจำเดือนตุลาคม</Text>
+          <Text style={{fontSize:19, fontWeight:"bold", color:"#363C56"}}>ไฟฟ้าประจำเดือน {currentmonth} / {year}</Text>
         </View>
 
         <View style={styles.block1}>
-          <View>
+          <View style={{marginLeft:5}}>
             <View style={styles.circle}></View>
             <View style={styles.circle2}>
-              <Text style={{fontSize:30, fontWeight:"bold", color:"#363C56"}}>4,567฿</Text>
+              <Text style={{fontSize:30, fontWeight:"bold", color:"#363C56"}}>{parseInt(light)*8}฿</Text>
             </View>
           </View>
           <View style={{justifyContent:"center"}}>
             <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>ค่าไฟฟ้า : 8 บาท/หน่วย</Text>
-            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>ปริมาณไฟฟ้า : 570 หน่วย</Text>
-            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>รวมทั้งหมด : 4,567 บาท</Text>
+            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>ปริมาณไฟฟ้า : {light} หน่วย</Text>
+            <Text style={{fontSize:16, fontWeight:"bold",  color:"#363C56", marginBottom:5}}>รวมทั้งหมด : {parseInt(light)*8} บาท</Text>
           </View>
         </View>
 
         <View style={styles.block2}>
-          <Text style={{position:'absolute', top:19, left:26, color:"#fff", fontWeight:"bold", fontSize:15}}>570.875 หน่วย</Text>
-          <Text style={{position:'absolute', top:78, left:26, color:"#fff", fontWeight:"bold", fontSize:15}}>321.54 หน่วย</Text>
+          <Text style={{position:'absolute', top:19, left:26, color:"#fff", fontWeight:"bold", fontSize:15}}>{light} หน่วย</Text>
+          <Text style={{position:'absolute', top:78, left:26, color:"#fff", fontWeight:"bold", fontSize:15}}>{p_light}หน่วย</Text>
           <BarChart
             horizontal
             barWidth={30}
@@ -68,7 +125,7 @@ const DashboardLight = () => {
             yAxisThickness={0}
             xAxisThickness={0}
             noOfSections={2}
-            maxValue={12} //dataเดือนที่มากว่า
+            maxValue={300} //dataเดือนที่มากว่า
             hideAxesAndRules
             spacing={30}
             // backgroundColor='#000'
@@ -104,15 +161,15 @@ const styles = StyleSheet.create({
     marginLeft:-5
   },
   circle: {
-    width:150,
-    height:150,
+    width:140,
+    height:140,
     borderRadius:360,
     backgroundColor:"#F2AD5C",
     marginRight:20
   },
   circle2: {
-    width:130,
-    height:130,
+    width:120,
+    height:120,
     borderRadius:360,
     backgroundColor:"#fff",
     position:"absolute",

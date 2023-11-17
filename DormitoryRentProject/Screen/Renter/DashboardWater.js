@@ -18,8 +18,14 @@ import { color } from "react-native-elements/dist/helpers";
 import DormitoryHeader from "../../component/DormitoryHeader";
 import { LineChart } from "react-native-chart-kit";
 import { BarChart } from "react-native-gifted-charts";
+import { useEffect, useState } from "react";
+import {firebase, initializeApp} from 'firebase/app';
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { firebaseConfig } from "../../database/FirebaseConfig";
 
-const DashboardWater = () => {
+
+const DashboardWater = (props) => {
+  const renter = props.renter
   const chartConfig = {
     backgroundGradientFrom: "#fff",
     backgroundGradientTo: "#fff",
@@ -30,11 +36,63 @@ const DashboardWater = () => {
     useShadowColorFromDataset: false, // optional
   };
 
+  const [paymentArr, setPayment] = useState([]);
+  const [pastArr, setPPast] = useState([]);
+  const [price, setPrice] = useState(0);
+  const [water, setWater] = useState(0);
+  const [light, setLight] = useState(0);
+  const [fine, setFine] = useState(0);
+  const [p_price, setPastPrice] = useState(0);
+  const [p_water, setPastWater] = useState(0);
+  const [p_light, setPastLight] = useState(0);
+  const [p_fine, setPastFine] = useState(0);
+  const today = new Date();
+  const day = today.getDate();
+  const year = today.getFullYear();
+  let currentmonth = today.getMonth();
+  if (day >= 26) {
+    currentmonth += 1;
+  }
+
+  useEffect(() => {
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(query(collection(db, "payment"), 
+      where("code", "==", renter.code), where('room', '==', renter.num_room),
+      where('month', '==', currentmonth)));
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push({ id: doc.id, ...doc.data() });
+        setPrice(parseInt(doc.data().price))
+        setLight(parseInt(doc.data().light))
+        setWater(parseInt(doc.data().water))
+        setFine(parseInt(doc.data().fine))
+      });
+      setPayment(data);
+
+      const PastSnapshot = await getDocs(query(collection(db, "payment"), 
+      where("code", "==", renter.code), where('room', '==', renter.num_room),
+      where('month', '==', currentmonth-1)));
+      const data2 = [];
+      PastSnapshot.forEach((doc) => {
+        data2.push({ id: doc.id, ...doc.data() });
+        setPastPrice(parseInt(doc.data().price))
+        setPastLight(parseInt(doc.data().light))
+        setPastWater(parseInt(doc.data().water))
+        setPastFine(parseInt(doc.data().fine))
+      });
+      setPPast(data2);
+    }
+    fetchData();
+  }, [renter])
+
   const data = {
-    labels: ["5/66", "6/66", "7/66", "8/66", "9/66"],
+    labels: [((currentmonth-1).toString()+ '/' + (year).toString()), (currentmonth.toString()+ '/' + year.toString())],
     datasets: [
       {
-        data: [15, 18, 15, 16, 18],
+        data: [p_water, water],
         color: (opacity = 1) => `#96B3FF`, // optional
         strokeWidth: 3, // optional
       },
@@ -42,28 +100,8 @@ const DashboardWater = () => {
   };
 
   const barData = [
-    {
-      value: 10,
-      label: "ตุลาคม",
-      labelTextStyle: {
-        width: 50,
-        color: "#363C56",
-        marginLeft: 50,
-        fontWeight: "bold",
-      },
-    },
-    {
-      value: 12,
-      label: "กันยายน",
-      frontColor: "lightgray",
-      labelMarginTop: 10,
-      labelTextStyle: {
-        width: 50,
-        color: "#363C56",
-        marginLeft: 50,
-        fontWeight: "bold",
-      },
-    },
+    {value: water, label: (currentmonth.toString()+ '/' + year.toString()), labelTextStyle:{width:70, color:"#fff", marginLeft:50, fontWeight:"bold"}},
+    {value: p_water, label: ((currentmonth-1).toString()+ '/' + (year).toString()), frontColor: 'lightgray', labelMarginTop: 10, labelTextStyle:{width:70, color:"#fff", marginLeft:50, fontWeight:"bold"}},
   ];
 
   return (
@@ -77,7 +115,7 @@ const DashboardWater = () => {
           ]}
         >
           <Text style={{ fontSize: 19, fontWeight: "bold", color: "#363C56" }}>
-            น้ำประจำเดือนกันยายน
+            น้ำประจำเดือน {currentmonth} / {year}
           </Text>
         </View>
 
@@ -88,7 +126,7 @@ const DashboardWater = () => {
               <Text
                 style={{ fontSize: 30, fontWeight: "bold", color: "#363C56" }}
               >
-                432฿
+                {parseInt(water)*18}฿
               </Text>
             </View>
           </View>
@@ -111,7 +149,7 @@ const DashboardWater = () => {
                 marginBottom: 5,
               }}
             >
-              ปริมาณน้ำ : 24 หน่วย
+              ปริมาณน้ำ : {water} หน่วย
             </Text>
             <Text
               style={{
@@ -121,7 +159,7 @@ const DashboardWater = () => {
                 marginBottom: 5,
               }}
             >
-              รวมทั้งหมด : 432 บาท
+              รวมทั้งหมด : {parseInt(water)*18} บาท
             </Text>
           </View>
         </View>
@@ -148,7 +186,7 @@ const DashboardWater = () => {
               fontSize: 15,
             }}
           >
-            432 หน่วย
+            {water} หน่วย
           </Text>
           <Text
             style={{
@@ -160,7 +198,7 @@ const DashboardWater = () => {
               fontSize: 15,
             }}
           >
-            120 หน่วย
+            {p_water} หน่วย
           </Text>
           <BarChart
             horizontal
@@ -172,7 +210,7 @@ const DashboardWater = () => {
             yAxisThickness={0}
             xAxisThickness={0}
             noOfSections={2}
-            maxValue={12} //dataเดือนที่มากว่า
+            maxValue={50} //dataเดือนที่มากว่า
             hideAxesAndRules
             spacing={30}
             // backgroundColor='#000'

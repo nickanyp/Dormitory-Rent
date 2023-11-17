@@ -31,15 +31,15 @@ var RenterDashPage = ({route}) => {
     color="#363C56"
     tcolor="#fff"
   }else if (thisScreen == 1){
-    content = <DashboardLight/>
+    content = <DashboardLight renter={renter}/>
     color2="#363C56"
     tcolor2="#fff"
   }else if (thisScreen == 2) {
-    content = <DashboardWater/>
+    content = <DashboardWater renter={renter}/>
     color3="#363C56"
     tcolor3="#fff"
   }else if (thisScreen == 3) {
-    content = <DashboardFine/>
+    content = <DashboardFine renter={renter}/>
     color4="#363C56"
     tcolor4="#fff"
   }
