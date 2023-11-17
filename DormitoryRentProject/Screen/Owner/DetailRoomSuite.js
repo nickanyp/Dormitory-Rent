@@ -149,10 +149,10 @@ const DetailRoomSuite = ({route}) => {
                   </View>
                   <View style={{margin:10}}>
                     <Text style={{fontWeight:'bold', fontSize:18, color:'#363C56'}}>ห้องที่ยังไม่ชำระ</Text>
-                    <View style={{ height: 1, backgroundColor: 'black'}} />
+                    <View style={{ height: 1, backgroundColor: 'black', marginBottom:10}} />
                     {notpay.map((item, i) => {
                       return(
-                        <Text key={i} style={{color:'#363C56',fontWeight:'bold', fontSize:15}} >{item.room}</Text>
+                        <Text key={i} style={{color:'#363C56',fontWeight:'bold', fontSize:15, margin:3}} >{item.room}</Text>
                       )
                     })}
                   </View>
