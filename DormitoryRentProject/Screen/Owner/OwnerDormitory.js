@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet, Image, ScrollView, Pressable, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Image, ScrollView, Button, TouchableOpacity} from 'react-native'
 import React, {useEffect, useState} from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { SafeAreaView } from 'react-native-safe-area-context' 
+import Modal from "react-native-modal";
 import { BarChart } from "react-native-gifted-charts";
 import {firebase, initializeApp} from 'firebase/app';
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
@@ -14,6 +15,31 @@ const OwnerDormitory = ({navigation, route}) => {
   let month = today.getMonth();
   if (day >= 26) {
     month += 1;
+  }
+  if(month == 10){
+    month = 'ตุลาคม'
+  }else if(month == 9){
+    month = 'กันยายน'
+  }else if(month == 8){
+    month = 'สิงหาคม'
+  }else if(month == 7){
+    month = 'กรกฎาคม'
+  }else if(month == 6){
+    month = 'มิถุนายน'
+  }else if(month == 5){
+    month = 'พฤษภาคม'
+  }else if(month == 4){
+    month = 'เมษายน'
+  }else if(month == 3){
+    month = 'มีนาคม'
+  }else if(month == 2){
+    month = 'กุมภาพันธ์'
+  }else if(month == 1){
+    month = 'มกราคม'
+  }else if(month == 11){
+    month = 'พฤศจิกายน'
+  }else if(month == 12){
+    month = 'ธันวาคม'
   }
   const [s, setSuite] = useState([]);
   const [se, setSuiteEmp] = useState([]);
@@ -35,6 +61,31 @@ const OwnerDormitory = ({navigation, route}) => {
   const [gfnp, setGenfanNotPay] = useState([]);
 
   useEffect(() => {
+    if(month == 'ตุลาคม'){
+      month = 10
+    }else if(month == 'กันยายน'){
+      month = 9
+    }else if(month == 'สิงหาคม'){
+      month = 8
+    }else if(month == 'กรกฎาคม'){
+      month = 7
+    }else if(month == 'มิถุนายน'){
+      month = 6
+    }else if(month == 'พฤษภาคม'){
+      month = 5
+    }else if(month == 'เมษายน'){
+      month = 4
+    }else if(month == 'มีนาคม'){
+      month = 3
+    }else if(month == 'กุมภาพันธ์'){
+      month = 2
+    }else if(month == 'มกราคม'){
+      month = 1
+    }else if(month == 'พฤศจิกายน'){
+      month = 11
+    }else if(month == 'ธันวาคม'){
+      month = 12
+    }
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     const fetchData = async () => { 
@@ -151,6 +202,26 @@ const OwnerDormitory = ({navigation, route}) => {
     notpayincome += parseInt(np[i].price);
   }
 
+  const [isModalVisible, setModalVisible] = useState(false);
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  const [isModalVisible2, setModalVisible2] = useState(false);
+  const toggleModal2 = () => {
+    setModalVisible2(!isModalVisible2);
+  };
+
+  const [isModalVisible3, setModalVisible3] = useState(false);
+  const toggleModal3 = () => {
+    setModalVisible3(!isModalVisible3);
+  };
+
+  const [isModalVisible4, setModalVisible4] = useState(false);
+  const toggleModal4 = () => {
+    setModalVisible4(!isModalVisible4);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={{width:"100%"}}>
@@ -170,7 +241,7 @@ const OwnerDormitory = ({navigation, route}) => {
         </View>
       
         <View style={{alignItems:"center", marginBottom:15}}>
-          <View style={[styles.hori]}>
+          <TouchableOpacity style={[styles.hori]} onPress={toggleModal}>
             <View style={{justifyContent:'center', alignItems:"center"}}>
               <Image style={styles.img} source={require('../../assets/air-conditioner.png')}/>
               <Text style={{color:"#363C56"}}>ห้องปรับอากาศ</Text>
@@ -178,23 +249,54 @@ const OwnerDormitory = ({navigation, route}) => {
             <View style={{marginLeft:40,justifyContent:'center', flexDirection:"row", alignItems:"center"}}>
               <View>
                 <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>ห้องสูท</Text>
+                <Text style={{color:'#9e9e9e', fontWeight:"bold", marginBottom:5}}>ว่าง</Text>
                 <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>ห้องธรรมดา</Text>
+                <Text style={{color:'#9e9e9e', fontWeight:"bold", marginBottom:5}}>ว่าง</Text>
                 {/* <Text style={{color:'#363C56', fontWeight:"bold"}}>ห้องเดี่ยว</Text> */}
               </View>
               <View style={{marginLeft:20}}>
-                <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>{s.length}</Text>
-                <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>{ga.length}</Text>
+                <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:7}}>{s.length}</Text>
+                <Text style={{color:'#9e9e9e', fontWeight:"bold", marginBottom:7}}>{se.length}</Text>
+                <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:7}}>{ga.length}</Text>
+                <Text style={{color:'#9e9e9e', fontWeight:"bold"}}>{gae.length}</Text>
                 {/* <Text style={{color:'#363C56', fontWeight:"bold"}}>{item.emp_oneair}/{parseInt(item.oneair)+parseInt(item.emp_oneair)}</Text> */}
               </View>
               <View style={{marginLeft:10}}>
                 <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>ห้อง</Text>
+                <Text style={{color:'#9e9e9e', fontWeight:"bold", marginBottom:5}}>ห้อง</Text>
                 <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>ห้อง</Text>
+                <Text style={{color:'#9e9e9e', fontWeight:"bold", marginBottom:5}}>ห้อง</Text>
                 {/* <Text style={{color:'#363C56', fontWeight:"bold"}}>ห้อง</Text> */}
               </View>
             </View>
-          </View>
+            {/* <View>
+                <Modal isVisible={isModalVisible}>
+                    <View style={{ backgroundColor: "#fff", width:"100%", height: "50%", borderRadius: 40, justifyContent: "center", alignItems: 'center'}}>
+                      <ScrollView style={{marginTop:20, marginBottom:10}}>
+                        <Text>ห้องสูทว่าง</Text>
+                        <View>
+                          {se.map((item, i)=> {
+                              return(
+                                <Text key={i}>{item.room}</Text>
+                              )
+                            })}
+                        </View>
+                        <Text>ห้องธรรมดาปรับอากาศว่าง</Text>
+                        <View>
+                          {gae.map((item, i)=> {
+                              return(
+                                <Text key={i}>{item.room}</Text>
+                              )
+                            })}
+                        </View>
+                      </ScrollView>
+                      <Button  style={{margin:20}} title="ปิด" onPress={toggleModal} />
+                    </View>
+                </Modal>
+            </View> */}
+          </TouchableOpacity>
 
-          <View style={[styles.hori, {marginTop:10}]}>
+          <TouchableOpacity style={[styles.hori, {marginTop:10,height:100,}]} onPress={toggleModal2}>
             <View style={{justifyContent:'center', alignItems:"center"}}>
               <Image style={styles.img2} source={require('../../assets/fan.png')}/>
               <Text style={{color:"#363C56"}}>ห้องพัดลม</Text>
@@ -202,35 +304,96 @@ const OwnerDormitory = ({navigation, route}) => {
             <View style={{marginLeft:40,justifyContent:'center', flexDirection:"row", alignItems:"center"}}>
               <View style={{justifyContent:"center"}}>
                 <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>ห้องธรรมดา</Text>
+                <Text style={{color:'#9e9e9e', fontWeight:"bold", marginBottom:5}}>ว่าง</Text>
                 {/* <Text style={{color:'#363C56', fontWeight:"bold"}}>ห้องเดี่ยว</Text> */}
               </View>
               <View style={{marginLeft:20, justifyContent:"center"}}>
                 <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>{gf.length}</Text>
+                <Text style={{color:'#9e9e9e', fontWeight:"bold", marginBottom:5}}>{gfe.length}</Text>
                 {/* <Text style={{color:'#363C56', fontWeight:"bold"}}>{item.emp_onefan}/{parseInt(item.onefan)+parseInt(item.emp_onefan)}</Text> */}
               </View>
               <View style={{marginLeft:10, justifyContent:"center"}}>
                 <Text style={{color:'#363C56', fontWeight:"bold", marginBottom:5}}>ห้อง</Text>
+                <Text style={{color:'#9e9e9e', fontWeight:"bold", marginBottom:5}}>ห้อง</Text>
                 {/* <Text style={{color:'#363C56', fontWeight:"bold"}}>ห้อง</Text> */}
               </View>
             </View>
-          </View>
+            {/* <Modal isVisible={isModalVisible2}>
+                    <View style={{ backgroundColor: "#fff", width:"100%", height: "50%", borderRadius: 40, justifyContent: "center", alignItems: 'center'}}>
+                      <ScrollView style={{marginTop:20, marginBottom:10}}>
+                        <Text>ห้องสูทว่าง</Text>
+                        <View>
+                          {se.map((item, i)=> {
+                              return(
+                                <Text key={i}>{item.room}</Text>
+                              )
+                            })}
+                        </View>
+                        <Text>ห้องธรรมดาปรับอากาศว่าง</Text>
+                        <View>
+                          {gae.map((item, i)=> {
+                              return(
+                                <Text key={i}>{item.room}</Text>
+                              )
+                            })}
+                        </View>
+                      </ScrollView>
+                      <Button  style={{margin:20}} title="ปิด" onPress={toggleModal} />
+                    </View>
+            </Modal> */}
+          </TouchableOpacity>
         </View>
 
         <View style={styles.month}>
-          <Text style={{color:"#fff", fontSize:22, fontWeight:"bold"}}>{month} / {year}</Text>
+          <Text style={{color:"#fff", fontSize:22, fontWeight:"bold"}}>{month} {year}</Text>
         </View>
       
         <View style={styles.center}>
           <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56", marginTop:20, marginBottom:5}}>รวมยอดชำระ {payincome.toString()} บาท</Text>
           <View style={styles.block4}>
-            <View style={[styles.box2]}>
+            <TouchableOpacity style={[styles.box2]} onPress={toggleModal3}>
               <Text style={{fontSize:13, fontWeight:"bold", color:"#363C56"}}>ชำระแล้ว</Text>
               <Text style={{fontSize:18, fontWeight:"bold", color:"#90DA83"}}>{(payincome-notpayincome).toString()} บาท</Text>
-            </View>
-            <View style={[styles.box2]}>
+              {/* <View>
+                <Modal isVisible={isModalVisible3}>
+                    <View style={{ backgroundColor: "#fff", width:"100%", height: "50%", borderRadius: 40, justifyContent: "center", alignItems: 'center'}}>
+                      <Text>รายการห้องที่ชำระแล้ว</Text>
+                      <View>
+                         {p.map((item, i)=> {
+                            return(
+                              <ScrollView style={{marginTop:20, marginBottom:10}}>
+                                <Text key={i}>{item.room}</Text>
+                              </ScrollView>
+                            )
+                          })}
+                      </View>
+                      <Button title="ปิด" onPress={toggleModal} />
+                    </View>
+                </Modal>
+              </View> */}
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.box2]} onPress={toggleModal4}>
               <Text style={{fontSize:13, fontWeight:"bold", color:"#363C56"}}>ยังไม่ชำระ</Text>
               <Text style={{fontSize:18, fontWeight:"bold", color:"#FF9699"}}>{notpayincome.toString()} บาท</Text>
-            </View>
+              {/* <View>
+                <Modal isVisible={isModalVisible4}>
+                    <View style={{ backgroundColor: "#fff", width:"100%", height: "50%", borderRadius: 40, justifyContent: "center", alignItems: 'center'}}>
+                      <Text>รายยการห้องที่ยังไม่ชำระ</Text>
+                      <View>
+                         {np.map((item, i)=> {
+                            return(
+                              <ScrollView style={{marginTop:20, marginBottom:10}}>
+                                <Text key={i}>{item.room}</Text>
+                              </ScrollView>
+                            )
+                          })}
+                      </View>
+                      <Button title="ปิด" onPress={toggleModal} />
+                    </View>
+                </Modal>
+              </View> */}
+            </TouchableOpacity>
+            
           </View>
 
           <View style={[styles.block4, {marginTop:0}]}>
@@ -253,7 +416,7 @@ const OwnerDormitory = ({navigation, route}) => {
 
           <View style={[styles.block4, {marginTop:10}]}>
             <TouchableOpacity style={styles.room} onPress={() => {navigation.navigate("DetailRoomSuite", 
-            {room: s, emp: se, full: sf, pay: sp, notpay: snp})}}>
+            {room: s, emp: se, full: sf, pay: sp, notpay: snp, dormitory: dormitory})}}>
               <Text style={{fontWeight:"bold", color:"#363C56"}}>ห้องสูท</Text>
               <Image style={styles.img} source={require('../../assets/air-conditioner.png')}/>
               <View style={[styles.block4, {marginTop:0}]}>
@@ -264,7 +427,7 @@ const OwnerDormitory = ({navigation, route}) => {
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.room} onPress={() => {navigation.navigate("DetailRoomGenAir",
-            {room: ga, emp: gae, full: gaf, pay: gap, notpay: ganp})}}>
+            {room: ga, emp: gae, full: gaf, pay: gap, notpay: ganp, dormitory: dormitory})}}>
               <Text style={{fontWeight:"bold", color:"#363C56"}}>ห้องธรรมดา</Text>
               <Image style={styles.img} source={require('../../assets/air-conditioner.png')}/>
               <View style={[styles.block4, {marginTop:0}]}>
@@ -275,7 +438,7 @@ const OwnerDormitory = ({navigation, route}) => {
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.room} onPress={() => {navigation.navigate("DetailRoomGenFan",
-            {room: gf, emp: gfe, full: gff, pay: gfp, notpay: gfnp})}}>
+            {room: gf, emp: gfe, full: gff, pay: gfp, notpay: gfnp, dormitory: dormitory})}}>
               <Text style={{fontWeight:"bold", color:"#363C56"}}>ห้องธรรมดา</Text>
               <Image style={[styles.img, {width:35, height:35, marginTop:7.5, marginBottom:7.5}]} source={require('../../assets/fan.png')}/>
               <View style={[styles.block4, {marginTop:0}]}>
@@ -392,7 +555,7 @@ const styles = StyleSheet.create({
     flexDirection:"row",
     borderWidth:1.5,
     width:320,
-    height:100,
+    height:120,
     justifyContent:"center",
     borderColor:"#96B3FF",
     borderRadius:10

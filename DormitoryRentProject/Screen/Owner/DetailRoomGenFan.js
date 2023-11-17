@@ -3,12 +3,28 @@ import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView, Ima
 import { LineChart } from "react-native-gifted-charts";
 
 const DetailRoomGenFan = ({route}) => {
+    const dormitory = route.params.dormitory
     const room = route.params.room
     const emp = route.params.emp
     const full = route.params.full
     const pay = route.params.pay
     const notpay = route.params.notpay
     const data = [{value: 0, label:"พ.ค."}, {value: 0, label:"มิ.ย."}, {value: 0, label:"ก.ค."}, {value: 0, label:"ส.ค."}, {value: 0, label:"ก.ย."}, {value: 0, label:"ต.ค."}];
+
+    let payincome = 0;
+    let notpayincome = 0;
+    for (let i = 0; i < pay.length; i++){
+      payincome += (parseInt(pay[i].light)*parseInt(dormitory.light));
+      payincome += (parseInt(pay[i].water)*parseInt(dormitory.water));
+      payincome += parseInt(pay[i].price);
+      console.log(dormitory)
+    }
+    for (let i = 0; i < notpay.length; i++){
+      notpayincome += (parseInt(notpay[i].light)*parseInt(dormitory.light));
+      notpayincome += (parseInt(notpay[i].water)*parseInt(dormitory.water));
+      notpayincome += parseInt(notpay[i].price);
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
@@ -54,15 +70,15 @@ const DetailRoomGenFan = ({route}) => {
                     </View>
                 </View>
 
-                <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56", marginTop:15}}>ยอดชำระ 0 บาท</Text>
+                <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56", marginTop:15}}>ยอดชำระ {parseInt(payincome)+parseInt(notpayincome)} บาท</Text>
                 <View style={styles.block4}>
                     <View style={[styles.box4, {borderColor:"#90DA83"}]}>
                         <Text style={{fontSize:13, fontWeight:"bold", color:"#363C56"}}>ชำระแล้ว</Text>
-                        <Text style={{fontSize:18, fontWeight:"bold", color:"#90DA83"}}>0 บาท</Text>
+                        <Text style={{fontSize:18, fontWeight:"bold", color:"#90DA83"}}>{payincome} บาท</Text>
                     </View>
                         <View style={[styles.box4, {borderColor:"#FF9699"}]}>
                         <Text style={{fontSize:13, fontWeight:"bold", color:"#363C56"}}>ยังไม่ชำระ</Text>
-                        <Text style={{fontSize:18, fontWeight:"bold", color:"#FF9699"}}>0 บาท</Text>
+                        <Text style={{fontSize:18, fontWeight:"bold", color:"#FF9699"}}>{notpayincome} บาท</Text>
                     </View>
                 </View>
 

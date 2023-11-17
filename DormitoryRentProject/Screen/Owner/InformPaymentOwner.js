@@ -36,9 +36,9 @@ const InformPaymentOwner = ({navigation, route}) => {
       const empRoom = [];
       const fullRoom = [];
       empQuery.forEach((doc) => {
-        if (doc.data().status == true){
+        if (doc.data().status == false){
           fullRoom.push({ id: doc.id, ...doc.data() })
-        }else if(doc.data().status == false) {
+        }else if(doc.data().status == true) {
           empRoom.push({ id: doc.id, ...doc.data() })
         }
       })

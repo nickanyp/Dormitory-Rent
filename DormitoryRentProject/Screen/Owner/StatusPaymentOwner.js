@@ -122,7 +122,7 @@ const StatusPaymentOwner = ({ navigation, route }) => {
               <View>
                 <Modal isVisible={isModalVisible}>
                   <View style={{ backgroundColor: "#fff", width: "100%", height: "50%", borderRadius: 40, justifyContent: "center", alignItems: 'center'}}>
-                    <Image style={styles.img} source={require('../../assets/slip2.jpeg')} />
+                    <Image style={styles.img} source={require('../../assets/slip2.jpg')} />
                     <Button title="ปิด" onPress={toggleModal} />
                   </View>
                 </Modal>
