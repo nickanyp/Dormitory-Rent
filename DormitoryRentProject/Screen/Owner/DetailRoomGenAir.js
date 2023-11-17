@@ -98,7 +98,7 @@ const DetailRoomGenAir = ({route}) => {
                       )
                     })}
                 </View>
-
+                <View style={{ width:320,height: 1, backgroundColor: 'transparent', marginTop:15}} />
                 <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56", marginTop:15}}>ยอดชำระ {parseInt(payincome)+parseInt(notpayincome)} บาท</Text>
                 <View style={styles.block4}>
                     <View style={[styles.box4, {borderColor:"#90DA83"}]}>

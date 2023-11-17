@@ -250,7 +250,7 @@ const OwnerDormitory = ({navigation, route}) => {
         </View>
       
         <View style={{alignItems:"center", marginBottom:15}}>
-          <TouchableOpacity style={[styles.hori]} onPress={toggleModal}>
+          <View style={[styles.hori]} onPress={toggleModal}>
             <View style={{justifyContent:'center', alignItems:"center"}}>
               <Image style={styles.img} source={require('../../assets/air-conditioner.png')}/>
               <Text style={{color:"#363C56"}}>ห้องปรับอากาศ</Text>
@@ -303,9 +303,9 @@ const OwnerDormitory = ({navigation, route}) => {
                     </View>
                 </Modal>
             </View> */}
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity style={[styles.hori, {marginTop:10,height:100,}]} onPress={toggleModal2}>
+          <View style={[styles.hori, {marginTop:10,height:100,}]} onPress={toggleModal2}>
             <View style={{justifyContent:'center', alignItems:"center"}}>
               <Image style={styles.img2} source={require('../../assets/fan.png')}/>
               <Text style={{color:"#363C56"}}>ห้องพัดลม</Text>
@@ -350,7 +350,7 @@ const OwnerDormitory = ({navigation, route}) => {
                       <Button  style={{margin:20}} title="ปิด" onPress={toggleModal} />
                     </View>
             </Modal> */}
-          </TouchableOpacity>
+          </View>
         </View>
 
         <View style={styles.month}>
@@ -360,7 +360,7 @@ const OwnerDormitory = ({navigation, route}) => {
         <View style={styles.center}>
           <Text style={{fontSize:25, fontWeight:"bold", color:"#363C56", marginTop:20, marginBottom:5}}>รวมยอดชำระ {payincome.toString()} บาท</Text>
           <View style={styles.block4}>
-            <TouchableOpacity style={[styles.box2]} onPress={toggleModal3}>
+            <View style={[styles.box2]} onPress={toggleModal3}>
               <Text style={{fontSize:13, fontWeight:"bold", color:"#363C56"}}>ชำระแล้ว</Text>
               <Text style={{fontSize:18, fontWeight:"bold", color:"#90DA83"}}>{(payincome-notpayincome).toString()} บาท</Text>
               {/* <View>
@@ -380,8 +380,8 @@ const OwnerDormitory = ({navigation, route}) => {
                     </View>
                 </Modal>
               </View> */}
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.box2]} onPress={toggleModal4}>
+            </View>
+            <View style={[styles.box2]} onPress={toggleModal4}>
               <Text style={{fontSize:13, fontWeight:"bold", color:"#363C56"}}>ยังไม่ชำระ</Text>
               <Text style={{fontSize:18, fontWeight:"bold", color:"#FF9699"}}>{notpayincome.toString()} บาท</Text>
               {/* <View>
@@ -401,7 +401,7 @@ const OwnerDormitory = ({navigation, route}) => {
                     </View>
                 </Modal>
               </View> */}
-            </TouchableOpacity>
+            </View>
             
           </View>
 

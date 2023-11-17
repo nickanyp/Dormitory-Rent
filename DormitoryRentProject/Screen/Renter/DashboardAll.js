@@ -147,14 +147,14 @@ const RenterDashAll = (props) => {
                 <MaterialIcons name="attach-money" size={30} color="#363C56" />
                 <Text style={{margin:10, fontWeight:"bold", color:"#363C56"}}>ค่าปรับ</Text>
                 <View style={[styles.blockprice3, styles.shadowProp, {backgroundColor: 'white'}]}>
-                  <Text style={{fontWeight: "bold", fontSize:15}}> {parseInt(water)*18} บาท</Text>
+                  <Text style={{fontWeight: "bold", fontSize:15}}> {fine} บาท</Text>
                 </View>
               </View>
               <View style={styles.detail2}>
                 <Ionicons name="water-outline" size={30} color="#363C56" />
                 <Text style={{margin:10, fontWeight:"bold", color:"#363C56"}}>ค่าน้ำ</Text>
                 <View style={[styles.blockprice4, styles.shadowProp, {backgroundColor: 'white'}]}>
-                  <Text style={{fontWeight: "bold", fontSize:15}}> {fine} บาท</Text>
+                  <Text style={{fontWeight: "bold", fontSize:15}}> {parseInt(water)*18} บาท</Text>
                 </View>
               </View>
             </View>

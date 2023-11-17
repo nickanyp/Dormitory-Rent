@@ -104,12 +104,12 @@ const MyRoomPage = ({ route, navigation }) => {
               ค่าไฟ : <Text>{parseInt(item.light) * 8}</Text> บาท ({" "}
               {item.light} หน่วย )<Text> </Text>
             </Text>
-            <Text></Text>
+            <Text style={[styles.text, {marginBottom:10}]}>ค่าปรับ: {item.fine} บาท</Text>
             <Text style={[styles.text, { color: "#FF9699", fontSize: 20 }]}>
               รวมทั้งสิ้น :{" "} 
                 {parseInt(item.price) +
                   parseInt(item.water) * 18 +
-                  parseInt(item.light) * 8} บาท
+                  parseInt(item.light) * 8 +item.fine} บาท
             </Text>
             <Text style={{marginTop:5, color: item.status? "#69CC6D":"#FF0000" }}>{item.status? 'ชำระแล้ว':'ยังไม่ชำระ'}</Text>
           </View>
