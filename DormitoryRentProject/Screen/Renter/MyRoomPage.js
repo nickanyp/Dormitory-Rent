@@ -111,6 +111,7 @@ const MyRoomPage = ({ route, navigation }) => {
                   parseInt(item.water) * 18 +
                   parseInt(item.light) * 8} บาท
             </Text>
+            <Text style={{marginTop:5, color: item.status? "#69CC6D":"#FF0000" }}>{item.status? 'ชำระแล้ว':'ยังไม่ชำระ'}</Text>
           </View>
         );
       })}

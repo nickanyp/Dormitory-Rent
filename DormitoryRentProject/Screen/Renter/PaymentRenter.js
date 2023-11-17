@@ -50,6 +50,7 @@ const PaymentRenter = ({ route, navigation }) => {
                   <Text style={[styles.text, { color: "#FF9699", fontSize:20 }]}>
                     รวมทั้งสิ้น : <Text>{parseInt(item.price)+(parseInt(item.water)*18)+(parseInt(item.light)*8)}</Text>บาท
                   </Text>
+                  <Text style={{marginTop:5, color: item.status? "#69CC6D":"#FF0000"}}>{item.status? 'ชำระแล้ว':'ยังไม่ชำระ'}</Text>
                 </View>
               );
             })}

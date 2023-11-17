@@ -9,8 +9,9 @@ import DashboardLight from "./DashboardLight";
 import DashboardFine from "./DashboardFine";
 import DashboardWater from "./DashboardWater";
 
-var RenterDashPage = () => {
+var RenterDashPage = ({route}) => {
   const [thisScreen, setScreen] = useState(0)
+  const renter = route.params.renter
 
   let content = <RenterDashAll/>
 
@@ -26,7 +27,7 @@ var RenterDashPage = () => {
   let tcolor4 = "#363C56"
 
   if (thisScreen == 0){
-    content = <RenterDashAll/>
+    content = <RenterDashAll renter={renter}/>
     color="#363C56"
     tcolor="#fff"
   }else if (thisScreen == 1){
