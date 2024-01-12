@@ -148,13 +148,13 @@ const LoginOwner = ({ navigation }) => {
             ยืนยัน
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => {
               navigation.navigate("RegisterOwner");
             }}
           >
           <Text style={styles.text}>ยังไม่มีบัญชีผู้ใช้?</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
 
       <DormitoryFooter></DormitoryFooter>
